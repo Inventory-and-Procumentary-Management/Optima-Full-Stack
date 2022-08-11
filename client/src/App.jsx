@@ -11,6 +11,7 @@ import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
+import SecondTopbar from "./components/secondTopbar/SecondTopbar";
 
 const App = () => {
   return (
@@ -25,17 +26,22 @@ const App = () => {
         {/* {admin && ( */}
         <>
           <Topbar />
+          
           <div className="container">
+            
             <Sidebar />
-            <Route exact path="/">
-              <Home />
-            </Route>
-            {/* <Route path="/users">
-              <UserList />
-            </Route> */}
-            {/* <Route path="/user/:userId">
-              <User />
-            </Route> */}
+            <div className="sub-container">
+              <SecondTopbar />
+              <Route exact path="/">
+                <Home />
+              </Route>
+              {/* <Route path="/users">
+                <UserList />
+              </Route> */}
+              {/* <Route path="/user/:userId">
+                <User />
+              </Route> */}
+              </div>
           </div>
         </>
         {/* )} */}
