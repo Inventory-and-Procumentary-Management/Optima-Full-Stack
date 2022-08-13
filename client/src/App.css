@@ -11,6 +11,6 @@
 .sub-container {
     display: flex;
     flex-direction: column;
-    flex: 6;
+    flex: 5;
     background-color: #F2F2F2;
 }
