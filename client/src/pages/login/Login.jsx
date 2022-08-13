@@ -57,18 +57,19 @@ export default function SignInSide() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let userData = {
-      email: data.get("email"),
+      username: data.get("username"),
       password: data.get("password"),
     };
-    if (!userData.email) {
+    console.log(userData);
+    if (!userData.username) {
       setEmailError(true);
-      setErrorMessageEmail("Email can't be empty!");
+      setErrorMessageEmail("Username can't be empty!");
     } else if (!userData.password) {
       setPasswordError(true);
       setErrorMessagePassword("Password can't be empty!");
     } else {
       console.log(userData);
-      login(dispatch, { username: "Punsisi", password: 1234 });
+      login(dispatch, JSON.stringify(userData));
       console.log(user);
     }
   };
@@ -120,10 +121,10 @@ export default function SignInSide() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
                 helperText={errorMessageEmail}
                 onChange={() => {
