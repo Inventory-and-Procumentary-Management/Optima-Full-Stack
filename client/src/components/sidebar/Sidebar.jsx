@@ -1,4 +1,5 @@
 import "./Sidebar.css";
+import { useDispatch, useSelector } from "react-redux";
 import {
   LineStyle,
   Timeline,
@@ -31,8 +32,20 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import { useEffect } from "react";
+
 export default function Sidebar() {
   const [open, setOpen] = React.useState(true);
+
+  //check user who is....then send correct props for the particular dashboard
+  const user = useSelector((state) => state.user.currentUser);
+
+  // useEffect(()=>{
+  //   if(user.userType === "purchasingStaff"){
+  //     useNavigate
+  //   }
+  // },[]);
 
   const handleClick = () => {
     setOpen(!open);
@@ -49,66 +62,18 @@ export default function Sidebar() {
             <div className="sidebarMenu">
               <h3 className="sidebarTitle">Dashboard</h3>
               <ul className="sidebarList">
-                <Link to="/" className="link">
+                {/* <Link to="/" className="link">
                   <li className="sidebarListItem active">
                     <LineStyle className="sidebarIcon" />
                     Home
                   </li>
-                </Link>
-                <ListItemButton>
+                </Link> */}
+              
+                <ListItemButton to={"/home"}>
                   <ListItemIcon>
                     <SendIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Sent mail" />
-                </ListItemButton>
-                <Link to="/users" className="link">
-                  <li className="sidebarListItem">
-                    <PermIdentity className="sidebarIcon" />
-                    Users
-                  </li>
-                </Link>
-                <Link to="/products" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Products
-                  </li>
-                </Link>
-                <Link to="/payments" className="link">
-                  <li className="sidebarListItem">
-                    <AttachMoney className="sidebarIcon" />
-                    Payments
-                  </li>
-                </Link>
-                <Link to="/orders" className="link">
-                  <li className="sidebarListItem">
-                    <BarChart className="sidebarIcon" />
-                    Orders
-                  </li>
-                </Link>
-                <Link to="/reports" className="link">
-                  <li className="sidebarListItem">
-                    <Report className="sidebarIcon" />
-                    Reports
-                  </li>
-                </Link>
-                <Link to="/article" className="link">
-                  <li className="sidebarListItem">
-                    <WorkOutline className="sidebarIcon" />
-                    Articles
-                  </li>
-                </Link>
-                <Link to="/email" className="link">
-                  <li className="sidebarListItem">
-                    <Email className="sidebarIcon" />
-                    Send Email
-                  </li>
-                </Link>
-
-                <ListItemButton>
-                  <ListItemIcon>
-                    <SendIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Sent mail" />
+                  <ListItemText primary="Home" />
                 </ListItemButton>
                 
                 <ListItemButton onClick={handleClick}>
