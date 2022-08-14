@@ -6,11 +6,13 @@ const userSlice = createSlice({
     currentUser: null,
     isFetching: false,
     token:null,
+    refersh_token:null,
     error: false,
   },
   reducers: {
     tokenSave: (state,action) => {
-      state.token = action.payload;
+      state.token = action.payload.access_token;
+      state.refersh_token = action.payload.refersh_token;
     },
     loginStart: (state) => {
       state.isFetching = true;
