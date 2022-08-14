@@ -1,41 +1,8 @@
-import "./Sidebar.css";
-import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router";
-import { useHistory } from "react-router-dom";
-import {
-  LineStyle,
-  Timeline,
-  TrendingUp,
-  PermIdentity,
-  Storefront,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
-  Email,
-} from "@material-ui/icons";
-import { Link } from "react-router-dom";
-import PerfectScrollbar from "react-perfect-scrollbar";
-
 import * as React from "react";
-import ListSubheader from "@mui/material/ListSubheader";
-import List from "@mui/material/List";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Collapse from "@mui/material/Collapse";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
-import SendIcon from "@mui/icons-material/Send";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import StarBorder from "@mui/icons-material/StarBorder";
-
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useEffect } from "react";
+import "./Sidebar.css";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import PurchaseStaffSidebar from "./PurchaseStaff/PurchaseStaff";
 import PurchaseManagerSidebar from './PurchaseManager/PurchaseManager';
@@ -46,7 +13,6 @@ import SupplierSidebar from './Supplier/Supplier';
 import WarehouseManagerSidebar from './WarehouseManager/WarehouseManager';
 
 export default function Sidebar() {
-  const [open, setOpen] = React.useState(true);
   const [userType, setUserType] = React.useState(7);
   // const navigation  = useNavigate();
   const history = useHistory();
@@ -90,24 +56,21 @@ export default function Sidebar() {
     });
   }, []);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
   return (
     <div>
-      {userType == 0 ? (
+      {userType === 0 ? (
         <AdministratorSidebar />
-      ) : userType == 1 ? (
+      ) : userType === 1 ? (
         <PurchaseManagerSidebar />
-      ) : userType == 2 ? (
+      ) : userType === 2 ? (
         <PurchaseStaffSidebar />
-      ) : userType == 3 ? (
+      ) : userType === 3 ? (
         <SiteManagerSidebar />
-      ) : userType == 4 ? (
+      ) : userType === 4 ? (
         <WarehouseManagerSidebar />
-      ) : userType == 5 ? (
+      ) : userType === 5 ? (
         <SupplierSidebar />
-      ) : userType == 6 ? (
+      ) : userType === 6 ? (
         <ProjectManagerSidebar />
       ) : (
         <></>
