@@ -2,15 +2,17 @@ import { loginFailure, loginStart, loginSuccess, tokenSave } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 
 export const login = async (dispatch, user) => {
+  // const userData = JSON.stringify(user);
   dispatch(loginStart());
-  console.log(user);
   try {
-    const res = await publicRequest.post("/login", {"username":"Punsisi","password":1234});
+    const res = await publicRequest.post("/login", user);
     console.log(res);
-    dispatch(tokenSave(res.data.access_token));
+    dispatch(tokenSave(res.data));
     try {
       const result = await userRequest.get(`/user/${user.username}`);
+      console.log(result);
       dispatch(loginSuccess(result.data));
+      window.location.href = "http://localhost:3000/";
     } catch (error) {}
   } catch (err) {
     dispatch(loginFailure());

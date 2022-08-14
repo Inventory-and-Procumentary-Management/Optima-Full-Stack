@@ -1,5 +1,7 @@
 import "./Sidebar.css";
 import { useDispatch, useSelector } from "react-redux";
+// import { useNavigate } from "react-router";
+import { useHistory } from "react-router-dom";
 import {
   LineStyle,
   Timeline,
@@ -32,134 +34,84 @@ import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
-import DashboardIcon from '@mui/icons-material/Dashboard';
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useEffect } from "react";
+
+import PurchaseStaffSidebar from "./PurchaseStaff/PurchaseStaff";
+import PurchaseManagerSidebar from './PurchaseManager/PurchaseManager';
+import AdministratorSidebar from './Administrator/Administrator';
+import ProjectManagerSidebar from './ProjectManager/ProjectManager';
+import SiteManagerSidebar from './SiteManager/SiteManager';
+import SupplierSidebar from './Supplier/Supplier';
+import WarehouseManagerSidebar from './WarehouseManager/WarehouseManager';
 
 export default function Sidebar() {
   const [open, setOpen] = React.useState(true);
+  const [userType, setUserType] = React.useState(0);
+  // const navigation  = useNavigate();
+  const history = useHistory();
 
   //check user who is....then send correct props for the particular dashboard
   const user = useSelector((state) => state.user.currentUser);
 
-  // useEffect(()=>{
-  //   if(user.userType === "purchasingStaff"){
-  //     useNavigate
-  //   }
-  // },[]);
+  useEffect(() => {
+    user.roles.map((item) => {
+      console.log(item);
+      if (item.name === "ROLE_ADMINISTRATOR") {
+        // navigation("/home");
+        //0
+        history.push("/home");
+        setUserType(0);
+      } else if (item.name === "ROLE_PURCHASING_MANAGER") {
+        //1
+        history.push("/home");
+        setUserType(1);
+      } else if (item.name === "ROLE_PURCHASING_STAFF") {
+        //2
+        history.push("/home");
+        setUserType(2);
+      } else if (item.name === "ROLE_SITE_MANAGER") {
+        //3
+        history.push("/home");
+        setUserType(3);
+      } else if (item.name === "ROLE_WAREHOUSE_MANAGER") {
+        //4
+        history.push("/home");
+        setUserType(4);
+      } else if (item.name === "ROLE_SUPPLIER") {
+        //5
+        history.push("/home");
+        setUserType(5);
+      } else if (item.name === "ROLE_PROJECT_MANAGER") {
+        //6
+        history.push("/home");
+        setUserType(6);
+      }
+    });
+  }, []);
 
   const handleClick = () => {
     setOpen(!open);
   };
   return (
     <div className="sidebar">
-      <PerfectScrollbar>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-        >
-          <div className="sidebarWrapper">
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Dashboard</h3>
-              <ul className="sidebarList">
-                {/* <Link to="/" className="link">
-                  <li className="sidebarListItem active">
-                    <LineStyle className="sidebarIcon" />
-                    Home
-                  </li>
-                </Link> */}
-              
-                <ListItemButton to={"/home"}>
-                  <ListItemIcon>
-                    <SendIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Home" />
-                </ListItemButton>
-                
-                <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Inbox"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Starred" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Quick Menu</h3>
-              <ul className="sidebarList">
-                <Link to="/users" className="link">
-                  <li className="sidebarListItem">
-                    <PermIdentity className="sidebarIcon" />
-                    Users
-                  </li>
-                </Link>
-                <Link to="/products" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Products
-                  </li>
-                </Link>
-                <li className="sidebarListItem">
-                  <AttachMoney className="sidebarIcon" />
-                  Transactions
-                </li>
-                <li className="sidebarListItem">
-                  <BarChart className="sidebarIcon" />
-                  Reports
-                </li>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Notifications</h3>
-              <ul className="sidebarList">
-                <li className="sidebarListItem">
-                  <MailOutline className="sidebarIcon" />
-                  Mail
-                </li>
-                <li className="sidebarListItem">
-                  <DynamicFeed className="sidebarIcon" />
-                  Feedback
-                </li>
-                <li className="sidebarListItem">
-                  <ChatBubbleOutline className="sidebarIcon" />
-                  Messages
-                </li>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Staff</h3>
-              <ul className="sidebarList">
-                <li className="sidebarListItem">
-                  <WorkOutline className="sidebarIcon" />
-                  Manage
-                </li>
-                <li className="sidebarListItem">
-                  <Timeline className="sidebarIcon" />
-                  Analytics
-                </li>
-                <li className="sidebarListItem">
-                  <Report className="sidebarIcon" />
-                  Reports
-                </li>
-              </ul>
-            </div>
-          </div>
-        </List>
-      </PerfectScrollbar>
+      {userType == 0 ? (
+        <AdministratorSidebar />
+      ) : userType == 1 ? (
+        <PurchaseManagerSidebar />
+      ) : userType == 2 ? (
+        <PurchaseStaffSidebar />
+      ) : userType == 3 ? (
+        <SiteManagerSidebar />
+      ) : userType == 4 ? (
+        <WarehouseManagerSidebar />
+      ) : userType == 5 ? (
+        <SupplierSidebar />
+      ) : userType == 6 ? (
+        <ProjectManagerSidebar />
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

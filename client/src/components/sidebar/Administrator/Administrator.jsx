@@ -33,12 +33,12 @@ import StarBorder from "@mui/icons-material/StarBorder";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
-export default function PurchaseStaffSidebar() {
+export default function AdministratorSitebar() {
   const [open, setOpen] = React.useState(true);
 
   //check user who is....then send correct props for the particular dashboard
   React.useEffect(()=>{
-    alert("Purchase Staff");
+    alert("Administrator");
   },[]);
 
   const handleClick = () => {

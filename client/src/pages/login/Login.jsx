@@ -69,7 +69,7 @@ export default function SignInSide() {
       setErrorMessagePassword("Password can't be empty!");
     } else {
       console.log(userData);
-      login(dispatch, JSON.stringify(userData));
+      login(dispatch, userData);
       console.log(user);
     }
   };
