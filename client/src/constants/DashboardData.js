@@ -62,3 +62,78 @@ export const SiteManager = [];
 export const WarehouseManager = [];
 export const Supplier = [];
 export const ProjectManager = [];
+
+export const dumyData = [
+    {
+        _id:1,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Pending",
+        isCancel : false
+    },
+    {
+        _id:2,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Accepted",
+        isCancel : false
+    },
+    {
+        _id:3,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "In Warehouse",
+        isCancel : false
+    },
+    {
+        _id:4,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Shipped",
+        isCancel : false
+    },
+    {
+        _id:5,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Completed",
+        isCancel : false
+    },
+    {
+        _id:6,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Pending",
+        isCancel : false
+    },
+    {
+        _id:7,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Shipped",
+        isCancel : false
+    },
+    {
+        _id:8,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "In Warehouse",
+        isCancel : false
+    },
+    {
+        _id:9,
+        title: "Test",
+        quantity : 20,
+        price : 20,
+        status : "Completed",
+        isCancel : false
+    },
+];
