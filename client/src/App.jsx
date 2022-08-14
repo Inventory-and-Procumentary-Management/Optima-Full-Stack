@@ -12,6 +12,9 @@ import Home from "./pages/home/Home";
 import Sidebar from "./components/sidebar/Sidebar";
 import Topbar from "./components/topbar/Topbar";
 import SecondTopbar from "./components/secondTopbar/SecondTopbar";
+import MaterialRequest from "./pages/purchasingStaff/materialRequest/MaterialRequest";
+import PurchaseOrder from "./pages/purchasingStaff/purchaseOrder/PurchaseOrder";
+import PurchaseInvoice from "./pages/purchasingStaff/purchaseInvoice/PurchaseInvoice";
 
 const App = () => {
   return (
@@ -35,9 +38,15 @@ const App = () => {
               <Route exact path="/">
                 <Home />
               </Route>
-              {/* <Route path="/users">
-                <UserList />
-              </Route> */}
+              <Route path="/materialRequest">
+                <MaterialRequest />
+              </Route>
+              <Route path="/purchaseOrder">
+                <PurchaseOrder />
+              </Route>
+              <Route path="/purchaseInvoice">
+                <PurchaseInvoice />
+              </Route>
               {/* <Route path="/user/:userId">
                 <User />
               </Route> */}

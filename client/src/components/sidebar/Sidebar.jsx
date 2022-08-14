@@ -26,31 +26,31 @@ export default function Sidebar() {
       if (item.name === "ROLE_ADMINISTRATOR") {
         // navigation("/home");
         //0
-        history.push("/");
+        // history.push("/");
         setUserType(0);
       } else if (item.name === "ROLE_PURCHASING_MANAGER") {
         //1
-        history.push("/");
+        // history.push("/");
         setUserType(1);
       } else if (item.name === "ROLE_PURCHASING_STAFF") {
         //2
-        history.push("/");
+        // history.push("/");
         setUserType(2);
       } else if (item.name === "ROLE_SITE_MANAGER") {
         //3
-        history.push("/");
+        // history.push("/");
         setUserType(3);
       } else if (item.name === "ROLE_WAREHOUSE_MANAGER") {
         //4
-        history.push("/");
+        // history.push("/");
         setUserType(4);
       } else if (item.name === "ROLE_SUPPLIER") {
         //5
-        history.push("/");
+        // history.push("/");
         setUserType(5);
       } else if (item.name === "ROLE_PROJECT_MANAGER") {
         //6
-        history.push("/");
+        // history.push("/");
         setUserType(6);
       }
     });
