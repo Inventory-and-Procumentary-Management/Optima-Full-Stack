@@ -94,7 +94,7 @@ export default function Sidebar() {
     setOpen(!open);
   };
   return (
-    <div className="sidebar">
+    <div>
       {userType == 0 ? (
         <AdministratorSidebar />
       ) : userType == 1 ? (
