@@ -150,6 +150,12 @@ const MaterialRequest = () => {
           pageSize={8}
           checkboxSelection
           autoHeight
+          componentsProps={{
+            columnMenu: {
+              background: "red",
+              // counter: rows.length
+            },
+          }}
         />
         {/* <SweetAlert
           show={show}

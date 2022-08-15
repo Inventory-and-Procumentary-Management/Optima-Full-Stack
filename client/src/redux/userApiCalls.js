@@ -7,9 +7,13 @@ export const login = async (dispatch, user) => {
   try {
     const res = await publicRequest.post("/login", user);
     console.log(res);
-    dispatch(tokenSave(res.data));
+    await dispatch(tokenSave(res.data));
     try {
-      const result = await userRequest.get(`/user/${user.username}`);
+      const result = await publicRequest.get(`/user/${user.username}`,{
+        headers: {
+          Authorization: `Bearer ${res.data.access_token}`,
+        }
+      });
       console.log(result);
       dispatch(loginSuccess(result.data));
       window.location.href = "http://localhost:3000/";
