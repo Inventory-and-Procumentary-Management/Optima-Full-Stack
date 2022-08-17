@@ -34,41 +34,11 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function PurchaseStaffSidebar() {
-  const [open, setOpen] = React.useState(true);
-  const [open1, setOpen1] = React.useState(true);
-  const [open2, setOpen2] = React.useState(true);
-  const [open3, setOpen3] = React.useState(true);
-  const [open4, setOpen4] = React.useState(true);
-  const [open5, setOpen5] = React.useState(true);
-  const [open6, setOpen6] = React.useState(true);
-  const [open7, setOpen7] = React.useState(true);
 
   //check user who is....then send correct props for the particular dashboard
   // React.useEffect(()=>{
   //   alert("Purchase Staff");
   // },[]);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-  const handleClick1 = () => {
-    setOpen1(!open1);
-  };
-  const handleClick2 = () => {
-    setOpen2(!open2);
-  };
-  const handleClick3 = () => {
-    setOpen3(!open3);
-  };
-  const handleClick4 = () => {
-    setOpen4(!open4);
-  };
-  const handleClick5 = () => {
-    setOpen5(!open5);
-  };
-  const handleClick6 = () => {
-    setOpen6(!open6);
-  };
 
   return (
     <div className="sidebar">
@@ -78,7 +48,7 @@ export default function PurchaseStaffSidebar() {
             <div className="sidebarMenu">
               <h3 className="sidebarTitle">Dashboard</h3>
               <ul className="sidebarList">
-                <Link to="/home" className="link">
+                <Link to="/purchaseStaff" className="link">
                   <li className="sidebarListItem active">
                     <LineStyle className="sidebarIcon" />
                     Home
@@ -145,25 +115,25 @@ export default function PurchaseStaffSidebar() {
             <div className="sidebarMenu">
               <h3 className="sidebarTitle">Purchase</h3>
               <ul className="sidebarList">
-                <Link to="/materialRequest" className="link">
+                <Link to="/purchaseStaff/materialRequest" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
                     Material Request
                   </li>
                 </Link>
-                <Link to="/purchaseOrder" className="link">
+                <Link to="/purchaseStaff/purchaseOrder" className="link">
                   <li className="sidebarListItem">
                     <Storefront className="sidebarIcon" />
                     Purchase Order
                   </li>
                 </Link>
-                <Link to="/purchaseInvoice" className="link">
+                <Link to="/purchaseStaff/purchaseInvoice" className="link">
                   <li className="sidebarListItem">
                     <Storefront className="sidebarIcon" />
                     Purchase Invoice
                   </li>
                 </Link>
-                <Link to="/purchaseInvoice" className="link">
+                <Link to="/purchaseStaff/purchaseInvoice" className="link">
                   <li className="sidebarListItem">
                     <Storefront className="sidebarIcon" />
                     Request for Quatation

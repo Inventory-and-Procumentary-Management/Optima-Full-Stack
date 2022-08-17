@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-// import "../../pages.css";
+import "../../pages.css";
 
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
