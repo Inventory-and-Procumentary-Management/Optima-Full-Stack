@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import FeaturedItem from "./featuredItem/FeaturedItem";
 // import { userRequest } from "../../requestMethods";
 
-export default function FeaturedInfo({ data }) {
-  console.log(data);
+export default function FeaturedInfo(props) {
+  const { data } = props;
   const [income, setIncome] = useState([]);
   const [perc, setPerc] = useState(0);
   const [countCategory, setCountCategory] = useState();
@@ -76,20 +76,20 @@ export default function FeaturedInfo({ data }) {
         </div>
         <span className="featuredSub">Compared to last month</span>
       </div> */}
-      {data.map((item) => {
-        // <FeaturedItem
-        //   title={item.title}
-        //   number={item.number}
-        //   percentage={item.percentage}
-        //   isDowngrade={item.isDowngrade}
-        //   text={item.text}
-        // />;
-        <FeaturedItem data={item} />
+      {/* {data.map((item) => {
+        <FeaturedItem
+          key={item.index}
+          title={item.title}
+          number={item.number}
+          percentage={item.percentage}
+          isDowngrade={item.isDowngrade}
+          text={item.text}
+        />;
         console.log(item);
-      })}
-      {/* <FeaturedItem title={"No of Users"} number={20} percentage={-1.4} isDowngrade={true} text={"Compared to last month"} />
-      <FeaturedItem title={"No of Orders"} number={20} percentage={+1.4} isDowngrade={false} text={"Compared to last month"} />
-      <FeaturedItem title={"No of Users"} number={20} percentage={-1.4} isDowngrade={true} text={"Compared to last month"} /> */}
+      })} */}
+      <FeaturedItem title={data[0]?.title} number={data[0]?.number} percentage={data[0]?.percentage} isDowngrade={data[0]?.isDowngrade} text={data[0]?.text} />
+      <FeaturedItem title={data[1]?.title} number={data[1]?.number} percentage={data[1]?.percentage} isDowngrade={data[1]?.isDowngrade} text={data[1]?.text} />
+      <FeaturedItem title={data[2]?.title} number={data[2]?.number} percentage={data[2]?.percentage} isDowngrade={data[2]?.isDowngrade} text={data[2]?.text} />
     </div>
   );
 }
