@@ -30,20 +30,41 @@ const PurchaseStaffHome = () => {
 
   useEffect(() => {
     let data = [
-      { name: MONTHS[0], "Active User": 15 },
-      { name: MONTHS[1], "Active User": 20 },
-      { name: MONTHS[2], "Active User": 65 },
-      { name: MONTHS[3], "Active User": 45 },
-      { name: MONTHS[4], "Active User": 100 },
-      { name: MONTHS[5], "Active User": 74 },
+      { name: MONTHS[0], "Cement": 15, "Sand": 12 },
+      { name: MONTHS[1], "Cement": 20, "Sand": 25 },
+      { name: MONTHS[2], "Cement": 65, "Sand": 78 },
+      { name: MONTHS[3], "Cement": 45, "Sand": 30 },
+      { name: MONTHS[4], "Cement": 100, "Sand": 80 },
+      { name: MONTHS[5], "Cement": 74, "Sand": 90 },
     ];
     setUserStats(data);
     console.log(userStats);
 
     let featureData = [
-        {title:"No of Users", number:20, percentage:-1.4, isDowngrade:false, text:"Compared to last month"},
-        {title:"No of Orders", number:40, percentage:+1.4, isDowngrade:true, text:"Compared to last month"},
-        {title:"No of Users", number:20, percentage:-1.4, isDowngrade:false, text:"Compared to last month"},
+      {
+        index: 1,
+        title: "No of Projects",
+        number: 20,
+        percentage: -1.4,
+        isDowngrade: false,
+        text: "Compared to last month",
+      },
+      {
+        index: 2,
+        title: "New Inventory Items",
+        number: 40,
+        percentage: +1.4,
+        isDowngrade: true,
+        text: "Compared to last month",
+      },
+      {
+        index: 3,
+        title: "Overdue Deliveries",
+        number: 20,
+        percentage: -1.4,
+        isDowngrade: false,
+        text: "Compared to last month",
+      },
     ];
     setFeaturedData(featureData);
   }, []);
@@ -54,9 +75,10 @@ const PurchaseStaffHome = () => {
         <FeaturedInfo data={featuredData} />
         <Charts
           data={userStats}
-          title="User Analytics"
+          title="Products Analytics"
           grid
-          dataKey="Active User"
+          dataKey1="Cement"
+          dataKey2="Sand"
         />
         {/* <div className="homeWidgets">
         <WidgetSm />

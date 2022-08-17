@@ -29,7 +29,7 @@ export default function SecondTopbar() {
       href="/"
       onClick={handleClick}
     >
-      MUI
+      Dashboard
     </Link>,
     <Link
       underline="hover"

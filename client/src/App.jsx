@@ -16,6 +16,9 @@ import MaterialRequest from "./pages/purchasingStaff/materialRequest/MaterialReq
 import PurchaseOrder from "./pages/purchasingStaff/purchaseOrder/PurchaseOrder";
 import PurchaseInvoice from "./pages/purchasingStaff/purchaseInvoice/PurchaseInvoice";
 import PurchaseStaffHome from "./pages/purchasingStaff/PurchaseStaffHome";
+import ProductList from "./pages/purchasingStaff/products/productList/ProductList";
+import ProductUpdate from "./pages/purchasingStaff/products/productUpdate/ProductUpdate";
+import NewProduct from "./pages/purchasingStaff/products/newProduct/NewProduct";
 
 const App = () => {
   return (
@@ -50,6 +53,15 @@ const App = () => {
               </Route>
               <Route path="/purchaseStaff/purchaseInvoice">
                 <PurchaseInvoice />
+              </Route>
+              <Route path="/purchaseStaff/productList">
+                <ProductList />
+              </Route>
+              <Route path="/purchaseStaff/productUpdate/:productId">
+                <ProductUpdate />
+              </Route>
+              <Route path="/purchaseStaff/newProduct">
+                <NewProduct />
               </Route>
               {/* <Route path="/user/:userId">
                 <User />
