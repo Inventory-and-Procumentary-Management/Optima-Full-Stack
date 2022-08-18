@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import "../../pages.css";
-import "./MaterialRequest.css";
 
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
@@ -9,14 +8,12 @@ import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { dumyData } from "../../../constants/DashboardData";
 
-// import Button from "@mui/material/Button";
-import SearchComponent from "../../../components/search/Search";
-
 const columns = [
-  { field: "_id", headerName: "Invoice ID", width: 150 },
+  { field: "_id", headerName: "Order ID", width: 150 },
+  { field: "invoice_id", headerName: "Invoice ID", width: 150 },
   {
     field: "title",
-    headerName: "Vendor Name",
+    headerName: "Supplier",
     width: 220,
     renderCell: (params) => {
       return (
@@ -37,7 +34,7 @@ const columns = [
   { field: "isPaid", headerName: "Paid or Not", width: 180 },
   {
     field: "staus",
-    headerName: "Status",
+    headerName: "Order Status",
     width: 220,
     renderCell: (params) => {
       return (
@@ -144,37 +141,25 @@ const columns = [
   },
 ];
 
-const MaterialRequest = () => {
+const OrderSummary = () => {
   return (
     <div className="common">
       <div className="userList">
-        <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request">
-            <Link to={"/purchaseStaff/newMaterialRequest"}>
-              <button className="color-contained-button">Create New</button>
-            </Link>
-          </div>
-          <div className="top-container-search-material-request">
-            <SearchComponent />
-          </div>
-        </div>
-        <div className="bottom-container-material-request">
-          <DataGrid
-            rows={dumyData}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={7}
-            checkboxSelection
-            autoHeight
-            // componentsProps={{
-            //   columnMenu: {
-            //     background: "red",
-            //     // counter: rows.length
-            //   },
-            // }}
-          />
-        </div>
+        <DataGrid
+          rows={dumyData}
+          disableSelectionOnClick
+          columns={columns}
+          getRowId={(row) => row._id}
+          pageSize={8}
+          checkboxSelection
+          autoHeight
+          // componentsProps={{
+          //   columnMenu: {
+          //     background: "red",
+          //     // counter: rows.length
+          //   },
+          // }}
+        />
         {/* <SweetAlert
           show={show}
           warning
@@ -229,4 +214,4 @@ const MaterialRequest = () => {
   );
 };
 
-export default MaterialRequest;
+export default OrderSummary;

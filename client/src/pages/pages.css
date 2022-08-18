@@ -45,3 +45,49 @@
   color: red;
   cursor: pointer;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(226, 223, 223);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.color-contained-button, .color-outlined-button:hover {
+  background-color: #378cbb;
+  border: 2px solid #378cbb;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.color-outlined-button, .color-contained-button:hover {
+  background-color: white;
+  border: 2px solid #378cbb;
+  padding: 6px 10px;
+  border-radius: 5px;
+  color: #378cbb;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 600px) {
+  .common {
+    width: 100vw;
+    overflow: hidden;
+  }
+}
