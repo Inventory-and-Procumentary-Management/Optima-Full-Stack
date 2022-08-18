@@ -19,6 +19,10 @@ import PurchaseStaffHome from "./pages/purchasingStaff/PurchaseStaffHome";
 import ProductList from "./pages/purchasingStaff/products/productList/ProductList";
 import ProductUpdate from "./pages/purchasingStaff/products/productUpdate/ProductUpdate";
 import NewProduct from "./pages/purchasingStaff/products/newProduct/NewProduct";
+import OrderSummary from "./pages/purchasingStaff/orderSummary/OrderSummary";
+import NewMaterialRequest from "./pages/purchasingStaff/materialRequest/newMaterialRequest/NewMaterialRequest";
+import AdministratorHome from "./pages/administrator/AdministratorHome";
+import UserList from "./pages/administrator/userList/UserList";
 
 const App = () => {
   return (
@@ -48,6 +52,9 @@ const App = () => {
               <Route path="/purchaseStaff/materialRequest">
                 <MaterialRequest />
               </Route>
+              <Route path="/purchaseStaff/newMaterialRequest">
+                <NewMaterialRequest />
+              </Route>
               <Route path="/purchaseStaff/purchaseOrder">
                 <PurchaseOrder />
               </Route>
@@ -62,6 +69,16 @@ const App = () => {
               </Route>
               <Route path="/purchaseStaff/newProduct">
                 <NewProduct />
+              </Route>
+              <Route path="/purchaseStaff/orders">
+                <OrderSummary />
+              </Route>
+
+              <Route exact path="/admin">
+                <AdministratorHome />
+              </Route>
+              <Route exact path="/admin/users">
+                <UserList />
               </Route>
               {/* <Route path="/user/:userId">
                 <User />

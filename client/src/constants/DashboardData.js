@@ -66,74 +66,110 @@ export const ProjectManager = [];
 export const dumyData = [
     {
         _id:1,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Pending",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:2,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Accepted",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:3,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "In Warehouse",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:4,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Shipped",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:5,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Completed",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:6,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Pending",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:7,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Shipped",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:8,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "In Warehouse",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
     {
         _id:9,
+        invoice_id: "124352353",
         title: "Test",
         quantity : 20,
         price : 20,
         status : "Completed",
-        isCancel : false
+        isCancel : false,
+        isPaid: true,
+        issueDate: "2022-08-18",
+        dueDate: "2022-09-18"
     },
 ];
