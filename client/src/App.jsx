@@ -24,6 +24,7 @@ import NewMaterialRequest from "./pages/purchasingStaff/materialRequest/newMater
 import AdministratorHome from "./pages/administrator/AdministratorHome";
 import UserList from "./pages/administrator/users/userList/UserList";
 import NewUser from "./pages/administrator/users/newUser/NewUser";
+import Delivery from "./pages/purchasingStaff/deliveries/Delivery";
 
 const App = () => {
   return (
@@ -73,6 +74,9 @@ const App = () => {
               </Route>
               <Route path="/purchaseStaff/orders">
                 <OrderSummary />
+              </Route>
+              <Route path="/purchaseStaff/deliveries">
+                <Delivery />
               </Route>
 
               <Route exact path="/admin">
