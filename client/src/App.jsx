@@ -25,10 +25,8 @@ import AdministratorHome from "./pages/administrator/AdministratorHome";
 import UserList from "./pages/administrator/users/userList/UserList";
 import NewUser from "./pages/administrator/users/newUser/NewUser";
 import Delivery from "./pages/purchasingStaff/deliveries/Delivery";
-import UserList from "./pages/administrator/userList/UserList";
 import Inventory from "./pages/warehouseManager/inventory/Inventory";
 import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
-import warehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Stocks from "./pages/warehouseManager/Stocks/Stocks";
 import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 
