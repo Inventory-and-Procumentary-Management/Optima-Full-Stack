@@ -1,0 +1,37 @@
+.form-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+  }
+  .form-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+  
+   }
+   .description-textfield{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+   }
+   .terms-checkbox{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+   }
+   .request-button{
+    position: inherit;
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+
+   }
+   .Full-Form-style{
+    padding-left: 2.875rem;
+   }
+   .Main-Topic-request-product{
+    padding: 1rem;
+    background-color: rgb(185, 186, 186);
+   }
+   .Topic-Add-new-item{
+    padding: 1rem;
+    padding-top: 0.5rem;
+   }
