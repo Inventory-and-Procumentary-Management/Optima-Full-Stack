@@ -136,7 +136,7 @@ export default function UserList() {
       },
     },
     {
-      field: "isActivated",
+      field: "isActivate",
       headerName: "User Activation",
       width: 170,
     },
