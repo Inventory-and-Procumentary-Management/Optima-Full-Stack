@@ -33,352 +33,172 @@ import StarBorder from "@mui/icons-material/StarBorder";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
-export default function WarehouseManagerSidebar() {
-  const [open, setOpen] = React.useState(true);
-
+export default function warehouseManagerSidebar() {
   //check user who is....then send correct props for the particular dashboard
-  React.useEffect(()=>{
-    alert("Warehouse Manager");
-  },[]);
+  // React.useEffect(()=>{
+  //   alert("Purchase Staff");
+  // },[]);
 
-  const handleClick = () => {
-    setOpen(!open);
-  };
   return (
     <div className="sidebar">
       <PerfectScrollbar>
-        <List
-          sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
-          component="nav"
-          aria-labelledby="nested-list-subheader"
-        >
-          <div className="sidebarWrapper">
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Dashboard</h3>
-              <ul className="sidebarList">
-                {/* <Link to="/" className="link">
-                  <li className="sidebarListItem active">
-                    <LineStyle className="sidebarIcon" />
-                    Home
+        {/* <div className="sidebar"> */}
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Dashboard</h3>
+            <ul className="sidebarList">
+              <Link to="/warehouseManager" className="link">
+                <li className="sidebarListItem active">
+                  <LineStyle className="sidebarIcon" />
+                  Home
+                </li>
+              </Link>
+              {/* <li className="sidebarListItem">
+              <Timeline className="sidebarIcon" />
+              Analytics
+            </li> */}
+              {/* <li className="sidebarListItem">
+              <TrendingUp className="sidebarIcon" />
+              Sales
+            </li> */}
+              {/* <Link to="/users" className="link">
+                  <li className="sidebarListItem">
+                    <PermIdentity className="sidebarIcon" />
+                    Users
                   </li>
                 </Link> */}
-
-                <ListItemButton to={"/home"}>
-                  <ListItemIcon>
-                    <SendIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Home" />
-                </ListItemButton>
-
-                <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Purchase"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-
-                <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Purchase"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Products</h3>
-              <ul className="sidebarList">
-                <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Items & Pricing"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Project</h3>
-              <ul className="sidebarList">
-              <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Supplier"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-
-                <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Projects"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-
-                <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Deliveries"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Reports</h3>
-              <ul className="sidebarList">
-              <ListItemButton onClick={handleClick}>
-                  <ListItemIcon>
-                    <InboxIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary="Reports"
-                    sx={{ pl: 0, textAlign: "left" }}
-                  />
-                  {open ? <ExpandLess /> : <ExpandMore />}
-                </ListItemButton>
-                <Collapse in={open} timeout="auto" unmountOnExit>
-                  <List component="div" disablePadding>
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Material Request" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Order" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Purchase Invoice" />
-                    </ListItemButton>
-
-                    <ListItemButton sx={{ pl: 4 }} to={"/home"}>
-                      <ListItemIcon>
-                        <StarBorder />
-                      </ListItemIcon>
-                      <ListItemText primary="Request for Quatation" />
-                    </ListItemButton>
-                  </List>
-                </Collapse>
-              </ul>
-            </div>
+              <Link to="/warehouseManager/inventory" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Inventory
+                </li>
+              </Link>
+              {/* <Link to="/payments" className="link">
+                  <li className="sidebarListItem">
+                    <AttachMoney className="sidebarIcon" />
+                    Payments
+                  </li>
+                </Link>
+                <Link to="/orders" className="link">
+                  <li className="sidebarListItem">
+                    <BarChart className="sidebarIcon" />
+                    Orders
+                  </li>
+                </Link> */}
+              {/* <Link to="/reports" className="link">
+                  <li className="sidebarListItem">
+                    <Report className="sidebarIcon" />
+                    Reports
+                  </li>
+                </Link>
+                <Link to="/article" className="link">
+                  <li className="sidebarListItem">
+                    <WorkOutline className="sidebarIcon" />
+                    Articles
+                  </li>
+                </Link>
+                <Link to="/email" className="link">
+                  <li className="sidebarListItem">
+                    <Email className="sidebarIcon" />
+                    Send Email
+                  </li>
+                </Link> */}
+              {/* <Link to="/post" className="link">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Posts
+              </li>
+            </Link> */}
+            </ul>
           </div>
-        </List>
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Stocks</h3>
+            <ul className="sidebarList">
+              <Link to="/warehouseManager/Stocks" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  Stocks
+                </li>
+              </Link>
+              <Link to="" className="link">
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  Request Stocks
+                </li>
+              </Link>
+              <Link to="/warehouseManager/purchaseOrder" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Pending Stocks
+                </li>
+              </Link>
+              <Link to="/warehouseManager/purchaseInvoice" className="link">
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Stock Recievals
+                </li>
+              </Link>
+              {/* <Link to="/warehouseManager/purchaseInvoice" className="link">
+                  <li className="sidebarListItem">
+                    <Storefront className="sidebarIcon" />
+                    Request for Quatation
+                  </li>
+                </Link> */}
+            </ul>
+          </div>
+          {/* <div className="sidebarMenu">
+              <h3 className="sidebarTitle">Invoices</h3>
+              <ul className="sidebarList">
+                <li className="sidebarListItem">
+                  <MailOutline className="sidebarIcon" />
+                  Invoices
+                </li>
+                <li className="sidebarListItem">
+                  <DynamicFeed className="sidebarIcon" />
+                  Feedback
+                </li>
+                <li className="sidebarListItem">
+                  <ChatBubbleOutline className="sidebarIcon" />
+                  Messages
+                </li>
+              </ul>
+            </div> */}
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Products</h3>
+            <ul className="sidebarList">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Items & Pricing
+              </li>
+              <li className="sidebarListItem">
+                <Timeline className="sidebarIcon" />
+                Analytics
+              </li>
+              <li className="sidebarListItem">
+                <Report className="sidebarIcon" />
+                Reports
+              </li>
+            </ul>
+          </div>
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Project</h3>
+            <ul className="sidebarList">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Project
+              </li>
+              <li className="sidebarListItem">
+                <Timeline className="sidebarIcon" />
+                Deliveries
+              </li>
+              <li className="sidebarListItem">
+                <Report className="sidebarIcon" />
+                Reports
+              </li>
+            </ul>
+          </div>
+        </div>
+        {/* </div> */}
       </PerfectScrollbar>
     </div>
   );
