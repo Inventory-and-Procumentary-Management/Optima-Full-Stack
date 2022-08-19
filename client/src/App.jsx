@@ -23,6 +23,11 @@ import OrderSummary from "./pages/purchasingStaff/orderSummary/OrderSummary";
 import NewMaterialRequest from "./pages/purchasingStaff/materialRequest/newMaterialRequest/NewMaterialRequest";
 import AdministratorHome from "./pages/administrator/AdministratorHome";
 import UserList from "./pages/administrator/userList/UserList";
+import Inventory from "./pages/warehouseManager/inventory/Inventory";
+import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
+import warehouseHome from "./pages/warehouseManager/WarehouseHome";
+import Stocks from "./pages/warehouseManager/Stocks/Stocks";
+import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 
 const App = () => {
   return (
@@ -80,6 +85,21 @@ const App = () => {
               <Route exact path="/admin/users">
                 <UserList />
               </Route>
+              <Route exact path="/warehouseManager">
+                <WarehouseHome/>
+              </Route>
+              <Route exact path="/warehouseManager/inventory">
+                <Inventory/>
+              </Route>
+              <Route exact path="/warehouseManager/AddProduct">
+                <AddProduct />
+              </Route>
+              <Route exact path="/warehouseManager/Stocks">
+                 <Stocks/>
+              </Route>
+              {/* <Route path="/users">
+                <UserList />
+              </Route> */}
               {/* <Route path="/user/:userId">
                 <User />
               </Route> */}
