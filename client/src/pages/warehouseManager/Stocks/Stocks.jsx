@@ -1,6 +1,6 @@
 import React from 'react'
 import "../../pages.css";
-import TopBarTabsStocks from './TopBarTabsStocks';
+import TopBarTabsStocks from './TopBarTabsStocks.jsx';
 
 function Stocks() {
   return (
