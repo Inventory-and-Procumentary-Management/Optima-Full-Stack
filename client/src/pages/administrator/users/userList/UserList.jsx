@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, getUsers, updateUser } from "../../../redux/userApiCalls";
+import { deleteUser, getUsers, updateUser } from "../../../../redux/userApiCalls";
+import SearchComponent from "../../../../components/search/Search";
 
 export default function UserList() {
   const [data, setData] = useState([]);
@@ -24,19 +25,19 @@ export default function UserList() {
   // IP address of local machine - 192.168.8.187
   useEffect(() => {
     getUsers(dispatch);
-  }, [dispatch,deleteTrigger]);
+  }, [dispatch, deleteTrigger]);
 
   const URL = `http://localhost:5000/api/v1/user/${userId}`;
 
   const URl_Update = `http://localhost:5000/api/v1/user/${userId}`;
 
-  const updateConfirm = async (key,value) => {
+  const updateConfirm = async (key, value) => {
     // updateUser(userId,UserObject,dispatch);
     let jsonObject;
-    if(key === "isActivated"){
-      jsonObject = {"isActivated":value}
-    }else if(key === "isAdmin"){
-      jsonObject = {"isAdmin":value}
+    if (key === "isActivated") {
+      jsonObject = { isActivated: value };
+    } else if (key === "isAdmin") {
+      jsonObject = { isAdmin: value };
     }
     console.log(jsonObject);
     try {
@@ -60,7 +61,7 @@ export default function UserList() {
 
   const deleteConfirm = async () => {
     setShow(false);
-    deleteUser(userId,dispatch);
+    deleteUser(userId, dispatch);
   };
   const deleteCancel = () => {
     setShow(false);
@@ -71,7 +72,7 @@ export default function UserList() {
     setUserId(id);
     // setData(data.filter((item) => item.id !== id));
   };
-  
+
   const columns = [
     { field: "id", headerName: "ID", width: 220 },
     {
@@ -136,7 +137,7 @@ export default function UserList() {
       },
     },
     {
-      field: "isActivated",
+      field: "isActivate",
       headerName: "User Activation",
       width: 170,
     },
@@ -201,59 +202,75 @@ export default function UserList() {
   ];
 
   return (
-    <div className="userList">
-      <DataGrid
-        rows={users}
-        disableSelectionOnClick
-        columns={columns}
-        getRowId={(row) => row.id}
-        pageSize={8}
-        checkboxSelection
-        autoHeight
-      />
-      <SweetAlert
-        show={show}
-        warning
-        showCancel
-        confirmBtnText="Yes, Delete it!"
-        confirmBtnBsStyle="danger"
-        title="Are you sure?"
-        onConfirm={deleteConfirm}
-        onCancel={deleteCancel}
-        focusCancelBtn
-      >
-        You will not be able to recover this imaginary file!
-      </SweetAlert>
+    <div className="common">
+      <div className="userList">
+        <div className="top-container-material-request">
+          <div className="top-contaier-button-material-request">
+            <Link to={"/admin/newUser"}>
+              <button className="color-contained-button">Add User</button>
+            </Link>
+          </div>
+          <div className="top-container-search-material-request">
+            <SearchComponent />
+          </div>
+        </div>
+        <div className="bottom-container-material-request">
+          <DataGrid
+            rows={users}
+            disableSelectionOnClick
+            columns={columns}
+            getRowId={(row) => row.id}
+            pageSize={8}
+            checkboxSelection
+            autoHeight
+          />
+        </div>
+        <SweetAlert
+          show={show}
+          warning
+          showCancel
+          confirmBtnText="Yes, Delete it!"
+          confirmBtnBsStyle="danger"
+          title="Are you sure?"
+          onConfirm={deleteConfirm}
+          onCancel={deleteCancel}
+          focusCancelBtn
+        >
+          You will not be able to recover this imaginary file!
+        </SweetAlert>
 
-      <SweetAlert
-        show={updateShow}
-        warning
-        showCancel
-        confirmBtnText="Yes, Update it!"
-        confirmBtnBsStyle="danger"
-        title="Are you sure?"
-        onConfirm={()=>{updateConfirm(keyData,valueData)}}
-        onCancel={deleteCancel}
-        focusCancelBtn
-      >
-        You will not be able to recover this imaginary file!
-      </SweetAlert>
+        <SweetAlert
+          show={updateShow}
+          warning
+          showCancel
+          confirmBtnText="Yes, Update it!"
+          confirmBtnBsStyle="danger"
+          title="Are you sure?"
+          onConfirm={() => {
+            updateConfirm(keyData, valueData);
+          }}
+          onCancel={deleteCancel}
+          focusCancelBtn
+        >
+          You will not be able to recover this imaginary file!
+        </SweetAlert>
 
-      <SweetAlert
-        show={allShow}
-        success
-        title="Successfully delete!"
-        // text="SweetAlert in React"
-        onConfirm={() => setAllShow(false)}
-      ></SweetAlert>
+        <SweetAlert
+          show={allShow}
+          success
+          title="Successfully delete!"
+          // text="SweetAlert in React"
+          onConfirm={() => setAllShow(false)}
+        ></SweetAlert>
 
-      <SweetAlert
-        show={updateAllShow}
-        success
-        title="Successfully update!"
-        // text="SweetAlert in React"
-        onConfirm={() => setUpdateAllShow(false)}
-      ></SweetAlert>
+        <SweetAlert
+          show={updateAllShow}
+          success
+          title="Successfully update!"
+          // text="SweetAlert in React"
+          onConfirm={() => setUpdateAllShow(false)}
+        ></SweetAlert>
+      </div>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts } from "../../../../redux/productApiCalls";
 import SweetAlert from "react-bootstrap-sweetalert";
+import SearchComponent from "../../../../components/search/Search";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -81,16 +82,10 @@ export default function ProductList() {
         return (
           <>
             <div className="productListItem">
-              <div className="productListItemData">
-              {params.row.price} {" "}
-              </div>
+              <div className="productListItemData">{params.row.price} </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              <button
-                className="productListEdit"
-              >
-                Change
-              </button>
+              <button className="productListEdit">Change</button>
               {/* </Link> */}
             </div>
           </>
@@ -106,15 +101,11 @@ export default function ProductList() {
           <>
             <div className="productListItem">
               <div className="productListItemData">
-              {params.row.quantity} {params.row.messure} {" "}
+                {params.row.quantity} {params.row.messure}{" "}
               </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              <button
-                className="productListEdit"
-              >
-                Change
-              </button>
+              <button className="productListEdit">Change</button>
               {/* </Link> */}
             </div>
           </>
@@ -181,21 +172,21 @@ export default function ProductList() {
     {
       field: "action",
       headerName: "Action",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <>
             <Link to={"/purchaseStaff/productUpdate/" + params.row.id}>
               <button className="productListEdit">Edit</button>
             </Link>
-            <Link to={"/purchaseStaff/newProduct"}>
+            {/* <Link to={"/purchaseStaff/newProduct"}>
               <button
                 className="productListEdit"
                 style={{ backgroundColor: "darkblue" }}
               >
                 Create
               </button>
-            </Link>
+            </Link> */}
             <DeleteOutline
               className="productListDelete"
               onClick={() => {
@@ -212,15 +203,27 @@ export default function ProductList() {
   return (
     <div className="common">
       <div className="userList">
-        <DataGrid
-          rows={products}
-          disableSelectionOnClick
-          columns={columns}
-          getRowId={(row) => row.id}
-          pageSize={7}
-          checkboxSelection
-          autoHeight
-        />
+        <div className="top-container-material-request">
+          <div className="top-contaier-button-material-request">
+            <Link to={"/purchaseStaff/newProduct"}>
+              <button className="color-contained-button">Add Product</button>
+            </Link>
+          </div>
+          <div className="top-container-search-material-request">
+            <SearchComponent />
+          </div>
+        </div>
+        <div className="bottom-container-material-request">
+          <DataGrid
+            rows={products}
+            disableSelectionOnClick
+            columns={columns}
+            getRowId={(row) => row.id}
+            pageSize={7}
+            checkboxSelection
+            autoHeight
+          />
+        </div>
         <SweetAlert
           show={show}
           warning

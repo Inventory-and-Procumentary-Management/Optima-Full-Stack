@@ -16,7 +16,7 @@ import { Link, useLocation } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
-import MenuItem from '@mui/material/MenuItem';
+import MenuItem from "@mui/material/MenuItem";
 import { useEffect } from "react";
 
 const stockData = [
@@ -36,8 +36,8 @@ export default function NewProduct() {
   const [file, setFile] = useState(null);
   const [allShow, setAllShow] = useState(false);
   const [show, setShow] = useState(false);
-  const [sizeForm, setSizeForm] = useState(4);
-  const [current_date,setCurrent_Date] = useState("");
+  const [sizeForm, setSizeForm] = useState(6);
+  const [current_date, setCurrent_Date] = useState("");
   const dispatch = useDispatch();
 
   const [titleError, setTitleError] = useState(false);
@@ -57,15 +57,21 @@ export default function NewProduct() {
   const [priceMessageError, setPriceMessageError] = useState(false);
   const [inStockMessageError, setInStockMessageError] = useState(false);
   const [quantityMessageError, setQuantityMessageError] = useState(false);
-  const [minimumLevelMessageError, setMinimumLevelMessageError] = useState(false);
+  const [minimumLevelMessageError, setMinimumLevelMessageError] =
+    useState(false);
   const [imageMessageError, setImageMessageError] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     const date = new Date();
-    let currentDate = date.getFullYear() + "-" + ("0" +(date.getMonth()+1)).slice(-2) + "-" + ("0" +date.getDate()).slice(-2);
+    let currentDate =
+      date.getFullYear() +
+      "-" +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + date.getDate()).slice(-2);
     console.log(currentDate);
     setCurrent_Date(currentDate);
-  },[]);
+  }, []);
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -74,7 +80,7 @@ export default function NewProduct() {
   };
 
   const handleClick = (e) => {
-    if(!e.target.value){
+    if (!e.target.value) {
       setShow(true);
       return;
     }
@@ -359,7 +365,6 @@ export default function NewProduct() {
                     </MenuItem>
                   ))}
                 </TextField>
-                
               </Grid>
               <Grid item md={sizeForm}>
                 {/* <input
@@ -385,15 +390,18 @@ export default function NewProduct() {
                   onChange={(e) => {
                     setImageError(false);
                     setImageMessageError("");
-                    setFile(e.target.files[0])
+                    setFile(e.target.files[0]);
                   }}
                 />
               </Grid>
-              <Grid item md={sizeForm}>
+              <Grid item md={sizeForm}></Grid>
+              <Grid item md={12} container sx={{alignItems:"center", justifyContent:"center"}}>
                 <button
                   type="submit"
                   // onClick={handleClick}
-                  className="addProductButton"
+                  // className="addProductButton"
+                  className="color-contained-button"
+                  style={{paddingLeft:70, paddingRight: 70, paddingBottom: 15, paddingTop:15}}
                 >
                   Create
                 </button>
