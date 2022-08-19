@@ -51,18 +51,18 @@ const App = () => {
               <Route path="/purchaseInvoice">
                 <PurchaseInvoice />
               </Route>
-              <Route path="/Product_details">
+              <Route path="/supplier/Product_details">
                 <Product_details />
               </Route>
-              <Route path="/Request_product">
+              <Route path="/supplier/Request_product">
                 <Request_product />
               </Route>
 
-              <Route path="/Supplier_Invoices">
+              <Route path="/supplier/Supplier_Invoices">
                 <Supplier_Invoices />
               </Route>
 
-              <Route path="/DisplayInvoice">
+              <Route path="/supplier/DisplayInvoice">
                 <DisplayInvoice />
               </Route>
               {/* <Route path="/user/:userId">
