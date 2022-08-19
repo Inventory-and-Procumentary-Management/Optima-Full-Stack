@@ -1,6 +1,6 @@
 .Main-topic-invoices{
     padding: 1rem;
-    background-color: rgb(185, 186, 186);
+    
 
 }
 .topic-invoice-number{
@@ -8,8 +8,8 @@
    
 }
 .Invoices-heading{
-    border-top: 0.1rem solid black;
-    border-bottom: 0.1rem solid black;
+    border-top: 0.01rem solid black;
+    border-bottom: 0.01rem solid black;
     display: grid;
     grid-template-columns: auto auto;
     
@@ -31,7 +31,7 @@
     padding-left: 1.875rem;
 }
 .topic-add-item{
-    background-color: rgb(55, 140, 187);
+
     padding: 0.4rem;
     
 }

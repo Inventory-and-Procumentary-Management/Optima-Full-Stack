@@ -14,25 +14,31 @@ import './SupplierInvoicesStyle.css'
 const Supplier_Invoices = () => {
     const { useState } = React;
     const [myArray, setMyArray] = useState([]);
+    const [data, setData] = useState('');
 
-    const handleSubmit = (event) => {
-       
-        event.preventDefault();
+ 
+ 
+
+    // const handleChange = (event) => {
+    //     //console.log(event.target.value);
+    //     setdata(data , event.target.value);
+    //     console.log(data)
+         
         
-        console.log(myArray);
-    
-    }
-
-    const handleChange = (event) => {
-        console.log(event.target.value);
-        setMyArray(myArray => [...myArray, event.target.value]);
-    };
+    // };
+  
+    const handleSubmit = () => {
+          
+      setMyArray(myArray => [...myArray, data]);
       
+  }
+  
 
   return (
     <div> {/* Main div to return */ }
+    
     <h2 className='Main-topic-invoices'>Invoices</h2>
-
+    <Box>
     <div className='Invoices-heading'> {/*Heading Div start */}
     <h3 className='topic-invoice-number'>Invoice - INV-456-001</h3>
     <h4 className='heading-date'>Date - 2022-08-17</h4>
@@ -126,10 +132,10 @@ const Supplier_Invoices = () => {
     <h4>Due Date</h4>
     </div>  {/* Div 6 end */}
     </div> {/* Form 1 part Ends in Here */}
-    <form onSubmit={handleSubmit}>
+    <form>
     <div className='add-item-select-btn'> {/* Adds item Button div start */}
-      <h4 className='topic-add-item'>Add Item +</h4>
-      <br></br>
+      <h2 className='topic-add-item'>Add Item</h2>
+      
       
 
       
@@ -140,7 +146,7 @@ const Supplier_Invoices = () => {
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           label="items"
-          onChange={handleChange}
+          onChange={e=>setData(e.target.value)}
         
         >
           <MenuItem value={10}>Cement</MenuItem>
@@ -149,11 +155,12 @@ const Supplier_Invoices = () => {
         </Select>
       </FormControl>
     </Box>
-    <Button variant="contained" type='submit'>Add to List</Button>
+    <Button variant="contained" onClick={()=>handleSubmit()} >Add to List</Button>
     </div> {/* Adds item Button div end */}
     </form>
-    <div> {/* Table Div start  */}
-        
+    <div className = ''> {/* Table Div start  */}
+    
+    {myArray.map(myArray => <h3>{myArray}</h3>)}
     </div> {/* Table Div ends  */}
 
 
@@ -230,9 +237,9 @@ const Supplier_Invoices = () => {
       </div> {/*All cal part end */}
       <br></br>
       <div className='create-btn'> {/* Request btn div start */}
-      <Button variant="contained" type='submit'>Create</Button>
+      <Button variant="contained" >Create</Button>
       </div> {/* Request btn div End */}
-   
+      </Box>
     </div> 
   )
 }
