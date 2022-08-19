@@ -48,21 +48,76 @@ export default function ProductList() {
         );
       },
     },
-    { field: "inStock", headerName: "Stock", width: 120 },
+    {
+      field: "inStock",
+      headerName: "Stock",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+                {params.row.inStock + " "}
+              </div>
+
+              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
+              <button
+                className="productListEdit"
+                style={{ backgroundColor: "#bdba2c" }}
+              >
+                Set
+              </button>
+              {/* </Link> */}
+            </div>
+          </>
+        );
+      },
+    },
     {
       field: "price",
       headerName: "Price",
-      width: 130,
+      width: 180,
+      renderCell: (params) => {
+        return (
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+              {params.row.price} {" "}
+              </div>
+
+              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
+              <button
+                className="productListEdit"
+              >
+                Change
+              </button>
+              {/* </Link> */}
+            </div>
+          </>
+        );
+      },
     },
     {
       field: "quantity",
       headerName: "Quantity",
-      width: 150,
+      width: 200,
       renderCell: (params) => {
         return (
-          <div className="productListItem">
-            {params.row.quantity} {params.row.messure}
-          </div>
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+              {params.row.quantity} {params.row.messure} {" "}
+              </div>
+
+              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
+              <button
+                className="productListEdit"
+              >
+                Change
+              </button>
+              {/* </Link> */}
+            </div>
+          </>
         );
       },
     },
@@ -74,19 +129,51 @@ export default function ProductList() {
         return (
           <>
             <div className="productListItem">
-              <div className="productListItemData">{params.row.minimumLevel + " "}</div>
+              <div className="productListItemData">
+                {params.row.minimumLevel + " "}
+              </div>
 
-              <Link to={"/purchaseStaff/productUpdate/" + params.row.id}>
-                <button className="productListEdit" style={{ backgroundColor: "#bdba2c" }}>Set</button>
-              </Link>
+              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
+              <button
+                className="productListEdit"
+                style={{ backgroundColor: "#bdba2c" }}
+              >
+                Set
+              </button>
+              {/* </Link> */}
             </div>
-            {/* <DeleteOutline
-              className="productListDelete"
-              onClick={() => {
-                handleDelete(params.row.id);
-                setShow(true);
-              }}
-            /> */}
+          </>
+        );
+      },
+    },
+    {
+      field: "isActivate",
+      headerName: "Activation",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+                {params.row.isActivate + " "}
+              </div>
+
+              {params.row.isActivate ? (
+                <button
+                  className="productListEdit"
+                  style={{ backgroundColor: "red" }}
+                >
+                  Deactivate
+                </button>
+              ) : (
+                <button
+                  className="productListEdit"
+                  style={{ backgroundColor: "red" }}
+                >
+                  Activate
+                </button>
+              )}
+            </div>
           </>
         );
       },
@@ -130,7 +217,7 @@ export default function ProductList() {
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row.id}
-          pageSize={8}
+          pageSize={7}
           checkboxSelection
           autoHeight
         />

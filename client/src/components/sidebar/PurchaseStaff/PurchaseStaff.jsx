@@ -16,6 +16,7 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
+import { useHistory } from "react-router-dom";
 
 import * as React from "react";
 import ListSubheader from "@mui/material/ListSubheader";
@@ -34,7 +35,7 @@ import StarBorder from "@mui/icons-material/StarBorder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 
 export default function PurchaseStaffSidebar() {
-
+  const history = useHistory();
   //check user who is....then send correct props for the particular dashboard
   // React.useEffect(()=>{
   //   alert("Purchase Staff");
@@ -44,49 +45,53 @@ export default function PurchaseStaffSidebar() {
     <div className="sidebar">
       <PerfectScrollbar>
         {/* <div className="sidebar"> */}
-          <div className="sidebarWrapper">
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Dashboard</h3>
-              <ul className="sidebarList">
-                <Link to="/purchaseStaff" className="link">
-                  <li className="sidebarListItem active">
-                    <LineStyle className="sidebarIcon" />
-                    Home
-                  </li>
-                </Link>
-                {/* <li className="sidebarListItem">
+        <div className="sidebarWrapper">
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Dashboard</h3>
+            <ul className="sidebarList">
+              <Link to="/purchaseStaff" className="link">
+              {/* {history.push("/purchaseStaff")} */}
+                <li className="sidebarListItem active">
+                  <LineStyle className="sidebarIcon" />
+                  Home
+                </li>
+              </Link>
+              {/* <li className="sidebarListItem">
               <Timeline className="sidebarIcon" />
               Analytics
             </li> */}
-                {/* <li className="sidebarListItem">
+              {/* <li className="sidebarListItem">
               <TrendingUp className="sidebarIcon" />
               Sales
             </li> */}
-                {/* <Link to="/users" className="link">
+              {/* <Link to="/users" className="link">
                   <li className="sidebarListItem">
                     <PermIdentity className="sidebarIcon" />
                     Users
                   </li>
                 </Link> */}
-                <Link to="/purchaseStaff/productList" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Products
-                  </li>
-                </Link>
-                <Link to="/payments" className="link">
-                  <li className="sidebarListItem">
-                    <AttachMoney className="sidebarIcon" />
-                    Payments
-                  </li>
-                </Link>
-                <Link to="/orders" className="link">
-                  <li className="sidebarListItem">
-                    <BarChart className="sidebarIcon" />
-                    Orders
-                  </li>
-                </Link>
-                {/* <Link to="/reports" className="link">
+              <Link to="/purchaseStaff/productList" className="link">
+                {/* {history.push("/purchaseStaff/productList")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Products
+                </li>
+              </Link>
+              {/* <Link to="/purchaseStaff/payments" className="link">
+                {history.push("/purchaseStaff/payments")}
+                <li className="sidebarListItem">
+                  <AttachMoney className="sidebarIcon" />
+                  Payments
+                </li>
+              </Link> */}
+              <Link to="/purchaseStaff/orders" className="link">
+                {/* {history.push("/purchaseStaff/orders")} */}
+                <li className="sidebarListItem">
+                  <BarChart className="sidebarIcon" />
+                  Order Summary
+                </li>
+              </Link>
+              {/* <Link to="/reports" className="link">
                   <li className="sidebarListItem">
                     <Report className="sidebarIcon" />
                     Reports
@@ -104,95 +109,99 @@ export default function PurchaseStaffSidebar() {
                     Send Email
                   </li>
                 </Link> */}
-                {/* <Link to="/post" className="link">
+              {/* <Link to="/post" className="link">
               <li className="sidebarListItem">
                 <WorkOutline className="sidebarIcon" />
                 Posts
               </li>
             </Link> */}
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Purchase</h3>
-              <ul className="sidebarList">
-                <Link to="/purchaseStaff/materialRequest" className="link">
-                  <li className="sidebarListItem">
-                    <PermIdentity className="sidebarIcon" />
-                    Material Request
-                  </li>
-                </Link>
-                <Link to="/purchaseStaff/purchaseOrder" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Purchase Order
-                  </li>
-                </Link>
-                <Link to="/purchaseStaff/purchaseInvoice" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Purchase Invoice
-                  </li>
-                </Link>
-                <Link to="/purchaseStaff/purchaseInvoice" className="link">
-                  <li className="sidebarListItem">
-                    <Storefront className="sidebarIcon" />
-                    Request for Quatation
-                  </li>
-                </Link>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Invoices</h3>
-              <ul className="sidebarList">
-                <li className="sidebarListItem">
-                  <MailOutline className="sidebarIcon" />
-                  Invoices
-                </li>
-                <li className="sidebarListItem">
-                  <DynamicFeed className="sidebarIcon" />
-                  Feedback
-                </li>
-                <li className="sidebarListItem">
-                  <ChatBubbleOutline className="sidebarIcon" />
-                  Messages
-                </li>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Products</h3>
-              <ul className="sidebarList">
-                <li className="sidebarListItem">
-                  <WorkOutline className="sidebarIcon" />
-                  Items & Pricing
-                </li>
-                <li className="sidebarListItem">
-                  <Timeline className="sidebarIcon" />
-                  Analytics
-                </li>
-                <li className="sidebarListItem">
-                  <Report className="sidebarIcon" />
-                  Reports
-                </li>
-              </ul>
-            </div>
-            <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Project</h3>
-              <ul className="sidebarList">
-                <li className="sidebarListItem">
-                  <WorkOutline className="sidebarIcon" />
-                  Project
-                </li>
-                <li className="sidebarListItem">
-                  <Timeline className="sidebarIcon" />
-                  Deliveries
-                </li>
-                <li className="sidebarListItem">
-                  <Report className="sidebarIcon" />
-                  Reports
-                </li>
-              </ul>
-            </div>
+            </ul>
           </div>
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Purchase</h3>
+            <ul className="sidebarList">
+              <Link to="/purchaseStaff/materialRequest" className="link">
+                {/* {history.push("/purchaseStaff/materialRequest")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Material Request
+                </li>
+              </Link>
+              <Link to="/purchaseStaff/purchaseOrder" className="link">
+                {/* {history.push("/purchaseStaff/purchaseOrder")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Purchase Order
+                </li>
+              </Link>
+              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+                {/* {history.push("/purchaseStaff/purchaseInvoice")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Purchase Invoice
+                </li>
+              </Link>
+              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+                {/* {history.push("/purchaseStaff/purchaseInvoice")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Request for Quatation
+                </li>
+              </Link>
+            </ul>
+          </div>
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Invoices</h3>
+            <ul className="sidebarList">
+              <li className="sidebarListItem">
+                <MailOutline className="sidebarIcon" />
+                Invoices
+              </li>
+              <li className="sidebarListItem">
+                <DynamicFeed className="sidebarIcon" />
+                Feedback
+              </li>
+              <li className="sidebarListItem">
+                <ChatBubbleOutline className="sidebarIcon" />
+                Messages
+              </li>
+            </ul>
+          </div>
+          {/* <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Products</h3>
+            <ul className="sidebarList">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Items & Pricing
+              </li>
+              <li className="sidebarListItem">
+                <Timeline className="sidebarIcon" />
+                Analytics
+              </li>
+              <li className="sidebarListItem">
+                <Report className="sidebarIcon" />
+                Reports
+              </li>
+            </ul>
+          </div> */}
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Project</h3>
+            <ul className="sidebarList">
+              <li className="sidebarListItem">
+                <WorkOutline className="sidebarIcon" />
+                Project
+              </li>
+              <li className="sidebarListItem">
+                <Timeline className="sidebarIcon" />
+                Deliveries
+              </li>
+              <li className="sidebarListItem">
+                <Report className="sidebarIcon" />
+                Reports
+              </li>
+            </ul>
+          </div>
+        </div>
         {/* </div> */}
       </PerfectScrollbar>
     </div>

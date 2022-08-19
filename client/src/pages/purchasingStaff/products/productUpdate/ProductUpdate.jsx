@@ -17,6 +17,11 @@ import { useEffect, useMemo, useState } from "react";
 import { deleteProduct, getProducts } from "../../../../redux/productApiCalls";
 import SweetAlert from "react-bootstrap-sweetalert";
 
+import * as React from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+
 export default function ProductUpdate() {
   const location = useLocation();
   const productId = location.pathname.split("/")[3];
@@ -25,6 +30,16 @@ export default function ProductUpdate() {
   const [show, setShow] = useState(false);
   const [allShow, setAllShow] = useState(false);
   const [formSaveData, setFormSaveData] = useState([]);
+
+  const [titleError,setTitleError] = useState(false);
+  const [descriptionError,setDescriptionError] = useState(false);
+  const [categoryError,setCategoryError] = useState(false);
+  const [messureError,setMessureError] = useState(false);
+
+  const [titleMessageError,setTitleMessageError] = useState("");
+  const [descriptionMessageError,setDescriptionMessageError] = useState("");
+  const [categoryMessageError,setCategoryMessageError] = useState("");
+  const [messureMessageError,setMessureMessageError] = useState("");
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product.id == productId)
@@ -40,7 +55,7 @@ export default function ProductUpdate() {
       "May",
       "Jun",
       "Jul",
-      "Agu",
+      "Aug",
       "Sep",
       "Oct",
       "Nov",
@@ -83,36 +98,43 @@ export default function ProductUpdate() {
     const formData = new FormData(e.target);
     const formNewData = {
       title: formData.get("title"),
-      desc: formData.get("desc"),
-      inStock: formData.get("inStock"),
-      price: formData.get("price"),
+      description: formData.get("description"),
+      category: formData.get("category"),
+      messure: formData.get("messure"),
       img: formData.get("img"),
+      inStock: product.inStock,
+      isActivate: product.isActivate,
+      price: product.price,
+      createDate: product.createDate,
+      minimum_level: product.minimumLevel,
+      quantity: product.quantity,
     };
     setFormSaveData(formNewData);
     setShow(true);
+    console.log(formNewData);
   };
 
   const URL = `http://localhost:5000/api/v1/products/${productId}`;
 
   const updateProductDetails = async () => {
     setShow(false);
-    // if (!formSaveData.title) {
-    //   formSaveData.title = product.title;
-    // }
-    // if (!formSaveData.desc) {
-    //   formSaveData.desc = product.desc;
-    // }
-    // console.log(formSaveData.img.name);
-    // if (!formSaveData.img.name) {
-    //   formSaveData.img = product.img;
-    // }
-    // console.log(formSaveData.img.name);
-    // if (!formSaveData.price) {
-    //   formSaveData.price = product.price;
-    // }
-    // if (!formSaveData.inStock) {
-    //   formSaveData.inStock = product.inStock;
-    // }
+    if (!formSaveData.title) {
+      formSaveData.title = product.title;
+    }
+    if (!formSaveData.description) {
+      formSaveData.description = product.description;
+    }
+    console.log(formSaveData.img.name);
+    if (!formSaveData.img.name) {
+      formSaveData.img = product.img;
+    }
+    console.log(formSaveData.img.name);
+    if (!formSaveData.category) {
+      formSaveData.category = product.category;
+    }
+    if (!formSaveData.messure) {
+      formSaveData.messure = product.messure;
+    }
     // try {
     //   let response = await fetch(URL, {
     //     method: "PUT",
@@ -146,14 +168,24 @@ export default function ProductUpdate() {
   return (
     <div className="common">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
-        <Link to="/purchaseStaff/newProduct">
-          <button className="productAddButton">Create</button>
-        </Link>
+        <h1 className="productTitle">Product Detail Edit</h1>
+        <div>
+          <Link to="/purchaseStaff/productList">
+            <button
+              className="productAddButton"
+              style={{ backgroundColor: "darkblue", marginRight: 10 }}
+            >
+              Back
+            </button>
+          </Link>
+          <Link to="/purchaseStaff/newProduct">
+            <button className="productAddButton">Create</button>
+          </Link>
+        </div>
       </div>
       <div className="productTop">
         <div className="productTopLeft">
-          <Charts data={pStats} dataKey1="Sales" title="Sales Performance" />
+          <Charts data={pStats} dataKey1="Sales" title="Product Requirement" />
         </div>
         <div className="productTopRight">
           <div className="productInfoTop">
@@ -177,36 +209,154 @@ export default function ProductUpdate() {
         </div>
       </div>
       <div className="productBottom">
-        <form className="productForm" onSubmit={updateProduct}>
-          <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" name="title" placeholder={product.title} />
-            <label>Product Description</label>
-            <input type="text" name="desc" placeholder={product.description} />
-            <label>Price</label>
-            <input type="text" name="price" placeholder={product.price} />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
-              <option value="1">Yes</option>
-              <option value="0">No</option>
-            </select>
-          </div>
-          <div className="productFormRight">
-            <div className="productUpload">
-              <img src={product.img} alt="" className="productUploadImg" />
-              <label for="file">
-                <Publish />
-              </label>
-              <input
-                type="file"
-                id="file"
-                name="img"
-                style={{ display: "none" }}
-              />
-            </div>
-            <button className="productButton">Update</button>
-          </div>
-        </form>
+        <h2>Update Product</h2>
+        <Box
+          sx={{
+            my: 1,
+            mx: 4,
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {/* <form className="productForm" onSubmit={updateProduct}> */}
+
+          <Box
+            component="form"
+            noValidate
+            onSubmit={updateProduct}
+            className="productForm"
+            // sx={{ m: 5 }}
+          >
+            {/* <div className="productFormLeft"> */}
+            <Grid container spacing={4}>
+              <Grid item md={10}>
+                <Grid container spacing={2}>
+                  <Grid item md={4}>
+                    <TextField
+                      error={titleError}
+                      defaultValue={product.title}
+                      variant="standard"
+                      margin="normal"
+                      // required
+                      fullWidth
+                      id="title"
+                      label="Product Name"
+                      name="title"
+                      autoComplete="title"
+                      autoFocus
+                      helperText={titleMessageError}
+                      onChange={() => {
+                        setTitleError(false);
+                        setTitleMessageError("");
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={4}>
+                    <TextField
+                      error={descriptionError}
+                      defaultValue={product.description}
+                      variant="standard"
+                      margin="normal"
+                      // required
+                      fullWidth
+                      id="description"
+                      label="Product Description"
+                      name="description"
+                      autoComplete="description"
+                      autoFocus
+                      helperText={descriptionMessageError}
+                      onChange={() => {
+                        setDescriptionError(false);
+                        setDescriptionMessageError("");
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={4}>
+                    <TextField
+                      error={categoryError}
+                      defaultValue={product.category}
+                      variant="standard"
+                      margin="normal"
+                      // required
+                      fullWidth
+                      id="category"
+                      label="Category"
+                      name="category"
+                      autoComplete="category"
+                      autoFocus
+                      helperText={categoryMessageError}
+                      onChange={() => {
+                        setCategoryError(false);
+                        setCategoryMessageError("");
+                      }}
+                    />
+                  </Grid>
+                  <Grid item md={4}>
+                    <TextField
+                      error={messureError}
+                      defaultValue={product.messure}
+                      variant="standard"
+                      margin="normal"
+                      // required
+                      fullWidth
+                      id="messure"
+                      label="Messurement"
+                      name="messure"
+                      autoComplete="messure"
+                      autoFocus
+                      helperText={messureMessageError}
+                      onChange={() => {
+                        setMessureError(false);
+                        setMessureMessageError("");
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+
+                {/* <label>Product Name</label>
+                <input type="text" name="title" placeholder={product.title} />
+                <label>Product Description</label>
+                <input
+                  type="text"
+                  name="desc"
+                  placeholder={product.description}
+                />
+                <label>Price</label>
+                <input type="text" name="price" placeholder={product.price} />
+                <label>In Stock</label>
+                <select name="inStock" id="idStock">
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+                </div> */}
+              </Grid>
+              <Grid item md={2}>
+                <div className="productFormRight">
+                  <div className="productUpload">
+                    <img
+                      src={product.img}
+                      alt=""
+                      className="productUploadImg"
+                    />
+                    <label for="file">
+                      <Publish />
+                    </label>
+                    <input
+                      type="file"
+                      id="file"
+                      name="img"
+                      style={{ display: "none" }}
+                    />
+                  </div>
+                  <button className="productButton">Update</button>
+                </div>
+              </Grid>
+            </Grid>
+            {/* </form> */}
+          </Box>
+        </Box>
       </div>
       <SweetAlert
         show={show}

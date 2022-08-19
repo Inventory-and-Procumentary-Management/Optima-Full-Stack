@@ -30,7 +30,7 @@ export default function Sidebar() {
         setUserType(0);
       } else if (item.name === "ROLE_PURCHASING_MANAGER") {
         //1
-        history.push("//purchaseManager");
+        history.push("/purchaseManager");
         setUserType(1);
       } else if (item.name === "ROLE_PURCHASING_STAFF") {
         //2
