@@ -1,7 +1,8 @@
 import * as React from "react";
 import { useEffect } from "react";
 import "./Sidebar.css";
-import { useSelector } from "react-redux";
+import { useSelector }
+ from "react-redux";
 import { useHistory } from "react-router-dom";
 
 import PurchaseStaffSidebar from "./PurchaseStaff/PurchaseStaff";

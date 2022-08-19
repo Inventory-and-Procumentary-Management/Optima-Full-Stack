@@ -15,6 +15,10 @@ import SecondTopbar from "./components/secondTopbar/SecondTopbar";
 import MaterialRequest from "./pages/purchasingStaff/materialRequest/MaterialRequest";
 import PurchaseOrder from "./pages/purchasingStaff/purchaseOrder/PurchaseOrder";
 import PurchaseInvoice from "./pages/purchasingStaff/purchaseInvoice/PurchaseInvoice";
+import Product_details from "./components/Supplier_components/Product_details";
+import Request_product from "./components/Supplier_components/Request_product";
+import Supplier_Invoices from "./components/Supplier_components/Supplier_Invoices";
+import DisplayInvoice from "./components/Supplier_components/DisplayInvoice";
 
 const App = () => {
   return (
@@ -46,6 +50,20 @@ const App = () => {
               </Route>
               <Route path="/purchaseInvoice">
                 <PurchaseInvoice />
+              </Route>
+              <Route path="/Product_details">
+                <Product_details />
+              </Route>
+              <Route path="/Request_product">
+                <Request_product />
+              </Route>
+
+              <Route path="/Supplier_Invoices">
+                <Supplier_Invoices />
+              </Route>
+
+              <Route path="/DisplayInvoice">
+                <DisplayInvoice />
               </Route>
               {/* <Route path="/user/:userId">
                 <User />
