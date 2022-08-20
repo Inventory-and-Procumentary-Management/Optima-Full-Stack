@@ -29,6 +29,8 @@ import Inventory from "./pages/warehouseManager/inventory/Inventory";
 import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
 import Stocks from "./pages/warehouseManager/Stocks/Stocks";
 import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
+import Request_product from "./pages/Supplier/Request_product";
+import PurchaseOrders from "./pages/purchaseManager/printPOs/PurchaseOrders";
 
 const App = () => {
   return (
@@ -105,12 +107,23 @@ const App = () => {
               <Route exact path="/warehouseManager/Stocks">
                  <Stocks/>
               </Route>
+
+              <Route exact path="/supplier/Request_product">
+                 <Request_product/>
+              </Route>
               {/* <Route path="/users">
                 <UserList />
               </Route> */}
               {/* <Route path="/user/:userId">
                 <User />
               </Route> */}
+
+              <Route path="/purchaseManager">
+                <PurchaseOrders />
+              </Route>
+              <Route path="/purchaseManager/purchaseOrders">
+                <PurchaseOrders />
+              </Route>
               </div>
           </div>
         </>
