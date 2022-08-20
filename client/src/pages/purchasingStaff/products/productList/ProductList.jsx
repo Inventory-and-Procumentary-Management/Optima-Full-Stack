@@ -1,20 +1,37 @@
 import "./ProductList.css";
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import {
+  DeleteOutline,
+  ThumbUpAltOutlined,
+  ThumbDownAltOutlined,
+  EditOutlined,
+  CancelOutlined,
+  CheckOutlined,
+  EditTwoTone,
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProducts } from "../../../../redux/productApiCalls";
+import {
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from "../../../../redux/productApiCalls";
 import SweetAlert from "react-bootstrap-sweetalert";
 import SearchComponent from "../../../../components/search/Search";
 
 export default function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
+  const userType = useSelector((state) => state.user.userType);
   const [show, setShow] = useState(false);
+  const [approveShow, setApproveShow] = useState(false);
+  const [approveStatus, setApproveStatus] = useState(false);
+  const [productStatusNew, setProductStatusNew] = useState(false);
   const [productId, setProductId] = useState("");
   const [deleteTrigger, setDeleteTrigger] = useState(false);
   const [allShow, setAllShow] = useState(false);
+  const [product, setProduct] = useState([]);
 
   useEffect(() => {
     getProducts(dispatch);
@@ -25,13 +42,56 @@ export default function ProductList() {
     deleteProduct(productId, dispatch);
     setDeleteTrigger(!deleteTrigger);
   };
+
   const deleteCancel = () => {
     setShow(false);
+    setApproveShow(false);
   };
 
   const handleDelete = (id) => {
     setProductId(id);
     // setData(data.filter((item) => item.id !== id));
+  };
+
+  const priceChangeModel = (id) => {
+    setProductId(id);
+    console.log(id);
+  };
+  const changeStockType = (id) => {
+    setProductId(id);
+    console.log(id);
+  };
+  const changeQuantity = (id) => {
+    setProductId(id);
+    console.log(id);
+  };
+  const setMinimumLevel = (id) => {
+    setProductId(id);
+    console.log(id);
+  };
+  const setProductStatus = (id, status) => {
+    setProductId(id);
+    setProductStatusNew(status);
+    // now activate -> status = false
+    // now deactivate -> status = true
+    console.log(id);
+  };
+  const setProductApproveStatus = (id, status, product) => {
+    setApproveStatus(status);
+    setProductId(id);
+    console.log(product);
+    let { isApprove, ...others } = product;
+    isApprove = status;
+    setProduct({ isApprove, ...others });
+    // now activate -> status = false
+    // now deactivate -> status = true
+    console.log(id);
+  };
+  const updateApproveConfirm = async () => {
+    setApproveShow(false);
+    console.log(product);
+    updateProduct(productId, product, dispatch);
+    setDeleteTrigger(!deleteTrigger);
   };
 
   const columns = [
@@ -62,12 +122,18 @@ export default function ProductList() {
               </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              <button
-                className="productListEdit"
-                style={{ backgroundColor: "#bdba2c" }}
-              >
-                Set
-              </button>
+              {userType === "ROLE_WAREHOUSE_MANAGER" ? (
+                <button
+                  className="productListEdit"
+                  style={{ backgroundColor: "#bdba2c" }}
+                  onClick={() => changeStockType(params.row.id)}
+                >
+                  Set
+                </button>
+              ) : (
+                <></>
+              )}
+
               {/* </Link> */}
             </div>
           </>
@@ -83,10 +149,16 @@ export default function ProductList() {
           <>
             <div className="productListItem">
               <div className="productListItemData">{params.row.price} </div>
-
-              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              <button className="productListEdit">Change</button>
-              {/* </Link> */}
+              {userType === "ROLE_SUPPLIER" ? (
+                <button
+                  className="productListEdit"
+                  onClick={() => priceChangeModel(params.row.id)}
+                >
+                  Change
+                </button>
+              ) : (
+                <></>
+              )}
             </div>
           </>
         );
@@ -105,7 +177,16 @@ export default function ProductList() {
               </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              <button className="productListEdit">Change</button>
+              {userType === "ROLE_WAREHOUSE_MANAGER" ? (
+                <button
+                  className="productListEdit"
+                  onClick={() => changeQuantity(params.row.id)}
+                >
+                  Change
+                </button>
+              ) : (
+                <></>
+              )}
               {/* </Link> */}
             </div>
           </>
@@ -125,12 +206,18 @@ export default function ProductList() {
               </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              <button
-                className="productListEdit"
-                style={{ backgroundColor: "#bdba2c" }}
-              >
-                Set
-              </button>
+              {userType === "ROLE_PURCHASING_MANAGER" ? (
+                <EditTwoTone
+                  className="productListDelete"
+                  style={{ color: "#bdba2c" }}
+                  onClick={() => {
+                    setMinimumLevel(params.row.id);
+                    // setApproveShow(true);
+                  }}
+                />
+              ) : (
+                <></>
+              )}
               {/* </Link> */}
             </div>
           </>
@@ -149,20 +236,68 @@ export default function ProductList() {
                 {params.row.isActivate + " "}
               </div>
 
-              {params.row.isActivate ? (
-                <button
-                  className="productListEdit"
-                  style={{ backgroundColor: "red" }}
-                >
-                  Deactivate
-                </button>
+              {userType === "ROLE_PURCHASING_MANAGER" ? (
+                params.row.isActivate ? (
+                  <CheckOutlined
+                    className="productListDelete"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      setProductStatus(params.row.id, false);
+                      // setApproveShow(true);
+                    }}
+                  />
+                ) : (
+                  <CancelOutlined
+                    className="productListDelete"
+                    style={{ color: "red" }}
+                    onClick={() => {
+                      setProductStatus(params.row.id, false);
+                      // setApproveShow(true);
+                    }}
+                  />
+                )
               ) : (
-                <button
-                  className="productListEdit"
-                  style={{ backgroundColor: "red" }}
-                >
-                  Activate
-                </button>
+                <></>
+              )}
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      field: "isApprove",
+      headerName: "Approve",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+                {params.row.isApprove + " "}
+              </div>
+
+              {userType === "ROLE_PURCHASING_MANAGER" ? (
+                params.row.isApprove ? (
+                  <ThumbUpAltOutlined
+                    className="productListDelete"
+                    style={{ color: "green" }}
+                    onClick={() => {
+                      setProductApproveStatus(params.row.id, false, params.row);
+                      setApproveShow(true);
+                    }}
+                  />
+                ) : (
+                  <ThumbDownAltOutlined
+                    className="productListDelete"
+                    style={{ color: "red" }}
+                    onClick={() => {
+                      setProductApproveStatus(params.row.id, true, params.row);
+                      setApproveShow(true);
+                    }}
+                  />
+                )
+              ) : (
+                <></>
               )}
             </div>
           </>
@@ -176,24 +311,31 @@ export default function ProductList() {
       renderCell: (params) => {
         return (
           <>
-            <Link to={"/purchaseStaff/productUpdate/" + params.row.id}>
-              <button className="productListEdit">Edit</button>
-            </Link>
-            {/* <Link to={"/purchaseStaff/newProduct"}>
-              <button
-                className="productListEdit"
-                style={{ backgroundColor: "darkblue" }}
-              >
-                Create
-              </button>
-            </Link> */}
-            <DeleteOutline
-              className="productListDelete"
-              onClick={() => {
-                handleDelete(params.row.id);
-                setShow(true);
-              }}
-            />
+            {userType === "ROLE_PURCHASING_MANAGER" ||
+            userType === "ROLE_PURCHASING_STAFF" ? (
+              <div>
+                <Link to={"/purchaseStaff/productUpdate/" + params.row.id}>
+                  {/* <button className="productListEdit">Edit</button> */}
+                  <EditOutlined
+                    className="productListDelete"
+                    style={{ color: "green", marginRight: 20 }}
+                  />
+                </Link>
+              </div>
+            ) : (
+              <></>
+            )}
+            {userType === "ROLE_PURCHASING_MANAGER" ? (
+              <DeleteOutline
+                className="productListDelete"
+                onClick={() => {
+                  handleDelete(params.row.id);
+                  setShow(true);
+                }}
+              />
+            ) : (
+              <></>
+            )}
           </>
         );
       },
@@ -232,6 +374,19 @@ export default function ProductList() {
           confirmBtnBsStyle="danger"
           title="Are you sure?"
           onConfirm={deleteConfirm}
+          onCancel={deleteCancel}
+          focusCancelBtn
+        >
+          You will not be able to recover this imaginary file!
+        </SweetAlert>
+        <SweetAlert
+          show={approveShow}
+          warning
+          showCancel
+          confirmBtnText="Yes, Update it!"
+          confirmBtnBsStyle="danger"
+          title="Are you sure?"
+          onConfirm={updateApproveConfirm}
           onCancel={deleteCancel}
           focusCancelBtn
         >

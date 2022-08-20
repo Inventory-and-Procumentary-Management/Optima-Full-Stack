@@ -145,12 +145,24 @@ const columns = [
 ];
 
 const MaterialRequest = () => {
+  const userType = useSelector((state)=>state.user.userType);
+  const [user,setUser] = useState("");
+  console.log(userType);
+
+  useEffect(()=>{
+    if(userType === "ROLE_PURCHASING_MANAGER"){
+      setUser("purchaseManager");
+    }else if(userType === "ROLE_PURCHASING_STAFF"){
+      setUser("purchaseStaff");
+    }
+  },[]);
+  
   return (
     <div className="common">
       <div className="userList">
         <div className="top-container-material-request">
           <div className="top-contaier-button-material-request">
-            <Link to={"/purchaseStaff/newMaterialRequest"}>
+            <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
             </Link>
           </div>
