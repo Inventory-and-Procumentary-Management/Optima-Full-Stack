@@ -173,7 +173,7 @@ export default function PurchaseStaffSidebar() {
                   Invoices
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+              <Link to="/supplier/Supplier_Invoices" className="link">
                 <li className="sidebarListItem">
                   <Report className="sidebarIcon" />
                   Create Invoices

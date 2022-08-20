@@ -1,0 +1,51 @@
+.Main-topic-invoices{
+    padding: 1rem;
+    
+
+}
+.topic-invoice-number{
+    padding: 1rem;
+   
+}
+.Invoices-heading{
+    border-top: 0.01rem solid black;
+    border-bottom: 0.01rem solid black;
+    display: grid;
+    grid-template-columns: auto auto;
+    
+}
+.heading-date{
+    padding: 1rem;
+    padding-right: 2rem;
+    text-align: right;
+}
+.form-first-part{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+    
+}
+.add-item-select-btn{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+}
+.topic-add-item{
+
+    padding: 0.4rem;
+    
+}
+.calculation-div{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.special-note-style{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+}
+.create-btn{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+    position: absolute;
+    right: 6rem;
+}
