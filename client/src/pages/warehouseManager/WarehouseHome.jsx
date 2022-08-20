@@ -80,6 +80,7 @@ const WarehouseHome = () => {
           grid
           dataKey1="Cement"
           dataKey2="Sand"
+          dataKey3="Sand1"
         />
         {/* <div className="homeWidgets">
         <WidgetSm />
