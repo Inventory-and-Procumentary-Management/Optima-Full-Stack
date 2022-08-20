@@ -22,12 +22,15 @@ import NewProduct from "./pages/purchasingStaff/products/newProduct/NewProduct";
 import OrderSummary from "./pages/purchasingStaff/orderSummary/OrderSummary";
 import NewMaterialRequest from "./pages/purchasingStaff/materialRequest/newMaterialRequest/NewMaterialRequest";
 import AdministratorHome from "./pages/administrator/AdministratorHome";
-import UserList from "./pages/administrator/userList/UserList";
+import UserList from "./pages/administrator/users/userList/UserList";
+import NewUser from "./pages/administrator/users/newUser/NewUser";
+import Delivery from "./pages/purchasingStaff/deliveries/Delivery";
 import Inventory from "./pages/warehouseManager/inventory/Inventory";
 import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
-import warehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Stocks from "./pages/warehouseManager/Stocks/Stocks";
 import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
+import Request_product from "./pages/Supplier/Request_product";
+import PurchaseOrders from "./pages/purchaseManager/printPOs/PurchaseOrders";
 
 const App = () => {
   return (
@@ -78,6 +81,9 @@ const App = () => {
               <Route path="/purchaseStaff/orders">
                 <OrderSummary />
               </Route>
+              <Route path="/purchaseStaff/deliveries">
+                <Delivery />
+              </Route>
 
               <Route exact path="/admin">
                 <AdministratorHome />
@@ -85,6 +91,10 @@ const App = () => {
               <Route exact path="/admin/users">
                 <UserList />
               </Route>
+              <Route exact path="/admin/newUser">
+                <NewUser />
+              </Route>
+
               <Route exact path="/warehouseManager">
                 <WarehouseHome/>
               </Route>
@@ -97,12 +107,23 @@ const App = () => {
               <Route exact path="/warehouseManager/Stocks">
                  <Stocks/>
               </Route>
+
+              <Route exact path="/supplier/Request_product">
+                 <Request_product/>
+              </Route>
               {/* <Route path="/users">
                 <UserList />
               </Route> */}
               {/* <Route path="/user/:userId">
                 <User />
               </Route> */}
+
+              <Route path="/purchaseManager">
+                <PurchaseOrders />
+              </Route>
+              <Route path="/purchaseManager/purchaseOrders">
+                <PurchaseOrders />
+              </Route>
               </div>
           </div>
         </>
