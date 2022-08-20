@@ -4,7 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Grid, MenuItem, TextField } from "@mui/material";
-import BasicSelect from "./BasicSelect";
+import BasicSelect from "../inventory/BasicSelect";
 
 const style = {
   position: "absolute",
@@ -18,7 +18,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModalStocks() {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -29,7 +29,7 @@ export default function BasicModal() {
                     <AddIcon />
                     ADD NEW
                   </Button> */}
-      <Button onClick={handleOpen} style={{ color:"black" }}>ADD NEW ITEM</Button>
+      <Button onClick={handleOpen} style={{ color:"black" }}>Request Stocks</Button>
       <Modal
         open={open}
         onClose={handleClose}
