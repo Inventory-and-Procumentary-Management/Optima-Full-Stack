@@ -6,6 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import DeleteIcon from '@mui/icons-material/Delete';
+import AddIcon from '@mui/icons-material/Add';
 
 function createData(name, Price_per_one, Quantity, Description, more) {
   return { name, Price_per_one, Quantity, Description, more };
@@ -29,7 +31,7 @@ export default function BasicTable() {
             <TableCell align="left">Price Per One</TableCell>
             <TableCell align="left">Quantity</TableCell>
             <TableCell align="left">Description</TableCell>
-            <TableCell align="left">More</TableCell>
+            <TableCell align="left"></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -44,7 +46,7 @@ export default function BasicTable() {
               <TableCell align="left">{row.Price_per_one}</TableCell>
               <TableCell align="left">{row.Quantity}</TableCell>
               <TableCell align="left">{row.Description}</TableCell>
-              <TableCell align="left">{row.more}</TableCell>
+              <TableCell align="left"><AddIcon></AddIcon> &nbsp; <DeleteIcon></DeleteIcon>  </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -176,10 +176,7 @@ export default function PurchaseStaffSidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Purchase</h3>
             <ul className="sidebarList">
-              <li className="sidebarListItem">
-                <WorkOutline className="sidebarIcon" />
-                Transactions
-              </li>
+            
 
               <Link to="/purchaseStaff/deliveries" className="link">
                 <li className="sidebarListItem">
@@ -189,7 +186,7 @@ export default function PurchaseStaffSidebar() {
               </Link>
               <Link to="/supplier/Supplier_Invoices" className="link">
                 <li className="sidebarListItem">
-                  <Report className="sidebarIcon" />
+                <Timeline className="sidebarIcon" />
                   Create Invoices
                 </li>
               </Link>

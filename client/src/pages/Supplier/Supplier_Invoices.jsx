@@ -37,7 +37,7 @@ const Supplier_Invoices = () => {
     <div> {/* Main div to return */ }
     
     <h2 className='Main-topic-invoices'>Invoices</h2>
-    <Box>
+    <div className='MainDiv'>
     <div className='Invoices-heading'> {/*Heading Div start */}
     <h3 className='topic-invoice-number'>Invoice - INV-456-001</h3>
     <h4 className='heading-date'>Date - 2022-08-17</h4>
@@ -238,7 +238,8 @@ const Supplier_Invoices = () => {
       <div className='create-btn'> {/* Request btn div start */}
       <Button variant="contained" >Create</Button>
       </div> {/* Request btn div End */}
-      </Box>
+      
+      </div>
     </div> 
   )
 }

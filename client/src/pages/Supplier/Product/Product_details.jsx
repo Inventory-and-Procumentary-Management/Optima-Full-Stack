@@ -7,15 +7,24 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Supplier_TableTabs from './Supplier_TableTabs';
 import Supplier_Table from './Supplier_Table';
+import { Link } from "react-router-dom";
+import './productStyle.css'
 
 const Product_details = () => {
  
     return (
       <div>
-      <div>
-          <Button variant="contained">Add New + </Button>
+      <div className="link-to-request-product">
+          
+          <Link to="/supplier/Request_product" className="request-product-link">
+                {/* {history.push("/purchaseStaff/materialRequest")} */}               
+                Add New +
+              </Link>
+      </div >
+      <div className='table-content'>
+      <Supplier_TableTabs> </Supplier_TableTabs>
       </div>
-          <Supplier_TableTabs> </Supplier_TableTabs>
+         
           
       
   

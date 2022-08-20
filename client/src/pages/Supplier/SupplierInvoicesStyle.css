@@ -1,5 +1,6 @@
 .Main-topic-invoices{
     padding: 1rem;
+    padding-bottom: 0.3rem;
     
 
 }
@@ -8,8 +9,7 @@
    
 }
 .Invoices-heading{
-    border-top: 0.01rem solid black;
-    border-bottom: 0.01rem solid black;
+    border: 0.01rem solid black;
     display: grid;
     grid-template-columns: auto auto;
     
@@ -48,4 +48,11 @@
     padding-left: 1.875rem;
     position: absolute;
     right: 6rem;
+}
+.MainDiv{
+    padding: 0.625rem;
+    margin: 0.5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background-color: rgb(227, 227, 227);
 }
