@@ -22,43 +22,57 @@ export default function TopBarTabs() {
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
-      <TabContext value={value}>
-        <AppBar position="static">
-          <Toolbar style={{ backgroundColor: "black" }}>
-            <Grid container spacing={5}>
-              <Grid item xs={10}>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                  <TabList
-                    onChange={handleChange}
-                    aria-label="lab API tabs example"
-                    sx={{ color: "#fff" }}
-                  >
-                    <Tab label="Building" sx={{ color: "#fff" }} value="1" />
-                    <Tab label="Wiring" sx={{ color: "#fff" }} value="2" />
-                    <Tab label="Plumbing" sx={{ color: "#fff" }} value="3" />
-                    <Tab label="Painting" sx={{ color: "#fff" }} value="4" />
-                    <Tab label="Tile" sx={{ color: "#fff" }} value="5" />
-                    <Tab label="Wood" sx={{ color: "#fff" }} value="5" />
-                  </TabList>
-                </Box>
+    
+      <Box sx={{ width: "100%", typography: "body1" }}>
+        <TabContext value={value}>
+          <AppBar position="static">
+            <Toolbar style={{ backgroundColor: "#fff" }}>
+              <Grid container spacing={5}>
+                <Grid item xs={10}>
+                  <Box sx={{ borderColor: "divider" }}>
+                    <TabList
+                      onChange={handleChange}
+                      aria-label="lab API tabs example"
+                      sx={{ color: "#000" }}
+                    >
+                      <Tab label="Building" sx={{ color: "#000" }} value="1" />
+                      <Tab label="Wiring" sx={{ color: "#000" }} value="2" />
+                      <Tab label="Plumbing" sx={{ color: "#000" }} value="3" />
+                      <Tab label="Painting" sx={{ color: "#000" }} value="4" />
+                      <Tab label="Tile" sx={{ color: "#000" }} value="5" />
+                      <Tab label="Wood" sx={{ color: "#000" }} value="6" />
+                    </TabList>
+                  </Box>
+                </Grid>
+                <Grid item xs={2} sx={{ marginTop: 1 }}>
+                  {/* <Link to="/AddProduct" className="link"> */}
+                  {/* <BasicModal /> */}
+
+                  {/* </Link> */}
+                </Grid>
               </Grid>
-              <Grid item xs={2} sx={{ marginTop: 1 }}>
-                {/* <Link to="/AddProduct" className="link"> */}
-                <BasicModal />
-                  
-                {/* </Link> */}
-              </Grid>
-            </Grid>
-          </Toolbar>
-        </AppBar>
-        <TabPanel value="1" sx={{p: 0}}><BuildingTable /></TabPanel>
-        <TabPanel value="2" sx={{p: 0}}><PlumbingTable /></TabPanel>
-        <TabPanel value="3" sx={{p: 0}}><InventoryTable /></TabPanel>
-        <TabPanel value="4" sx={{p: 0}}><BuildingTable /></TabPanel>
-        <TabPanel value="5" sx={{p: 0}}><PlumbingTable /></TabPanel>
-        <TabPanel value="6" sx={{p: 0}}><InventoryTable /></TabPanel>
-      </TabContext>
-    </Box>
+            </Toolbar>
+          </AppBar>
+          <TabPanel value="1" sx={{ p: 0 }}>
+            <BuildingTable />
+          </TabPanel>
+          <TabPanel value="2" sx={{ p: 0 }}>
+            <BuildingTable />
+          </TabPanel>
+          <TabPanel value="3" sx={{ p: 0 }}>
+            <BuildingTable />
+          </TabPanel>
+          <TabPanel value="4" sx={{ p: 0 }}>
+            <BuildingTable />
+          </TabPanel>
+          <TabPanel value="5" sx={{ p: 0 }}>
+            <BuildingTable />
+          </TabPanel>
+          <TabPanel value="6" sx={{ p: 0 }}>
+            <BuildingTable />
+          </TabPanel>
+        </TabContext>
+      </Box>
+ 
   );
 }

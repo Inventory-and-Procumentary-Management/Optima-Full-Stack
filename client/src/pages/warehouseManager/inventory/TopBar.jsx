@@ -13,6 +13,7 @@ import TopBarTabs from "./TopBarTabs";
 
 export default function TopBar() {
   return (
+    
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar style={{ backgroundColor: "black" }}>
