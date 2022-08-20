@@ -115,7 +115,7 @@ export default function PurchaseStaffSidebar() {
                   Request Product
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseOrder" className="link">
+              <Link to="/supplier/Product_details" className="link">
                 {/* {history.push("/purchaseStaff/purchaseOrder")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
@@ -123,6 +123,20 @@ export default function PurchaseStaffSidebar() {
                 </li>
               </Link>
               
+            </ul>
+          </div>
+
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Orders</h3>
+            <ul className="sidebarList">
+              <Link to="/supplier/Order_details" className="link">
+                {/* {history.push("/purchaseStaff/materialRequest")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Order Details
+                </li>
+              </Link>
+
             </ul>
           </div>
           {/* <div className="sidebarMenu">

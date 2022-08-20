@@ -31,6 +31,8 @@ import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Stocks from "./pages/warehouseManager/Stocks/Stocks";
 import Request_product from "./pages/Supplier/Request_product";
 import Supplier_Invoices from "./pages/Supplier/Supplier_Invoices";
+import Product_details from "./pages/Supplier/Product/Product_details";
+import Order_details from "./pages/Supplier/Orders/Order_details";
 
 const App = () => {
   return (
@@ -113,6 +115,12 @@ const App = () => {
               </Route>
               <Route exact path="/supplier/Supplier_Invoices">
                  <Supplier_Invoices/>
+              </Route>
+              <Route exact path="/supplier/Product_details">
+                 <Product_details/>
+              </Route>
+              <Route exact path="/supplier/Order_details">
+                 <Order_details/>
               </Route>
               {/* <Route path="/users">
                 <UserList />
