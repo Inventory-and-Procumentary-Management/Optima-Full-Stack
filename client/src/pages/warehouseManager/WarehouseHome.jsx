@@ -85,6 +85,7 @@ const WarehouseHome = () => {
         <WidgetSm />
         <WidgetLg />
       </div> */}
+      {/* khygygy */}
       </div>
     </div>
   );
