@@ -27,8 +27,8 @@ import NewUser from "./pages/administrator/users/newUser/NewUser";
 import Delivery from "./pages/purchasingStaff/deliveries/Delivery";
 import Inventory from "./pages/warehouseManager/inventory/Inventory";
 import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
-import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Stocks from "./pages/warehouseManager/Stocks/Stocks";
+import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Request_product from "./pages/Supplier/Request_product";
 import PurchaseOrders from "./pages/purchaseManager/printPOs/PurchaseOrders";
 
