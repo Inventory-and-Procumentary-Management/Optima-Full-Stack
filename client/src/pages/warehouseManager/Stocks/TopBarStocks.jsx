@@ -9,15 +9,14 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
-import TopBarTabs from "./TopBarTabs";
+import TopBarTabsStocks from "./TopBarTabsStocks";
 
-export default function TopBar() {
+export default function TopBarStocks() {
   return (
-    
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar style={{ backgroundColor: "black" }}>
-          <TopBarTabs />
+        <Toolbar style={{ backgroundColor: "#fff" }}>
+          <TopBarTabsStocks />
           {/* <IconButton
             size="large"
             edge="start"
@@ -32,9 +31,9 @@ export default function TopBar() {
             Building
           </Typography> */}
           <Link to="/AddProduct" className="link">
-            <Button color="inherit" align="center">
+            <Button style={{ backgroundColor: "black" }} color="black" align="center">
               <AddIcon />
-              ADD NEW
+              ADD NEW 123
             </Button>
           </Link>
         </Toolbar>
