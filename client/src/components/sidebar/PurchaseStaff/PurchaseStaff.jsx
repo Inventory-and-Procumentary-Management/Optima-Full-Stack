@@ -50,7 +50,7 @@ export default function PurchaseStaffSidebar() {
             <h3 className="sidebarTitle">Dashboard</h3>
             <ul className="sidebarList">
               <Link to="/purchaseStaff" className="link">
-              {/* {history.push("/purchaseStaff")} */}
+                {/* {history.push("/purchaseStaff")} */}
                 <li className="sidebarListItem active">
                   <LineStyle className="sidebarIcon" />
                   Home
@@ -150,7 +150,7 @@ export default function PurchaseStaffSidebar() {
               </Link>
             </ul>
           </div>
-          <div className="sidebarMenu">
+          {/* <div className="sidebarMenu">
             <h3 className="sidebarTitle">Invoices</h3>
             <ul className="sidebarList">
               <li className="sidebarListItem">
@@ -166,7 +166,7 @@ export default function PurchaseStaffSidebar() {
                 Messages
               </li>
             </ul>
-          </div>
+          </div> */}
           {/* <div className="sidebarMenu">
             <h3 className="sidebarTitle">Products</h3>
             <ul className="sidebarList">
@@ -191,14 +191,19 @@ export default function PurchaseStaffSidebar() {
                 <WorkOutline className="sidebarIcon" />
                 Project
               </li>
-              <li className="sidebarListItem">
-                <Timeline className="sidebarIcon" />
-                Deliveries
-              </li>
-              <li className="sidebarListItem">
-                <Report className="sidebarIcon" />
-                Reports
-              </li>
+
+              <Link to="/purchaseStaff/deliveries" className="link">
+                <li className="sidebarListItem">
+                  <Timeline className="sidebarIcon" />
+                  Deliveries
+                </li>
+              </Link>
+              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+                <li className="sidebarListItem">
+                  <Report className="sidebarIcon" />
+                  Reports
+                </li>
+              </Link>
             </ul>
           </div>
         </div>
