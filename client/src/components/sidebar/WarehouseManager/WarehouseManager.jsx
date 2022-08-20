@@ -163,7 +163,7 @@ export default function warehouseManagerSidebar() {
                 </li>
               </ul>
             </div> */}
-          <div className="sidebarMenu">
+          {/* <div className="sidebarMenu">
             <h3 className="sidebarTitle">Products</h3>
             <ul className="sidebarList">
               <li className="sidebarListItem">
@@ -196,7 +196,7 @@ export default function warehouseManagerSidebar() {
                 Reports
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
         {/* </div> */}
       </PerfectScrollbar>
