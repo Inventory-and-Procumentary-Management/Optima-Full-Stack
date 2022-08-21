@@ -1,10 +1,21 @@
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import {
+  DeleteOutline,
+  CheckOutlined,
+  CancelOutlined,
+  EditOutlined,
+  SupervisorAccountOutlined,
+  PersonAddDisabledOutlined,
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteUser, getUsers, updateUser } from "../../../../redux/userApiCalls";
+import {
+  deleteUser,
+  getUsers,
+  updateUser,
+} from "../../../../redux/userApiCalls";
 import SearchComponent from "../../../../components/search/Search";
 
 export default function UserList() {
@@ -74,7 +85,7 @@ export default function UserList() {
   };
 
   const columns = [
-    { field: "id", headerName: "ID", width: 220 },
+    { field: "id", headerName: "ID", width: 150 },
     {
       field: "username",
       headerName: "User",
@@ -96,50 +107,89 @@ export default function UserList() {
       },
     },
     { field: "email", headerName: "Email", width: 220 },
-    {
-      field: "isAdmin",
-      headerName: "Admin or Not",
-      width: 170,
-      renderCell: (params) => {
-        return (
-          <>
-            {params.row.isAdmin ? (
-              <button
-                className="userListEdit"
-                onClick={() => {
-                  setKeyData("isAdmin");
-                  setValueData(false);
-                  setUpdateShow(true);
-                  setUpdateActivate(false);
-                  setUserId(params.row.id);
-                }}
-                style={{ backgroundColor: "#87DD44" }}
-              >
-                True
-              </button>
-            ) : (
-              <button
-                className="userListEdit"
-                onClick={() => {
-                  setKeyData("isAdmin");
-                  setValueData(true);
-                  setUpdateShow(true);
-                  setUpdateActivate(true);
-                  setUserId(params.row.id);
-                }}
-                style={{ backgroundColor: "#bdba2c" }}
-              >
-                False
-              </button>
-            )}
-          </>
-        );
-      },
-    },
+    { field: "employeeId", headerName: "Employee ID", width: 170 },
+    { field: "mobileNumber", headerName: "Mobile No", width: 170 },
+    // {
+    //   field: "isAdmin",
+    //   headerName: "Supplier or Not",
+    //   width: 200,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <div className="productListItem">
+    //           <div className="productListItemData">
+    //             {params.row.isAdmin + " "}
+    //           </div>
+    //           {params.row.isAdmin ? (
+    //             <SupervisorAccountOutlined
+    //               className="productListDelete"
+    //               style={{ color: "green" }}
+    //               onClick={() => {
+    //                 setKeyData("isAdmin");
+    //                 setValueData(false);
+    //                 setUpdateShow(true);
+    //                 setUpdateActivate(false);
+    //                 setUserId(params.row.id);
+    //               }}
+    //             />
+    //           ) : (
+    //             <PersonAddDisabledOutlined
+    //               className="productListDelete"
+    //               style={{ color: "red" }}
+    //               onClick={() => {
+    //                 setKeyData("isAdmin");
+    //                 setValueData(true);
+    //                 setUpdateShow(true);
+    //                 setUpdateActivate(true);
+    //                 setUserId(params.row.id);
+    //               }}
+    //             />
+    //           )}
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
     {
       field: "isActivate",
       headerName: "User Activation",
-      width: 170,
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+                {params.row.isActivate + " "}
+              </div>
+              {params.row.isActivate ? (
+                <CheckOutlined
+                  className="productListDelete"
+                  style={{ color: "green" }}
+                  onClick={() => {
+                    setKeyData("isActivated");
+                    setValueData(false);
+                    setUpdateShow(true);
+                    setUpdateActivate(false);
+                    setUserId(params.row.id);
+                  }}
+                />
+              ) : (
+                <CancelOutlined
+                  className="productListDelete"
+                  style={{ color: "red" }}
+                  onClick={() => {
+                    setKeyData("isActivated");
+                    setValueData(true);
+                    setUpdateShow(true);
+                    setUpdateActivate(true);
+                    setUserId(params.row.id);
+                  }}
+                />
+              )}
+            </div>
+          </>
+        );
+      },
     },
     {
       field: "action",
@@ -149,45 +199,12 @@ export default function UserList() {
         return (
           <>
             <Link to={"/user/" + params.row.id}>
-              <button className="userListEdit">Edit</button>
+              {/* <button className="userListEdit">Edit</button> */}
+              <EditOutlined
+                className="productListDelete"
+                style={{ color: "green", marginRight: 20 }}
+              />
             </Link>
-           {/*  <Link to={"/newUser"}>
-              <button
-                className="userListEdit"
-                style={{ backgroundColor: "darkblue" }}
-              >
-                Create
-              </button>
-            </Link> */}
-            {params.row.isActivated ? (
-              <button
-                className="userListEdit"
-                onClick={() => {
-                  setKeyData("isActivated");
-                  setValueData(false);
-                  setUpdateShow(true);
-                  setUpdateActivate(false);
-                  setUserId(params.row.id);
-                }}
-                style={{ backgroundColor: "red" }}
-              >
-                Deactivate
-              </button>
-            ) : (
-              <button
-                className="userListEdit"
-                onClick={() => {
-                  setKeyData("isActivated");
-                  setValueData(true);
-                  setUpdateShow(true);
-                  setUpdateActivate(true);
-                  setUserId(params.row.id);
-                }}
-                style={{ backgroundColor: "red" }}
-              >
-                Activate
-              </button>
-            )}
             <DeleteOutline
               className="userListDelete"
               onClick={() => {
@@ -210,7 +227,12 @@ export default function UserList() {
               <button className="color-contained-button">Add User</button>
             </Link>
             <Link to={"/admin/newSupplier"}>
-              <button className="color-contained-button" style={{marginLeft:10}}>Add Supplier</button>
+              <button
+                className="color-contained-button"
+                style={{ marginLeft: 10 }}
+              >
+                Add Supplier
+              </button>
             </Link>
           </div>
           <div className="top-container-search-material-request">

@@ -37,6 +37,7 @@ import Supplier_Invoices from "./pages/Supplier/invoices/Supplier_Invoices";
 import Supplier_invoices_details from "./pages/Supplier/invoices/Supplier_invoices_details";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
+import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 
 const App = () => {
   return (
@@ -51,7 +52,6 @@ const App = () => {
         {/* {admin && ( */}
         <>
           <Topbar />
-
           <div className="container">
             <Sidebar />
             <div className="sub-container">
@@ -117,7 +117,7 @@ const App = () => {
                 <Stocks />
               </Route>
               <Route exact path="/warehouseManager/Dispatch">
-                 <Dispatch/>
+                 <Dispatch />
               </Route>
 
               <Route exact path="/supplier/Request_product">
@@ -153,6 +153,9 @@ const App = () => {
               </Route>
               <Route path="/purchaseManager/newPurchaseOrders">
                 <PurchaseOrders />
+              </Route>
+              <Route path="/purchaseManager/purchaseInvoice">
+                <PurchaseInvoice />
               </Route>
               <Route path="/purchaseManager/materialRequest">
                 <MaterialRequest />

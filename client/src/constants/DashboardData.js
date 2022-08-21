@@ -462,3 +462,79 @@ export const purchaseInvoiceData = [
         isApprove: true
     },
 ];
+
+export const inventoryData = [
+    {
+        _id:1,
+        name: "Cement",
+        quantity : 120,
+        type : "Packets",
+        status : "Pending",
+        minimum : 20,
+        description: " Mahaweli Cement",
+        recieve: "2022-08-18",
+        block: "Block A",
+        expire: "2022-12-18"
+    },
+    {
+        _id:2,
+        name: "Sand",
+        quantity : 20,
+        type : "Cubes",
+        status : "Recieved",
+        minimum : 5,
+        description: "Rough Sand",
+        recieve: "2022-10-18",
+        block: "Block B",
+        expire: "2026-09-18"
+    },
+    {
+        _id:3,
+        name: "3/4 Stones",
+        quantity : 17,
+        type : "Cubes",
+        status : "Requested",
+        minimum : 5,
+        description: " Good",
+        recieve: "2022-08-18",
+        block: "Block C",
+        expire: "2030-09-18"
+    },{
+        _id:4,
+        name: "Cement",
+        quantity : 120,
+        type : "Packets",
+        status : "Pending",
+        minimum : 20,
+        description: " Mahaweli Cement",
+        recieve: "2022-08-18",
+        block: "Block A",
+        expire: "2022-12-18"
+    },
+    {
+        _id:5,
+        name: "Sand",
+        quantity : 20,
+        type : "Cubes",
+        status : "Recieved",
+        minimum : 5,
+        description: "Rough Sand",
+        recieve: "2022-10-18",
+        block: "Block B",
+        expire: "2026-09-18"
+    },
+    {
+        _id:6,
+        name: "3/4 Stones",
+        quantity : 17,
+        type : "Cubes",
+        status : "Requested",
+        minimum : 5,
+        description: " Good",
+        recieve: "2022-08-18",
+        block: "Block C",
+        expire: "2030-09-18"
+    },
+    
+    
+];
