@@ -6,15 +6,15 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector } from "react-redux";
-import { dumyData } from "../../../constants/DashboardData";
+import { inventoryData } from "../../../constants/DashboardData";
 import SearchComponent from "../../../components/search/Search";
 
 const columns = [
   // { field: "_id", headerName: "ID", width: 150 },
   {
-    field: "title",
+    field: "name",
     headerName: "Product Name",
-    width: 220,
+    width: 180,
     renderCell: (params) => {
       return (
         <div className="userListUser">
@@ -23,16 +23,18 @@ const columns = [
             src={params.row.img}
             alt="category Icon"
           /> */}
-          {params.row.title}
+          {params.row.name}
         </div>
       );
     },
   },
-  { field: "quantity", headerName: "Quantity", width: 200 },
-  { field: "price", headerName: "Quantity Type", width: 200 },
-  { field: "minimumLevel", headerName: "Minimum Level", width: 200 },
+  { field: "quantity", headerName: "Quantity", width: 160 },
+  { field: "type", headerName: "Quantity Type", width: 180 },
+  { field: "recieve", headerName: "Recieved Date", width: 180 },
+  { field: "expire", headerName: "Expire Date", width: 180 },
+  { field: "minimum", headerName: "Minimum Level", width: 180 },
   
-  { field: "isPaid", headerName: "Description", width: 250 },
+  { field: "description", headerName: "Description", width: 200 },
   // {
   //   field: "staus",
   //   headerName: "Order Status",
@@ -157,11 +159,12 @@ const BuildingTable = () => {
           </div>
         </div>
         <DataGrid
-          rows={dumyData}
+          rows={inventoryData}
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row._id}
           pageSize={8}
+          checkboxSelection
           autoHeight
           // componentsProps={{
           //   columnMenu: {

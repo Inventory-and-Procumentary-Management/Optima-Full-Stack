@@ -32,13 +32,13 @@ const Profile = () => {
   // console.log(userID);
   // console.log("User Type "+type);
   const authToken = useSelector((state) => state.login.authToken);
-  const URL = "http://192.168.8.187:5000/api/v1/user/find";
+  const URL = "http://192.168.1.4:5000/api/v1/user/find";
   // console.log(URL);
 
   let token = "Bearer " + authToken;
 
   // useEffect(() => {
-  //   fetch("http://192.168.8.187:5000/api/v1/user/find", {
+  //   fetch("http://192.168.1.4:5000/api/v1/user/find", {
   //     method: "POST",
   //     headers: {
   //       "Content-Type": "application/json",
