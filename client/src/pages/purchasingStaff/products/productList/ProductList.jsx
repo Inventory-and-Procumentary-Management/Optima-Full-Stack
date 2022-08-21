@@ -77,15 +77,18 @@ export default function ProductList() {
     console.log(id);
   };
   const setProductApproveStatus = (id, status, product) => {
-    setApproveStatus(status);
-    setProductId(id);
-    console.log(product);
-    let { isApprove, ...others } = product;
-    isApprove = status;
-    setProduct({ isApprove, ...others });
+    if (userType === "ROLE_PURCHASING_MANAGER") {
+      setApproveStatus(status);
+      setProductId(id);
+      console.log(product);
+      let { isApprove, ...others } = product;
+      isApprove = status;
+      setProduct({ isApprove, ...others });
+    }else {
+      console.log(id);
+    }
     // now activate -> status = false
     // now deactivate -> status = true
-    console.log(id);
   };
   const updateApproveConfirm = async () => {
     setApproveShow(false);
@@ -142,7 +145,7 @@ export default function ProductList() {
     },
     {
       field: "price",
-      headerName: "Price",
+      headerName: "Price (Rs)",
       width: 180,
       renderCell: (params) => {
         return (

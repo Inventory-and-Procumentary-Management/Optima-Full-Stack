@@ -103,6 +103,13 @@ export default function PurchaseStaffSidebar() {
                   Supplier Details
                 </li>
               </Link>
+              <Link to="/purchaseStaff/materialRequest" className="link">
+                {/* {history.push("/purchaseStaff/materialRequest")} */}
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  Supplier Items
+                </li>
+              </Link>
             </ul>
           </div>
           <div className="sidebarMenu">

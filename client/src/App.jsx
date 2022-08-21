@@ -131,6 +131,9 @@ const App = () => {
               <Route path="/purchaseManager/productList">
                 <ProductList />
               </Route>
+              <Route path="/purchaseManager/purchaseOrder">
+                <PurchaseOrder />
+              </Route>
               <Route path="/purchaseManager/newPurchaseOrders">
                 <PurchaseOrders />
               </Route>
