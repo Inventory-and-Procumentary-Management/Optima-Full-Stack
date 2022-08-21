@@ -3,7 +3,6 @@ import {useState, useEffect } from 'react'
 import {AiOutlineDelete, AiOutlineEdit} from "react-icons/ai"
 import { v4 as uuidv4 } from 'uuid'
 
-
 export default function TableForm({
     desc,setDesc, 
     quantity,setQuantity, 
@@ -34,12 +33,12 @@ export default function TableForm({
         console.log(list)
     }
 // calculate amount
-    useEffect(()=>{
-        const calAmount = (amount)=>{
-            setAmount(quantity * price)
-        }
-        calAmount(amount)
-    },[amount,price,quantity,setAmount])
+    // useEffect(()=>{
+    //     const calAmount = (amount)=>{
+    //         setAmount(quantity * price)
+    //     }
+    //     calAmount(amount)
+    // },[amount,price,quantity,setAmount])
 
 //edit function
 const editRow= (id)=>{
@@ -48,7 +47,7 @@ const editRow= (id)=>{
     setIsEditing(true)
     setDesc(editingRow.desc)
     setQuantity(editingRow.quantity)
-    setPrice(editingRow.price)
+    
 }
 
 //delete function
@@ -60,7 +59,7 @@ const deleteRow = (id)=>{
     <>
     <form onSubmit={handleSubmit}>
     <div className="flex flex-col">
-    <label htmlFor='desc'>Item Description</label>
+    <label htmlFor='desc'>Item Name</label>
         <input 
         type="text" 
         name="desc" 
@@ -82,7 +81,7 @@ const deleteRow = (id)=>{
         onChange={(e)=>setQuantity(e.target.value)}
         />
     </div>
-    <div className="flex flex-col">
+    {/* <div className="flex flex-col">
     <label htmlFor='price'>Item price</label>
         <input 
         type="text" 
@@ -96,7 +95,7 @@ const deleteRow = (id)=>{
     <div className="flex flex-col">
     <label htmlFor='amount'>Amount</label>
         <p>{amount}</p>
-    </div>
+    </div> */}
     </div>
     <button 
     className=" mb-5 bg-blue-500 text-white 
@@ -112,19 +111,15 @@ const deleteRow = (id)=>{
                 <tr className='bg-gray-100 p-1'>
                 <td className='font-bold'>Description</td>
                 <td className='font-bold'>Quantity</td>
-                <td className='font-bold'>Price</td>
-                <td className='font-bold'>Amount</td>
                 <td className='font-bold'>Action</td>
                 </tr>
          </thead>
-        {list.map(({id, desc,quantity,price,amount}) =>(
+        {list.map(({id, desc,quantity}) =>(
             <React.Fragment key={id}>
             <tbody>
                 <tr>
                 <td>{desc}</td>
                 <td>{quantity}</td>
-                <td>{price}</td>
-                <td>{amount}</td>
                 <td>
                     <button onClick={()=>deleteRow(id)}>
                     <AiOutlineDelete className='text-red-500 font-bold text-xl ' />

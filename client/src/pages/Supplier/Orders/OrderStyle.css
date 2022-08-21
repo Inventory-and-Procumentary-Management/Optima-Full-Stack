@@ -1,0 +1,21 @@
+.Main-div-order{
+    padding: 1rem;
+    background-color: rgba(196, 196, 196, 0.281);
+}
+.sub-div-order{
+    padding: 1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+}
+.accept-btn{
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    border: 0.2rem solid rgb(123, 206, 7);
+    background-color: rgb(123, 206, 7);
+}
+.reject-btn{
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    border: 0.2rem solid rgba(253, 60, 60, 0.897);
+    background-color: rgba(253, 60, 60, 0.897);
+}

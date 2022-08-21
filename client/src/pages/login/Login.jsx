@@ -78,12 +78,12 @@ export default function SignInSide() {
       setLoginErrorSet(userError);
       console.log(user);
       console.log(userError);
-      if (userError) {
-        setLoginCancelShow(true);
-        // window.location.href = "http://localhost:3000/login";
-      } else {
-        setLoginShow(true);
-      }
+      // if (userError) {
+      //   setLoginCancelShow(true);
+      //   // window.location.href = "http://localhost:3000/login";
+      // } else {
+      //   setLoginShow(true);
+      // }
     }
   };
 

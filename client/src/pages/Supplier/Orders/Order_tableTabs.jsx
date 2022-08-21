@@ -44,9 +44,9 @@ const Order_tableTabs = () => {
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-            <Tab label="Core Products" {...a11yProps(0)} />
-            <Tab label="Pipe and Eqipments" {...a11yProps(1)} />
-            <Tab label="Paints" {...a11yProps(2)} />
+            <Tab sx={{ width: '20%' }} label="Core Products" {...a11yProps(0)} />
+            <Tab sx={{ width: '20%' }} label="Pipe and Eqipments" {...a11yProps(1)} />
+            <Tab sx={{ width: '20%' }} label="Paints" {...a11yProps(2)} />
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
