@@ -1,0 +1,19 @@
+.link-to-request-product{
+    padding: 0.625rem;
+    background-color:rgb(55, 140, 187);
+   
+    border-radius: 0.725rem;
+    width: fit-content;
+    padding-left: 1rem;
+    margin: 1rem;
+    
+    
+}
+.request-product-link{
+    color: aliceblue;
+    text-decoration: none;
+}
+.table-content{
+    margin: 1rem;
+    background-color: rgb(216, 213, 213);
+}

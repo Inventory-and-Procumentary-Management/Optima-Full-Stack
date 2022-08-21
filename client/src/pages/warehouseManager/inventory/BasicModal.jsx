@@ -29,7 +29,7 @@ export default function BasicModal() {
                     <AddIcon />
                     ADD NEW
                   </Button> */}
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen} style={{ color:"black" }}>ADD NEW ITEM</Button>
       <Modal
         open={open}
         onClose={handleClose}
