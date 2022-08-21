@@ -13,7 +13,7 @@ import './productStyle.css'
 const Product_details = () => {
  
     return (
-      <div>
+      <div className='Main-div'>
       <div className="link-to-request-product">
           
           <Link to="/supplier/Request_product" className="request-product-link">
