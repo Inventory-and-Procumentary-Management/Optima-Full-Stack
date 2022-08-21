@@ -19,28 +19,7 @@ import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import { useEffect } from "react";
 
-const typeData = [
-  {
-    value: '2',
-    label: "Purchasing manager",
-  },
-  {
-    value: '3',
-    label: "Purchasing staff",
-  },
-  {
-    value: '4',
-    label: "Site manager",
-  },
-  {
-    value: '5',
-    label: "Warehouse manager",
-  },
-  
-];
-
-export default function NewUser() {
-  const [type, settype] = useState(true);
+export default function NewSupplier() {
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [allShow, setAllShow] = useState(false);
@@ -49,20 +28,33 @@ export default function NewUser() {
   const [current_date, setCurrent_Date] = useState("");
   const dispatch = useDispatch();
 
-  const [fullnameError, setFullnameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [idError, setIdError] = useState(false);
+  const [titleError, setTitleError] = useState(false);
+  const [regnoError, setRegnoError] = useState(false);
+  const [address1Error, setAddress1Error] = useState(false);
+  const [address2Error, setAddress2Error] = useState(false);
+  const [cityError, setCityError] = useState(false);
+  const [provinceError, setProvinceError] = useState(false);
+  const [zipError, setZipError] = useState(false);
+  const [telephone1Error, setTelephone1Error] = useState(false);
+  const [personError, setPersonError] = useState(false);
+  const [telephone2Error, setTelephone2Error] = useState(false);
   const [usernameError, setUsernameError] = useState(false);
-  const [usertypeError, setUsertypeError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  
+ 
 
-  const [fullnameMessageError, setFullnameMessageError] = useState("");
-  const [emailMessageError, setEmailMessageError] = useState("");
-  const [idMessageError, setIdMessageError] = useState("");
+  const [titleMessageError, setTitleMessageError] = useState("");
+  const [regnoMessageError, setRegnoMessageError] = useState("");
+  const [address1MessageError, setAddress1MessageError] = useState("");
+  const [address2MessageError, setAddress2MessageError] = useState("");
+  const [cityMessageError, setCityMessageError] = useState(false);
+  const [provinceMessageError, setProvinceMessageError] = useState(false);
+  const [zipMessageError, setZipMessageError] = useState(false);
+  const [telephone1MessageError, setTelephone1MessageError] = useState(false);
+  const [personMessageError, setPersonMessageError] = useState(false);
+  const [telephone2MessageError, setTelephone2MessageError] = useState(false);
   const [usernameMessageError, setUsernameMessageError] = useState(false);
-  const [usertypeMessageError, setUsertypeMessageError] = useState(false);
   const [passwordMessageError, setPasswordMessageError] = useState(false);
+ 
 
   useEffect(() => {
     const date = new Date();
@@ -126,7 +118,7 @@ export default function NewUser() {
             ...inputs,
             img: downloadURL,
             // categories: [...cat, "all"],
-            intype: type,
+            /* inStock: stock, */
             isActivate: true,
             createDate: current_date,
           };
@@ -141,7 +133,7 @@ export default function NewUser() {
     <div className="newProduct common">
       {/* <h1 className="addProductTitle">New Product</h1> */}
       <div className="userTitleContainer">
-        <h1 className="addProductTitle">New User</h1>
+        <h1 className="addProductTitle">New Supplier</h1>
         <div className="userTitleButtons">
           <Link to={"/admin/users"}>
             <button
@@ -179,21 +171,21 @@ export default function NewUser() {
             <Grid container spacing={4}>
               <Grid item md={sizeForm}>
                 <TextField
-                  error={fullnameError}
-                  // defaultValue={product.fullname}
+                  error={titleError}
+                  // defaultValue={product.title}
                   // variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  id="fullname"
-                  label="Full Name"
-                  name="fullname"
-                  autoComplete="fullname"
+                  id="title"
+                  label="Business name"
+                  name="title"
+                  autoComplete="title"
                   autoFocus
-                  helperText={fullnameMessageError}
+                  helperText={titleMessageError}
                   onChange={(e) => {
-                    setFullnameError(false);
-                    setFullnameMessageError("");
+                    setTitleError(false);
+                    setTitleMessageError("");
                     // handleChange();
                     setInputs((prev) => {
                       return { ...prev, [e.target.name]: e.target.value };
@@ -203,21 +195,21 @@ export default function NewUser() {
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
-                  error={emailError}
-                  // defaultValue={product.email}
+                  error={regnoError}
+                  // defaultValue={product.regno}
                   // variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
+                  id="regno"
+                  label="Business registration no"
+                  name="regno"
+                  autoComplete="regno"
                   autoFocus
-                  helperText={emailMessageError}
+                  helperText={regnoMessageError}
                   onChange={(e) => {
-                    setEmailError(false);
-                    setEmailMessageError("");
+                    setRegnoError(false);
+                    setRegnoMessageError("");
                     setInputs((prev) => {
                       return { ...prev, [e.target.name]: e.target.value };
                     });
@@ -226,52 +218,182 @@ export default function NewUser() {
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
-                  error={usertypeError}
-                  // defaultValue={product.id}
+                  error={address1Error}
+                  // defaultValue={product.address1}
                   // variant="standard"
-                  value={type}
                   margin="normal"
                   required
-                  select
                   fullWidth
-                  id="usertype"
-                  label="User Type"
-                  name="usertype"
-                  autoComplete="usertype"
+                  id="address1"
+                  label="Street adress line 1"
+                  name="address1"
+                  autoComplete="address1"
                   autoFocus
-                  helperText={usertypeMessageError}
-                  onChange={(event) => {
-                    setUsertypeError(false);
-                    setUsertypeMessageError("");
-                    settype(event.target.value);
-                    // handleCat();
+                  helperText={address1MessageError}
+                  onChange={(e) => {
+                    setAddress1Error(false);
+                    setAddress1MessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
                   }}
-                >
-                  {typeData.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                    
-                  ))}
-                </TextField>
+                />
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
-                  error={idError}
-                  // defaultValue={product.id}
+                  error={address2Error}
+                  // defaultValue={product.address2}
                   // variant="standard"
                   margin="normal"
                   required
                   fullWidth
-                  id="id"
-                  label="Employee ID"
-                  name="id"
-                  autoComplete="id"
+                  id="address2"
+                  label="Street adress line 2"
+                  name="address2"
+                  autoComplete="address2"
                   autoFocus
-                  helperText={idMessageError}
+                  helperText={address2MessageError}
                   onChange={(e) => {
-                    setIdError(false);
-                    setIdMessageError("");
+                    setAddress2Error(false);
+                    setAddress2MessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  error={cityError}
+                  // defaultValue={product.city}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="city"
+                  label="City"
+                  name="city"
+                  autoComplete="city"
+                  autoFocus
+                  helperText={cityMessageError}
+                  onChange={(e) => {
+                    setCityError(false);
+                    setCityMessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  error={provinceError}
+                  // defaultValue={product.province}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="province"
+                  label="Province"
+                  name="province"
+                  autoComplete="province"
+                  autoFocus
+                  helperText={provinceMessageError}
+                  onChange={(e) => {
+                    setProvinceError(false);
+                    setProvinceMessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  error={zipError}
+                  // defaultValue={product.zip}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="zip"
+                  label="Zip code"
+                  name="zip"
+                  autoComplete="zip"
+                  autoFocus
+                  helperText={zipMessageError}
+                  onChange={(e) => {
+                    setZipError(false);
+                    setZipMessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  error={telephone1Error}
+                  // defaultValue={product.telephone1}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="telephone1"
+                  label="Telephone"
+                  name="telephone1"
+                  autoComplete="telephone1"
+                  autoFocus
+                  helperText={telephone1MessageError}
+                  onChange={(e) => {
+                    setTelephone1Error(false);
+                    setTelephone1MessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  error={personError}
+                  // defaultValue={product.person}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="person"
+                  label="Contact person"
+                  name="person"
+                  autoComplete="person"
+                  autoFocus
+                  helperText={personMessageError}
+                  onChange={(e) => {
+                    setPersonError(false);
+                    setPersonMessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  error={telephone2Error}
+                  // defaultValue={product.telephone2}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="telephone2"
+                  label="Telephone"
+                  name="telephone2"
+                  autoComplete="telephone2"
+                  autoFocus
+                  helperText={telephone2MessageError}
+                  onChange={(e) => {
+                    setTelephone2Error(false);
+                    setTelephone2MessageError("");
                     setInputs((prev) => {
                       return { ...prev, [e.target.name]: e.target.value };
                     });
@@ -281,7 +403,7 @@ export default function NewUser() {
               <Grid item md={sizeForm}>
                 <TextField
                   error={usernameError}
-                  // defaultValue={product.id}
+                  // defaultValue={product.address1}
                   // variant="standard"
                   margin="normal"
                   required
@@ -304,7 +426,7 @@ export default function NewUser() {
               <Grid item md={sizeForm}>
                 <TextField
                   error={passwordError}
-                  // defaultValue={product.id}
+                  // defaultValue={product.address1}
                   // variant="standard"
                   margin="normal"
                   required
@@ -325,35 +447,6 @@ export default function NewUser() {
                 />
               </Grid>
               
-              
-              {/* <Grid item md={sizeForm}> */}
-                {/* <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  required
-                /> */}
-                {/* <TextField
-                  error={imageError}
-                  // defaultValue={product.id}
-                  // variant="standard"
-                  type="file"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="file"
-                  label="Image"
-                  name="file"
-                  autoComplete="file"
-                  autoFocus
-                  helperText={imageMessageError}
-                  onChange={(e) => {
-                    setImageError(false);
-                    setImageMessageError("");
-                    setFile(e.target.files[0]);
-                  }}
-                />
-              </Grid> */}
               <Grid item md={sizeForm}></Grid>
               <Grid item md={12} container sx={{alignItems:"center", justifyContent:"center"}}>
                 <button
@@ -396,14 +489,14 @@ export default function NewUser() {
       <SweetAlert
         show={allShow}
         success
-        fullname="Successfully added!"
+        title="Successfully added!"
         // text="SweetAlert in React"
         onConfirm={() => setAllShow(false)}
       ></SweetAlert>
       <SweetAlert
         show={show}
         danger
-        fullname="Added Unsuccess!"
+        title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
       ></SweetAlert>

@@ -24,6 +24,7 @@ import NewMaterialRequest from "./pages/purchasingStaff/materialRequest/newMater
 import AdministratorHome from "./pages/administrator/AdministratorHome";
 import UserList from "./pages/administrator/users/userList/UserList";
 import NewUser from "./pages/administrator/users/newUser/NewUser";
+import NewSupplier from "./pages/administrator/users/newUser/NewSupplier";
 import Delivery from "./pages/purchasingStaff/deliveries/Delivery";
 import Inventory from "./pages/warehouseManager/inventory/Inventory";
 import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
@@ -35,6 +36,8 @@ import PurchaseManagerHome from "./pages/purchaseManager/PurchaseManagerHome";
 import Supplier_Invoices from "./pages/Supplier/Supplier_Invoices";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
+
+import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 
 const App = () => {
   return (
@@ -98,6 +101,9 @@ const App = () => {
               <Route exact path="/admin/newUser">
                 <NewUser />
               </Route>
+              <Route exact path="/admin/newSupplier">
+                <NewSupplier />
+              </Route>
 
               <Route exact path="/warehouseManager">
                 <WarehouseHome />
@@ -111,6 +117,11 @@ const App = () => {
               <Route exact path="/warehouseManager/Stocks">
                 <Stocks />
               </Route>
+              <Route exact path="/warehouseManager/Dispatch">
+                 <Dispatch/>
+              </Route>
+
+
 
               <Route exact path="/supplier/Request_product">
                  <Request_product/>
