@@ -29,7 +29,7 @@ export default function ProductList() {
   const [approveStatus, setApproveStatus] = useState(false);
   const [productStatusNew, setProductStatusNew] = useState(false);
   const [productId, setProductId] = useState("");
-  const [deleteTrigger, setDeleteTrigger] = useState(false);
+  const [deleteTrigger, setDeleteTrigger] = useState("");
   const [allShow, setAllShow] = useState(false);
   const [product, setProduct] = useState([]);
 
@@ -40,7 +40,7 @@ export default function ProductList() {
   const deleteConfirm = async () => {
     setShow(false);
     deleteProduct(productId, dispatch);
-    setDeleteTrigger(!deleteTrigger);
+    setDeleteTrigger("Delete"+deleteTrigger);
   };
 
   const deleteCancel = () => {
@@ -55,23 +55,28 @@ export default function ProductList() {
 
   const priceChangeModel = (id) => {
     setProductId(id);
+    setDeleteTrigger("price"+deleteTrigger);
     console.log(id);
   };
   const changeStockType = (id) => {
     setProductId(id);
+    setDeleteTrigger("stock"+deleteTrigger);
     console.log(id);
   };
   const changeQuantity = (id) => {
     setProductId(id);
+    setDeleteTrigger("change"+deleteTrigger);
     console.log(id);
   };
   const setMinimumLevel = (id) => {
     setProductId(id);
+    setDeleteTrigger("minimum"+deleteTrigger);
     console.log(id);
   };
   const setProductStatus = (id, status) => {
     setProductId(id);
     setProductStatusNew(status);
+    setDeleteTrigger("product"+deleteTrigger);
     // now activate -> status = false
     // now deactivate -> status = true
     console.log(id);
@@ -93,8 +98,8 @@ export default function ProductList() {
   const updateApproveConfirm = async () => {
     setApproveShow(false);
     console.log(product);
-    updateProduct(productId, product, dispatch);
-    setDeleteTrigger(!deleteTrigger);
+    await updateProduct(productId, product, dispatch);
+    setDeleteTrigger("approve"+deleteTrigger);
   };
 
   const columns = [
