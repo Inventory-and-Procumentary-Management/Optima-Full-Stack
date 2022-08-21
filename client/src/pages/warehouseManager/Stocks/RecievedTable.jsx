@@ -30,71 +30,10 @@ const columns = [
     },
   },
   { field: "type", headerName: "Item Catogery", width: 180 },
-  { field: "recieve", headerName: "Request Date", width: 180 },
-  { field: "expire", headerName: "Due Date", width: 180 },
-  {
-    field: "staus",
-    headerName: "Status",
-    width: 220,
-    renderCell: (params) => {
-      return (
-        <>
-          {params.row.status === "Pending" ? (
-            <button
-              // onClick={() => {
-              //   setCartId(params.row._id);
-              //   setStatus("Accepted");
-              //   setShow(true);
-              // }}
-            >
-              {params.row.status}
-            </button>
-          ) : params.row.status === "Accepted" ? (
-            <button
-              // onClick={() => {
-              //     setCartId(params.row._id);
-              //     setStatus("In Warehouse");
-              //     setShow(true);
-              //   }}
-            >
-              {/* {params.row.status} */}
-              Recieved
-            </button>
-          ) : params.row.status === "In Warehouse" ? (
-            <button
-              // onClick={() => {
-              //     setStatus("Shipped");
-              //     setCartId(params.row._id);
-              //     setShow(true);
-              //   }}
-            >
-              {/* {params.row.status} */}
-              Requested
-            </button>
-          ) : params.row.status === "Shipped" ? (
-            <button
-              // onClick={() => {
-              //     setCartId(params.row._id);
-              //     setStatus("Completed");
-              //     setShow(true);
-              //   }}
-            >
-              {params.row.status}
-            </button>
-          ) : params.row.status === "Completed" ? (
-            <button
-            >
-              {params.row.status}
-            </button>
-          ) : (
-            <button>
-              {params.row.status}
-            </button>
-          )}
-        </>
-      );
-    },
-  },
+  { field: "recieve", headerName: "Recieve Date", width: 180 },
+  { field: "expire", headerName: "Expire Date", width: 180 },
+  { field: "block", headerName: "Placement", width: 180 },
+ 
 //   {
 //     field: "action",
 //     headerName: "Action",
@@ -133,7 +72,7 @@ const columns = [
 //   },
 ];
 
-const AllTable = () => {
+const RecievedTable = () => {
   return (
     <div className="common">
       <div className="userList">
@@ -214,4 +153,4 @@ const AllTable = () => {
   );
 };
 
-export default AllTable;
+export default RecievedTable;
