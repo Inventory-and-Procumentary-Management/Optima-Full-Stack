@@ -5,6 +5,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Supplier_Table from './Supplier_Table';
+import './productStyle.css'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -48,13 +49,16 @@ export default function BasicTabs() {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <div className='tabStyle'>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="Core Products" {...a11yProps(0)} />
-          <Tab label="Pipe and Eqipments" {...a11yProps(1)} />
-          <Tab label="Paints" {...a11yProps(2)} />
+          <Tab sx={{ width: '20%' }} label="Core Products " {...a11yProps(0)} />
+          
+          <Tab sx={{ width: '20%' }} label="Pipe and Eqipments" {...a11yProps(1)} />
+          <Tab sx={{ width: '20%' }} label="Paints" {...a11yProps(2)} />
         </Tabs>
       </Box>
+      </div>
       <TabPanel value={value} index={0}>
       <Supplier_Table></Supplier_Table>
       </TabPanel>

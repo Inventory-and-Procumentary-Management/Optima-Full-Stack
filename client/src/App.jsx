@@ -31,9 +31,11 @@ import Stocks from "./pages/warehouseManager/Stocks/Stocks";
 import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Request_product from "./pages/Supplier/Request_product";
 import PurchaseOrders from "./pages/purchaseManager/printPOs/PurchaseOrders";
-import Supplier_Invoices from "./pages/Supplier/Supplier_Invoices";
+import Supplier_Invoices from "./pages/Supplier/invoices/Supplier_Invoices";
+import Supplier_invoices_details from "./pages/Supplier/invoices/Supplier_invoices_details";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
+import SupplierHome from "./pages/Supplier/SupplierHome";
 
 const App = () => {
   return (
@@ -111,11 +113,18 @@ const App = () => {
                  <Stocks/>
               </Route>
 
+              <Route exact path="/SupplierHome">
+                 <SupplierHome/>
+              </Route>
               <Route exact path="/supplier/Request_product">
                  <Request_product/>
               </Route>
               <Route exact path="/supplier/Supplier_Invoices">
                  <Supplier_Invoices/>
+              </Route>
+
+              <Route exact path="/supplier/Supplier_invoices_details">
+                 <Supplier_invoices_details/>
               </Route>
               <Route exact path="/supplier/Product_details">
                  <Product_details/>
