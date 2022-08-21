@@ -183,7 +183,7 @@ export default function DispatchForm() {
               </div>
             </Grid>
             <Grid item xs={7}>
-              <TextField label="Item Name" fullWidth required />
+              <TextField label="Dispatch Number" fullWidth required />
             </Grid>
             <Grid item xs={4}>
               <TextField label="Number of Items" fullWidth required />

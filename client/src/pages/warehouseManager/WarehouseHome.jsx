@@ -44,15 +44,15 @@ const WarehouseHome = () => {
     let featureData = [
       {
         index: 1,
-        title: "No of Requested Stocks",
+        title: "No of Pending Stocks",
         number: 20,
         percentage: -1.4,
         isDowngrade: false,
-        text: "Compared to last month",
+        text: "",
       },
       {
         index: 2,
-        title: "No of Pending Stocks",
+        title: "No of Dispatched Stocks",
         number: 40,
         percentage: +1.4,
         isDowngrade: true,
@@ -60,7 +60,7 @@ const WarehouseHome = () => {
       },
       {
         index: 3,
-        title: "Overdue Deliveries",
+        title: "No of Recieved Stocks",
         number: 20,
         percentage: -1.4,
         isDowngrade: false,
