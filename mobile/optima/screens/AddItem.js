@@ -25,8 +25,8 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import categories from "../constans/categories";
 // import { ArrowLeft } from "@material-ui/icons";
 
-const URL1 = "http://192.168.8.187:5000/api/v1/category";
-const URL = "http://192.168.8.187:5000/api/v1/post";
+const URL1 = "http://192.168.1.4:5000/api/v1/category";
+const URL = "http://192.168.1.4:5000/api/v1/post";
 
 const AddItem = () => {
   const [isLoading, setLoading] = useState(false);

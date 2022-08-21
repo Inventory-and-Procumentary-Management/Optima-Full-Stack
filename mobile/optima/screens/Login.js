@@ -19,8 +19,8 @@ import { LogBox } from "react-native";
 LogBox.ignoreLogs(["new NativeEventEmitter"]); // Ignore log notification by message
 LogBox.ignoreAllLogs();
 
-const URL = "http://192.168.8.187:8080/api/login";
-const URL1 = "http://192.168.8.187:8080/api/users";
+const URL = "http://192.168.1.4:8080/api/login";
+const URL1 = "http://192.168.1.4:8080/api/users";
 
 const Login = () => {
   const [role, setRole] = useState("");
@@ -71,7 +71,7 @@ const Login = () => {
   const getUserData = async (token,username) => {
     console.log("JSON token "+token);
     try {
-      let response = await fetch(`http://192.168.8.187:8080/api/user/${username}`, {
+      let response = await fetch(`http://192.168.1.4:8080/api/user/${username}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
