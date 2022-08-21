@@ -173,9 +173,9 @@ const MaterialRequest = () => {
       <div className="userList">
         <div className="top-container-material-request">
           <div className="top-contaier-button-material-request">
-            <Link to={`/${user}/newMaterialRequest`}>
+            {/* <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
-            </Link>
+            </Link> */}
           </div>
           <div className="top-container-search-material-request">
             <SearchComponent />
