@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 
 import AddIcon from "@mui/icons-material/Add";
 import AllTable from "./AllTable";
+import RecievedTable from "./RecievedTable";
 import BasicModalStocks from "./BasicModalStocks";
 
 export default function TopBarTabsStocks() {
@@ -50,7 +51,7 @@ export default function TopBarTabsStocks() {
         <TabPanel value="1" sx={{p: 0}}><AllTable /></TabPanel>
         <TabPanel value="2" sx={{p: 0}}><AllTable /></TabPanel>
         <TabPanel value="3" sx={{p: 0}}><AllTable /></TabPanel>
-        <TabPanel value="4" sx={{p: 0}}><AllTable /></TabPanel>
+        <TabPanel value="4" sx={{p: 0}}><RecievedTable /></TabPanel>
       </TabContext>
     </Box>
   );
