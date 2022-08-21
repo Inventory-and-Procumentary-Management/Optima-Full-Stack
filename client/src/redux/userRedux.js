@@ -37,6 +37,7 @@ const userSlice = createSlice({
       state.error = false;
       state.token = null;
       state.refersh_token = null;
+      state.userType = null;
     },
 
     //GET ALL
@@ -96,6 +97,19 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    //add role
+    addUserRoleStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    addUserRoleSuccess: (state) => {
+      state.isFetching = false;
+      // state.otherUsers.push(action.payload);
+    },
+    addUserRoleFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
@@ -117,6 +131,9 @@ export const {
   addUserStart,
   addUserSuccess,
   addUserFailure,
+  addUserRoleStart,
+  addUserRoleSuccess,
+  addUserRoleFailure,
   userTypeSave,
 } = userSlice.actions;
 export default userSlice.reducer;

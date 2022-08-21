@@ -52,7 +52,6 @@ const App = () => {
         {/* {admin && ( */}
         <>
           <Topbar />
-
           <div className="container">
             <Sidebar />
             <div className="sub-container">
@@ -147,6 +146,9 @@ const App = () => {
               </Route>
               <Route path="/purchaseManager/newPurchaseOrders">
                 <PurchaseOrders />
+              </Route>
+              <Route path="/purchaseManager/purchaseInvoice">
+                <PurchaseInvoice />
               </Route>
               <Route path="/purchaseManager/materialRequest">
                 <MaterialRequest />
