@@ -127,7 +127,7 @@ export default function PurchaseStaffSidebar() {
                   Material Request
                 </li>
               </Link>
-              <Link to="/purchaseManager/newPurchaseOrders" className="link">
+              <Link to="/purchaseManager/purchaseOrder" className="link">
                 {/* {history.push("/purchaseStaff/purchaseOrder")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />

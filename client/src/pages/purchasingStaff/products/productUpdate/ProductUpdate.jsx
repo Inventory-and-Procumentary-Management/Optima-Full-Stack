@@ -109,9 +109,10 @@ export default function ProductUpdate() {
       isActivate: product.isActivate,
       price: product.price,
       createDate: product.createDate,
-      minimum_level: product.minimumLevel,
+      minimumLevel: product.minimumLevel,
       quantity: product.quantity,
-      isApprove: product.isApprove,
+      isApprove: false,
+      // isApprove: product.isApprove,
     };
     setFormSaveData(formNewData);
     setShow(true);
