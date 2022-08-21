@@ -24,6 +24,7 @@ import NewMaterialRequest from "./pages/purchasingStaff/materialRequest/newMater
 import AdministratorHome from "./pages/administrator/AdministratorHome";
 import UserList from "./pages/administrator/users/userList/UserList";
 import NewUser from "./pages/administrator/users/newUser/NewUser";
+import NewSupplier from "./pages/administrator/users/newUser/NewSupplier";
 import Delivery from "./pages/purchasingStaff/deliveries/Delivery";
 import Inventory from "./pages/warehouseManager/inventory/Inventory";
 import AddProduct from "./pages/warehouseManager/inventory/AddProduct/AddProduct";
@@ -99,6 +100,9 @@ const App = () => {
               </Route>
               <Route exact path="/admin/newUser">
                 <NewUser />
+              </Route>
+              <Route exact path="/admin/newSupplier">
+                <NewSupplier />
               </Route>
 
               <Route exact path="/warehouseManager">
