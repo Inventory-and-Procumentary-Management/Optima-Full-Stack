@@ -151,14 +151,14 @@ export default function UserList() {
             <Link to={"/user/" + params.row.id}>
               <button className="userListEdit">Edit</button>
             </Link>
-            <Link to={"/newUser"}>
+           {/*  <Link to={"/newUser"}>
               <button
                 className="userListEdit"
                 style={{ backgroundColor: "darkblue" }}
               >
                 Create
               </button>
-            </Link>
+            </Link> */}
             {params.row.isActivated ? (
               <button
                 className="userListEdit"
@@ -208,6 +208,9 @@ export default function UserList() {
           <div className="top-contaier-button-material-request">
             <Link to={"/admin/newUser"}>
               <button className="color-contained-button">Add User</button>
+            </Link>
+            <Link to={"/admin/newSupplier"}>
+              <button className="color-contained-button" style={{marginLeft:10}}>Add Supplier</button>
             </Link>
           </div>
           <div className="top-container-search-material-request">

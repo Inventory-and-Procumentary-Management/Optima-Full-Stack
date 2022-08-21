@@ -5,6 +5,7 @@ const userSlice = createSlice({
   initialState: {
     currentUser: null,
     otherUsers: null,
+    userType: null,
     isFetching: false,
     token: null,
     refersh_token: null,
@@ -15,12 +16,16 @@ const userSlice = createSlice({
       state.token = action.payload.access_token;
       state.refersh_token = action.payload.refersh_token;
     },
+    userTypeSave: (state, action) => {
+      state.userType = action.payload;
+    },
     loginStart: (state) => {
       state.isFetching = true;
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
+      state.error = false;
     },
     loginFailure: (state) => {
       state.isFetching = false;
@@ -112,5 +117,6 @@ export const {
   addUserStart,
   addUserSuccess,
   addUserFailure,
+  userTypeSave,
 } = userSlice.actions;
 export default userSlice.reducer;

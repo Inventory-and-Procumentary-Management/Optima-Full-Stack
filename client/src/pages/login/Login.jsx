@@ -19,6 +19,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import SweetAlert from "react-bootstrap-sweetalert";
 
 import { login } from "../../redux/userApiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -47,13 +48,17 @@ export default function SignInSide() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [loginShow, setLoginShow] = useState(false);
+  const [loginCancelShow, setLoginCancelShow] = useState(false);
+  const [loginErrorSet, setLoginErrorSet] = useState(false);
   const [errorMessageEmail, setErrorMessageEmail] = useState("");
   const [errorMessagePassword, setErrorMessagePassword] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
+  let userError = useSelector((state) => state.user.error);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let userData = {
@@ -69,13 +74,35 @@ export default function SignInSide() {
       setErrorMessagePassword("Password can't be empty!");
     } else {
       console.log(userData);
-      login(dispatch, userData);
+      await login(dispatch, userData);
+      setLoginErrorSet(userError);
       console.log(user);
+      console.log(userError);
+      if (userError) {
+        setLoginCancelShow(true);
+        // window.location.href = "http://localhost:3000/login";
+      } else {
+        setLoginShow(true);
+      }
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
+      <SweetAlert
+        show={loginShow}
+        success
+        title="Successfully Login!"
+        // text="SweetAlert in React"
+        onConfirm={() => setLoginShow(false)}
+      ></SweetAlert>
+      <SweetAlert
+        show={loginCancelShow}
+        danger
+        title="Login Unsuccess!"
+        // text="SweetAlert in React"
+        onConfirm={() => setLoginCancelShow(false)}
+      ></SweetAlert>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -84,7 +111,8 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: "url(https://source.unsplash.com/random)",
+            backgroundImage:
+              "url(https://res.cloudinary.com/midefulness/image/upload/v1661021593/OPTIMA/Login%20Images/construction-silhouette_qwbfoe.jpg)",
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -179,8 +207,8 @@ export default function SignInSide() {
               >
                 Sign In
               </Button>
-              <Divider>or</Divider>
-              <Button
+              {/* <Divider>or</Divider> */}
+              {/* <Button
                 variant="outlined"
                 fullWidth
                 sx={{ mt: 3, mb: 2, color: "#378CBB" }}
@@ -188,18 +216,18 @@ export default function SignInSide() {
                 startIcon={<GoogleIcon />}
               >
                 Continue with google
-              </Button>
+              </Button> */}
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                   </Link>
                 </Grid>
-                <Grid item>
+                {/* <Grid item>
                   <Link href="#" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
-                </Grid>
+                </Grid> */}
               </Grid>
               {/* <Copyright sx={{ mt: 5 }} /> */}
             </Box>
