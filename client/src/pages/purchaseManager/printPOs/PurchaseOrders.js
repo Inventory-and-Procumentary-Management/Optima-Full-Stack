@@ -41,7 +41,7 @@ const handlePrint =()=>{
       {showInvoice ? ( <div>
       <Header  handlePrint = {handlePrint}/>
       
-      <MainDetails name={name} address={address} />
+      <MainDetails name={"OPTIMA"} address={"161/A, Aggona, Malabe, Sri Lanka"} />
     
      <ClientDetails clientName={clientName} clientAddress={clientAddress} />
      
@@ -59,12 +59,9 @@ const handlePrint =()=>{
      <Notes notes={notes}/>
      
      <Footer 
-     name={name} 
-     email={email} 
-     phone={phone}
-     webSite={webSite}
-     bankAccount={bankAccount}
-     bankName={bankName}
+     name={"OPTIMA"} 
+     email={"optima@gmail.com"} 
+     phone={"0116598453"}
      />
 
      <button
@@ -77,47 +74,48 @@ const handlePrint =()=>{
        <div className="flex flex-col justify-center">
       <article className="md:grid grid-cols-2 gap-10">
         <div className="flex flex-col">
-          <label htmlFor="name">Enter the name</label>
+      
         <input 
           type="text"
           name="text"
           id="text"
           placeholder="Enter"
           autoComplete="off" 
-          value={name}
+          value="OPTIMA"
+          disabled
           onChange={(e)=>setName(e.target.value)}
           />
         </div>
 
       <div className="flex flex-col">
-      <label htmlFor="address">Enter the address</label>
             <input 
               type="text"
               name="address"
               id="address"
               placeholder="Enter address"
               autoComplete="off" 
-              value={address}
+              value="161/A, Aggona, Malabe, Sri Lanka"
               onChange={(e)=>setAddress(e.target.value)}
               />
       </div>
       </article>
 
-      <article className="md:grid grid-cols-3 gap-10">
+      <article className="md:grid grid-cols-2 gap-10">
        <div className="flex flex-col">
-        <label htmlFor="email">Enter the email</label>
+        <label htmlFor="email">Company Email</label>
         <input 
           type="email"
           name="email"
           id="email"
           placeholder="Enter email"
           autoComplete="off" 
-          value={email}
+          value="optima@gmail.com"
+          disabled
           onChange={(e)=>setEmail(e.target.value)}
           />
        </div>
 
-        <div className="flex flex-col">
+        {/* <div className="flex flex-col">
         <label htmlFor="webSite">Enter the webSite</label>
         <input 
           type="text"
@@ -128,24 +126,24 @@ const handlePrint =()=>{
           value={webSite}
           onChange={(e)=>setWebSite(e.target.value)}
           />
-        </div>
+        </div> */}
 
         <div className="flex flex-col">
-        <label htmlFor="phone">Enter the phone</label>
+        <label htmlFor="phone">Company Phone Number</label>
         <input 
         type="text"
         name="phone"
         id="phone"
         placeholder="Enter phone"
         autoComplete="off" 
-        value={phone}
+        value="0116598453"
         onChange={(e)=>setPhone(e.target.value)}
         />
         </div>
 
         </article>
 
-      <article className="md:grid grid-cols-2 gap-10">
+      {/* <article className="md:grid grid-cols-2 gap-10">
         <div className="flex flex-col">
           <label htmlFor="bankName">Enter the Bank Name</label>
         <input 
@@ -171,9 +169,9 @@ const handlePrint =()=>{
         onChange={(e)=>setBankAccount(e.target.value)}
         />
         </div>
-      </article>
+      </article> */}
 
-      <article className="md:grid grid-cols-2 gap-10 md:mt-16">
+      <article className="md:grid grid-cols-2 gap-10 md:mt-8">
         <div className="flex flex-col">
         <label htmlFor="clientName">Enter the client's Name</label>
         <input 
@@ -201,7 +199,7 @@ const handlePrint =()=>{
         </div>
       </article>
 
-      <article className="md:grid grid-cols-3 gap-10">
+      <article className="md:grid grid-cols-3 gap-10 md:mb-8">
       <div className="flex flex-col">
       <label htmlFor="invoiceNum">Enter the Invoice Number</label>
        <input 
