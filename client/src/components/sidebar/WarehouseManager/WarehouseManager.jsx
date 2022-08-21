@@ -48,7 +48,7 @@ export default function warehouseManagerSidebar() {
             <h3 className="sidebarTitle">Dashboard</h3>
             <ul className="sidebarList">
               <Link to="/warehouseManager" className="link">
-                <li className="sidebarListItem active">
+                <li className="sidebarListItem ">
                   <LineStyle className="sidebarIcon" />
                   Home
                 </li>
@@ -120,19 +120,19 @@ export default function warehouseManagerSidebar() {
                   Stocks
                 </li>
               </Link>
-              <Link to="" className="link">
+              <Link to="/warehouseManager/Stocks" className="link">
                 <li className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />
                   Request Stocks
                 </li>
               </Link>
-              <Link to="/warehouseManager/purchaseOrder" className="link">
+              <Link to="/warehouseManager/Stocks" className="link">
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Pending Stocks
                 </li>
               </Link>
-              <Link to="/warehouseManager/purchaseInvoice" className="link">
+              <Link to="/warehouseManager/Stocks" className="link">
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Stock Recievals
@@ -146,23 +146,18 @@ export default function warehouseManagerSidebar() {
                 </Link> */}
             </ul>
           </div>
-          {/* <div className="sidebarMenu">
-              <h3 className="sidebarTitle">Invoices</h3>
+          <div className="sidebarMenu">
+              <h3 className="sidebarTitle">Dispatches</h3>
               <ul className="sidebarList">
+              <Link to="/warehouseManager/Dispatch" className="link">
                 <li className="sidebarListItem">
                   <MailOutline className="sidebarIcon" />
-                  Invoices
+                  Dispatch Stocks
                 </li>
-                <li className="sidebarListItem">
-                  <DynamicFeed className="sidebarIcon" />
-                  Feedback
-                </li>
-                <li className="sidebarListItem">
-                  <ChatBubbleOutline className="sidebarIcon" />
-                  Messages
-                </li>
+              </Link>
+                
               </ul>
-            </div> */}
+            </div>
           {/* <div className="sidebarMenu">
             <h3 className="sidebarTitle">Products</h3>
             <ul className="sidebarList">
