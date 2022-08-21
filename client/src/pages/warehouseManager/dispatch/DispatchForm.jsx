@@ -143,7 +143,7 @@ export default function DispatchForm() {
           <Link to={"/purchaseStaff/productList"}>
             <button
               className="productAddButton"
-              style={{ backgroundColor: "#FFB000", color: "black" }}
+              style={{ backgroundColor: "blue", color: "black" }}
             >
               Back
             </button>
