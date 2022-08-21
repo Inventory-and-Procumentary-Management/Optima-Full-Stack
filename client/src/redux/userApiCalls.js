@@ -15,6 +15,9 @@ import {
   addUserStart,
   addUserSuccess,
   addUserFailure,
+  addUserRoleStart,
+  addUserRoleSuccess,
+  addUserRoleFailure,
 } from "./userRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 
@@ -77,6 +80,17 @@ export const addUser = async (User, dispatch) => {
     dispatch(addUserSuccess(res.data));
   } catch (err) {
     dispatch(addUserFailure());
+  }
+};
+
+export const addRole = async (User, dispatch) => {
+  console.log(User);
+  dispatch(addUserRoleStart());
+  try {
+    const res = await userRequest.post(`/role/addtouser`, User);
+    dispatch(addUserRoleSuccess());
+  } catch (err) {
+    dispatch(addUserRoleFailure());
   }
 };
 

@@ -101,7 +101,7 @@ export default function ProductList() {
     // { field: "id", headerName: "ID", width: 220 },
     {
       field: "title",
-      headerName: "Product",
+      headerName: "Item",
       width: 220,
       renderCell: (params) => {
         return (
@@ -351,7 +351,7 @@ export default function ProductList() {
         <div className="top-container-material-request">
           <div className="top-contaier-button-material-request">
             <Link to={"/purchaseStaff/newProduct"}>
-              <button className="color-contained-button">Add Product</button>
+              <button className="color-contained-button">Add Item</button>
             </Link>
           </div>
           <div className="top-container-search-material-request">

@@ -21,6 +21,7 @@ export default function Sidebar() {
 
   //check user who is....then send correct props for the particular dashboard
   const user = useSelector((state) => state.user.currentUser);
+  console.log(user);
 
   useEffect(() => {
     user.roles.map((item) => {
@@ -61,6 +62,8 @@ export default function Sidebar() {
         history.push("/projectManager");
         setUserType(6);
         dispatch(userTypeSave("ROLE_PROJECT_MANAGER"));
+      } else {
+        window.location.href = "http://localhost:3000/login";
       }
     });
   }, []);

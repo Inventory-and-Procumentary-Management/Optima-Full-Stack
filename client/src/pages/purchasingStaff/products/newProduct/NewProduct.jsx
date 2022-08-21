@@ -254,7 +254,7 @@ export default function NewProduct() {
                   required
                   fullWidth
                   id="messure"
-                  label="Messurement"
+                  label="Unit of Messurement"
                   name="messure"
                   autoComplete="messure"
                   autoFocus

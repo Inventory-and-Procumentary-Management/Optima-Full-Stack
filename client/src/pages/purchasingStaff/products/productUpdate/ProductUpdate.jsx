@@ -306,7 +306,7 @@ export default function ProductUpdate() {
                       // required
                       fullWidth
                       id="messure"
-                      label="Messurement"
+                      label="UOM"
                       name="messure"
                       autoComplete="messure"
                       autoFocus
