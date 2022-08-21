@@ -80,10 +80,10 @@ export default function NewProduct() {
   };
 
   const handleClick = (e) => {
-    if (!e.target.value) {
-      setShow(true);
-      return;
-    }
+    // if (!e.target.value) {
+    //   setShow(true);
+    //   return;
+    // }
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
@@ -126,6 +126,7 @@ export default function NewProduct() {
             inStock: stock,
             isActivate: true,
             createDate: current_date,
+            isApprove: false,
           };
           addProduct(product, dispatch);
           setAllShow(true);
