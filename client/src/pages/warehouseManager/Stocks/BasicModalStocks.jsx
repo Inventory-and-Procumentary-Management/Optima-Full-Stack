@@ -74,7 +74,7 @@ export default function BasicModalStocks() {
               <TextField label="Request Amount" fullWidth required />
             </Grid>
             <Grid item style={{ alignItems: "right" }}>
-            <button className="color-contained-button"  >ADD</button>
+            <button className="color-contained-button"  >REQUEST</button>
             </Grid>
           </Grid>
 

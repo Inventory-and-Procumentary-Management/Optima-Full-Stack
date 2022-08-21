@@ -2,9 +2,10 @@ import React from 'react'
 import {useState, useEffect } from 'react'
 import {AiOutlineDelete, AiOutlineEdit} from "react-icons/ai"
 import { v4 as uuidv4 } from 'uuid'
-
+import './printPO_supplier.css'
 
 export default function TableForm({
+    itemCode,setitemCode,
     desc,setDesc, 
     quantity,setQuantity, 
     price,setPrice, 
@@ -20,11 +21,13 @@ export default function TableForm({
 
         const newItems ={
             id: uuidv4(),
+            itemCode,
             desc,
             quantity,
             price,
             amount,
         }
+        setitemCode("")
         setDesc("")
         setQuantity("")
         setPrice("")
@@ -58,9 +61,24 @@ const deleteRow = (id)=>{
    
   return (
     <>
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className='form-style'>
+
+    <div className="main-input-feild">
+    <div>
+    <label htmlFor='desc'>Item Code</label><br></br>
+        <input 
+        type="text" 
+        name="itemCode" 
+        id="itemCode"
+        placeholder='Item Code' 
+        value={itemCode}
+        onChange={(e)=>setitemCode(e.target.value)}
+        />
+    </div>
+
     <div className="flex flex-col">
-    <label htmlFor='desc'>Item Description</label>
+
+    <label htmlFor='desc'>Item Description</label><br></br>
         <input 
         type="text" 
         name="desc" 
@@ -70,9 +88,8 @@ const deleteRow = (id)=>{
         onChange={(e)=>setDesc(e.target.value)}
         />
     </div>
-    <div className="md:grid grid-cols-3 gap-10">
     <div className="flex flex-col">
-    <label htmlFor='quantity'>Quantity</label>
+    <label htmlFor='quantity'>Quantity</label><br></br>
         <input 
         type="text" 
         name="quantity" 
@@ -83,7 +100,7 @@ const deleteRow = (id)=>{
         />
     </div>
     <div className="flex flex-col">
-    <label htmlFor='price'>Item price</label>
+    <label htmlFor='price'>Item price</label> <br></br>
         <input 
         type="text" 
         name="price" 
@@ -99,22 +116,22 @@ const deleteRow = (id)=>{
     </div>
     </div>
     <button 
-    className=" mb-5 bg-blue-500 text-white 
-        font-bold py-2 px-8 rounded shadow border-2 border-blue-500
-        hover:bg-transparent hover:text-blue-500 transition-all duration-300"
+    className="Add-table-item-btn"
         type='submit'>
         {isEditing ? "Editing Row Item":"Add Table Item"}    
         </button>
     </form>
+
+
     {/*Table Items */}
     <table width="100%" className='mb-10'>
-         <thead>
-                <tr className='bg-gray-100 p-1'>
-                <td className='font-bold'>Description</td>
-                <td className='font-bold'>Quantity</td>
-                <td className='font-bold'>Price</td>
-                <td className='font-bold'>Amount</td>
-                <td className='font-bold'>Action</td>
+         <thead className='table-head-form'>
+                <tr >
+                <td >Description</td>
+                <td >Quantity</td>
+                <td >Price</td>
+                <td >Amount</td>
+                <td >Action</td>
                 </tr>
          </thead>
         {list.map(({id, desc,quantity,price,amount}) =>(
@@ -127,14 +144,15 @@ const deleteRow = (id)=>{
                 <td>{amount}</td>
                 <td>
                     <button onClick={()=>deleteRow(id)}>
-                    <AiOutlineDelete className='text-red-500 font-bold text-xl ' />
+                    <AiOutlineDelete  />
                     </button>
-                </td>
-                <td>
+                    &nbsp;
+                    &nbsp;
                     <button onClick={()=>editRow(id)}>
-                    <AiOutlineEdit className='text-green-500 font-bold text-xl ' />
+                    <AiOutlineEdit  />
                     </button>
                 </td>
+            
                 </tr>
             </tbody>
             </React.Fragment>

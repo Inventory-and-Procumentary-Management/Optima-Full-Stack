@@ -1,12 +1,11 @@
-import React from 'react'
 import { useEffect, useMemo, useState } from "react";
 import Charts from "../../components/charts/Charts";
-import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
+import FeaturedInfo_supplier from "../../components/featuredInfo/FeaturedInfo_supplier";
 import { useDispatch, useSelector } from "react-redux";
 import "../pages.css";
-import "./warehouseHome.css";
+import "./SupplierHomeStyle.css";
 
-const WarehouseHome = () => {
+const PurchaseStaffHome = () => {
   const [userStats, setUserStats] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   //   const user = useSelector((state) => state.user.currentUser);
@@ -44,27 +43,24 @@ const WarehouseHome = () => {
     let featureData = [
       {
         index: 1,
-        title: "No of Pending Stocks",
+        title: "No of Orders",
         number: 20,
         percentage: -1.4,
         isDowngrade: false,
-        text: "",
+        text: "Compared to last month",
       },
       {
         index: 2,
-        title: "No of Dispatched Stocks",
+        title: "Number Of Products",
         number: 40,
-        percentage: +1.4,
         isDowngrade: true,
-        text: "Compared to last month",
+        text: "Products which are available for Customer",
       },
       {
         index: 3,
-        title: "No of Recieved Stocks",
-        number: 20,
-        percentage: -1.4,
-        isDowngrade: false,
-        text: "Compared to last month",
+        title: "Due Orders",
+        number: 5,
+        text:"To do Orders "
       },
     ];
     setFeaturedData(featureData);
@@ -73,23 +69,21 @@ const WarehouseHome = () => {
   return (
     <div className="common">
       <div className="home">
-        <FeaturedInfo data={featuredData} />
+        <FeaturedInfo_supplier data={featuredData} />
         <Charts
           data={userStats}
-          title="Stocks Analytics"
+          title="Products Analytics"
           grid
           dataKey1="Cement"
           dataKey2="Sand"
-          dataKey3="Sand1"
         />
         {/* <div className="homeWidgets">
         <WidgetSm />
         <WidgetLg />
       </div> */}
-      {/* khygygy */}
       </div>
     </div>
   );
 };
 
-export default WarehouseHome;
+export default PurchaseStaffHome;
