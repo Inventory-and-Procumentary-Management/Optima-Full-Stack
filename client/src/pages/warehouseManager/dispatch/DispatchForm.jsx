@@ -19,6 +19,8 @@ import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import { useEffect } from "react";
 
+import PurchaseOrders from "./printPOs/PurchaseOrders";
+
 const stockData = [
   {
     value: true,
@@ -137,10 +139,10 @@ export default function DispatchForm() {
   return (
     <div className="newProduct common">
       {/* <h1 className="addProductTitle">New Product</h1> */}
-      <div className="userTitleContainer">
-        <h1 className="addProductTitle">Dispatch</h1>
+      <div className="userTitleContainer" style={{margin:"0px 225px"}}>
+        <h1 className="addProductTitle" style={{fontSize:30}}>Dispatch Form</h1>
         <div className="userTitleButtons">
-          <Link to={"/purchaseStaff/productList"}>
+          <Link to={"/warehouseManager"}>
             <button
               className="productAddButton"
               style={{ backgroundColor: "blue", color: "black" }}
@@ -171,7 +173,7 @@ export default function DispatchForm() {
           sx={{ m: 5 }}
         >
           {/* <div className="productFormLeft"> */}
-          <Grid container spacing={4}>
+          {/* <Grid container spacing={4}>
             <Grid item xs={12}>
               <div>
                 <h3
@@ -263,8 +265,9 @@ export default function DispatchForm() {
                 Send
               </button>
             </Grid>
-          </Grid>
+          </Grid> */}
           {/* </form> */}
+          <PurchaseOrders/>
         </Box>
       </Box>
       <SweetAlert
