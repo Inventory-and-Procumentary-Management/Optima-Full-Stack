@@ -8,6 +8,7 @@ import MainDetails from "./MainDetails";
 import Notes from "./Notes";
 import Table from "./Table";
 import TableForm from "./TableForm";
+import { Button } from "@mui/material";
 
 function PurchaseOrders() {
 const [showInvoice, setShowInvoice] = useState(false)
@@ -265,6 +266,7 @@ const handlePrint =()=>{
         hover:bg-transparent hover:text-blue-500 transition-all duration-300">
           Preview Invoice
         </button>
+        <Button variant="contained" size="medium">jk</Button>
        </div>
       </>
       )}

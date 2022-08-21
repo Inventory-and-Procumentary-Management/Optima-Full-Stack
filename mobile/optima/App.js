@@ -12,7 +12,7 @@ import {
   Profile,
   EditProfile,
 } from "./screens";
-import Tabs from "./navigation/tabs";
+import Tabs from "./navigation/Tabs";
 import { Provider } from "react-redux";
 import { store } from "./store";
 
