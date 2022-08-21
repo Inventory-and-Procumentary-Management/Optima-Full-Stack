@@ -58,11 +58,11 @@ const handlePrint =()=>{
 
      <Notes notes={notes}/>
      
-     <Footer 
+     {/* <Footer 
      name={"OPTIMA"} 
      email={"optima@gmail.com"} 
      phone={"0116598453"}
-     />
+     /> */}
 
      <button
         onClick={()=> setShowInvoice(false)}
