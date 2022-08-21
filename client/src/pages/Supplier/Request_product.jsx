@@ -63,7 +63,6 @@ const Request_product = () => {
   >
   <TextField 
   id="outlined-basic" 
-  label="Name" 
   name='name' 
   variant="outlined" 
   value={formValues.name}
@@ -85,7 +84,6 @@ const Request_product = () => {
   >
   <TextField 
   id="outlined-basic" 
-  label="Category" 
   name='category' 
   variant="outlined"
   value={formValues.category}
@@ -107,7 +105,6 @@ const Request_product = () => {
   >
   <TextField
   id="outlined-basic" 
-  label="Price Per One" 
   name='price_per_one' 
   variant="outlined" 
   value={formValues.price_per_one}
@@ -129,7 +126,6 @@ const Request_product = () => {
   >
   <TextField
   id="outlined-basic"
-  label="Quantity"
    name='quantity' 
    variant="outlined" 
    value={formValues.quantity}
@@ -151,7 +147,6 @@ const Request_product = () => {
   >
   <TextField
   id="outlined-basic"
-  label="UOM"
    name='UOM' 
    variant="outlined" 
    value={formValues.UOM}
@@ -179,7 +174,6 @@ const Request_product = () => {
   <div>
   <TextField
     id="outlined-multiline-flexible"
-    label="Description"
     name='description'
     multiline
     rows = {4}

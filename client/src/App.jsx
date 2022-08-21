@@ -37,6 +37,8 @@ import Supplier_Invoices from "./pages/Supplier/invoices/Supplier_Invoices";
 import Supplier_invoices_details from "./pages/Supplier/invoices/Supplier_invoices_details";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
+import SupplierHome from "./pages/Supplier/SupplierHome"
+
 
 const App = () => {
   return (
@@ -131,6 +133,15 @@ const App = () => {
               </Route>
               <Route exact path="/supplier/Order_details">
                  <Order_details/>
+              </Route>
+              <Route exact path="/supplierHome">
+                 <SupplierHome/>
+              </Route>
+              <Route exact path="/supplier">
+                 <SupplierHome/>
+              </Route>
+              <Route exact path="/supplier/Supplier_invoices_details">
+                 <Supplier_invoices_details/>
               </Route>
               {/* <Route path="/users">
                 <UserList />

@@ -5,6 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
+import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 
 const style = {
   position: 'absolute',
@@ -18,15 +19,7 @@ const style = {
   p: 4,
 };
 
-const ColorButton = styled(Button)(({ theme }) => ({
-  color: theme.palette.getContrastText(purple[500]),
-  backgroundColor: purple[500],
-  '&:hover': {
-    backgroundColor: purple[700],
-    padding: '0.4rem',
 
-  },
-}));
 
 export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
@@ -35,7 +28,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <ColorButton onClick={handleOpen} variant="outlined" >Details</ColorButton> 
+      <button onClick={handleOpen}  ><ExpandCircleDownIcon></ExpandCircleDownIcon></button> 
       <Modal
         open={open}
         onClose={handleClose}
