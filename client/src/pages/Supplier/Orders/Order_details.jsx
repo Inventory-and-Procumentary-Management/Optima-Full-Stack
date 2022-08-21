@@ -7,7 +7,7 @@ const Order_details = () => {
   return (
     <div className='Main-div-order'>
       <div>
-        <h2>Orders</h2>
+        <h2 className='orders-topic-style'>Orders</h2>
       </div >
       <div className='sub-div-order'>
       <Order_tableTabs></Order_tableTabs>

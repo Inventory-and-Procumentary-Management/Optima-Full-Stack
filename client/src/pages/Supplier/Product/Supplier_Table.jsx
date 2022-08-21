@@ -9,6 +9,8 @@ import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
 import { DataGrid } from "@material-ui/data-grid";
+import { green } from '@mui/material/colors';
+import { red } from '@mui/material/colors';
 
 // function createData(name, Price_per_one, Quantity, Description, more) {
 //   return { name, Price_per_one, Quantity, Description, more };
@@ -23,7 +25,7 @@ import { DataGrid } from "@material-ui/data-grid";
 // ];
 
 const columns = [
-  // { field: 'id', headerName: 'ID', width: 70 },
+   { field: 'id', headerName: '', width: 70 },
   { field: 'Item', headerName: 'Item', width: 130 },
   { field: 'Unit', headerName: 'Unit', width: 130 },
   { field: 'Price_per_one', headerName: 'Price_Per_One', width: 130 },
@@ -35,32 +37,33 @@ const columns = [
   {
     field: 'Description',
     headerName: 'Description',
-    width: 160,
+    width: 350,
   },
   { field: 'Button', headerName: '', width: 160 ,
   renderCell: (params) => {
 
     return (
       <>
-      <button className='update-btn'>Update</button>
+      <AddIcon sx={{ color: green[500] }}></AddIcon>
       &nbsp;
       &nbsp;
-      <button className='delete-btn'>Delete</button>
+      &nbsp;
+      <DeleteIcon sx={{ color: red[500] }}></DeleteIcon>
       </>
     );
       },}
 ];
 
 const rows = [
-  { id: 1, Item: 'Cement',Unit:'Bag', Price_per_one: '3200',Quantity:12 , Description: 'sdvfsodjvglsdj' },
-  { id: 2, Item: 'Sand',Unit:'Cube', Price_per_one: '13000',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 3, Item: 'Bricks',Unit:'', Price_per_one: '100',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 4, Item: '1" Pipe',Unit:'', Price_per_one: '1000',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 5, Item: '1 1/2" Pipe',Unit:'', Price_per_one: '1000',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 6, Item: '1 3/4" Pipe',Unit:'', Price_per_one: '1100',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 7, Item: '2" Pipe',Unit:'', Price_per_one: '1200',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 8, Item: '1 ft Tile',Unit:'', Price_per_one: '1500',Quantity:12, Description: 'sdvfsodjvglsdj' },
-  { id: 9, Item: '1 1/2 Tile',Unit:'', Price_per_one: '1500',Quantity:12, Description: 'sdvfsodjvglsdj' },
+  { id: 1, Item: 'Cement',Unit:'Bag', Price_per_one: '3200',Quantity:12 , Description: 'Ultra Cement and the and ajantha Cement' },
+  { id: 2, Item: 'Sand',Unit:'Cube', Price_per_one: '13000',Quantity:12, Description: 'Ultra Cement and the and ajantha Cement' },
+  { id: 3, Item: 'Bricks',Unit:'', Price_per_one: '100',Quantity:12, Description: '' },
+  { id: 4, Item: '1" Pipe',Unit:'', Price_per_one: '1000',Quantity:12, Description: 'Slone Pipe' },
+  { id: 5, Item: '1 1/2" Pipe',Unit:'', Price_per_one: '1000',Quantity:12, Description: 'Slone Pipe' },
+  { id: 6, Item: '1 3/4" Pipe',Unit:'', Price_per_one: '1100',Quantity:12, Description: 'Slone Pipe' },
+  { id: 7, Item: '2" Pipe',Unit:'', Price_per_one: '1200',Quantity:12, Description: 'Slone Pipe' },
+  { id: 8, Item: '1 ft Tile',Unit:'', Price_per_one: '1500',Quantity:12, Description: 'Lanka tile and american tile contain' },
+  { id: 9, Item: '1 1/2 Tile',Unit:'', Price_per_one: '1500',Quantity:12, Description: 'Lanka tile and american tile contain' },
 ];
 
 export default function BasicTable() {

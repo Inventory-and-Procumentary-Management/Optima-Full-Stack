@@ -63,8 +63,8 @@ const deleteRow = (id)=>{
     <>
     <form onSubmit={handleSubmit} className='form-style'>
 
-    <div className="main-input-feild">
-    <div>
+    <div >
+    {/* <div>
     <label htmlFor='desc'>Item Code</label><br></br>
         <input 
         type="text" 
@@ -74,7 +74,7 @@ const deleteRow = (id)=>{
         value={itemCode}
         onChange={(e)=>setitemCode(e.target.value)}
         />
-    </div>
+    </div> */}
 
     <div className="flex flex-col">
 
@@ -114,6 +114,7 @@ const deleteRow = (id)=>{
     <label htmlFor='amount'>Amount</label>
         <p>{amount}</p>
     </div>
+    <br></br>
     </div>
     <button 
     className="Add-table-item-btn"
