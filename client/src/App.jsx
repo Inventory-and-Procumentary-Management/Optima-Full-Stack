@@ -32,6 +32,8 @@ import WarehouseHome from "./pages/warehouseManager/WarehouseHome";
 import Request_product from "./pages/Supplier/Request_product";
 import PurchaseOrders from "./pages/purchaseManager/printPOs/PurchaseOrders";
 
+import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
+
 const App = () => {
   return (
     <Router basename={config.basename}>
@@ -107,6 +109,11 @@ const App = () => {
               <Route exact path="/warehouseManager/Stocks">
                  <Stocks/>
               </Route>
+              <Route exact path="/warehouseManager/Dispatch">
+                 <Dispatch/>
+              </Route>
+
+
 
               <Route exact path="/supplier/Request_product">
                  <Request_product/>
