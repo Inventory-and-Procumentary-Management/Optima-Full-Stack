@@ -16,6 +16,7 @@ const defautlValues = {
   price_per_one:"",
   quantity: "",
   description:"",
+  UOM:"",
 };
 
 
@@ -39,8 +40,9 @@ const Request_product = () => {
   
     return (
       
-      <div onSubmit={handleSubmit}>
+      <div onSubmit={handleSubmit} className='Main-div' >
           <h2 className='Main-Topic-request-product'>Request product</h2>
+          <div  className='sub-div'>
           <h3 className='Topic-Add-new-item'>Add new Item</h3>
           <form onSubmit={handleSubmit}>
             
@@ -136,6 +138,28 @@ const Request_product = () => {
   
   </Box>
   </div> {/* div 04 end */ }
+
+  <div> {/* div 05 */ }
+      <h4>Unit Of Measurement</h4>
+  <Box
+  component="form"
+  sx={{
+  '& > :not(style)': { m: 1, width: '25ch' },
+  }}
+  noValidate
+  autoComplete="off"
+  >
+  <TextField
+  id="outlined-basic"
+  label="UOM"
+   name='UOM' 
+   variant="outlined" 
+   value={formValues.UOM}
+  onChange = {handleInputChange}
+  />
+  
+  </Box>
+  </div> {/* div 05 end */ }
   
   
   
@@ -168,11 +192,6 @@ const Request_product = () => {
   
   </div>  {/* div 0-1 end */ }
   
-  <div className='terms-checkbox'>  {/* div 0-2 */ }
-  <FormGroup>
-  <FormControlLabel control={<Checkbox/>} label="Agree to Terms and Condition" />
-  </FormGroup>
-  </div>  {/* div 0-2 end */ }
   <div className='request-button'>
   <Button variant="contained" type='submit' >Request</Button>
   </div>
@@ -183,7 +202,7 @@ const Request_product = () => {
           
   
          
-  
+        </div>
   
   
       </div>
