@@ -37,6 +37,7 @@ import Supplier_Invoices from "./pages/Supplier/invoices/Supplier_Invoices";
 import Supplier_invoices_details from "./pages/Supplier/invoices/Supplier_invoices_details";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
+import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 
 const App = () => {
   return (
@@ -116,7 +117,7 @@ const App = () => {
                 <Stocks />
               </Route>
               <Route exact path="/warehouseManager/Dispatch">
-                 <Dispatch/>
+                 <Dispatch />
               </Route>
 
               <Route exact path="/supplier/Request_product">
