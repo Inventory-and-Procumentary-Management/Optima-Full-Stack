@@ -36,6 +36,8 @@ import Supplier_Invoices from "./pages/Supplier/Supplier_Invoices";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
 
+import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
+
 const App = () => {
   return (
     <Router basename={config.basename}>
@@ -111,6 +113,11 @@ const App = () => {
               <Route exact path="/warehouseManager/Stocks">
                 <Stocks />
               </Route>
+              <Route exact path="/warehouseManager/Dispatch">
+                 <Dispatch/>
+              </Route>
+
+
 
               <Route exact path="/supplier/Request_product">
                  <Request_product/>

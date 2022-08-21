@@ -10,7 +10,7 @@ import { dumyData } from "../../../constants/DashboardData";
 import SearchComponent from "../../../components/search/Search";
 
 const columns = [
-  { field: "_id", headerName: "ID", width: 220 },
+  // { field: "_id", headerName: "ID", width: 150 },
   {
     field: "title",
     headerName: "Product Name",
@@ -28,9 +28,11 @@ const columns = [
       );
     },
   },
+  { field: "quantity", headerName: "Quantity", width: 200 },
   { field: "price", headerName: "Quantity Type", width: 200 },
-  { field: "quantity", headerName: "Quantity", width: 150 },
-  { field: "quantity", headerName: "Description", width: 250 },
+  { field: "minimumLevel", headerName: "Minimum Level", width: 200 },
+  
+  { field: "isPaid", headerName: "Description", width: 250 },
   // {
   //   field: "staus",
   //   headerName: "Order Status",
@@ -102,42 +104,42 @@ const columns = [
   //     );
   //   },
   // },
-  {
-    field: "action",
-    headerName: "Action",
-    width: 250,
-    renderCell: (params) => {
-      return (
-        <>
-          {!params.row.isCancel ? (
-            <button
-              className="userListEdit"
-              // onClick={() => {
-              //   setUpdateShow(true);
-              //   setCartId(params.row._id);
-              //   setIsCancelStatus(false);
-              // }}
-              style={{ backgroundColor: "red" }}
-            >
-              Cancel
-            </button>
-          ) : (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "red" }}
-              // onClick={() => {
-              //     setUpdateShow(true);
-              //     setCartId(params.row._id);
-              //     setIsCancelStatus(true);
-              //   }}
-            >
-              Request Received
-            </button>
-          )}
-        </>
-      );
-    },
-  },
+  // {
+  //   field: "action",
+  //   headerName: "Action",
+  //   width: 250,
+  //   renderCell: (params) => {
+  //     return (
+  //       <>
+  //         {!params.row.isCancel ? (
+  //           <button
+  //             className="userListEdit"
+  //             // onClick={() => {
+  //             //   setUpdateShow(true);
+  //             //   setCartId(params.row._id);
+  //             //   setIsCancelStatus(false);
+  //             // }}
+  //             style={{ backgroundColor: "#FFB000" }}
+  //           >
+  //             Update
+  //           </button>
+  //         ) : (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "red" }}
+  //             // onClick={() => {
+  //             //     setUpdateShow(true);
+  //             //     setCartId(params.row._id);
+  //             //     setIsCancelStatus(true);
+  //             //   }}
+  //           >
+  //             Request Received
+  //           </button>
+  //         )}
+  //       </>
+  //     );
+  //   },
+  // },
 ];
 
 const BuildingTable = () => {
@@ -145,7 +147,7 @@ const BuildingTable = () => {
     <div className="common">
       <div className="userList">
         <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request">
+          <div className="top-contaier-button-material-request" style={{visibility:"hidden"}}>
             <Link to={"/purchaseStaff/newMaterialRequest"}>
               <button className="color-contained-button">Add New Item</button>
             </Link>
@@ -160,7 +162,6 @@ const BuildingTable = () => {
           columns={columns}
           getRowId={(row) => row._id}
           pageSize={8}
-          checkboxSelection
           autoHeight
           // componentsProps={{
           //   columnMenu: {
