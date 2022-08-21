@@ -14,6 +14,7 @@ import Modal from '@mui/material/Modal';
 import { DataGrid } from "@material-ui/data-grid";
 import { More } from '@mui/icons-material';
 import Invoice_details_popup from './Invoice_details_popup'
+import KitchenIcon from '@mui/icons-material/Kitchen';
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
@@ -31,24 +32,39 @@ const columns = [
         </>
       );
         },},
+        { field: 'Generate Invoice', headerName: '', width: 200 ,
+        renderCell: (params) => {
+
+          return (
+            <>
+            { <button><KitchenIcon></KitchenIcon></button>}
+            {/* {params.row.Items} */}
+            </>
+          );
+            },
+      },
  
   ];
   
   const rows = [
-    { id: 1, invoiceNumber: 'INV 001', IssueDate: '2022-05-01', TotalPrice:1000 , Paid_or_not: true,Items:"Cement, Sand"},
-    { id: 2, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice: 2000, Paid_or_not: true, Items:"Cement, Sand"},
-    { id: 3, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice:5000, Paid_or_not: false, Items:"Cement, Sand"},
-    { id: 4, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice: 10000, Paid_or_not: true,Items:"Cement, Sand" },
-    { id: 5, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice: 100000, Paid_or_not: true,Items:"Cement, Sand"},
-    { id: 6, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice:150000, Paid_or_not: false,Items:"Cement, Sand"},
-    { id: 7, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice:250000, Paid_or_not: true, Items:"Cement, Sand"},
-    { id: 8, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice:300000, Paid_or_not: false, Items:"Cement, Sand"},
-    { id: 9, invoiceNumber: 'INV 001',IssueDate: '2022-05-01',TotalPrice:500000, Paid_or_not: true, Items:"Cement, Sand"},
+    { id: 1, invoiceNumber: 'INV 001', IssueDate: '2022-05-01', TotalPrice:10000 , Paid_or_not: true,Items:"Cement, Sand"},
+    { id: 2, invoiceNumber: 'INV 002',IssueDate: '2022-05-02',TotalPrice: 200000, Paid_or_not: true, Items:"Cement, Sand"},
+    { id: 3, invoiceNumber: 'INV 003',IssueDate: '2022-05-02',TotalPrice:50000, Paid_or_not: false, Items:"Cement, Sand"},
+    { id: 4, invoiceNumber: 'INV 004',IssueDate: '2022-05-03',TotalPrice: 10000, Paid_or_not: true,Items:"Cement, Sand" },
+    { id: 5, invoiceNumber: 'INV 005',IssueDate: '2022-05-03',TotalPrice: 100000, Paid_or_not: true,Items:"Cement, Sand"},
+    { id: 6, invoiceNumber: 'INV 006',IssueDate: '2022-05-03',TotalPrice:150000, Paid_or_not: false,Items:"Cement, Sand"},
+    { id: 7, invoiceNumber: 'INV 007',IssueDate: '2022-05-05',TotalPrice:250000, Paid_or_not: true, Items:"Cement, Sand"},
+    { id: 8, invoiceNumber: 'INV 008',IssueDate: '2022-05-05',TotalPrice:300000, Paid_or_not: false, Items:"Cement, Sand"},
+    { id: 9, invoiceNumber: 'INV 009',IssueDate: '2022-05-06',TotalPrice:500000, Paid_or_not: true, Items:"Cement, Sand"},
   ];
 
 const Invoice_details_table = () => {
   
     return (
+  <div>
+      <h2 className='invoice-details-topic-style-02'>Invoice Details</h2>
+      <div className='invoice-detail-table-style-02'>
+
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
             rows={rows}
@@ -58,6 +74,8 @@ const Invoice_details_table = () => {
             checkboxSelection
           />
           
+        </div>
+        </div>
         </div>
       );
   

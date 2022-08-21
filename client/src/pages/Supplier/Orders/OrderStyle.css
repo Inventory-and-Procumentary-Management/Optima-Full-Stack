@@ -19,3 +19,15 @@
     border: 0.2rem solid rgba(253, 60, 60, 0.897);
     background-color: rgba(253, 60, 60, 0.897);
 }
+.orders-topic-style{
+    padding: 1rem;
+    padding-bottom: 0rem;
+    font-size: 1.7rem;
+    font-weight: bold;
+}
+.detalis-btn{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgb(175, 175, 175);
+    border-radius: 1rem;
+}

@@ -185,12 +185,12 @@ export default function PurchaseStaffSidebar() {
                 </li>
               </Link>
               
-              <Link to="/supplier/Supplier_Invoices" className="link">
+              {/* <Link to="/supplier/Supplier_Invoices" className="link">
                 <li className="sidebarListItem">
                 <Timeline className="sidebarIcon" />
                   Create Invoices
                 </li>
-              </Link>
+              </Link> */}
             </ul>
           </div>
         </div>
