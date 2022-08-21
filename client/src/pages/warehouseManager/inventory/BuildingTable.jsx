@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { dumyData } from "../../../constants/DashboardData";
+import SearchComponent from "../../../components/search/Search";
 
 const columns = [
   { field: "_id", headerName: "ID", width: 220 },
@@ -32,7 +33,7 @@ const columns = [
   { field: "quantity", headerName: "Description", width: 250 },
   // {
   //   field: "staus",
-  //   headerName: "Order Status",    
+  //   headerName: "Order Status",
   //   width: 220,
   //   renderCell: (params) => {
   //     return (
@@ -143,6 +144,16 @@ const BuildingTable = () => {
   return (
     <div className="common">
       <div className="userList">
+        <div className="top-container-material-request">
+          <div className="top-contaier-button-material-request">
+            <Link to={"/purchaseStaff/newMaterialRequest"}>
+              <button className="color-contained-button">Add New Item</button>
+            </Link>
+          </div>
+          <div className="top-container-search-material-request">
+            <SearchComponent />
+          </div>
+        </div>
         <DataGrid
           rows={dumyData}
           disableSelectionOnClick
@@ -213,4 +224,3 @@ const BuildingTable = () => {
 };
 
 export default BuildingTable;
-  
