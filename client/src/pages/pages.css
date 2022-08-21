@@ -31,6 +31,7 @@
   border: none;
   border-radius: 10px;
   padding: 5px 10px;
+  /* margin: 0 10px 0; */
   background-color: #3bb077;
   color: white;
   cursor: pointer;
@@ -83,6 +84,13 @@
   color: #378cbb;
   font-size: 14px;
   cursor: pointer;
+}
+
+.top-container-material-request {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0px 25px 25px 25px;
 }
 
 @media only screen and (max-width: 600px) {

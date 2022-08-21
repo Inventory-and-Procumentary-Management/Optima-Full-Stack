@@ -1,0 +1,14 @@
+.top-container-material-request {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0px 25px 25px 25px;
+}
+/* .top-contaier-button-material-request > button {
+    background-color: #378CBB;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+} */

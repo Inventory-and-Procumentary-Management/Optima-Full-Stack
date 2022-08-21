@@ -3,109 +3,115 @@ import "../../pages.css";
 import "./MaterialRequest.css";
 
 import { DataGrid } from "@material-ui/data-grid";
-import { DeleteOutline } from "@material-ui/icons";
+import {
+  DeleteOutline,
+  CancelOutlined,
+  VisibilityOutlined,
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector } from "react-redux";
-import { dumyData } from "../../../constants/DashboardData";
+import { materialRequestData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
 
 const columns = [
-  { field: "_id", headerName: "Invoice ID", width: 150 },
+  { field: "invoice_id", headerName: "Invoice ID", width: 150 },
   {
-    field: "title",
-    headerName: "Vendor Name",
-    width: 220,
+    field: "managerUsername",
+    headerName: "Warehouse Manager Name",
+    width: 280,
     renderCell: (params) => {
       return (
         <div className="userListUser">
-          {/* <img
+          <img
             className="userListImg"
-            src={params.row.img}
+            src="https://res.cloudinary.com/midefulness/image/upload/v1661021417/OPTIMA/Login%20Images/construction-plans-with-yellow-helmet-drawing-tools-bluep_azokvo.jpg"
             alt="category Icon"
-          /> */}
-          {params.row.title}
+          />
+          {params.row.managerUsername}
         </div>
       );
     },
   },
   { field: "issueDate", headerName: "Issue Date", width: 180 },
   { field: "dueDate", headerName: "Due Date", width: 180 },
-  { field: "price", headerName: "Total Price", width: 180 },
-  { field: "isPaid", headerName: "Paid or Not", width: 180 },
-  {
-    field: "staus",
-    headerName: "Status",
-    width: 220,
-    renderCell: (params) => {
-      return (
-        <>
-          {params.row.status === "Pending" ? (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "#bdba2c" }}
-              // onClick={() => {
-              //   setCartId(params.row._id);
-              //   setStatus("Accepted");
-              //   setShow(true);
-              // }}
-            >
-              {params.row.status}
-            </button>
-          ) : params.row.status === "Accepted" ? (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "#87DD44" }}
-              // onClick={() => {
-              //     setCartId(params.row._id);
-              //     setStatus("In Warehouse");
-              //     setShow(true);
-              //   }}
-            >
-              {params.row.status}
-            </button>
-          ) : params.row.status === "In Warehouse" ? (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "#DD9A44" }}
-              // onClick={() => {
-              //     setStatus("Shipped");
-              //     setCartId(params.row._id);
-              //     setShow(true);
-              //   }}
-            >
-              {params.row.status}
-            </button>
-          ) : params.row.status === "Shipped" ? (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "#44A1DD" }}
-              // onClick={() => {
-              //     setCartId(params.row._id);
-              //     setStatus("Completed");
-              //     setShow(true);
-              //   }}
-            >
-              {params.row.status}
-            </button>
-          ) : params.row.status === "Completed" ? (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "#69DD44" }}
-            >
-              {params.row.status}
-            </button>
-          ) : (
-            <button className="userListEdit" style={{ backgroundColor: "red" }}>
-              {params.row.status}
-            </button>
-          )}
-        </>
-      );
-    },
-  },
+  { field: "price", headerName: "Total Price (Rs)", width: 200 },
+  // { field: "currentQuantity", headerName: "Current Quantity", width: 200 },
+  // { field: "requestQuantity", headerName: "Request Quantity", width: 200 },
+  // { field: "isPaid", headerName: "Paid or Not", width: 180 },
+  // {
+  //   field: "staus",
+  //   headerName: "Status",
+  //   width: 220,
+  //   renderCell: (params) => {
+  //     return (
+  //       <>
+  //         {params.row.status === "Pending" ? (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "#bdba2c" }}
+  //             // onClick={() => {
+  //             //   setCartId(params.row._id);
+  //             //   setStatus("Accepted");
+  //             //   setShow(true);
+  //             // }}
+  //           >
+  //             {params.row.status}
+  //           </button>
+  //         ) : params.row.status === "Accepted" ? (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "#87DD44" }}
+  //             // onClick={() => {
+  //             //     setCartId(params.row._id);
+  //             //     setStatus("In Warehouse");
+  //             //     setShow(true);
+  //             //   }}
+  //           >
+  //             {params.row.status}
+  //           </button>
+  //         ) : params.row.status === "In Warehouse" ? (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "#DD9A44" }}
+  //             // onClick={() => {
+  //             //     setStatus("Shipped");
+  //             //     setCartId(params.row._id);
+  //             //     setShow(true);
+  //             //   }}
+  //           >
+  //             {params.row.status}
+  //           </button>
+  //         ) : params.row.status === "Shipped" ? (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "#44A1DD" }}
+  //             // onClick={() => {
+  //             //     setCartId(params.row._id);
+  //             //     setStatus("Completed");
+  //             //     setShow(true);
+  //             //   }}
+  //           >
+  //             {params.row.status}
+  //           </button>
+  //         ) : params.row.status === "Completed" ? (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "#69DD44" }}
+  //           >
+  //             {params.row.status}
+  //           </button>
+  //         ) : (
+  //           <button className="userListEdit" style={{ backgroundColor: "red" }}>
+  //             {params.row.status}
+  //           </button>
+  //         )}
+  //       </>
+  //     );
+  //   },
+  // },
   {
     field: "action",
     headerName: "Action",
@@ -114,17 +120,22 @@ const columns = [
       return (
         <>
           {!params.row.isCancel ? (
-            <button
-              className="userListEdit"
-              // onClick={() => {
-              //   setUpdateShow(true);
-              //   setCartId(params.row._id);
-              //   setIsCancelStatus(false);
-              // }}
-              style={{ backgroundColor: "red" }}
-            >
-              Cancel
-            </button>
+            <div>
+              <VisibilityOutlined
+                style={{ color: "#bdba2c", cursor: "pointer", marginRight: 20 }}
+                onClick={() => {
+                  // setProductStatus(params.row.id, false);
+                  // setApproveShow(true);
+                }}
+              />
+              <CancelOutlined
+                style={{ color: "red", cursor: "pointer" }}
+                onClick={() => {
+                  // setProductStatus(params.row.id, false);
+                  // setApproveShow(true);
+                }}
+              />
+            </div>
           ) : (
             <button
               className="userListEdit"
@@ -145,12 +156,24 @@ const columns = [
 ];
 
 const MaterialRequest = () => {
+  const userType = useSelector((state) => state.user.userType);
+  const [user, setUser] = useState("");
+  console.log(userType);
+
+  useEffect(() => {
+    if (userType === "ROLE_PURCHASING_MANAGER") {
+      setUser("purchaseManager");
+    } else if (userType === "ROLE_PURCHASING_STAFF") {
+      setUser("purchaseStaff");
+    }
+  }, []);
+
   return (
     <div className="common">
       <div className="userList">
         <div className="top-container-material-request">
           <div className="top-contaier-button-material-request">
-            <Link to={"/purchaseStaff/newMaterialRequest"}>
+            <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
             </Link>
           </div>
@@ -160,7 +183,7 @@ const MaterialRequest = () => {
         </div>
         <div className="bottom-container-material-request">
           <DataGrid
-            rows={dumyData}
+            rows={materialRequestData}
             disableSelectionOnClick
             columns={columns}
             getRowId={(row) => row._id}

@@ -266,7 +266,6 @@ const handlePrint =()=>{
         hover:bg-transparent hover:text-blue-500 transition-all duration-300">
           Preview Invoice
         </button>
-        <Button variant="contained" size="medium">jk</Button>
        </div>
       </>
       )}

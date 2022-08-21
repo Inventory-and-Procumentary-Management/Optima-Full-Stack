@@ -49,7 +49,7 @@ export default function PurchaseStaffSidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Dashboard</h3>
             <ul className="sidebarList">
-              <Link to="/purchaseStaff" className="link">
+              <Link to="/purchaseManager" className="link">
                 {/* {history.push("/purchaseStaff")} */}
                 <li className="sidebarListItem active">
                   <LineStyle className="sidebarIcon" />
@@ -70,7 +70,7 @@ export default function PurchaseStaffSidebar() {
                     Users
                   </li>
                 </Link> */}
-              <Link to="/purchaseStaff/productList" className="link">
+              <Link to="/purchaseManager/productList" className="link">
                 {/* {history.push("/purchaseStaff/productList")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
@@ -84,7 +84,7 @@ export default function PurchaseStaffSidebar() {
                   Payments
                 </li>
               </Link> */}
-              <Link to="/purchaseStaff/orders" className="link">
+              <Link to="/purchaseManager/orders" className="link">
                 {/* {history.push("/purchaseStaff/orders")} */}
                 <li className="sidebarListItem">
                   <BarChart className="sidebarIcon" />
@@ -120,28 +120,28 @@ export default function PurchaseStaffSidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Purchase</h3>
             <ul className="sidebarList">
-              <Link to="/purchaseStaff/materialRequest" className="link">
+              <Link to="/purchaseManager/materialRequest" className="link">
                 {/* {history.push("/purchaseStaff/materialRequest")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Material Request
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseOrder" className="link">
+              <Link to="/purchaseManager/purchaseOrder" className="link">
                 {/* {history.push("/purchaseStaff/purchaseOrder")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Purchase Order
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+              <Link to="/purchaseManager/purchaseInvoice" className="link">
                 {/* {history.push("/purchaseStaff/purchaseInvoice")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Purchase Invoice
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+              <Link to="/purchaseManager/purchaseInvoice" className="link">
                 {/* {history.push("/purchaseStaff/purchaseInvoice")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
@@ -192,13 +192,13 @@ export default function PurchaseStaffSidebar() {
                 Project
               </li>
 
-              <Link to="/purchaseStaff/deliveries" className="link">
+              <Link to="/purchaseManager/deliveries" className="link">
                 <li className="sidebarListItem">
                   <Timeline className="sidebarIcon" />
                   Deliveries
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+              <Link to="/purchaseManager/purchaseInvoice" className="link">
                 <li className="sidebarListItem">
                   <Report className="sidebarIcon" />
                   Reports
