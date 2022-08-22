@@ -17,7 +17,7 @@ import { materialRequestData } from "../../../constants/DashboardData";
 import SearchComponent from "../../../components/search/Search";
 
 const columns = [
-  { field: "invoice_id", headerName: "Invoice ID", width: 150 },
+  { field: "invoice_id", headerName: "Request ID", width: 170 },
   {
     field: "managerUsername",
     headerName: "Warehouse Manager Name",
