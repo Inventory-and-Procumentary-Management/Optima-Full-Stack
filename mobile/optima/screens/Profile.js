@@ -29,6 +29,7 @@ const Profile = () => {
   const [userType, setUserType] = useState("Worker");
   const userID = useSelector((state) => state.login.userID);
   const type = useSelector((state) => state.login.userType);
+  const user = useSelector((state) => state.login.currentUser);
   // console.log(userID);
   // console.log("User Type "+type);
   const authToken = useSelector((state) => state.login.authToken);
@@ -63,24 +64,33 @@ const Profile = () => {
   //     .finally(() => setLoading(false)); // change loading state
   // }, []);
 
+  useEffect(()=>{
+    if(!user){
+      setLoading(true);
+    }else{
+      createDataSet();
+      setLoading(false);
+    }
+  },[]);
+
   // let userType;
 
-  const createDataSet = (data) => {
+  const createDataSet = () => {
     let DATA = [
       {
         id: "1",
         title: "Name",
-        value: data.name,
+        value: user.name,
       },
       {
         id: "2",
         title: "Email Address",
-        value: data.email,
+        value: user.email,
       },
       {
         id: "3",
         title: "Phone Number",
-        value: data.telephone_no,
+        value: user.mobileNumber,
       },
       {
         id: "4",
