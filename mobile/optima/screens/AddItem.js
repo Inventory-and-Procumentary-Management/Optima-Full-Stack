@@ -23,6 +23,8 @@ import Header from "../components/Header.component";
 import { useSelector } from "react-redux";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import categories from "../constans/categories";
+import HeaderWithBack from "../components/HeaderWithBack.component";
+import { icons, COLORS, SIZES, FONTS } from "../constans";
 // import { ArrowLeft } from "@material-ui/icons";
 
 const URL1 = "http://192.168.1.4:5000/api/v1/category";
@@ -122,12 +124,20 @@ const AddItem = () => {
 
   return (
     <View>
-      <Header title={"BANTU.LK"} />
+      <Header title={"Inventory"} />
+      <HeaderWithBack
+        text={"Add New Item"}
+        iconLeft={"arrow-left"}
+        iconRight={"pencil"}
+        // textColor={COLORS.primary}
+        iconsColor={COLORS.black}
+        isEnabled={"0"}
+      />
 
       <View style={styles.title}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles.root}>
-            <Text style={styles.title}>Add New Item</Text>
+            {/* <Text style={styles.title}>Add New Item</Text> */}
 
             <CustomInput
               name="postTitle"
