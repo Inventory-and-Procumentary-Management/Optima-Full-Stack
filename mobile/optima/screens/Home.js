@@ -18,6 +18,10 @@ const { height, width } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/core";
 import categories from "../constans/categories";
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const Home = () => {
   const [isLoading, setLoading] = useState(true);
   const [categoryLoading, setCategoryLoading] = useState(false);
@@ -46,7 +50,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.backgroundColor }}>
-      <Header title={"OPTIMA"} />
+      <Header title={"Home"} />
 
       <View style={{ marginTop: 20 }}>
         <SearchComponent />

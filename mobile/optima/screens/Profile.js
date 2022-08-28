@@ -10,59 +10,20 @@ import {
   SafeAreaView,
   ActivityIndicator,
 } from "react-native";
-// import Cookies from "js-cookie";
-// import axios from "axios";
 import Header from "../components/Header.component";
 import Placeholder from "../components/Placeholder.component";
-import { icons, COLORS, SIZES, FONTS } from "../constans";
+import { COLORS } from "../constans";
 import TextDetail from "../components/TextDetail.component";
 import HeaderWithBack from "../components/HeaderWithBack.component";
-import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
 
 const Profile = () => {
-  // const [DATA, setDATA] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
   const [DATA, setDATA] = useState([]);
   const [imageUrl, setImageUrl] = useState();
-  const [userType, setUserType] = useState("Worker");
   const userID = useSelector((state) => state.login.userID);
-  const type = useSelector((state) => state.login.userType);
+  const userType = useSelector((state) => state.login.userType);
   const user = useSelector((state) => state.login.currentUser);
-  // console.log(userID);
-  // console.log("User Type "+type);
-  const authToken = useSelector((state) => state.login.authToken);
-  const URL = "http://192.168.1.4:5000/api/v1/user/find";
-  // console.log(URL);
-
-  let token = "Bearer " + authToken;
-
-  // useEffect(() => {
-  //   fetch("http://192.168.1.4:5000/api/v1/user/find", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({
-  //       _id: userID,
-  //     }),
-  //   })
-  //     .then((response) => response.json()) // get response, convert to json
-  //     .then((json) => {
-  //       // console.log(json);
-  //       setData(json);
-  //       if (type === 0) {
-  //         setUserType("Worker");
-  //       } else {
-  //         setUserType("User");
-  //       }
-  //       createDataSet(json);
-  //       setImageUrl(json.img_url);
-  //     })
-  //     .catch((error) => alert(error)) // display errors
-  //     .finally(() => setLoading(false)); // change loading state
-  // }, []);
 
   useEffect(()=>{
     if(!user){
@@ -95,7 +56,7 @@ const Profile = () => {
       {
         id: "4",
         title: "User Type",
-        value: userType,
+        value: userType === "ROLE_WAREHOUSE_MANAGER" ? "Warehouse Manager" : "Site Manager",
       },
     ];
     setDATA(DATA);
@@ -104,13 +65,13 @@ const Profile = () => {
   return (
     <SafeAreaView style={[{ backgroundColor: COLORS.backgroundColor }]}>
       <View style={styles.mainContainer}>
-        <Header title={"OPTIMA"} />
+        <Header title={"Profile"} />
 
         <HeaderWithBack
           text={"Profile"}
           iconLeft={"arrow-left"}
           iconRight={"pencil"}
-          textColor={COLORS.primary}
+          // textColor={COLORS.primary}
           iconsColor={COLORS.black}
           isEnabled= {"1"}
         />
