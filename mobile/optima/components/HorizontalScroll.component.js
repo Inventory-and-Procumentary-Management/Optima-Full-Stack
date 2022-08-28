@@ -22,7 +22,7 @@ const HorizontalScroll = ({ title, data }) => {
           {data.map((item) => {
             return (
               <Category
-                key={item._id}
+                key={item.id}
                 imageUri={{ uri: item.img }}
                 name={item.category}
               />

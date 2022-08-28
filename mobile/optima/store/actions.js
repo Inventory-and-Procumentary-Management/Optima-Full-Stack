@@ -40,6 +40,25 @@ export const UserLogin = (data) => {
   }
 }
 
+export const UserDetailFetch = (data,userType) => {
+  return async dispatch => {
+    // let token = data.user.toString();
+    // let userID = data.userID.toString();
+    // let userType = data.type.toString();
+    await AsyncStorage.setItem('userID', data.id.toString());
+    // await AsyncStorage.setItem('userType', data.roles);
+    // console.log("User Detail");
+    // console.log(data);
+    // console.log(userType);
+    dispatch({
+      type: 'USERDETAIL',
+      payload: data,
+      userID: data.id.toString(),
+      userType: userType,
+    })
+  }
+}
+
 
 
 export const Logout = () => {

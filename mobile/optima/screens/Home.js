@@ -24,9 +24,20 @@ const Home = () => {
   const [refreshing, setRefreshing] = useState(false);
   // const [count, setCount] = useState(0);
   const authToken = useSelector((state) => state.login.authToken);
+  const user = useSelector((state) => state.login.currentUser); 
+  const userType = useSelector((state) => state.login.userType);
+  const userID = useSelector((state) => state.login.userID);
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
   const [categoryData, setCategoryData] = useState(categories);
+
+  useEffect(()=>{
+    console.log("Home");
+    console.log(authToken);
+    console.log(user);
+    console.log(userType);
+    console.log(userID);
+  },[]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -51,7 +62,7 @@ const Home = () => {
           {categoryLoading ? (
             <ActivityIndicator />
           ) : (
-            <HorizontalScroll title={"CATEGORY"} data={categoryData} />
+            <HorizontalScroll title={"NOTIFICATIONS"} data={categories} />
           )}
           <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
             <ImageView />

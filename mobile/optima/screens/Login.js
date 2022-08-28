@@ -13,19 +13,23 @@ import SocialSignInButtons from "../components/SocialSignInButtons.component";
 import { useNavigation } from "@react-navigation/native";
 import { useForm, Controller } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
-import { UserLogin } from "../store/actions";
+import { UserLogin, UserDetailFetch } from "../store/actions";
 import { LogBox } from "react-native";
+import { publicRequest, userRequest } from "../requestMethods";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-LogBox.ignoreLogs(["new NativeEventEmitter"]); // Ignore log notification by message
-LogBox.ignoreAllLogs();
+// LogBox.ignoreLogs(["new NativeEventEmitter"]);
+// LogBox.ignoreAllLogs();
 
-const URL = "http://192.168.1.4:8080/api/login";
-const URL1 = "http://192.168.1.4:8080/api/users";
+// const URL = "http://192.168.1.4:8080/api/login";
+// const URL1 = "http://192.168.1.4:8080/api/users";
 
 const Login = () => {
   const [role, setRole] = useState("");
+  const [result, setResult] = useState([]);
   const { height } = useWindowDimensions();
   const navigation = useNavigation();
+  // const authToken = useSelector((state) => state.login.authToken);
 
   const dispatch = useDispatch();
 
@@ -38,64 +42,86 @@ const Login = () => {
 
   const onSignInPressed = async (data) => {
     try {
-      let response = await fetch(URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      const res = await publicRequest.post(
+        "login",
+        JSON.stringify({
           username: data.username,
           password: data.password,
-        }),
-      });
+        })
+      );
 
-      let result = await response.json();
-
-    //   console.log(result);
+      // console.log(res);
 
       const privateData = {
-        token: result.access_token.toString(),
+        token: res.data.access_token.toString(),
       };
 
       dispatch(UserLogin(privateData));
 
-      getUserData(result.access_token.toString(),data.username);
+      getUserData(res.data.access_token.toString(), data.username);
 
       reset();
-    } catch (err) {
-      console.log("Something Worng");
-      alert("Username or Password is incorrect!");
+    } catch (error) {
+      console.log(error);
     }
+    // try {
+    //   let response = await fetch(URL, {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({
+    //       username: data.username,
+    //       password: data.password,
+    //     }),
+    //   });
+
+    //   let result = await response.json();
+
+    // } catch (err) {
+    //   console.log("Something Worng");
+    //   alert("Username or Password is incorrect!");
+    // }
   };
 
-  const getUserData = async (token,username) => {
-    console.log("JSON token "+token);
+  const getUserData = async (token, username) => {
+    // console.log("JSON token "+token);
+    // const TOKEN = AsyncStorage.getItem("token");
+    // console.log("JSON token " + TOKEN);
+    // console.log(TOKEN);
+    // console.log(authToken);
     try {
-      let response = await fetch(`http://192.168.1.4:8080/api/user/${username}`, {
-        method: "GET",
+      let response = await userRequest.get(`user/${username}`, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
 
-      let result = await response.json();
-      console.log(result);
-      result.roles.map((item) => {
-        // console.log(item);
-        // navigation.navigate("Tabs");
-        if (
-          item.name.toString() == "ROLE_WAREHOUSE_MANAGER" ||
-          item.name.toString() == "ROLE_SITE_MANAGER"
-        ) {
-          navigation.navigate("Tabs");
-        } else {
-          alert("User role incorrect!");
-        }
-      });
+      // console.log(response);
+      setResult(response.data);
+      // let result = await response.json();
+      if (response.data.isActivate) {
+        response.data.roles.map(async (item) => {
+          // console.log(item);
+          // navigation.navigate("Tabs");
+          if (
+            item.name.toString() == "ROLE_WAREHOUSE_MANAGER" ||
+            item.name.toString() == "ROLE_SITE_MANAGER"
+          ) {
+            await dispatch(
+              UserDetailFetch(response.data, item.name.toString())
+            );
+            navigation.navigate("Tabs");
+          } else {
+            alert("User role incorrect!");
+          }
+        });
+      } else {
+        alert("User is not activated, Please contact admin!");
+      }
     } catch (error) {
       console.log("User error");
-      //   console.log(error);
+      console.log(error);
     }
   };
 
