@@ -33,9 +33,24 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function PurchaseStaffSidebar() {
   const history = useHistory();
+  // const [sidebarActive,setSidebarActive] = useState(
+  //   {
+  //     "home":"active",
+  //     "products":null,
+  //     "orderSummary":null,
+  //     "supplierDetails":null,
+  //     "products":null,
+  //     "products":null,
+  //   }
+  // );
+  // useEffect(()=>{
+
+  // },[]);
   //check user who is....then send correct props for the particular dashboard
   // React.useEffect(()=>{
   //   alert("Purchase Staff");
@@ -96,14 +111,14 @@ export default function PurchaseStaffSidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Supplier</h3>
             <ul className="sidebarList">
-              <Link to="/purchaseStaff/materialRequest" className="link">
+              <Link to="/purchaseStaff/supplierDetails" className="link">
                 {/* {history.push("/purchaseStaff/materialRequest")} */}
                 <li className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />
                   Supplier Details
                 </li>
               </Link>
-              <Link to="/purchaseStaff/materialRequest" className="link">
+              <Link to="/purchaseStaff/supplierItems" className="link">
                 {/* {history.push("/purchaseStaff/materialRequest")} */}
                 <li className="sidebarListItem">
                   <PermIdentity className="sidebarIcon" />

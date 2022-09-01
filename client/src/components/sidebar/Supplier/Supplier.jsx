@@ -49,7 +49,7 @@ export default function PurchaseStaffSidebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Dashboard</h3>
             <ul className="sidebarList">
-              <Link to="/purchaseStaff" className="link">
+              <Link to="/SupplierHome" className="link">
                 {/* {history.push("/purchaseStaff")} */}
                 <li className="sidebarListItem active">
                   <LineStyle className="sidebarIcon" />
@@ -178,18 +178,19 @@ export default function PurchaseStaffSidebar() {
             <ul className="sidebarList">
             
 
-              <Link to="/purchaseStaff/deliveries" className="link">
+              <Link to="/supplier/Supplier_invoices_details" className="link">
                 <li className="sidebarListItem">
                   <Timeline className="sidebarIcon" />
                   Invoices
                 </li>
               </Link>
-              <Link to="/supplier/Supplier_Invoices" className="link">
+              
+              {/* <Link to="/supplier/Supplier_Invoices" className="link">
                 <li className="sidebarListItem">
                 <Timeline className="sidebarIcon" />
                   Create Invoices
                 </li>
-              </Link>
+              </Link> */}
             </ul>
           </div>
         </div>

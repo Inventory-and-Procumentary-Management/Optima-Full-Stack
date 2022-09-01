@@ -37,27 +37,39 @@ const HeaderWithBack = ({
     }
   };
 
+  const HeaderAddNewItemButton = () => {
+    navigation.navigate("AddItem");
+  }
+
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity onPress={HeaderBackButton}>
         <Icon
           name={iconLeft}
           size={25}
-          color={backProfile}
+          color="black"
           style={{ marginLeft: 20 }}
         />
       </TouchableOpacity>
 
       <Text style={styles.headerText}>{text}</Text>
 
+      {isEnabled == "1" ?
       <TouchableOpacity onPress={HeaderEditButton}>
           <Icon
             name={iconRight}
             size={25}
-            color={iconsColor}
+            color="black"
             style={{ marginRight: 20 }}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> : <TouchableOpacity onPress={HeaderAddNewItemButton}>
+          <Icon
+            name={iconRight}
+            size={25}
+            color="black"
+            style={{ marginRight: 20 }}
+          />
+        </TouchableOpacity>}
       {/* {isEnabled == "1" && type == 1 ? (
         <TouchableOpacity onPress={HeaderEditButton}>
           <Icon

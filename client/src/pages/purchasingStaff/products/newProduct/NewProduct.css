@@ -68,6 +68,11 @@
   justify-content: space-between;
 }
 
+.addProductTitle {
+  font-size: 28px;
+  font-weight: bold;
+}
+
 .userAddButton {
   width: 80px;
   border: none;

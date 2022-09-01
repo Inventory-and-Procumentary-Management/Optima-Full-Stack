@@ -15,5 +15,27 @@
 }
 .table-content{
     margin: 1rem;
+    background-color: rgb(255, 255, 255);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+/* .Main-div{
+
     background-color: rgb(216, 213, 213);
+} */
+.tabStyle{
+    background-color: rgb(227, 227, 227);
+    border-radius: 1rem;
+}
+.update-btn{
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    border: 0.2rem solid rgb(209, 209, 15);
+    background-color: rgb(209, 209, 15);
+}
+.delete-btn{
+    border-radius: 0.5rem;
+    padding: 0.3rem;
+    border: 0.2rem solid rgba(253, 60, 60, 0.897);
+    background-color: rgba(253, 60, 60, 0.897);
 }

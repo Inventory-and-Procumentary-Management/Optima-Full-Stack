@@ -17,7 +17,7 @@ import { materialRequestData } from "../../../constants/DashboardData";
 import SearchComponent from "../../../components/search/Search";
 
 const columns = [
-  { field: "invoice_id", headerName: "Invoice ID", width: 150 },
+  { field: "invoice_id", headerName: "Request ID", width: 170 },
   {
     field: "managerUsername",
     headerName: "Warehouse Manager Name",
@@ -173,9 +173,9 @@ const MaterialRequest = () => {
       <div className="userList">
         <div className="top-container-material-request">
           <div className="top-contaier-button-material-request">
-            <Link to={`/${user}/newMaterialRequest`}>
+            {/* <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
-            </Link>
+            </Link> */}
           </div>
           <div className="top-container-search-material-request">
             <SearchComponent />

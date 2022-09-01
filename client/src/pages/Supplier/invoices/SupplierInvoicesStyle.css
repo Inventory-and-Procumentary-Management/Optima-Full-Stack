@@ -56,3 +56,23 @@
     margin-right: 2rem;
     background-color: rgb(227, 227, 227);
 }
+.invoice-detail-table-style{
+    padding: 1rem;
+}
+.invoice-detail-table-style-02{
+    padding: 1rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+.invoice-details-topic-style-02{
+    padding: 1rem;
+    padding-bottom: 0.2rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.details-02{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: rgb(190, 190, 190);
+    border-radius: 0.5rem;
+}

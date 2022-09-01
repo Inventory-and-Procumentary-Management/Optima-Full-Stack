@@ -1,6 +1,8 @@
 const initialState = {
   authToken: null,
-  userID:null,
+  userID: null,
+  currentUser: null,
+  userType: null,
   // userData: {},
   // anyData:[],
 };
@@ -12,13 +14,21 @@ export default loginReducer = (state = initialState, action) => {
       return {
         ...state, //copy all previous states
         authToken: action.payload,
-        userID:action.userID,
-        userType:action.userType,
+        // userType: action.userType,
       };
     case "LOGOUT":
       return {
         authToken: null,
         userID: null,
+        currentUser: null,
+      };
+    case "USERDETAIL":
+      return {
+        ...state,
+        currentUser: action.payload,
+        userType:action.userType,
+        userID: action.userID,
+        // userType: action.payload.roles.name,
       };
     default:
       return state;

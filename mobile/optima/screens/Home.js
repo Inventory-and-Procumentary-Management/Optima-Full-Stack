@@ -18,15 +18,30 @@ const { height, width } = Dimensions.get("window");
 import { useNavigation } from "@react-navigation/core";
 import categories from "../constans/categories";
 
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
+
 const Home = () => {
   const [isLoading, setLoading] = useState(true);
   const [categoryLoading, setCategoryLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   // const [count, setCount] = useState(0);
   const authToken = useSelector((state) => state.login.authToken);
+  const user = useSelector((state) => state.login.currentUser); 
+  const userType = useSelector((state) => state.login.userType);
+  const userID = useSelector((state) => state.login.userID);
   const [data, setData] = useState([]);
   const [query, setQuery] = useState("");
   const [categoryData, setCategoryData] = useState(categories);
+
+  useEffect(()=>{
+    console.log("Home");
+    console.log(authToken);
+    console.log(user);
+    console.log(userType);
+    console.log(userID);
+  },[]);
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
@@ -35,7 +50,7 @@ const Home = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.backgroundColor }}>
-      <Header title={"OPTIMA"} />
+      <Header title={"Home"} />
 
       <View style={{ marginTop: 20 }}>
         <SearchComponent />
@@ -51,7 +66,7 @@ const Home = () => {
           {categoryLoading ? (
             <ActivityIndicator />
           ) : (
-            <HorizontalScroll title={"CATEGORY"} data={categoryData} />
+            <HorizontalScroll title={"NOTIFICATIONS"} data={categories} />
           )}
           <View style={{ marginTop: 40, paddingHorizontal: 20 }}>
             <ImageView />

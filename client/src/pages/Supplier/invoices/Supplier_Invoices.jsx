@@ -1,40 +1,74 @@
+import React from 'react'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 import { useState } from "react";
-import "./printPOs.css";
-import ClientDetails from "./ClientDetails";
-import Dates from "./Dates";
-import Footer from "./Footer";
-import Header from "./Header";
-import MainDetails from "./MainDetails";
-import Notes from "./Notes";
-import Table from "./Table";
+import ClientDetails from "../../purchaseManager/printPOs/ClientDetails";
+import Dates from "../../purchaseManager/printPOs/Dates";
+import Footer from "../../purchaseManager/printPOs/Footer";
+import Header from "../../purchaseManager/printPOs/Header";
+import MainDetails from "../../purchaseManager/printPOs/MainDetails";
+import Notes from "../../purchaseManager/printPOs/Notes";
+import Table from "../../purchaseManager/printPOs/Table";
 import TableForm from "./TableForm";
-import { Button } from "@mui/material";
+import './printPO_supplier.css'
 
-function PurchaseOrders() {
-  const [showInvoice, setShowInvoice] = useState(false);
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [bankName, setBankName] = useState("");
-  const [bankAccount, setBankAccount] = useState("");
-  const [webSite, setWebSite] = useState("");
-  const [clientName, setClientName] = useState("");
-  const [clientAddress, setClientAddresse] = useState("");
-  const [invoiceNum, setInvoiceNum] = useState("");
-  const [invoiceDate, setInvoiceDate] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [notes, setNotes] = useState("");
-  const [desc, setDesc] = useState("");
-  const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
-  const [amount, setAmount] = useState("");
-  const [list, setList] = useState([]);
 
-  const handlePrint = () => {
-    window.print();
-  };
 
+import './SupplierInvoicesStyle.css'
+
+const Supplier_Invoices = () => {
+
+  const [showInvoice, setShowInvoice] = useState(false)
+  const [name, setName] = useState("Janatha Hardware Pvt Lmd")
+  const [address, setAddress] = useState("282/1/G , Ashokarama Road, Ihala Bomiriya, Kaduwela")
+  const [email, setEmail] = useState("Janatha Hardware@gmail.com")
+  const [phone, setPhone] = useState("0765768600")
+  // const [bankName, setBankName] = useState("")
+  // const [bankAccount, setBankAccount] = useState("")
+  // const [webSite, setWebSite] = useState("")
+  const [clientName, setClientName] = useState("SMG Constructions Pvt Lmd")
+  const [clientAddress, setClientAddresse] = useState("85/K Himbutana , Angoda")
+  const [invoiceNum, setInvoiceNum] = useState("")
+  const [invoiceDate, setInvoiceDate] = useState("")
+  const [dueDate, setDueDate] = useState("")
+  const [notes, setNotes] = useState("")
+  const [desc, setDesc] = useState("")
+  const [quantity, setQuantity] = useState("")
+  const [price, setPrice] = useState("")
+  const [amount, setAmount] = useState("")
+  const [itemCode, setitemCode] = useState("")
+  const [list,setList] = useState([])
+
+  const handlePrint =()=>{
+    window.print()
+  }
+    // const { useState } = React;
+    // const [myArray, setMyArray] = useState([]);
+    // const [data, setData] = useState('');
+
+ 
+ 
+
+    // const handleChange = (event) => {
+    //     //console.log(event.target.value);
+    //     setdata(data , event.target.value);
+    //     console.log(data)
+         
+        
+    // };
+  
+  //   const handleSubmit = () => {
+          
+  //     setMyArray(myArray => [...myArray, data]);
+      
+  // }
+  
   return (
     <>
       <main className="m-5 p-5 md:max-w-xl md:mx-auto lg:max-w-2xl xl:max-w-4xl bg-white rounded shadow">
@@ -42,10 +76,7 @@ function PurchaseOrders() {
           <div>
             <Header handlePrint={handlePrint} />
 
-            <MainDetails
-              name={"OPTIMA"}
-              address={"161/A, Aggona, Malabe, Sri Lanka"}
-            />
+            <MainDetails name={name} address={address} />
 
             <ClientDetails
               clientName={clientName}
@@ -69,11 +100,12 @@ function PurchaseOrders() {
 
             <Notes notes={notes} />
 
-            {/* <Footer 
-     name={"OPTIMA"} 
-     email={"optima@gmail.com"} 
-     phone={"0116598453"}
-     /> */}
+            <Footer
+              name={name}
+              email={email}
+              phone={phone}
+
+            />
 
             <button
               onClick={() => setShowInvoice(false)}
@@ -88,104 +120,106 @@ function PurchaseOrders() {
           <>
             <div className="flex flex-col justify-center">
               <article className="md:grid grid-cols-2 gap-10">
-                <div className="flex flex-col">
+                {/* <div className="flex flex-col">
+                  <label htmlFor="name">Enter the name</label>
                   <input
                     type="text"
                     name="text"
                     id="text"
                     placeholder="Enter"
                     autoComplete="off"
-                    value="OPTIMA"
-                    disabled
+                    value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
-                </div>
+                </div> */}
 
-                <div className="flex flex-col">
+                {/* <div className="flex flex-col">
+                  <label htmlFor="address">Enter the address</label>
                   <input
                     type="text"
                     name="address"
                     id="address"
                     placeholder="Enter address"
                     autoComplete="off"
-                    value="161/A, Aggona, Malabe, Sri Lanka"
+                    value={address}
                     onChange={(e) => setAddress(e.target.value)}
                   />
-                </div>
+                </div> */}
               </article>
 
-              <article className="md:grid grid-cols-2 gap-10">
-                <div className="flex flex-col">
-                  <label htmlFor="email">Company Email</label>
+              <article className="md:grid grid-cols-3 gap-10">
+                {/* <div className="flex flex-col">
+                  <label htmlFor="email">Enter the email</label>
                   <input
                     type="email"
                     name="email"
                     id="email"
                     placeholder="Enter email"
                     autoComplete="off"
-                    value="optima@gmail.com"
-                    disabled
+                    value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
-                </div>
+                </div> */}
 
                 {/* <div className="flex flex-col">
-        <label htmlFor="webSite">Enter the webSite</label>
-        <input 
-          type="text"
-          name="webSite"
-          id="webSite"
-          placeholder="Enter webSite"
-          autoComplete="off" 
-          value={webSite}
-          onChange={(e)=>setWebSite(e.target.value)}
-          />
-        </div> */}
+                  <label htmlFor="webSite">Enter the webSite</label>
+                  <input
+                    type="text"
+                    name="webSite"
+                    id="webSite"
+                    placeholder="Enter webSite"
+                    autoComplete="off"
+                    value={webSite}
+                    onChange={(e) => setWebSite(e.target.value)}
+                  />
+                </div> */}
 
-                <div className="flex flex-col">
-                  <label htmlFor="phone">Company Phone Number</label>
+                {/* <div className="flex flex-col">
+                  <label htmlFor="phone">Enter the phone</label>
                   <input
                     type="text"
                     name="phone"
                     id="phone"
                     placeholder="Enter phone"
                     autoComplete="off"
-                    value="0116598453"
+                    value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                   />
-                </div>
+                </div> */}
               </article>
 
-              {/* <article className="md:grid grid-cols-2 gap-10">
-        <div className="flex flex-col">
-          <label htmlFor="bankName">Enter the Bank Name</label>
-        <input 
-          type="text"
-          name="bankName"
-          id="bankName"
-          placeholder="Enter bankName"
-          autoComplete="off" 
-          value={bankName}
-          onChange={(e)=>setBankName(e.target.value)}
-          />
-        </div>
+              {/* <article className="md:grid grid-cols-2 gap-10"> */}
+                {/* <div className="flex flex-col">
+                  <label htmlFor="bankName">Enter the Bank Name</label>
+                  <input
+                    type="text"
+                    name="bankName"
+                    id="bankName"
+                    placeholder="Enter bankName"
+                    autoComplete="off"
+                    value={bankName}
+                    onChange={(e) => setBankName(e.target.value)}
+                  />
+                </div> */}
 
-        <div className="flex flex-col">
-        <label htmlFor="bankAccount">Enter the Bank Account Number</label>
-       <input 
-        type="text"
-        name="bankAccount"
-        id="bankAccount"
-        placeholder="Enter bankAccount"
-        autoComplete="off" 
-        value={bankAccount}
-        onChange={(e)=>setBankAccount(e.target.value)}
-        />
-        </div>
-      </article> */}
+                {/* <div className="flex flex-col">
+                  <label htmlFor="bankAccount">
+                    Enter the Bank Account Number
+                  </label>
+                  <input
+                    type="text"
+                    name="bankAccount"
+                    id="bankAccount"
+                    placeholder="Enter bankAccount"
+                    autoComplete="off"
+                    value={bankAccount}
+                    onChange={(e) => setBankAccount(e.target.value)}
+                  />
+                </div> */}
+              {/* </article> */}
 
-              <article className="md:grid grid-cols-2 gap-10 md:mt-8">
-                <div className="flex flex-col">
+              {/* <article className="md:grid grid-cols-2 gap-10 md:mt-16"> */}
+                {/* <div className="flex flex-col">
                   <label htmlFor="clientName">Enter the client's Name</label>
                   <input
                     type="text"
@@ -196,9 +230,9 @@ function PurchaseOrders() {
                     value={clientName}
                     onChange={(e) => setClientName(e.target.value)}
                   />
-                </div>
+                </div> */}
 
-                <div className="flex flex-col">
+                {/* <div className="flex flex-col">
                   <label htmlFor="clientAddress">
                     Enter the client's Address
                   </label>
@@ -211,10 +245,10 @@ function PurchaseOrders() {
                     value={clientAddress}
                     onChange={(e) => setClientAddresse(e.target.value)}
                   />
-                </div>
-              </article>
+                </div> */}
+              {/* </article> */}
 
-              <article className="md:grid grid-cols-3 gap-10 md:mb-8">
+              <article className="md:grid grid-cols-3 gap-10">
                 <div className="flex flex-col">
                   <label htmlFor="invoiceNum">Enter the Invoice Number</label>
                   <input
@@ -241,7 +275,7 @@ function PurchaseOrders() {
                   />
                 </div>
 
-                <div className="flex flex-col">
+                {/* <div className="flex flex-col">
                   <label htmlFor="dueDate">Enter the Due Date</label>
                   <input
                     type="date"
@@ -252,7 +286,7 @@ function PurchaseOrders() {
                     value={dueDate}
                     onChange={(e) => setDueDate(e.target.value)}
                   />
-                </div>
+                </div> */}
               </article>
 
               <article>
@@ -293,6 +327,6 @@ function PurchaseOrders() {
       </main>
     </>
   );
-}
+      }
 
-export default PurchaseOrders;
+export default Supplier_Invoices;

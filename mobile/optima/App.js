@@ -12,9 +12,10 @@ import {
   Profile,
   EditProfile,
 } from "./screens";
-import Tabs from "./navigation/tabs";
+import Tabs from "./navigation/Tabs";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import ItemTable from "./screens/ItemTable";
 
 const Stack = createStackNavigator();
 
@@ -36,6 +37,7 @@ export default function App() {
           <Stack.Screen name="Categories" component={Categories} />
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
+          <Stack.Screen name="ItemTable" component={ItemTable} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
