@@ -38,6 +38,7 @@ import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
 
 import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
+import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 
 const App = () => {
   return (
@@ -119,6 +120,9 @@ const App = () => {
               </Route>
               <Route exact path="/warehouseManager/Dispatch">
                  <Dispatch/>
+              </Route>
+              <Route exact path="/warehouseManager/requesdtedDispatch">
+                 <RequesdtedDispatch/>
               </Route>
 
 
