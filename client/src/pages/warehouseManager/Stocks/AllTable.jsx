@@ -29,7 +29,7 @@ const columns = [
       );
     },
   },
-  { field: "type", headerName: "Item Catogery", width: 180 },
+  { field: "type", headerName: "Unit of Messurement", width: 180 },
   { field: "recieve", headerName: "Request Date", width: 180 },
   { field: "expire", headerName: "Due Date", width: 180 },
   {

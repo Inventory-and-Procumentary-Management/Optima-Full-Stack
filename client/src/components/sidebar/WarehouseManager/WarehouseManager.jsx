@@ -149,6 +149,12 @@ export default function warehouseManagerSidebar() {
           <div className="sidebarMenu">
               <h3 className="sidebarTitle">Dispatches</h3>
               <ul className="sidebarList">
+              <Link to="/warehouseManager/requesdtedDispatch" className="link">
+                <li className="sidebarListItem">
+                  <MailOutline className="sidebarIcon" />
+                  Requested Stocks
+                </li>
+              </Link>
               <Link to="/warehouseManager/Dispatch" className="link">
                 <li className="sidebarListItem">
                   <MailOutline className="sidebarIcon" />

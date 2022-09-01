@@ -13,7 +13,7 @@ const columns = [
   // { field: "_id", headerName: "ID", width: 150 },
   {
     field: "name",
-    headerName: "Product Name",
+    headerName: "Item Name",
     width: 180,
     renderCell: (params) => {
       return (
@@ -29,7 +29,7 @@ const columns = [
     },
   },
   { field: "quantity", headerName: "Quantity", width: 160 },
-  { field: "type", headerName: "Quantity Type", width: 180 },
+  { field: "type", headerName: "Unit of Messurement", width: 180 },
   { field: "recieve", headerName: "Recieved Date", width: 180 },
   { field: "expire", headerName: "Expire Date", width: 180 },
   { field: "minimum", headerName: "Minimum Level", width: 180 },
