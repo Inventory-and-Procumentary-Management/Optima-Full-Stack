@@ -40,6 +40,7 @@ import Order_details from "./pages/Supplier/Orders/Order_details";
 import SupplierHome from "./pages/Supplier/SupplierHome"
 
 import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
+import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
 
@@ -128,6 +129,9 @@ const App = () => {
               </Route>
               <Route exact path="/warehouseManager/Dispatch">
                  <Dispatch />
+              </Route>
+              <Route exact path="/warehouseManager/requesdtedDispatch">
+                 <RequesdtedDispatch/>
               </Route>
 
               <Route exact path="/supplier/Request_product">
