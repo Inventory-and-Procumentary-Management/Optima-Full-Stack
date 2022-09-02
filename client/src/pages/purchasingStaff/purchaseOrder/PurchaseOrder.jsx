@@ -7,7 +7,7 @@ import {
   CancelOutlined,
   VisibilityOutlined,
   ThumbDownAltOutlined,
-  ThumbUpAltOutlined
+  ThumbUpAltOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
@@ -16,10 +16,12 @@ import { purchaseOrderData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
+import PrintInvoice from "../../purchaseManager/printPOs/PrintInvoice";
 
 const PurchaseOrder = () => {
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
+  const [show, setShow] = useState(true);
   console.log(userType);
 
   useEffect(() => {
@@ -29,6 +31,12 @@ const PurchaseOrder = () => {
       setUser("purchaseStaff");
     }
   }, []);
+
+  const list = [
+    { id: 1, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+    { id: 2, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+    { id: 3, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+  ];
 
   const columns = [
     { field: "invoice_id", headerName: "Invoice ID", width: 150 },
@@ -82,7 +90,7 @@ const PurchaseOrder = () => {
               <div className="productListItemData">
                 {params.row.isApprove + " "}
               </div>
-  
+
               {userType === "ROLE_PURCHASING_MANAGER" ? (
                 params.row.isApprove ? (
                   <ThumbUpAltOutlined
@@ -192,10 +200,16 @@ const PurchaseOrder = () => {
             {!params.row.isCancel ? (
               <div>
                 <VisibilityOutlined
-                  style={{ color: "#bdba2c", cursor: "pointer", marginRight: 20 }}
+                  style={{
+                    color: "#bdba2c",
+                    cursor: "pointer",
+                    marginRight: 20,
+                  }}
                   onClick={() => {
                     // setProductStatus(params.row.id, false);
                     // setApproveShow(true);
+                    console.log("Hee");
+                    setShow(false);
                   }}
                 />
                 <CancelOutlined
@@ -226,36 +240,38 @@ const PurchaseOrder = () => {
   ];
 
   return (
-    <div className="common">
-      <div className="userList">
-        <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request">
-            <Link to={`/${user}/newMaterialRequest`}>
-              <button className="color-contained-button">Create New</button>
-            </Link>
-          </div>
-          <div className="top-container-search-material-request">
-            <SearchComponent />
-          </div>
-        </div>
-        <div className="bottom-container-material-request">
-          <DataGrid
-            rows={purchaseOrderData}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row._id}
-            pageSize={7}
-            checkboxSelection
-            autoHeight
-            // componentsProps={{
-            //   columnMenu: {
-            //     background: "red",
-            //     // counter: rows.length
-            //   },
-            // }}
-          />
-        </div>
-        {/* <SweetAlert
+    <div>
+      {show ? (
+        <div className="common">
+          <div className="userList">
+            <div className="top-container-material-request">
+              <div className="top-contaier-button-material-request">
+                <Link to={`/${user}/newMaterialRequest`}>
+                  <button className="color-contained-button">Create New</button>
+                </Link>
+              </div>
+              <div className="top-container-search-material-request">
+                <SearchComponent />
+              </div>
+            </div>
+            <div className="bottom-container-material-request">
+              <DataGrid
+                rows={purchaseOrderData}
+                disableSelectionOnClick
+                columns={columns}
+                getRowId={(row) => row._id}
+                pageSize={7}
+                checkboxSelection
+                autoHeight
+                // componentsProps={{
+                //   columnMenu: {
+                //     background: "red",
+                //     // counter: rows.length
+                //   },
+                // }}
+              />
+            </div>
+            {/* <SweetAlert
           show={show}
           warning
           showCancel
@@ -289,7 +305,7 @@ const PurchaseOrder = () => {
           You will not be able to recover this imaginary file!
         </SweetAlert> */}
 
-        {/* <SweetAlert
+            {/* <SweetAlert
         show={allShow}
         success
         title="Successfully delete!"
@@ -297,14 +313,33 @@ const PurchaseOrder = () => {
         onConfirm={() => setAllShow(false)}
       ></SweetAlert> */}
 
-        {/* <SweetAlert
+            {/* <SweetAlert
           show={updateAllShow}
           success
           title="Request Send!"
           // text="SweetAlert in React"
           onConfirm={() => setUpdateAllShow(false)}
         ></SweetAlert> */}
-      </div>
+          </div>
+        </div>
+      ) : (
+        <PrintInvoice
+          ourName={"OPTIMA"}
+          ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
+          clientName={"Yohan"}
+          clientAddress={"497/A/1"}
+          invoiceNum={"Inv-123456"}
+          invoiceDate={"2022-05-14"}
+          dueDate={"2022-08-29"}
+          // desc={"Sand"}
+          // quantity={152}
+          // price={50}
+          // amount={300000}
+          list={list}
+          // setList={}
+          // notes={}
+        />
+      )}
     </div>
   );
 };

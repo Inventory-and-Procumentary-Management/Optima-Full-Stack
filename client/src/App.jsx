@@ -40,6 +40,9 @@ import Order_details from "./pages/Supplier/Orders/Order_details";
 import SupplierHome from "./pages/Supplier/SupplierHome"
 
 import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
+import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
+import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
+import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
 
 const App = () => {
   return (
@@ -92,6 +95,12 @@ const App = () => {
               <Route path="/purchaseStaff/deliveries">
                 <Delivery />
               </Route>
+              <Route path="/purchaseStaff/supplierDetails">
+                <SupplierDetails />
+              </Route>
+              <Route path="/purchaseStaff/supplierItems">
+                <SupplierItems />
+              </Route>
 
               <Route exact path="/admin">
                 <AdministratorHome />
@@ -120,6 +129,9 @@ const App = () => {
               </Route>
               <Route exact path="/warehouseManager/Dispatch">
                  <Dispatch />
+              </Route>
+              <Route exact path="/warehouseManager/requesdtedDispatch">
+                 <RequesdtedDispatch/>
               </Route>
 
               <Route exact path="/supplier/Request_product">
