@@ -11,6 +11,13 @@ import AddIcon from '@mui/icons-material/Add';
 import { DataGrid } from "@material-ui/data-grid";
 import { green } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
+import { useState} from 'react';
+import UpdateProductForm from './UpdateProductForm';
+import Supplier_TableTabs from './Supplier_TableTabs';
+
+
+
+
 
 // function createData(name, Price_per_one, Quantity, Description, more) {
 //   return { name, Price_per_one, Quantity, Description, more };
@@ -24,49 +31,69 @@ import { red } from '@mui/material/colors';
 //   createData('Sand', 356, 16.0, "This is a description of Ultra Cement."),
 // ];
 
-const columns = [
-   { field: 'id', headerName: '', width: 70 },
-  { field: 'Item', headerName: 'Item', width: 130 },
-  { field: 'Unit', headerName: 'Unit', width: 130 },
-  { field: 'Price_per_one', headerName: 'Price_Per_One', width: 130 },
-  {
-    field: 'Quantity',
-    headerName: 'Quantity',
-    width: 160,
-  },
-  {
-    field: 'Description',
-    headerName: 'Description',
-    width: 350,
-  },
-  { field: 'Action', headerName: '', width: 160 ,
-  renderCell: (params) => {
 
-    return (
-      <>
-      <AddIcon sx={{ color: green[500] }}></AddIcon>
-      &nbsp;
-      &nbsp;
-      &nbsp;
-      <DeleteIcon sx={{ color: red[500] }}></DeleteIcon>
-      </>
-    );
-      },}
-];
-
-const rows = [
-  { id: 1, Item: 'Cement',Unit:'Bag', Price_per_one: '3200',Quantity:12 , Description: 'Ultra Cement and the and ajantha Cement' },
-  { id: 2, Item: 'Sand',Unit:'Cube', Price_per_one: '13000',Quantity:12, Description: 'Ultra Cement and the and ajantha Cement' },
-  { id: 3, Item: 'Bricks',Unit:'stones', Price_per_one: '100',Quantity:12, Description: '-' },
-  { id: 4, Item: '1" Pipe',Unit:'-', Price_per_one: '1000',Quantity:12, Description: 'Slone Pipe' },
-  { id: 5, Item: '1 1/2" Pipe',Unit:'-', Price_per_one: '1000',Quantity:12, Description: 'Slone Pipe' },
-  { id: 6, Item: '1 3/4" Pipe',Unit:'-', Price_per_one: '1100',Quantity:12, Description: 'Slone Pipe' },
-  { id: 7, Item: '2" Pipe',Unit:'-', Price_per_one: '1200',Quantity:12, Description: 'Slone Pipe' },
-  { id: 8, Item: '1 ft Tile',Unit:'-', Price_per_one: '1500',Quantity:12, Description: 'Lanka tile and american tile contain' },
-  { id: 9, Item: '1 1/2 Tile',Unit:'-', Price_per_one: '1500',Quantity:12, Description: 'Lanka tile and american tile contain' },
-];
 
 export default function BasicTable() {
+
+
+  const [displayRequestForm, setdisplayRequestForm] = useState(false);
+  const [itemName, setitemName] = useState("");
+
+  const columns = [
+    { field: 'id', headerName: '', width: 70 },
+   { field: 'Item', headerName: 'Item', width: 130 },
+   { field: 'Unit', headerName: 'Unit', width: 130 },
+   { field: 'Price_per_one', headerName: 'Price_Per_One', width: 130 },
+   {
+     field: 'Quantity',
+     headerName: 'Quantity',
+     width: 160,
+   },
+   {
+     field: 'Description',
+     headerName: 'Description',
+     width: 350,
+   },
+   { field: 'Button', headerName: '', width: 200 ,
+   renderCell: (params) => {
+    
+   return (
+       <>
+       <div>
+       <button onClick = {()=>{
+       
+        setitemName(params.row.Item);
+        setdisplayRequestForm(true);
+      }
+        }>Update <AddIcon sx={{ color: green[500] }} ></AddIcon></button>
+       
+       </div>
+       &nbsp;
+       &nbsp;
+       &nbsp;
+       <div>
+       <h3>Delete <DeleteIcon sx={{ color: red[500] }}>Delete</DeleteIcon></h3>
+       
+       </div>
+       </>
+     );
+       },}
+ ];
+ 
+ const rows = [
+   { id: 1, Item: 'Cement',Unit:'Bag', Price_per_one: '3200',Quantity:12 , Description: 'Ultra Cement and the and ajantha Cement' },
+   { id: 2, Item: 'Sand',Unit:'Cube', Price_per_one: '13000',Quantity:12, Description: 'Ultra Cement and the and ajantha Cement' },
+   { id: 3, Item: 'Bricks',Unit:'', Price_per_one: '100',Quantity:12, Description: '' },
+   { id: 4, Item: '1" Pipe',Unit:'', Price_per_one: '1000',Quantity:12, Description: 'Slone Pipe' },
+   { id: 5, Item: '1 1/2" Pipe',Unit:'', Price_per_one: '1000',Quantity:12, Description: 'Slone Pipe' },
+   { id: 6, Item: '1 3/4" Pipe',Unit:'', Price_per_one: '1100',Quantity:12, Description: 'Slone Pipe' },
+   { id: 7, Item: '2" Pipe',Unit:'', Price_per_one: '1200',Quantity:12, Description: 'Slone Pipe' },
+   { id: 8, Item: '1 ft Tile',Unit:'', Price_per_one: '1500',Quantity:12, Description: 'Lanka tile and american tile contain' },
+   { id: 9, Item: '1 1/2 Tile',Unit:'', Price_per_one: '1500',Quantity:12, Description: 'Lanka tile and american tile contain' },
+ ];
+ 
+
+  
   // return (
   //   <TableContainer component={Paper}>
   //     <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -99,14 +126,22 @@ export default function BasicTable() {
   //   </TableContainer>
   // );
   return (
-    <div style={{ height: 400, width: '100%' }}>
+
+    <>
+    
+    <div>
+      {displayRequestForm ? (<><UpdateProductForm itemName = {itemName}></UpdateProductForm>  </> ) : (<div style={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
         pageSize={5}
         rowsPerPageOptions={[5]}
-        checkboxSelection
+        checkboxSelection={true}
+        disableMultipleSelection={true}
       />
-    </div>
+    </div>)}
+      </div>    
+    </>
+    
   );
 }
