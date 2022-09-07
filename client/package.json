@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/types": "^7.18.10",
+    "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@material-ui/core": "^4.12.4",
