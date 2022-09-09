@@ -15,14 +15,14 @@ public class SupplierItem {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long supplier_item_id;
-    private Integer price;
-    private Integer availableQuantity;
-    private Integer discountQuantity;
-    private Integer discountAsPercentage;
-    @Column(columnDefinition = "boolean default true")
-    private Boolean isActivate;
-    @Column(columnDefinition = "boolean default false")
-    private Boolean isApprove;
+    private Integer price = 0;
+    private Integer availableQuantity = 0;
+    private Integer discountQuantity = 0;
+    private Integer discountAsPercentage = 0;
+//    @Column(columnDefinition = "boolean default true")
+    private Boolean isActivate = true;
+//    @Column(columnDefinition = "boolean default false")
+    private Boolean isApprove = false;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date createDate;
