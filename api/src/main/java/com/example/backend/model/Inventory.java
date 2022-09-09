@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -18,6 +20,10 @@ public class Inventory {
     private Integer sectionQuantity;
     private String receivedLocation;
     private Date expiredDate;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    Collection<InventorySection> inventorySection = new ArrayList<>();
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date receivedDate;
