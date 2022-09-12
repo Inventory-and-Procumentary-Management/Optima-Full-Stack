@@ -1,20 +1,25 @@
 package com.example.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "Supplier")
 public class Supplier {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long supplier_id;
     private String businessName;
     private String address;
@@ -25,5 +30,18 @@ public class Supplier {
     @Column(columnDefinition = "boolean default true")
     private Boolean isActivate;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SupplierContactPerson> supplierContactPerson;
+    Collection<SupplierContactPerson> supplierContactPerson = new ArrayList<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Supplier supplier = (Supplier) o;
+        return supplier_id != null && Objects.equals(supplier_id, supplier.supplier_id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
