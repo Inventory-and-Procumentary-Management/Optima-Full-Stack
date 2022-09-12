@@ -8,11 +8,9 @@ import { AppBar, Button, Grid, Toolbar } from "@mui/material";
 import { Link } from "react-router-dom";
 
 import AddIcon from "@mui/icons-material/Add";
-import InventoryTable from "../inventory/Table";
-import BasicModal from "../inventory/BasicModal";
-
-import BuildingTable from "../inventory/BuildingTable";
-import PlumbingTable from "../inventory/PlumbingTable";
+import AllTable from "./AllTable";
+import RecievedTable from "./RecievedTable";
+import BasicModalStocks from "./BasicModalStocks";
 
 export default function TopBarTabsStocks() {
   const [value, setValue] = React.useState("1");
@@ -22,9 +20,9 @@ export default function TopBarTabsStocks() {
   };
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }}>
-      <TabContext value={value}>
-        <AppBar position="static">
+    <Box sx={{ width: "100%", typography: "body1" }} >
+      <TabContext value={value} >
+        <AppBar position="static" >
           <Toolbar style={{ backgroundColor: "#fff" }}>
             <Grid container spacing={5}>
               <Grid item xs={10}>
@@ -43,19 +41,17 @@ export default function TopBarTabsStocks() {
               </Grid>
               <Grid item xs={2} sx={{ marginTop: 1 }}>
                 {/* <Link to="/AddProduct" className="link"> */}
-                <BasicModal />
+                <BasicModalStocks />
                   
                 {/* </Link> */}
               </Grid>
             </Grid>
           </Toolbar>
         </AppBar>
-        <TabPanel value="1" sx={{p: 0}}><BuildingTable /></TabPanel>
-        <TabPanel value="2" sx={{p: 0}}><PlumbingTable /></TabPanel>
-        <TabPanel value="3" sx={{p: 0}}><InventoryTable /></TabPanel>
-        <TabPanel value="4" sx={{p: 0}}><BuildingTable /></TabPanel>
-        <TabPanel value="5" sx={{p: 0}}><PlumbingTable /></TabPanel>
-        <TabPanel value="6" sx={{p: 0}}><InventoryTable /></TabPanel>
+        <TabPanel value="1" sx={{p: 0}}><AllTable /></TabPanel>
+        <TabPanel value="2" sx={{p: 0}}><AllTable /></TabPanel>
+        <TabPanel value="3" sx={{p: 0}}><AllTable /></TabPanel>
+        <TabPanel value="4" sx={{p: 0}}><RecievedTable /></TabPanel>
       </TabContext>
     </Box>
   );

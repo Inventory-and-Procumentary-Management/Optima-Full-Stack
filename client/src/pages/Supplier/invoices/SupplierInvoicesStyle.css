@@ -1,0 +1,78 @@
+.Main-topic-invoices{
+    padding: 1rem;
+    padding-bottom: 0.3rem;
+    
+
+}
+.topic-invoice-number{
+    padding: 1rem;
+   
+}
+.Invoices-heading{
+    border: 0.01rem solid black;
+    display: grid;
+    grid-template-columns: auto auto;
+    
+}
+.heading-date{
+    padding: 1rem;
+    padding-right: 2rem;
+    text-align: right;
+}
+.form-first-part{
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+    
+}
+.add-item-select-btn{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+}
+.topic-add-item{
+
+    padding: 0.4rem;
+    
+}
+.calculation-div{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.special-note-style{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+}
+.create-btn{
+    padding: 0.625rem;
+    padding-left: 1.875rem;
+    position: absolute;
+    right: 6rem;
+}
+.MainDiv{
+    padding: 0.625rem;
+    margin: 0.5rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background-color: rgb(227, 227, 227);
+}
+.invoice-detail-table-style{
+    padding: 1rem;
+}
+.invoice-detail-table-style-02{
+    padding: 1rem;
+    background-color: white;
+    border-radius: 1rem;
+}
+.invoice-details-topic-style-02{
+    padding: 1rem;
+    padding-bottom: 0.2rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.details-02{
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background-color: rgb(190, 190, 190);
+    border-radius: 0.5rem;
+}

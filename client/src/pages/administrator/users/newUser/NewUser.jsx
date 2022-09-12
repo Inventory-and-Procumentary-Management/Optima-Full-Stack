@@ -8,6 +8,7 @@ import {
 } from "firebase/storage";
 import app from "../../../../firebase";
 import { addProduct } from "../../../../redux/productApiCalls";
+import { addUser, addRole } from "../../../../redux/userApiCalls";
 import { useDispatch } from "react-redux";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { Link, useLocation } from "react-router-dom";
@@ -21,20 +22,24 @@ import { useEffect } from "react";
 
 const typeData = [
   {
-    value: '2',
-    label: "Purchasing manager",
+    value: 'ROLE_PURCHASING_MANAGER',
+    label: "Purchasing Manager",
   },
   {
-    value: '3',
-    label: "Purchasing staff",
+    value: 'ROLE_PURCHASING_STAFF',
+    label: "Purchasing Staff",
   },
   {
-    value: '4',
-    label: "Site manager",
+    value: 'ROLE_SITE_MANAGER',
+    label: "Site Manager",
   },
   {
-    value: '5',
-    label: "Warehouse manager",
+    value: 'ROLE_WAREHOUSE_MANAGER',
+    label: "Warehouse Manager",
+  },
+  {
+    value: 'ROLE_PROJECT_MANAGER',
+    label: "Project Manager",
   },
   
 ];
@@ -47,6 +52,7 @@ export default function NewUser() {
   const [show, setShow] = useState(false);
   const [sizeForm, setSizeForm] = useState(6);
   const [current_date, setCurrent_Date] = useState("");
+  const [employeeNo, setEmployeeNo] = useState("EMP"+(Math.floor((Math.random() * 100000) + 1001)));
   const dispatch = useDispatch();
 
   const [fullnameError, setFullnameError] = useState(false);
@@ -55,14 +61,16 @@ export default function NewUser() {
   const [usernameError, setUsernameError] = useState(false);
   const [usertypeError, setUsertypeError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [mobileNumberError, setMobileNumberError] = useState(false);
   
 
   const [fullnameMessageError, setFullnameMessageError] = useState("");
   const [emailMessageError, setEmailMessageError] = useState("");
   const [idMessageError, setIdMessageError] = useState("");
-  const [usernameMessageError, setUsernameMessageError] = useState(false);
-  const [usertypeMessageError, setUsertypeMessageError] = useState(false);
-  const [passwordMessageError, setPasswordMessageError] = useState(false);
+  const [usernameMessageError, setUsernameMessageError] = useState("");
+  const [usertypeMessageError, setUsertypeMessageError] = useState("");
+  const [passwordMessageError, setPasswordMessageError] = useState("");
+  const [mobileNumberMessageError, setMobileNumberMessageError] = useState("");
 
   useEffect(() => {
     const date = new Date();
@@ -74,6 +82,9 @@ export default function NewUser() {
       ("0" + date.getDate()).slice(-2);
     console.log(currentDate);
     setCurrent_Date(currentDate);
+
+    let x = "EMP"+(Math.floor((Math.random() * 100000) + 1001));
+    // setEmployeeNo(x);
   }, []);
 
   const handleChange = (e) => {
@@ -82,11 +93,29 @@ export default function NewUser() {
     });
   };
 
-  const handleClick = (e) => {
-    if (!e.target.value) {
-      setShow(true);
-      return;
-    }
+  const handleClick = async (e) => {
+    e.preventDefault();
+    console.log(inputs);
+    let {roleName,...others} = inputs;
+    const user = {
+      ...others,
+      isActivate: true,
+      employeeId:employeeNo,
+      password:"12345678"
+    };
+    const role = {
+      "username":others.username,
+      "roleName":type
+    };
+    await addUser(user, dispatch);
+    addRole(role, dispatch);
+    setAllShow(true);
+  }
+  const handleClick1 = (e) => {
+    // if (!e.target.value) {
+    //   setShow(true);
+    //   return;
+    // }
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
@@ -177,6 +206,30 @@ export default function NewUser() {
           <Grid container spacing={4}>
             {/* <Grid item md={10}> */}
             <Grid container spacing={4}>
+            <Grid item md={sizeForm}>
+                <TextField
+                  error={idError}
+                  defaultValue={employeeNo}
+                  // variant="standard"
+                  disabled
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="employeeId"
+                  label="Employee ID"
+                  name="employeeId"
+                  autoComplete="employeeId"
+                  autoFocus
+                  helperText={idMessageError}
+                  onClick={(e) => {
+                    setIdError(false);
+                    setIdMessageError("");
+                    // setInputs((prev) => {
+                    //   return { ...prev, [e.target.name]: e.target.value };
+                    // });
+                  }}
+                />
+              </Grid>
               <Grid item md={sizeForm}>
                 <TextField
                   error={fullnameError}
@@ -185,10 +238,10 @@ export default function NewUser() {
                   margin="normal"
                   required
                   fullWidth
-                  id="fullname"
+                  id="name"
                   label="Full Name"
-                  name="fullname"
-                  autoComplete="fullname"
+                  name="name"
+                  autoComplete="name"
                   autoFocus
                   helperText={fullnameMessageError}
                   onChange={(e) => {
@@ -234,10 +287,10 @@ export default function NewUser() {
                   required
                   select
                   fullWidth
-                  id="usertype"
+                  id="roleName"
                   label="User Type"
-                  name="usertype"
-                  autoComplete="usertype"
+                  name="roleName"
+                  autoComplete="roleName"
                   autoFocus
                   helperText={usertypeMessageError}
                   onChange={(event) => {
@@ -255,29 +308,7 @@ export default function NewUser() {
                   ))}
                 </TextField>
               </Grid>
-              <Grid item md={sizeForm}>
-                <TextField
-                  error={idError}
-                  // defaultValue={product.id}
-                  // variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="id"
-                  label="Employee ID"
-                  name="id"
-                  autoComplete="id"
-                  autoFocus
-                  helperText={idMessageError}
-                  onChange={(e) => {
-                    setIdError(false);
-                    setIdMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
+              
               <Grid item md={sizeForm}>
                 <TextField
                   error={usernameError}
@@ -301,11 +332,36 @@ export default function NewUser() {
                   }}
                 />
               </Grid>
+              
               <Grid item md={sizeForm}>
                 <TextField
-                  error={passwordError}
+                  error={usernameError}
                   // defaultValue={product.id}
                   // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="mobileNumber"
+                  label="Mobile Number"
+                  name="mobileNumber"
+                  autoComplete="mobileNumber"
+                  autoFocus
+                  helperText={mobileNumberMessageError}
+                  onChange={(e) => {
+                    setMobileNumberError(false);
+                    setMobileNumberMessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
+                  }}
+                />
+              </Grid>
+
+
+              {/* <Grid item md={sizeForm}>
+                <TextField
+                  error={passwordError}
+                  type="password"
                   margin="normal"
                   required
                   fullWidth
@@ -323,7 +379,7 @@ export default function NewUser() {
                     });
                   }}
                 />
-              </Grid>
+              </Grid> */}
               
               
               {/* <Grid item md={sizeForm}> */}
@@ -396,14 +452,14 @@ export default function NewUser() {
       <SweetAlert
         show={allShow}
         success
-        fullname="Successfully added!"
+        title="Successfully added!"
         // text="SweetAlert in React"
         onConfirm={() => setAllShow(false)}
       ></SweetAlert>
       <SweetAlert
         show={show}
         danger
-        fullname="Added Unsuccess!"
+        title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
       ></SweetAlert>

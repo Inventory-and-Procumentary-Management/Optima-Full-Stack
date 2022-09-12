@@ -5,6 +5,7 @@ const userSlice = createSlice({
   initialState: {
     currentUser: null,
     otherUsers: null,
+    userType: null,
     isFetching: false,
     token: null,
     refersh_token: null,
@@ -15,12 +16,16 @@ const userSlice = createSlice({
       state.token = action.payload.access_token;
       state.refersh_token = action.payload.refersh_token;
     },
+    userTypeSave: (state, action) => {
+      state.userType = action.payload;
+    },
     loginStart: (state) => {
       state.isFetching = true;
     },
     loginSuccess: (state, action) => {
       state.isFetching = false;
       state.currentUser = action.payload;
+      state.error = false;
     },
     loginFailure: (state) => {
       state.isFetching = false;
@@ -32,6 +37,7 @@ const userSlice = createSlice({
       state.error = false;
       state.token = null;
       state.refersh_token = null;
+      state.userType = null;
     },
 
     //GET ALL
@@ -91,6 +97,19 @@ const userSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+    //add role
+    addUserRoleStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    addUserRoleSuccess: (state) => {
+      state.isFetching = false;
+      // state.otherUsers.push(action.payload);
+    },
+    addUserRoleFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
@@ -112,5 +131,9 @@ export const {
   addUserStart,
   addUserSuccess,
   addUserFailure,
+  addUserRoleStart,
+  addUserRoleSuccess,
+  addUserRoleFailure,
+  userTypeSave,
 } = userSlice.actions;
 export default userSlice.reducer;

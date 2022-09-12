@@ -33,9 +33,24 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import StarBorder from "@mui/icons-material/StarBorder";
 
 import DashboardIcon from "@mui/icons-material/Dashboard";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function PurchaseStaffSidebar() {
   const history = useHistory();
+  // const [sidebarActive,setSidebarActive] = useState(
+  //   {
+  //     "home":"active",
+  //     "products":null,
+  //     "orderSummary":null,
+  //     "supplierDetails":null,
+  //     "products":null,
+  //     "products":null,
+  //   }
+  // );
+  // useEffect(()=>{
+
+  // },[]);
   //check user who is....then send correct props for the particular dashboard
   // React.useEffect(()=>{
   //   alert("Purchase Staff");
@@ -91,30 +106,25 @@ export default function PurchaseStaffSidebar() {
                   Order Summary
                 </li>
               </Link>
-              {/* <Link to="/reports" className="link">
-                  <li className="sidebarListItem">
-                    <Report className="sidebarIcon" />
-                    Reports
-                  </li>
-                </Link>
-                <Link to="/article" className="link">
-                  <li className="sidebarListItem">
-                    <WorkOutline className="sidebarIcon" />
-                    Articles
-                  </li>
-                </Link>
-                <Link to="/email" className="link">
-                  <li className="sidebarListItem">
-                    <Email className="sidebarIcon" />
-                    Send Email
-                  </li>
-                </Link> */}
-              {/* <Link to="/post" className="link">
-              <li className="sidebarListItem">
-                <WorkOutline className="sidebarIcon" />
-                Posts
-              </li>
-            </Link> */}
+            </ul>
+          </div>
+          <div className="sidebarMenu">
+            <h3 className="sidebarTitle">Supplier</h3>
+            <ul className="sidebarList">
+              <Link to="/purchaseStaff/supplierDetails" className="link">
+                {/* {history.push("/purchaseStaff/materialRequest")} */}
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  Supplier Details
+                </li>
+              </Link>
+              <Link to="/purchaseStaff/supplierItems" className="link">
+                {/* {history.push("/purchaseStaff/materialRequest")} */}
+                <li className="sidebarListItem">
+                  <PermIdentity className="sidebarIcon" />
+                  Supplier Items
+                </li>
+              </Link>
             </ul>
           </div>
           <div className="sidebarMenu">
@@ -150,40 +160,6 @@ export default function PurchaseStaffSidebar() {
               </Link>
             </ul>
           </div>
-          {/* <div className="sidebarMenu">
-            <h3 className="sidebarTitle">Invoices</h3>
-            <ul className="sidebarList">
-              <li className="sidebarListItem">
-                <MailOutline className="sidebarIcon" />
-                Invoices
-              </li>
-              <li className="sidebarListItem">
-                <DynamicFeed className="sidebarIcon" />
-                Feedback
-              </li>
-              <li className="sidebarListItem">
-                <ChatBubbleOutline className="sidebarIcon" />
-                Messages
-              </li>
-            </ul>
-          </div> */}
-          {/* <div className="sidebarMenu">
-            <h3 className="sidebarTitle">Products</h3>
-            <ul className="sidebarList">
-              <li className="sidebarListItem">
-                <WorkOutline className="sidebarIcon" />
-                Items & Pricing
-              </li>
-              <li className="sidebarListItem">
-                <Timeline className="sidebarIcon" />
-                Analytics
-              </li>
-              <li className="sidebarListItem">
-                <Report className="sidebarIcon" />
-                Reports
-              </li>
-            </ul>
-          </div> */}
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Project</h3>
             <ul className="sidebarList">

@@ -6,14 +6,15 @@ import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector } from "react-redux";
-import { dumyData } from "../../../constants/DashboardData";
+import { inventoryData } from "../../../constants/DashboardData";
+import SearchComponent from "../../../components/search/Search";
 
 const columns = [
-  { field: "_id", headerName: "ID", width: 220 },
+  // { field: "_id", headerName: "ID", width: 150 },
   {
-    field: "title",
-    headerName: "Product Name",
-    width: 220,
+    field: "name",
+    headerName: "Item Name",
+    width: 180,
     renderCell: (params) => {
       return (
         <div className="userListUser">
@@ -22,17 +23,21 @@ const columns = [
             src={params.row.img}
             alt="category Icon"
           /> */}
-          {params.row.title}
+          {params.row.name}
         </div>
       );
     },
   },
-  { field: "price", headerName: "Quantity Type", width: 200 },
-  { field: "quantity", headerName: "Quantity", width: 150 },
-  { field: "quantity", headerName: "Description", width: 250 },
+  { field: "quantity", headerName: "Quantity", width: 160 },
+  { field: "type", headerName: "Unit of Messurement", width: 180 },
+  { field: "recieve", headerName: "Recieved Date", width: 180 },
+  { field: "expire", headerName: "Expire Date", width: 180 },
+  { field: "minimum", headerName: "Minimum Level", width: 180 },
+  
+  { field: "description", headerName: "Description", width: 200 },
   // {
   //   field: "staus",
-  //   headerName: "Order Status",    
+  //   headerName: "Order Status",
   //   width: 220,
   //   renderCell: (params) => {
   //     return (
@@ -101,50 +106,60 @@ const columns = [
   //     );
   //   },
   // },
-  {
-    field: "action",
-    headerName: "Action",
-    width: 250,
-    renderCell: (params) => {
-      return (
-        <>
-          {!params.row.isCancel ? (
-            <button
-              className="userListEdit"
-              // onClick={() => {
-              //   setUpdateShow(true);
-              //   setCartId(params.row._id);
-              //   setIsCancelStatus(false);
-              // }}
-              style={{ backgroundColor: "red" }}
-            >
-              Cancel
-            </button>
-          ) : (
-            <button
-              className="userListEdit"
-              style={{ backgroundColor: "red" }}
-              // onClick={() => {
-              //     setUpdateShow(true);
-              //     setCartId(params.row._id);
-              //     setIsCancelStatus(true);
-              //   }}
-            >
-              Request Received
-            </button>
-          )}
-        </>
-      );
-    },
-  },
+  // {
+  //   field: "action",
+  //   headerName: "Action",
+  //   width: 250,
+  //   renderCell: (params) => {
+  //     return (
+  //       <>
+  //         {!params.row.isCancel ? (
+  //           <button
+  //             className="userListEdit"
+  //             // onClick={() => {
+  //             //   setUpdateShow(true);
+  //             //   setCartId(params.row._id);
+  //             //   setIsCancelStatus(false);
+  //             // }}
+  //             style={{ backgroundColor: "#FFB000" }}
+  //           >
+  //             Update
+  //           </button>
+  //         ) : (
+  //           <button
+  //             className="userListEdit"
+  //             style={{ backgroundColor: "red" }}
+  //             // onClick={() => {
+  //             //     setUpdateShow(true);
+  //             //     setCartId(params.row._id);
+  //             //     setIsCancelStatus(true);
+  //             //   }}
+  //           >
+  //             Request Received
+  //           </button>
+  //         )}
+  //       </>
+  //     );
+  //   },
+  // },
 ];
 
 const BuildingTable = () => {
   return (
     <div className="common">
       <div className="userList">
+        <div className="top-container-material-request">
+          <div className="top-contaier-button-material-request" style={{visibility:"hidden"}}>
+            <Link to={"/purchaseStaff/newMaterialRequest"}>
+              <button className="color-contained-button">Add New Item</button>
+            </Link>
+          </div>
+          <div className="top-container-search-material-request">
+            <SearchComponent />
+          </div>
+        </div>
         <DataGrid
-          rows={dumyData}
+          rows={inventoryData}
           disableSelectionOnClick
           columns={columns}
           getRowId={(row) => row._id}
@@ -213,4 +228,3 @@ const BuildingTable = () => {
 };
 
 export default BuildingTable;
-  

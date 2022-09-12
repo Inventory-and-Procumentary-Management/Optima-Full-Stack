@@ -18,20 +18,58 @@
     padding: 0.625rem;
     padding-left: 1.875rem;
    }
-   .request-button{
-    position: inherit;
-    padding: 0.625rem;
-    padding-left: 1.875rem;
 
-   }
    .Full-Form-style{
     padding-left: 2.875rem;
    }
    .Main-Topic-request-product{
     padding: 1rem;
-    background-color: rgb(185, 186, 186);
+    font-size: 1.7rem;
+    font-weight: bold;
+    
    }
    .Topic-Add-new-item{
     padding: 1rem;
+    font-size: 1.2rem;
+    font-weight: 100;
     padding-top: 0.5rem;
    }
+   .Main-div{
+    padding: 0.5rem;
+    padding-left: 1rem;
+    
+   }
+   .sub-div{
+    padding: 1rem;
+    padding-top: 0.1rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 1rem;
+    margin-left: 8rem;
+    margin-right: 8rem;
+   }
+   .inputstyle{
+    border-radius: 2rem;
+   }
+   .request-button{
+    padding: 0.625rem;
+    background-color:rgb(55, 140, 187) ;
+    border-radius: 0.625rem;
+    color: white;
+  
+   }
+
+   .cancel-button{
+    padding: 0.625rem;
+    border-radius: 0.625rem;
+    background-color: red;
+    color: white;
+    width: fit-content;
+    margin-left: 1rem;
+
+   }
+   .button-container{
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: row;
+  
+  }

@@ -16,6 +16,7 @@ const defautlValues = {
   price_per_one:"",
   quantity: "",
   description:"",
+  UOM:"",
 };
 
 
@@ -39,8 +40,9 @@ const Request_product = () => {
   
     return (
       
-      <div onSubmit={handleSubmit}>
+      <div onSubmit={handleSubmit} className='Main-div' >
           <h2 className='Main-Topic-request-product'>Request product</h2>
+          <div  className='sub-div'>
           <h3 className='Topic-Add-new-item'>Add new Item</h3>
           <form onSubmit={handleSubmit}>
             
@@ -61,7 +63,6 @@ const Request_product = () => {
   >
   <TextField 
   id="outlined-basic" 
-  label="Name" 
   name='name' 
   variant="outlined" 
   value={formValues.name}
@@ -83,7 +84,6 @@ const Request_product = () => {
   >
   <TextField 
   id="outlined-basic" 
-  label="Category" 
   name='category' 
   variant="outlined"
   value={formValues.category}
@@ -105,7 +105,6 @@ const Request_product = () => {
   >
   <TextField
   id="outlined-basic" 
-  label="Price Per One" 
   name='price_per_one' 
   variant="outlined" 
   value={formValues.price_per_one}
@@ -127,7 +126,6 @@ const Request_product = () => {
   >
   <TextField
   id="outlined-basic"
-  label="Quantity"
    name='quantity' 
    variant="outlined" 
    value={formValues.quantity}
@@ -136,6 +134,27 @@ const Request_product = () => {
   
   </Box>
   </div> {/* div 04 end */ }
+
+  <div> {/* div 05 */ }
+      <h4>Unit Of Measurement</h4>
+  <Box
+  component="form"
+  sx={{
+  '& > :not(style)': { m: 1, width: '25ch' },
+  }}
+  noValidate
+  autoComplete="off"
+  >
+  <TextField
+  id="outlined-basic"
+   name='UOM' 
+   variant="outlined" 
+   value={formValues.UOM}
+  onChange = {handleInputChange}
+  />
+  
+  </Box>
+  </div> {/* div 05 end */ }
   
   
   
@@ -155,7 +174,6 @@ const Request_product = () => {
   <div>
   <TextField
     id="outlined-multiline-flexible"
-    label="Description"
     name='description'
     multiline
     rows = {4}
@@ -167,14 +185,14 @@ const Request_product = () => {
   </Box>
   
   </div>  {/* div 0-1 end */ }
-  
-  <div className='terms-checkbox'>  {/* div 0-2 */ }
-  <FormGroup>
-  <FormControlLabel control={<Checkbox/>} label="Agree to Terms and Condition" />
-  </FormGroup>
-  </div>  {/* div 0-2 end */ }
+  <div className='button-container'>
   <div className='request-button'>
-  <Button variant="contained" type='submit' >Request</Button>
+  <button variant="contained" type='submit' >Request</button>
+  </div>
+
+  <div className='cancel-button'>
+  <button variant="contained" >Cancel</button>
+  </div>
   </div>
   
   </div> {/* Form ends in here */}
@@ -183,7 +201,7 @@ const Request_product = () => {
           
   
          
-  
+        </div>
   
   
       </div>

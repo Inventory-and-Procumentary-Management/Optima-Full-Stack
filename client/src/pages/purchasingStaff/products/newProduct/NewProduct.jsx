@@ -30,8 +30,64 @@ const stockData = [
   },
 ];
 
+const categoryData = [
+  {
+    value: "BUILDING",
+    label: "Building",
+  },
+  {
+    value: "WIRING",
+    label: "Wiring",
+  },
+  {
+    value: "PLUMBING",
+    label: "Plumbing",
+  },
+  {
+    value: "PAINTING",
+    label: "Painting",
+  },
+  {
+    value: "TILE",
+    label: "Tile",
+  },
+  {
+    value: "WOOD",
+    label: "Wood",
+  },
+];
+
+const uomData = [
+  {
+    value: "Cubes",
+    label: "Cubes",
+  },
+  {
+    value: "Packets",
+    label: "Packets",
+  },
+  {
+    value: "Leters",
+    label: "Leters",
+  },
+  {
+    value: "Kg",
+    label: "Kg",
+  },
+  {
+    value: "Nos",
+    label: "Nos",
+  },
+  {
+    value: "Other",
+    label: "Other",
+  },
+];
+
 export default function NewProduct() {
   const [stock, setStock] = useState(true);
+  const [category, setCategory] = useState("");
+  const [UOM, setUOM] = useState("");
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [allShow, setAllShow] = useState(false);
@@ -80,10 +136,10 @@ export default function NewProduct() {
   };
 
   const handleClick = (e) => {
-    if (!e.target.value) {
-      setShow(true);
-      return;
-    }
+    // if (!e.target.value) {
+    //   setShow(true);
+    //   return;
+    // }
     e.preventDefault();
     const fileName = new Date().getTime() + file.name;
     const storage = getStorage(app);
@@ -123,9 +179,12 @@ export default function NewProduct() {
             ...inputs,
             img: downloadURL,
             // categories: [...cat, "all"],
+            category: category,
+            messure: UOM,
             inStock: stock,
             isActivate: true,
             createDate: current_date,
+            isApprove: false,
           };
           addProduct(product, dispatch);
           setAllShow(true);
@@ -221,7 +280,7 @@ export default function NewProduct() {
                   }}
                 />
               </Grid>
-              <Grid item md={sizeForm}>
+              {/* <Grid item md={sizeForm}>
                 <TextField
                   error={categoryError}
                   // defaultValue={product.category}
@@ -243,8 +302,38 @@ export default function NewProduct() {
                     });
                   }}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item md={sizeForm}>
+                <TextField
+                  error={categoryError}
+                  // defaultValue={product.category}
+                  // variant="standard"
+                  value={category}
+                  margin="normal"
+                  select
+                  required
+                  fullWidth
+                  id="category"
+                  label="Category"
+                  name="category"
+                  autoComplete="category"
+                  autoFocus
+                  helperText={categoryMessageError}
+                  onChange={(event) => {
+                    setCategoryError(false);
+                    setCategoryMessageError("");
+                    setCategory(event.target.value);
+                    // handleCat();
+                  }}
+                >
+                  {categoryData.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              </Grid>
+              {/* <Grid item md={sizeForm}>
                 <TextField
                   error={messureError}
                   // defaultValue={product.messure}
@@ -253,7 +342,7 @@ export default function NewProduct() {
                   required
                   fullWidth
                   id="messure"
-                  label="Messurement"
+                  label="Unit of Messurement"
                   name="messure"
                   autoComplete="messure"
                   autoFocus
@@ -266,6 +355,36 @@ export default function NewProduct() {
                     });
                   }}
                 />
+              </Grid> */}
+              <Grid item md={sizeForm}>
+                <TextField
+                  select
+                  value={UOM}
+                  error={messureError}
+                  // defaultValue={product.messure}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="messure"
+                  label="Unit of Messurement"
+                  name="messure"
+                  autoComplete="messure"
+                  autoFocus
+                  helperText={messureMessageError}
+                  onChange={(event) => {
+                    setMessureError(false);
+                    setMessureMessageError("");
+                    setUOM(event.target.value);
+                    // handleCat();
+                  }}
+                >
+                  {uomData.map((option) => (
+                    <MenuItem key={option.value} value={option.value}>
+                      {option.label}
+                    </MenuItem>
+                  ))}
+                </TextField>
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
@@ -276,8 +395,9 @@ export default function NewProduct() {
                   required
                   fullWidth
                   id="price"
-                  label="Price"
+                  label="Price (Rs)"
                   name="price"
+                  type="number"
                   autoComplete="price"
                   autoFocus
                   helperText={priceMessageError}
@@ -297,6 +417,7 @@ export default function NewProduct() {
                   // variant="standard"
                   margin="normal"
                   required
+                  type="number"
                   fullWidth
                   id="quantity"
                   label="Quantity"
@@ -318,6 +439,7 @@ export default function NewProduct() {
                   error={minimumLevelError}
                   // defaultValue={product.messure}
                   // variant="standard"
+                  type="number"
                   margin="normal"
                   required
                   fullWidth
@@ -395,13 +517,23 @@ export default function NewProduct() {
                 />
               </Grid>
               <Grid item md={sizeForm}></Grid>
-              <Grid item md={12} container sx={{alignItems:"center", justifyContent:"center"}}>
+              <Grid
+                item
+                md={12}
+                container
+                sx={{ alignItems: "center", justifyContent: "center" }}
+              >
                 <button
                   type="submit"
                   // onClick={handleClick}
                   // className="addProductButton"
                   className="color-contained-button"
-                  style={{paddingLeft:70, paddingRight: 70, paddingBottom: 15, paddingTop:15}}
+                  style={{
+                    paddingLeft: 70,
+                    paddingRight: 70,
+                    paddingBottom: 15,
+                    paddingTop: 15,
+                  }}
                 >
                   Create
                 </button>

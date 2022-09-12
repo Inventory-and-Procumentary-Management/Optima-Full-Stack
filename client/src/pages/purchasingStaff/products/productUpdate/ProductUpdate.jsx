@@ -11,10 +11,10 @@ import "./ProductUpdate.css";
 import Charts from "../../../../components/charts/Charts";
 // import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
-import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 // import { userRequest } from "../../requestMethods";
-import { deleteProduct, getProducts } from "../../../../redux/productApiCalls";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteProduct, getProducts, updateProduct } from "../../../../redux/productApiCalls";
 import SweetAlert from "react-bootstrap-sweetalert";
 
 import * as React from "react";
@@ -41,6 +41,7 @@ export default function ProductUpdate() {
   const [categoryMessageError,setCategoryMessageError] = useState("");
   const [messureMessageError,setMessureMessageError] = useState("");
 
+  const dispatch = useDispatch();
   const product = useSelector((state) =>
     state.product.products.find((product) => product.id == productId)
   );
@@ -93,28 +94,30 @@ export default function ProductUpdate() {
     setPStats(data);
   }, [productId, MONTHS]);
 
-  const updateProduct = (e) => {
+  const updateProductSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formNewData = {
+      id:productId,
       title: formData.get("title"),
       description: formData.get("description"),
       category: formData.get("category"),
       messure: formData.get("messure"),
-      img: formData.get("img"),
+      // img: formData.get("img"),
+      img: product.img,
       inStock: product.inStock,
       isActivate: product.isActivate,
       price: product.price,
       createDate: product.createDate,
-      minimum_level: product.minimumLevel,
+      minimumLevel: product.minimumLevel,
       quantity: product.quantity,
+      isApprove: false,
+      // isApprove: product.isApprove,
     };
     setFormSaveData(formNewData);
     setShow(true);
     console.log(formNewData);
   };
-
-  const URL = `http://localhost:5000/api/v1/products/${productId}`;
 
   const updateProductDetails = async () => {
     setShow(false);
@@ -124,17 +127,18 @@ export default function ProductUpdate() {
     if (!formSaveData.description) {
       formSaveData.description = product.description;
     }
-    console.log(formSaveData.img.name);
-    if (!formSaveData.img.name) {
-      formSaveData.img = product.img;
-    }
-    console.log(formSaveData.img.name);
+    // console.log(formSaveData.img.name);
+    // if (!formSaveData.img.name) {
+    //   formSaveData.img = product.img;
+    // }
+    // console.log(formSaveData.img.name);
     if (!formSaveData.category) {
       formSaveData.category = product.category;
     }
     if (!formSaveData.messure) {
       formSaveData.messure = product.messure;
     }
+    updateProduct(productId,JSON.stringify(formSaveData),dispatch);
     // try {
     //   let response = await fetch(URL, {
     //     method: "PUT",
@@ -225,7 +229,7 @@ export default function ProductUpdate() {
           <Box
             component="form"
             noValidate
-            onSubmit={updateProduct}
+            onSubmit={updateProductSubmit}
             className="productForm"
             // sx={{ m: 5 }}
           >
@@ -302,7 +306,7 @@ export default function ProductUpdate() {
                       // required
                       fullWidth
                       id="messure"
-                      label="Messurement"
+                      label="UOM"
                       name="messure"
                       autoComplete="messure"
                       autoFocus

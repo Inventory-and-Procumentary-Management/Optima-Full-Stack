@@ -29,7 +29,9 @@ export default function BasicModal() {
                     <AddIcon />
                     ADD NEW
                   </Button> */}
-      <Button onClick={handleOpen}>Open modal</Button>
+      <Button onClick={handleOpen} style={{ color: "black" }}>
+        ADD NEW ITEM
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -38,11 +40,14 @@ export default function BasicModal() {
       >
         <Box sx={style}>
           <h2 align="center" style={{ marginBottom: "20px" }}>
-            Add New Item
+            Request Stocks
           </h2>
           <Grid container spacing={3} padding="20px">
             <Grid item xs={12}>
-              <TextField label="name" fullWidth required />
+              <TextField label="Item ID" fullWidth required />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField label="Item Name" fullWidth required />
             </Grid>
             <Grid item xs={12}>
               <BasicSelect label="Category">
@@ -65,7 +70,7 @@ export default function BasicModal() {
               </BasicSelect>
             </Grid>
             <Grid item xs={12}>
-              <TextField label="Quantity" fullWidth required />
+              <TextField label="Request Amount" fullWidth required />
             </Grid>
             <Grid item style={{ alignItems: "right" }}>
               <Button style={{ backgroundColor: "#FFB000" }}>ADD</Button>
