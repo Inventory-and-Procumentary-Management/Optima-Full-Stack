@@ -14,6 +14,7 @@ import { red } from '@mui/material/colors';
 import { useState} from 'react';
 import UpdateProductForm from './UpdateProductForm';
 import Supplier_TableTabs from './Supplier_TableTabs';
+import {Route} from "react-router-dom";
 
 
 
@@ -60,12 +61,13 @@ export default function BasicTable() {
    return (
        <>
        <div>
+     
        <button onClick = {()=>{
        
-        setitemName(params.row.Item);
-        setdisplayRequestForm(true);
-      }
-        }>Update <AddIcon sx={{ color: green[500] }} ></AddIcon></button>
+       setitemName(params.row.itemName);
+       setdisplayRequestForm(true);
+     }
+       }>Update <AddIcon sx={{ color: green[500] }} ></AddIcon></button>
        
        </div>
        &nbsp;
@@ -130,7 +132,6 @@ export default function BasicTable() {
     <>
     
     <div>
-      {displayRequestForm ? (<><UpdateProductForm itemName = {itemName}></UpdateProductForm>  </> ) : (<div style={{ height: 400, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
@@ -139,7 +140,6 @@ export default function BasicTable() {
         checkboxSelection={true}
         disableMultipleSelection={true}
       />
-    </div>)}
       </div>    
     </>
     
