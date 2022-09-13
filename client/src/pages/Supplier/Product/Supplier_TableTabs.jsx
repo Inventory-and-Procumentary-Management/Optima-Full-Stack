@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import Supplier_Table from './Supplier_Table';
 import './productStyle.css';
-import UpdateProductForm from './UpdateProductForm';
+// import UpdateProductForm from './UpdateProductForm';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
