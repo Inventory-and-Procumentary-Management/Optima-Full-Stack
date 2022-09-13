@@ -43,6 +43,9 @@ import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
+import ProjectManagerHome from "./pages/projectManager/ProjectManagerHome";
+import NewSite from "./pages/projectManager/sites/NewSite";
+import SiteInternalPage from "./pages/projectManager/sites/SiteInternalPage";
 
 const App = () => {
   return (
@@ -161,6 +164,19 @@ const App = () => {
               {/* <Route path="/user/:userId">
                 <User />
               </Route> */}
+
+
+              <Route exact path="/projectManager">
+                 <ProjectManagerHome/>
+              </Route>
+              <Route exact path="/projectManager/newsite">
+                 <NewSite/>
+              </Route>
+              <Route exact path="/projectManager/siteInternalPage">
+                 <SiteInternalPage/>
+              </Route>
+
+
 
               <Route exact path="/purchaseManager">
                 <PurchaseManagerHome />
