@@ -10,7 +10,7 @@ const SiteInternalPage = (props) => {
             <div className='site-name-title'> {props.name} Project </div> 
     
         <div className='address-div'> Address : {props.address}</div>
-        <div>Location : {props.location}</div>
+        <div>Location : <a>{props.location}</a></div>
         </div> {/* Header name address location End */}
     <br></br>
 
@@ -32,7 +32,7 @@ const SiteInternalPage = (props) => {
                 </select>
                 </div>
 
-                <button className='add-inventory-div' onClick={()=>{alert("Suwasana")}}>Add Inventory Item</button>
+                <button className='add-inventory-div' onClick={()=>{alert("Suwasana")}}>Add Inventory Item Details</button>
 
         </div>
         </div>

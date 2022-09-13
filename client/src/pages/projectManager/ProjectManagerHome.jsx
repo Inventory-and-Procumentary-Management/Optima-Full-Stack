@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Charts from "../../components/charts/Charts";
-import FeaturedInfo_supplier from "../../components/featuredInfo/FeaturedInfo_supplier";
+import FeaturedInfo_projectManager from "../../components/featuredInfo/FeaturedInfo_projectManager"
 import { useDispatch, useSelector } from "react-redux";
 import "../pages.css";
  import "./ProjectManagerStyle.css";
@@ -11,56 +11,30 @@ const PurchaseStaffHome = () => {
   const [featuredData, setFeaturedData] = useState([]);
   //   const user = useSelector((state) => state.user.currentUser);
 
-  const MONTHS = useMemo(
-    () => [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ],
-    []
-  );
+  
 
   useEffect(() => {
-    let data = [
-      { name: MONTHS[0], "Cement": 15, "Sand": 12 },
-      { name: MONTHS[1], "Cement": 20, "Sand": 25 },
-      { name: MONTHS[2], "Cement": 65, "Sand": 78 },
-      { name: MONTHS[3], "Cement": 45, "Sand": 30 },
-      { name: MONTHS[4], "Cement": 100, "Sand": 80 },
-      { name: MONTHS[5], "Cement": 74, "Sand": 90 },
-    ];
-    setUserStats(data);
-    console.log(userStats);
+
+ 
 
     let featureData = [
       {
         index: 1,
-        title: "",
-        number: 20,
-        percentage: -1.4,
-        isDowngrade: false,
+        title: "Ongoing Projects",
+        number: 6,
         text: "",
       },
       {
         index: 2,
-        title: "",
-        number: 40,
+        title: "Completed Projects",
+        number: 12,
         isDowngrade: true,
         text: "",
       },
       {
         index: 3,
-        title: "",
-        number: 5,
+        title: "All Projects",
+        number: 18,
         text:""
       },
     ];
@@ -70,7 +44,7 @@ const PurchaseStaffHome = () => {
   return (
     <div className="common">
       <div className="home">
-        <FeaturedInfo_supplier data={featuredData} />
+        <FeaturedInfo_projectManager data={featuredData} />
         <br></br>
         <Link to="/projectManager/newsite" className="request-product-link">
                 {/* {history.push("/purchaseStaff/materialRequest")} */}               
