@@ -279,7 +279,6 @@ export default function NewProduct() {
                 //   Swal.fire('Saved!', '', 'success')
                 // }
                 // window.location.href = "http://localhost:3000/purchaseStaff/productList";
-
               })
               // return (
               //   <Stack sx={{ width: "100%" }} spacing={2}>
