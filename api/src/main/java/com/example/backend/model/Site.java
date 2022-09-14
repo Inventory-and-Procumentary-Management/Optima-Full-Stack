@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -18,6 +20,7 @@ public class Site {
     private String siteName;
     private String siteAddress;
     private String location;
+    private Long siteManagerId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
@@ -28,4 +31,7 @@ public class Site {
     private void onCreate() {
         startDate = new Date();
     }
+
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    AppUser appUser;
 }

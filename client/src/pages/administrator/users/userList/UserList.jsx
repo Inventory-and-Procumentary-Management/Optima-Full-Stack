@@ -8,7 +8,7 @@ import {
   PersonAddDisabledOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import SweetAlert from "react-bootstrap-sweetalert";
+// import SweetAlert from "react-bootstrap-sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -250,7 +250,7 @@ export default function UserList() {
             autoHeight
           />
         </div>
-        <SweetAlert
+        {/* <SweetAlert
           show={show}
           warning
           showCancel
@@ -262,9 +262,9 @@ export default function UserList() {
           focusCancelBtn
         >
           You will not be able to recover this imaginary file!
-        </SweetAlert>
+        </SweetAlert> */}
 
-        <SweetAlert
+        {/* <SweetAlert
           show={updateShow}
           warning
           showCancel
@@ -278,23 +278,23 @@ export default function UserList() {
           focusCancelBtn
         >
           You will not be able to recover this imaginary file!
-        </SweetAlert>
+        </SweetAlert> */}
 
-        <SweetAlert
+        {/* <SweetAlert
           show={allShow}
           success
           title="Successfully delete!"
           // text="SweetAlert in React"
           onConfirm={() => setAllShow(false)}
-        ></SweetAlert>
+        ></SweetAlert> */}
 
-        <SweetAlert
+        {/* <SweetAlert
           show={updateAllShow}
           success
           title="Successfully update!"
           // text="SweetAlert in React"
           onConfirm={() => setUpdateAllShow(false)}
-        ></SweetAlert>
+        ></SweetAlert> */}
       </div>
     </div>
   );
