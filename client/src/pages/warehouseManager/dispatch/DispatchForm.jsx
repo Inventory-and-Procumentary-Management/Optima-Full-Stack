@@ -139,16 +139,13 @@ export default function DispatchForm() {
   return (
     <div className="newProduct common">
       {/* <h1 className="addProductTitle">New Product</h1> */}
-      <div className="userTitleContainer" style={{margin:"0px 225px"}}>
-        <h1 className="addProductTitle" style={{fontSize:30}}>Dispatch Form</h1>
+      <div className="userTitleContainer" style={{ margin: "0px 225px" }}>
+        <h1 className="addProductTitle" style={{ fontSize: 30 }}>
+          Dispatch Form
+        </h1>
         <div className="userTitleButtons">
-          <Link to={"/warehouseManager"}>
-            <button
-              className="productAddButton"
-              style={{ backgroundColor: "blue", color: "black" }}
-            >
-              Back
-            </button>
+          <Link to={"/warehouseManager/requesdtedDispatch"}>
+            <button className="color-contained-button">Back</button>
           </Link>
         </div>
       </div>
@@ -267,7 +264,14 @@ export default function DispatchForm() {
             </Grid>
           </Grid> */}
           {/* </form> */}
-          <PurchaseOrders/>
+          <PurchaseOrders
+            smId={"The Site Manager's ID"}
+            smName={"The Site Manager's Name"}
+            dispatchNumber={"Dispatch Number"}
+            dispatchDate={"Date"}
+            itemName={"Item Name"}
+            dispatchQuantity={"Quantity"}
+          />
         </Box>
       </Box>
       <SweetAlert
