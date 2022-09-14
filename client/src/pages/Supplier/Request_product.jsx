@@ -7,6 +7,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import './RequestProductStyle.css';
+import Axios from 'axios';
 
 
 
@@ -36,6 +37,9 @@ const Request_product = () => {
   const handleSubmit = (event) =>{
     event.preventDefault();
     console.log(formValues);
+    Axios.post("http://localhost:8080/api/save" , {formValues}).
+    then(()=>{console.log("Insert Successful. ")})
+
   }
   
     return (
