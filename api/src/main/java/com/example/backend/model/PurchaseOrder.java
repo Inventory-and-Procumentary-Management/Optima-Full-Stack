@@ -13,25 +13,27 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Site {
+public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long site_id;
-    private String siteName;
-    private String siteAddress;
-    private String location;
-    private Long siteManagerId;
+    private Long purchase_order_id;
+    private Long senderId;
+    private Long receiverId;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Date startDate;
-    private Date endDate;
+    private Date issueDate;
+    private Date dueDate;
+    private Boolean status = false;
+
+    @Column(nullable = false)
+    private Long supplierId;
 
     @PrePersist
     private void onCreate() {
-        startDate = new Date();
+        issueDate = new Date();
     }
 
-//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    AppUser appUser;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Collection<OrderProduct> orderProducts = new ArrayList<>();
 }
