@@ -20,6 +20,9 @@ import {
 import Swal from "sweetalert2";
 import SearchComponent from "../../../../components/search/Search";
 
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+
 export default function ProductList() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
@@ -30,7 +33,6 @@ export default function ProductList() {
   const [productStatusNew, setProductStatusNew] = useState(false);
   const [productId, setProductId] = useState("");
   const [deleteTrigger, setDeleteTrigger] = useState("");
-  const [allShow, setAllShow] = useState(false);
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
@@ -39,7 +41,7 @@ export default function ProductList() {
 
   const deleteConfirm = async (id) => {
     await deleteProduct(id, dispatch);
-    setDeleteTrigger("Delete"+deleteTrigger);
+    setDeleteTrigger("Delete" + deleteTrigger);
   };
 
   const deleteCancel = () => {
@@ -49,78 +51,170 @@ export default function ProductList() {
 
   const handleDelete = async (id) => {
     Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#378cbb",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteConfirm(id);
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
+    // setData(data.filter((item) => item.id !== id));
+  };
+
+  const priceChangeModel = (id) => {
+    setProductId(id);
+    setDeleteTrigger("price" + deleteTrigger);
+    console.log(id);
+  };
+  const changeStockType = (id) => {
+    setProductId(id);
+    setDeleteTrigger("stock" + deleteTrigger);
+    console.log(id);
+  };
+  const changeQuantity = (id) => {
+    setProductId(id);
+    setDeleteTrigger("change" + deleteTrigger);
+    console.log(id);
+  };
+  const setMinimumLevel = (id) => {
+    // setProductId(id);
+    Swal.fire({
+      title: "Enter new minimum level",
+      input: "number",
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      confirmButtonColor: '#378cbb',
+      showLoaderOnConfirm: true,
+      inputPlaceholder: 'Minimum Level',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to add something!'
+        }
+      },
+      preConfirm: (minQuantity) => {
+        return updateProduct(id, { minQuantity: minQuantity }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Updated!", "Minimum level has been updated.", "success");
+        setDeleteTrigger("minimum" + deleteTrigger);
+      } else {
+        Swal.fire(
+          "Updated fail!",
+          "Minimum level has not been updated.",
+          "error"
+        );
+      }
+    });
+  };
+  const setMaximumLevel = (id) => {
+    Swal.fire({
+      title: "Enter new maximum level",
+      input: "number",
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      confirmButtonColor: '#378cbb',
+      showLoaderOnConfirm: true,
+      inputPlaceholder: 'Maximum Level',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to add something!'
+        }
+      },
+      preConfirm: (maxQuantity) => {
+        return updateProduct(id, { maxQuantity: maxQuantity }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Updated!", "Maximum level has been updated.", "success");
+        setDeleteTrigger("maximum" + deleteTrigger);
+      } else {
+        Swal.fire(
+          "Updated fail!",
+          "Maximum level has not been updated.",
+          "error"
+        );
+      }
+    });
+    
+  };
+  const setProductStatus = (id, status) => {
+    // now activate -> status = false
+    // now deactivate -> status = true
+    Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#378cbb',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Yes, delete it!'
+      confirmButtonText: 'Yes, update it!',
+      preConfirm: () => {
+        return updateProduct(id, { isActivate: status }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteConfirm(id);
         Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
+          'Updated!',
+          'Activation has been updated.',
           'success'
         )
+        setDeleteTrigger("product" + deleteTrigger);
+      }else {
+        Swal.fire(
+          "Updated fail!",
+          "Activation has not been updated.",
+          "error"
+        );
       }
     })
-    // setData(data.filter((item) => item.id !== id));
   };
-
-  const priceChangeModel = (id) => {
-    setProductId(id);
-    setDeleteTrigger("price"+deleteTrigger);
-    console.log(id);
-  };
-  const changeStockType = (id) => {
-    setProductId(id);
-    setDeleteTrigger("stock"+deleteTrigger);
-    console.log(id);
-  };
-  const changeQuantity = (id) => {
-    setProductId(id);
-    setDeleteTrigger("change"+deleteTrigger);
-    console.log(id);
-  };
-  const setMinimumLevel = (id) => {
-    setProductId(id);
-    setDeleteTrigger("minimum"+deleteTrigger);
-    console.log(id);
-  };
-  const setMaximumLevel = (id) => {
-    setProductId(id);
-    setDeleteTrigger("maximum"+deleteTrigger);
-    console.log(id);
-  };
-  const setProductStatus = (id, status) => {
-    setProductId(id);
-    setProductStatusNew(status);
-    setDeleteTrigger("product"+deleteTrigger);
+  const setProductApproveStatus = (id, status) => {
     // now activate -> status = false
     // now deactivate -> status = true
-    console.log(id);
-  };
-  const setProductApproveStatus = (id, status, product) => {
-    if (userType === "ROLE_PURCHASING_MANAGER") {
-      setApproveStatus(status);
-      setProductId(id);
-      console.log(product);
-      let { isApprove, ...others } = product;
-      isApprove = status;
-      setProduct({ isApprove, ...others });
-    }else {
-      console.log(id);
-    }
-    // now activate -> status = false
-    // now deactivate -> status = true
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#378cbb',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!',
+      preConfirm: () => {
+        return updateProduct(id, { isApprove: status }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Updated!',
+          'Approve has been updated.',
+          'success'
+        )
+        setDeleteTrigger("productApprove" + deleteTrigger);
+      }else {
+        Swal.fire(
+          "Updated fail!",
+          "Approve has not been updated.",
+          "error"
+        );
+      }
+    })
   };
   const updateApproveConfirm = async () => {
     setApproveShow(false);
     console.log(product);
     await updateProduct(productId, product, dispatch);
-    setDeleteTrigger("approve"+deleteTrigger);
+    setDeleteTrigger("approve" + deleteTrigger);
   };
 
   const columns = [
@@ -316,7 +410,7 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "red" }}
                     onClick={() => {
-                      setProductStatus(params.row.inventor_item_id, false);
+                      setProductStatus(params.row.inventor_item_id, true);
                       // setApproveShow(true);
                     }}
                   />
@@ -347,8 +441,10 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "green" }}
                     onClick={() => {
-                      setProductApproveStatus(params.row.inventor_item_id, false, params.row);
-                      setApproveShow(true);
+                      setProductApproveStatus(
+                        params.row.inventor_item_id,
+                        false,
+                      );
                     }}
                   />
                 ) : (
@@ -356,8 +452,10 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "red" }}
                     onClick={() => {
-                      setProductApproveStatus(params.row.inventor_item_id, true, params.row);
-                      setApproveShow(true);
+                      setProductApproveStatus(
+                        params.row.inventor_item_id,
+                        true,
+                      );
                     }}
                   />
                 )
@@ -379,7 +477,12 @@ export default function ProductList() {
             {userType === "ROLE_PURCHASING_MANAGER" ||
             userType === "ROLE_PURCHASING_STAFF" ? (
               <div>
-                <Link to={"/purchaseStaff/productUpdate/" + params.row.inventor_item_id}>
+                <Link
+                  to={
+                    "/purchaseStaff/productUpdate/" +
+                    params.row.inventor_item_id
+                  }
+                >
                   {/* <button className="productListEdit">Edit</button> */}
                   <EditOutlined
                     className="productListDelete"

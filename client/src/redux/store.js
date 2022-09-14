@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import breadcrumbReducer from "./breadcrumbRedux";
 
 const persistConfig = {
   key: "root",
@@ -22,6 +23,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
+  breadcrumb: breadcrumbReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
