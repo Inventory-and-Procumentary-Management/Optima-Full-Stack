@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.model.Inventory;
 import com.example.backend.model.Site;
 import com.example.backend.service.site.SiteService;
 import lombok.RequiredArgsConstructor;

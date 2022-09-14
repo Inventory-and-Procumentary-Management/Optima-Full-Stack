@@ -36,10 +36,14 @@ export const login = async (dispatch, user) => {
       });
       console.log(result);
       dispatch(loginSuccess(result.data));
-      window.location.href = "http://localhost:3000/";
-    } catch (error) {}
+      return 1;
+      // window.location.href = "http://localhost:3000/";
+    } catch (error) {
+      return 0;
+    }
   } catch (err) {
     dispatch(loginFailure());
+    return 0;
   }
 };
 
