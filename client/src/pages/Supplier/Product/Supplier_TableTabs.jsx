@@ -40,15 +40,20 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
+export default function BasicTabs({displayValue}) {
   const [value, setValue] = React.useState(0);
 
+  const [displayTabs, setDisplayTabs ] = React.useState(true);
+
+  
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
   return (
-    <Box sx={{ width: '100%' }}>
+  <>
+    <div>
+    {displayTabs ? ( <Box sx={{ width: '100%' }}>
       <div className='tabStyle'>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
@@ -68,6 +73,9 @@ export default function BasicTabs() {
       <TabPanel value={value} index={2}>
       <Supplier_Table></Supplier_Table>
       </TabPanel>
-    </Box>
+    </Box>) : (<></>)}
+    </div>
+    </>
+   
   );
 }

@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@babel/types": "^7.18.10",
+    "@emailjs/browser": "^3.7.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@material-ui/core": "^4.12.4",
@@ -23,7 +24,6 @@
     "framer-motion": "^6.3.16",
     "react": "^17.0.2",
     "react-bootstrap": "^2.5.0",
-    "react-bootstrap-sweetalert": "^5.2.0",
     "react-dom": "^17.0.2",
     "react-hooks": "^1.0.1",
     "react-icons": "^4.4.0",

@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from 'uuid'
 import './printPO_supplier.css'
 
 export default function TableForm({
-    itemCode,setitemCode,
     desc,setDesc, 
     quantity,setQuantity, 
     price,setPrice, 
@@ -21,13 +20,12 @@ export default function TableForm({
 
         const newItems ={
             id: uuidv4(),
-            itemCode,
             desc,
             quantity,
             price,
             amount,
         }
-        setitemCode("")
+        
         setDesc("")
         setQuantity("")
         setPrice("")

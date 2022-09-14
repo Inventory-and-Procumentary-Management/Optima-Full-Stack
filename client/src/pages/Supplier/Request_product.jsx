@@ -185,9 +185,14 @@ const Request_product = () => {
   </Box>
   
   </div>  {/* div 0-1 end */ }
-  
+  <div className='button-container'>
   <div className='request-button'>
-  <Button variant="contained" type='submit' >Request</Button>
+  <button variant="contained" type='submit' >Request</button>
+  </div>
+
+  <div className='cancel-button'>
+  <button variant="contained" >Cancel</button>
+  </div>
   </div>
   
   </div> {/* Form ends in here */}
