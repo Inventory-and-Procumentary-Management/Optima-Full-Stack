@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 import { useEffect, useState } from "react";
 import "../../pages.css";
@@ -9,7 +9,7 @@ import {
   CancelOutlined,
   VisibilityOutlined,
   ThumbDownAltOutlined,
-  ThumbUpAltOutlined
+  ThumbUpAltOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 // import SweetAlert from "react-bootstrap-sweetalert";
@@ -18,6 +18,9 @@ import { purchaseInvoiceData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
+
+import BasicModalDispatch from "./BasicModalDispatch";
+import { IconButton } from "@material-ui/core";
 
 const RequesdtedDispatch = () => {
   const userType = useSelector((state) => state.user.userType);
@@ -33,7 +36,7 @@ const RequesdtedDispatch = () => {
   }, []);
 
   const columns = [
-    { field: "invoice_id", headerName: "Invoice ID", width: 150 },
+    { field: "invoice_id", headerName: "Dispatch ID", width: 180 },
     // {
     //   field: "staffUsername",
     //   headerName: "Purchase Staff Name",
@@ -53,8 +56,8 @@ const RequesdtedDispatch = () => {
     // },
     {
       field: "supplier",
-      headerName: "Supplier",
-      width: 300,
+      headerName: "Site Manager",
+      width: 270,
       renderCell: (params) => {
         return (
           <div className="userListUser">
@@ -68,9 +71,9 @@ const RequesdtedDispatch = () => {
         );
       },
     },
-    { field: "issueDate", headerName: "Date", width: 180 },
+    { field: "issueDate", headerName: "Recieve Date", width: 180 },
     // { field: "dueDate", headerName: "Due Date", width: 180 },
-    { field: "price", headerName: "Total Price (Rs)", width: 200 },
+    { field: "price", headerName: "Description", width: 200 },
     // { field: "currentQuantity", headerName: "Current Quantity", width: 200 },
     // { field: "requestQuantity", headerName: "Request Quantity", width: 200 },
     {
@@ -84,8 +87,8 @@ const RequesdtedDispatch = () => {
               <div className="productListItemData">
                 {params.row.isApprove + " "}
               </div>
-  
-              {userType === "ROLE_PURCHASING_MANAGER" ? (
+
+              {userType === "ROLE_WAREHOUSE_MANAGER" ? (
                 params.row.isApprove ? (
                   <ThumbUpAltOutlined
                     className="productListDelete"
@@ -193,13 +196,25 @@ const RequesdtedDispatch = () => {
           <>
             {!params.row.isCancel ? (
               <div>
-                <VisibilityOutlined
-                  style={{ color: "#bdba2c", cursor: "pointer", marginRight: 20 }}
-                  onClick={() => {
-                    // setProductStatus(params.row.id, false);
-                    // setApproveShow(true);
-                  }}
-                />
+                <IconButton>
+                  <BasicModalDispatch
+                    name={
+                      <VisibilityOutlined
+                        style={{
+                          color: "#bdba2c",
+                          cursor: "pointer",
+                          marginRight: 20,
+                        }}
+                      />
+                    }
+                    topic={"Requested Stocks"}
+                    supName={params.row.supplier}
+                    reqId={params.row.invoice_id}
+                    date={params.row.issueDate}
+                    description={params.row.price}
+                  />
+                </IconButton>
+
                 <CancelOutlined
                   style={{ color: "red", cursor: "pointer" }}
                   onClick={() => {

@@ -18,15 +18,16 @@ export default function TopBarTabsStocks() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const name = "Request Stocks";
 
   return (
-    <Box sx={{ width: "100%", typography: "body1" }} >
-      <TabContext value={value} >
-        <AppBar position="static" >
+    <Box sx={{ width: "100%", typography: "body1" }}>
+      <TabContext value={value}>
+        <AppBar position="static">
           <Toolbar style={{ backgroundColor: "#fff" }}>
             <Grid container spacing={5}>
-              <Grid item xs={10}>
-                <Box sx={{  borderColor: "divider" }}>
+              <Grid item xs={9}>
+                <Box sx={{ borderColor: "divider" }}>
                   <TabList
                     onChange={handleChange}
                     aria-label="lab API tabs example"
@@ -39,19 +40,29 @@ export default function TopBarTabsStocks() {
                   </TabList>
                 </Box>
               </Grid>
-              <Grid item xs={2} sx={{ marginTop: 1 }}>
+              <Grid item xs={3} sx={{ marginTop: 1 }}>
                 {/* <Link to="/AddProduct" className="link"> */}
-                <BasicModalStocks />
-                  
+                <Link to="/warehouseManager/requestForm" sx={{ color: "#000" }}>
+                  <button style={{ color: "#000" }}>REQUEST STOCKS</button>
+                </Link>
+
                 {/* </Link> */}
               </Grid>
             </Grid>
           </Toolbar>
         </AppBar>
-        <TabPanel value="1" sx={{p: 0}}><AllTable /></TabPanel>
-        <TabPanel value="2" sx={{p: 0}}><AllTable /></TabPanel>
-        <TabPanel value="3" sx={{p: 0}}><AllTable /></TabPanel>
-        <TabPanel value="4" sx={{p: 0}}><RecievedTable /></TabPanel>
+        <TabPanel value="1" sx={{ p: 0 }}>
+          <AllTable />
+        </TabPanel>
+        <TabPanel value="2" sx={{ p: 0 }}>
+          <AllTable />
+        </TabPanel>
+        <TabPanel value="3" sx={{ p: 0 }}>
+          <AllTable />
+        </TabPanel>
+        <TabPanel value="4" sx={{ p: 0 }}>
+          <RecievedTable />
+        </TabPanel>
       </TabContext>
     </Box>
   );

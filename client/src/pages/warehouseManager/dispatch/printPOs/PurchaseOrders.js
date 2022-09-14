@@ -9,7 +9,14 @@ import Notes from "./Notes";
 import Table from "./Table";
 import TableForm from "./TableForm";
 
-function PurchaseOrders() {
+function PurchaseOrders({
+  smId,
+  smName,
+  dispatchNumber,
+  dispatchDate,
+  itemName,
+  dispatchQuantity
+}) {
   const [showInvoice, setShowInvoice] = useState(false);
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
@@ -187,7 +194,7 @@ function PurchaseOrders() {
 
               <article className="md:grid grid-cols-2 gap-10 md:mt-1">
                 <div className="flex flex-col">
-                  <label htmlFor="clientName">The Site Manager's ID</label>
+                  <label htmlFor="clientName">{smId}</label>
                   <input
                     type="text"
                     name="clientName"
@@ -200,9 +207,7 @@ function PurchaseOrders() {
                 </div>
 
                 <div className="flex flex-col">
-                  <label htmlFor="clientAddress">
-                  The Site Manager's Name
-                  </label>
+                  <label htmlFor="clientAddress">{smName}</label>
                   <input
                     type="text"
                     name="clientAddress"
@@ -217,7 +222,7 @@ function PurchaseOrders() {
 
               <article className="md:grid grid-cols-3 gap-10">
                 <div className="flex flex-col">
-                  <label htmlFor="invoiceNum">Dispatch Number</label>
+                  <label htmlFor="invoiceNum">{dispatchNumber}</label>
                   <input
                     type="text"
                     name="invoiceNum"
@@ -230,7 +235,7 @@ function PurchaseOrders() {
                 </div>
 
                 <div className="flex flex-col">
-                  <label htmlFor="invoiceDate"> Date</label>
+                  <label htmlFor="invoiceDate"> {dispatchDate}</label>
                   <input
                     type="date"
                     name="invoiceDate"
@@ -242,7 +247,7 @@ function PurchaseOrders() {
                   />
                 </div>
 
-                <div className="flex flex-col" style={{visibility:"hidden"}}>
+                <div className="flex flex-col" style={{ visibility: "hidden" }}>
                   <label htmlFor="dueDate">Enter the Due Date</label>
                   <input
                     type="date"
@@ -258,6 +263,8 @@ function PurchaseOrders() {
 
               <article>
                 <TableForm
+                  itemName={itemName}
+                  dispatchQuantity={dispatchQuantity}
                   desc={desc}
                   setDesc={setDesc}
                   quantity={quantity}
