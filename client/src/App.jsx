@@ -43,6 +43,7 @@ import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
+import Invoice from "./pages/purchaseManager/printPOs/Invoice";
 
 const App = () => {
   return (
@@ -184,7 +185,7 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
-                <PurchaseOrders />
+              <PurchaseOrders />
               </Route>
             </div>
           </div>

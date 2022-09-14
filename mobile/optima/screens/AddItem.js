@@ -27,8 +27,8 @@ import HeaderWithBack from "../components/HeaderWithBack.component";
 import { icons, COLORS, SIZES, FONTS } from "../constans";
 // import { ArrowLeft } from "@material-ui/icons";
 
-const URL1 = "http://192.168.1.4:5000/api/v1/category";
-const URL = "http://192.168.1.4:5000/api/v1/post";
+const URL1 = "http://192.168.236.92:8080/api/v1/category";
+const URL = "http://192.168.236.92:8080/api/v1/post";
 
 const AddItem = () => {
   const [isLoading, setLoading] = useState(false);

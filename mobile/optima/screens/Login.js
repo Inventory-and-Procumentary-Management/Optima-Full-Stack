@@ -21,8 +21,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // LogBox.ignoreLogs(["new NativeEventEmitter"]);
 // LogBox.ignoreAllLogs();
 
-// const URL = "http://192.168.1.4:8080/api/login";
-// const URL1 = "http://192.168.1.4:8080/api/users";
+// const URL = "http://192.168.236.92:8080/api/login";
+// const URL1 = "http://192.168.236.92:8080/api/users";
 
 const Login = () => {
   const [role, setRole] = useState("");
