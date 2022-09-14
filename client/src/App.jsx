@@ -43,6 +43,7 @@ import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
+import RequestForm from "./pages/warehouseManager/Stocks/RequestForm";
 
 const App = () => {
   return (
@@ -132,6 +133,9 @@ const App = () => {
               </Route>
               <Route exact path="/warehouseManager/requesdtedDispatch">
                  <RequesdtedDispatch/>
+              </Route>
+              <Route exact path="/warehouseManager/requestForm">
+                 <RequestForm/>
               </Route>
 
               <Route exact path="/supplier/Request_product">

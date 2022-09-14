@@ -8,7 +8,8 @@ export default function TableForm({
     quantity,setQuantity, 
     price,setPrice, 
     amount,setAmount,
-    list, setList
+    list, setList,
+    itemName,dispatchQuantity
 }) {
 
     const [isEditing, setIsEditing]= useState(false)
@@ -59,7 +60,7 @@ const deleteRow = (id)=>{
     <>
     <form onSubmit={handleSubmit}>
     <div className="flex flex-col">
-    <label htmlFor='desc'>Item Name</label>
+    <label htmlFor='desc'>{itemName}</label>
         <input 
         type="text" 
         name="desc" 
@@ -71,7 +72,7 @@ const deleteRow = (id)=>{
     </div>
     <div className="md:grid grid-cols-3 gap-10">
     <div className="flex flex-col">
-    <label htmlFor='quantity'>Quantity</label>
+    <label htmlFor='quantity'>{dispatchQuantity}</label>
         <input 
         type="text" 
         name="quantity" 

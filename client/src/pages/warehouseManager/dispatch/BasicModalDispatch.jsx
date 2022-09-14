@@ -9,6 +9,8 @@ import "../../pages.css";
 import { useState } from "react";
 import { Input } from "@material-ui/core";
 
+import { Link } from "react-router-dom";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -21,14 +23,21 @@ const style = {
   p: 4,
 };
 
-
-export default function BasicModalStocks({name,topic }) {
+export default function BasicModalDispatch({
+  name,
+  topic,
+  supName,
+  reqId,
+  date,
+  description,
+}) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const formOpen = () => {};
 
-  const [reqId, setReqId] = useState("");
-  const [itemName, setItemName] = useState("");
+  // const [reqId, setReqId] = useState("");
+  // const [itemName, setItemName] = useState("");
 
   return (
     <div>
@@ -49,45 +58,63 @@ export default function BasicModalStocks({name,topic }) {
           <h2 align="center" style={{ marginBottom: "20px" }}>
             {topic}
           </h2>
-          <Grid container spacing={3} padding="20px">
-            <Grid item xs={12}>
-              <Input label="Request ID" fullWidth required 
-              value={reqId}
-              onChange={(e)=> setReqId(e.target.value)}
-              readOnly
+          <Grid container spacing={3} padding="20px 10px">
+            <Grid item xs={5}>
+              <h3>Request ID :</h3>
+            </Grid>
+            <Grid item xs={7}>
+              <Input
+                label="Request ID"
+                fullWidth
+                required
+                value={reqId}
+                readOnly
+                //onChange={(e)=> setReqId(e.target.value)}
               />
             </Grid>
-            <Grid item xs={12}>
-              <Input label="Item Name" fullWidth required 
-              value={itemName}
-              readOnly
-              onChange={(e)=> setItemName(e.target.value)}/>
+
+            <Grid item xs={5}>
+              <h3>Site Manager :</h3>
+            </Grid>
+            <Grid item xs={7}>
+              <Input
+                fullWidth
+                required
+                value={supName}
+                readOnly
+                //onChange={(e)=> setReqId(e.target.value)}
+              />
+            </Grid>
+
+            <Grid item xs={5}>
+              <h3>Recieve Date :</h3>
+            </Grid>
+            <Grid item xs={7}>
+              <Input
+                fullWidth
+                required
+                value={date}
+                readOnly
+                //onChange={(e)=> setReqId(e.target.value)}
+              />
+            </Grid>
+            <Grid item xs={5}>
+              <h3>Description :</h3>
             </Grid>
             <Grid item xs={12}>
-              <BasicSelect label="Category">
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Twenty</MenuItem>
-                <MenuItem value={21}>Twenty one</MenuItem>
-                <MenuItem value={22}>Twenty one and a half</MenuItem>
-              </BasicSelect>
+              <textarea
+                fullWidth
+                required
+                readOnly
+                value={description}
+                // onChange={(e)=> setItemName(e.target.value)}
+              />
             </Grid>
-            <Grid item xs={12}>
-              <BasicSelect label="Quantity Type">
-                <MenuItem value="hello">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value={10}>Twenty</MenuItem>
-                <MenuItem value={21}>Twenty one</MenuItem>
-                <MenuItem value={22}>Twenty one and a half</MenuItem>
-              </BasicSelect>
-            </Grid>
-            <Grid item xs={12}>
-              <TextField label="Request Amount" fullWidth required />
-            </Grid>
+
             <Grid item style={{ alignItems: "right" }}>
-            <button className="color-contained-button"  >REQUEST</button>
+              <Link to="/warehouseManager/Dispatch" className="link">
+                <button className="color-contained-button">Dispatch</button>
+              </Link>
             </Grid>
           </Grid>
 

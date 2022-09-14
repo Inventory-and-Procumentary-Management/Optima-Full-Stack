@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./DispatchForm.css";
+import "./RequestForm.css";
 import {
   getStorage,
   ref,
@@ -19,7 +19,7 @@ import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
 import { useEffect } from "react";
 
-import PurchaseOrders from "./printPOs/PurchaseOrders";
+import PurchaseOrders from "../dispatch/printPOs/PurchaseOrders";
 
 const stockData = [
   {
@@ -32,7 +32,7 @@ const stockData = [
   },
 ];
 
-export default function DispatchForm() {
+export default function RequestForm() {
   const [stock, setStock] = useState(true);
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
@@ -139,13 +139,16 @@ export default function DispatchForm() {
   return (
     <div className="newProduct common">
       {/* <h1 className="addProductTitle">New Product</h1> */}
-      <div className="userTitleContainer" style={{ margin: "0px 225px" }}>
-        <h1 className="addProductTitle" style={{ fontSize: 30 }}>
-          Dispatch Form
-        </h1>
+      <div className="userTitleContainer" style={{margin:"0px 225px"}}>
+        <h1 className="addProductTitle" style={{fontSize:30}}>Request Form</h1>
         <div className="userTitleButtons">
-          <Link to={"/warehouseManager/requesdtedDispatch"}>
-            <button className="color-contained-button">Back</button>
+          <Link to={"/warehouseManager/Stocks"}>
+            <button 
+              className=" color-contained-button"
+              
+            >
+              Back
+            </button>
           </Link>
         </div>
       </div>
@@ -265,12 +268,12 @@ export default function DispatchForm() {
           </Grid> */}
           {/* </form> */}
           <PurchaseOrders
-            smId={"The Site Manager's ID"}
-            smName={"The Site Manager's Name"}
-            dispatchNumber={"Dispatch Number"}
-            dispatchDate={"Date"}
-            itemName={"Item Name"}
-            dispatchQuantity={"Quantity"}
+          smId={"The Warehouse Manager's ID"}
+          smName={"The Warehouse Manager's Name"}
+          dispatchNumber={"Request Number"}
+          dispatchDate={"Date"}
+          itemName={"Item Name"}
+          dispatchQuantity={"Quantity"}
           />
         </Box>
       </Box>
