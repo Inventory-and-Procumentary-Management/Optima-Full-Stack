@@ -566,7 +566,7 @@ export default function ProductList() {
           title="Successfully delete!"
           // text="SweetAlert in React"
           onConfirm={() => setAllShow(false)}
-        ></SweetAlert> */}
+        ></SweetAlert> */} 
       </div>
     </div>
   );
