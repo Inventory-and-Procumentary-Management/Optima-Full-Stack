@@ -85,6 +85,20 @@
   font-size: 14px;
   cursor: pointer;
 }
+/* h1 */
+.addTitle {
+  font-size: 28px;
+  font-weight: bold;
+}
+.h2Title {
+  font-size: 24px;
+  font-weight:100;
+}
+.h3Title {
+  font-size: 17px;
+  font-weight: 600;
+  color: #555;
+}
 
 .top-container-material-request {
   display: flex;

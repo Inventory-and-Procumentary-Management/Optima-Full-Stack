@@ -9,7 +9,7 @@ import {
 import app from "../../../../firebase";
 import { addProduct } from "../../../../redux/productApiCalls";
 import { useDispatch } from "react-redux";
-import SweetAlert from "react-bootstrap-sweetalert";
+// import SweetAlert from "react-bootstrap-sweetalert";
 import { Link, useLocation } from "react-router-dom";
 // import "../user/user.css";
 
@@ -486,20 +486,20 @@ export default function NewSupplier() {
           {/* </form> */}
         </Box>
       </Box>
-      <SweetAlert
+      {/* <SweetAlert
         show={allShow}
         success
         title="Successfully added!"
         // text="SweetAlert in React"
         onConfirm={() => setAllShow(false)}
-      ></SweetAlert>
-      <SweetAlert
+      ></SweetAlert> */}
+      {/* <SweetAlert
         show={show}
         danger
         title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
-      ></SweetAlert>
+      ></SweetAlert> */}
     </div>
   );
 }

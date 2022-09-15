@@ -46,6 +46,7 @@
 .productInfoTop {
   display: flex;
   align-items: center;
+  padding: 0px 20px;
 }
 
 .productName {
@@ -57,9 +58,10 @@
 }
 
 .productInfoItem {
-  width: 150px;
+  /* width: 200px; */
   display: flex;
   justify-content: space-between;
+  padding: 1px 20px;
 }
 
 .productInfoValue {
@@ -130,6 +132,7 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
+  margin-top: 10px;
 }
 
 @media only screen and (max-width: 600px) {
