@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @Entity
 @Data
@@ -24,10 +25,20 @@ public class InventoryItem {
     private Integer minQuantity = 0;
     private Integer maxQuantity = 0;
     private Integer totalQuantity = 0;
+    private Boolean isActivate = true;
+    private Boolean isApprove = false;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
+    private Date createDate;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Collection<SupplierItem> supplierItem = new ArrayList<>();
+    @PrePersist
+    private void onCreate() {
+        createDate = new Date();
+    }
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    Collection<Inventory> inventory = new ArrayList<>();
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    Collection<SupplierItem> supplierItem = new ArrayList<>();
+
+//    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    Collection<Inventory> inventory = new ArrayList<>();
 }

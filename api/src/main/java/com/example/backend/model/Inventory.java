@@ -24,6 +24,9 @@ public class Inventory {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Collection<InventorySection> inventorySection = new ArrayList<>();
 
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    InventoryItem inventoryItem;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date receivedDate;

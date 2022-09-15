@@ -2,13 +2,15 @@ import { useEffect, useMemo, useState } from "react";
 import Charts from "../../components/charts/Charts";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import { useDispatch, useSelector } from "react-redux";
+import { countProduct } from "../../redux/productApiCalls";
 import "../pages.css";
 import "./PurchaseStaffHome.css";
 
 const PurchaseStaffHome = () => {
   const [userStats, setUserStats] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
-  //   const user = useSelector((state) => state.user.currentUser);
+  const dispatch = useDispatch();
+  const inventoryCount = useSelector((state) => state.product.count);
 
   const MONTHS = useMemo(
     () => [
@@ -27,6 +29,14 @@ const PurchaseStaffHome = () => {
     ],
     []
   );
+
+  useEffect(()=>{
+    const getCountInventoryData = async () => {
+      await countProduct(dispatch);
+    }
+    
+    getCountInventoryData();
+  },[]);
 
   useEffect(() => {
     let data = [
@@ -52,7 +62,7 @@ const PurchaseStaffHome = () => {
       {
         index: 2,
         title: "New Inventory Items",
-        number: 40,
+        number: inventoryCount,
         percentage: +1.4,
         isDowngrade: true,
         text: "Compared to last month",

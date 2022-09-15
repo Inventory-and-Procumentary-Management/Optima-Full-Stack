@@ -22,8 +22,18 @@ public class InventoryItemController {
 
     //getAll
     @GetMapping("/")
-    public ResponseEntity<List<InventoryItem>> getInventorySections(){
-        return ResponseEntity.ok().body(inventoryItemService.getInventoryItems());
+    public ResponseEntity<List<InventoryItem>> getInventoryItems(@RequestParam String field){
+        return ResponseEntity.ok().body(inventoryItemService.getInventoryItems(field));
+    }
+    //getCount
+    @GetMapping("/count")
+    public ResponseEntity<Long> getInventoryItemsCount(){
+        try {
+            return new ResponseEntity<Long>(inventoryItemService.countInventoryItems(), HttpStatus.OK);
+
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<Long>(HttpStatus.NOT_FOUND);
+        }
     }
     //get one inventory item
     @GetMapping("/{id}")
