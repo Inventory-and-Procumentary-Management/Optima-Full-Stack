@@ -7,8 +7,10 @@ import { v4 as uuidv4 } from 'uuid'
 export default function TableForm({
     desc,setDesc,
     itemCode,setItemCode, 
+    itemName, setItemName,
+    uom, setUom,
     quantity,setQuantity, 
-    price,setPrice, 
+    rate,setRate, 
     amount,setAmount,
     list, setList
 }) {
@@ -24,15 +26,19 @@ export default function TableForm({
             id: uuidv4(),
             desc,
             itemCode,
+            itemName,
+            uom,
             quantity,
-            price,
+            rate,
             amount,
         }
         
         setDesc("")
         setItemCode("")
+        setItemName("")
+        setUom("")
         setQuantity("")
-        setPrice("")
+        setRate("")
         setAmount("")
         setList([...list, newItems])
         setIsEditing(false)
@@ -52,6 +58,10 @@ const editRow= (id)=>{
     setList(list.filter((row)=> row.id !== id))
     setIsEditing(true)
     setDesc(editingRow.desc)
+    setItemCode(editingRow.itemCode)
+    setItemName(editingRow.itemName)
+    setUom(editingRow.uom)
+    setRate(editingRow.rate)
     setQuantity(editingRow.quantity)
     setPrice(editingRow.price)
 }
@@ -100,6 +110,21 @@ const deleteRow = (id)=>{
                   label="Item Code"
                   name="title"
                   autoFocus
+                  onChange={(e)=>setItemCode(e.target.value)}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
+                  // defaultValue={product.title}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="title"
+                  label="Item Name"
+                  name="title"
+                  autoFocus
+                  onChange={(e)=>setItemName(e.target.value)}
                 />
               </Grid>
               <Grid item md={sizeForm}>
@@ -118,12 +143,26 @@ const deleteRow = (id)=>{
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
+                  // defaultValue={product.title}
+                  // variant="standard"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="title"
+                  label="UOM"
+                  name="title"
+                  autoFocus
+                  onChange={(e)=>setUom(e.target.value)}
+                />
+              </Grid>
+              <Grid item md={sizeForm}>
+                <TextField
                 
                   margin="normal"
                   required
                   fullWidth
                   id="description"
-                  label="Invoice Number"
+                  label="Rate"
                   name="invoiceNumber"
                   autoFocus
                 />
@@ -135,7 +174,7 @@ const deleteRow = (id)=>{
                   required
                   fullWidth
                   id="messure"
-                  label="Invoice Date"
+                  label="Amount"
                   type="date"
                   name="messure"
                 >
