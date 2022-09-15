@@ -48,8 +48,11 @@ export default function InvoiceForm() {
 
   const [desc, setDesc] = useState("");
   const [quantity, setQuantity] = useState("");
-  const [price, setPrice] = useState("");
+  const [rate, setRate] = useState("");
   const [amount, setAmount] = useState("");
+  const [itemCode, setItemCode] = useState("");
+  const [itemName, setItemName] = useState("");
+  const [uom, setUom] = useState("");
   const [list, setList] = useState([]);
 
 //   useEffect(() => {
@@ -89,9 +92,9 @@ export default function InvoiceForm() {
     <div className="newProduct common">
       {/* <h1 className="addProductTitle">New Product</h1> */}
       <div className="userTitleContainer">
-        <h1 className="addProductTitle">New Product</h1>
+        <h1 className="addProductTitle">New Purchase Order</h1>
         <div className="userTitleButtons">
-          <Link to={"/purchaseStaff/productList"}>
+          <Link to={"/purchaseManager/purchaseOrder"}>
             <button
               className="productAddButton"
               style={{ backgroundColor: "darkblue" }}
@@ -218,10 +221,16 @@ export default function InvoiceForm() {
                     <TableForm
                      desc={desc}
                      setDesc={setDesc}
+                     itemCode= {itemCode}
+                     setItemCode = {setItemCode}
+                     itemName = {itemName}
+                     setItemName = {setItemName}
+                     uom = {uom}
+                     setUom = {setUom}
                      quantity={quantity}
                      setQuantity={setQuantity}
-                     price={price}
-                     setPrice={setPrice}
+                     rate={rate}
+                     setRate = {setRate}
                      amount={amount}
                      setAmount={setAmount}
                      list={list}
@@ -246,32 +255,10 @@ export default function InvoiceForm() {
                     paddingTop: 15,
                   }}
                 >
-                  Create
+                  Preview Purchase Order
                 </button>
               </Grid>
             </Grid>
-            {/* </Grid> */}
-            {/* <Grid item md={2}> */}
-            {/* <div className="productFormRight">
-                  <div className="productUpload">
-                    <img
-                      // src={product.img}
-                      alt=""
-                      className="productUploadImg"
-                    />
-                    <label for="file">
-                      <Publish />
-                    </label>
-                    <input
-                      type="file"
-                      id="file"
-                      name="img"
-                      style={{ display: "none" }}
-                    />
-                  </div>
-                  <button className="productButton">Update</button>
-                </div> */}
-            {/* </Grid> */}
           </Grid>
           {/* </form> */}
         </Box>

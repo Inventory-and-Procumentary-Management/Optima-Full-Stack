@@ -1,4 +1,4 @@
-import { Box, Grid, TextField } from '@mui/material'
+import { Box, Button, Grid, TextField } from '@mui/material'
 import React from 'react'
 import {useState, useEffect } from 'react'
 import {AiOutlineDelete, AiOutlineEdit} from "react-icons/ai"
@@ -47,10 +47,11 @@ export default function TableForm({
 // calculate amount
     useEffect(()=>{
         const calAmount = (amount)=>{
-            setAmount(quantity * price)
+            setAmount(quantity * rate)
         }
         calAmount(amount)
-    },[amount,price,quantity,setAmount])
+        console.log(rate)
+    },[amount,rate,quantity,setAmount])
 
 //edit function
 const editRow= (id)=>{
@@ -63,7 +64,6 @@ const editRow= (id)=>{
     setUom(editingRow.uom)
     setRate(editingRow.rate)
     setQuantity(editingRow.quantity)
-    setPrice(editingRow.price)
 }
 
 //delete function
@@ -104,13 +104,17 @@ const deleteRow = (id)=>{
                   // defaultValue={product.title}
                   // variant="standard"
                   margin="normal"
+                  value={itemCode}
                   required
                   fullWidth
-                  id="title"
+                  id="itemCode"
                   label="Item Code"
-                  name="title"
+                  name="itemCode"
                   autoFocus
-                  onChange={(e)=>setItemCode(e.target.value)}
+                  onChange={(e)=>{
+                    setItemCode(e.target.value)
+                }
+                }
                 />
               </Grid>
               <Grid item md={sizeForm}>
@@ -118,20 +122,22 @@ const deleteRow = (id)=>{
                   // defaultValue={product.title}
                   // variant="standard"
                   margin="normal"
+                  value={itemName}
                   required
                   fullWidth
-                  id="title"
+                  id="itemName"
                   label="Item Name"
-                  name="title"
+                  name="itemName"
                   autoFocus
                   onChange={(e)=>setItemName(e.target.value)}
                 />
               </Grid>
-              <Grid item md={sizeForm}>
+              <Grid item xs={6} md={4}>
                 <TextField
                   // defaultValue={product.description}
                   // variant="standard"
                   margin="normal"
+                  value={quantity}
                   required
                   fullWidth
                   id="Quantity"
@@ -141,12 +147,13 @@ const deleteRow = (id)=>{
                   onChange={(e)=>setQuantity(e.target.value)}
                 />
               </Grid>
-              <Grid item md={sizeForm}>
+              <Grid item xs={4} md={4}>
                 <TextField
                   // defaultValue={product.title}
                   // variant="standard"
                   margin="normal"
                   required
+                  value={uom}
                   fullWidth
                   id="title"
                   label="UOM"
@@ -155,91 +162,90 @@ const deleteRow = (id)=>{
                   onChange={(e)=>setUom(e.target.value)}
                 />
               </Grid>
-              <Grid item md={sizeForm}>
+              <Grid item xs={4} md={4}>
                 <TextField
-                
                   margin="normal"
                   required
+                  value={rate}
                   fullWidth
                   id="description"
                   label="Rate"
                   name="invoiceNumber"
                   autoFocus
-                />
-              </Grid>
-              <Grid item md={sizeForm}>
-                <TextField
                   
+                  onChange={(e)=>setRate(e.target.value)}
+                />
+                
+              </Grid>
+              <Grid item xs={6} md={6} alignItems="center">
+                <TextField
                   margin="normal"
-                  required
+                  inputProps={
+					{ readOnly: true, }
+				}
+                  value={amount}
                   fullWidth
-                  id="messure"
+                  id="description"
                   label="Amount"
-                  type="date"
-                  name="messure"
+                  name="invoiceNumber"
+                  autoFocus
+                  
+                />
+                 <Button type='submit' size = "medium" variant="contained">
+                    {isEditing ? "Editing Row Item":"Add Table Item"}    
+                </Button>
+              </Grid>
+              <Grid item xs={4} md={4}>
+               
+                </Grid>
+              {/* <Grid item md={sizeForm}>
+                <TextField
+                  value={amount}
                 >
                 </TextField>
-              </Grid>
+              </Grid> */}
             </Grid>
           </Grid>
           {/* </form> */}
         </Box>
       </Box>
         </div>
-    <div className="flex flex-col">
-    <label htmlFor='quantity'>Quantity</label><br></br>
-        <input 
-        type="text" 
-        name="quantity" 
-        id="quantity"
-        placeholder='Quantity' 
-        value={quantity}
-        onChange={(e)=>setQuantity(e.target.value)}
-        />
     </div>
-    <div className="flex flex-col">
-    <label htmlFor='price'>Item price</label> <br></br>
-        <input 
-        type="text" 
-        name="price" 
-        id="price"
-        placeholder='Item price' 
-        value={price}
-        onChange={(e)=>setPrice(e.target.value)}
-        />
-    </div>
-    <div className="flex flex-col">
-    <label htmlFor='amount'>Amount</label>
-        <p>{amount}</p>
-    </div>
-    <br></br>
-    </div>
-    <button 
-    className=""
-        type='submit'>
-        {isEditing ? "Editing Row Item":"Add Table Item"}    
-        </button>
     </form>
 
+    <Box
+        sx={{
+          my: 0.5,
+          mx: 4,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-evenly",
+        }}
+      >
 
     {/*Table Items */}
     <table width="100%" className='mb-10'>
          <thead className='table-head-form'>
                 <tr >
-                <td >Description</td>
-                <td >Quantity</td>
+                <td >Item Code</td>
+                <td >Item Name</td>
+                <td >UOM</td>
                 <td >Price</td>
+                <td >Quantity</td>
                 <td >Amount</td>
                 <td >Action</td>
                 </tr>
          </thead>
-        {list.map(({id, desc,quantity,price,amount}) =>(
+        {list.map(({id,itemCode,itemName,uom,quantity,rate,amount}) =>(
             <React.Fragment key={id}>
             <tbody>
                 <tr>
-                <td>{desc}</td>
+                <td>{itemCode}</td>
+                <td>{itemName}</td>
+                <td>{uom}</td>
+                <td>{rate}</td>
                 <td>{quantity}</td>
-                <td>{price}</td>
                 <td>{amount}</td>
                 <td>
                     <button onClick={()=>deleteRow(id)}>
@@ -257,6 +263,10 @@ const deleteRow = (id)=>{
             </React.Fragment>
         ))}
     </table>
+
+        </Box>
+
+
     </>
   )
 }
