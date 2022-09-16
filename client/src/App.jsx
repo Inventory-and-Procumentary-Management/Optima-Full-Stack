@@ -10,7 +10,7 @@ import config from "./config";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import Sidebar from "./components/sidebar/Sidebar";
-import Topbar from "./components/topbar/Topbar";
+import Topbar from "./components/topbar/TopbarSupplier";
 import SecondTopbar from "./components/secondTopbar/SecondTopbar";
 import MaterialRequest from "./pages/purchasingStaff/materialRequest/MaterialRequest";
 import PurchaseOrder from "./pages/purchasingStaff/purchaseOrder/PurchaseOrder";
@@ -44,6 +44,7 @@ import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDisp
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
 import RequestForm from "./pages/warehouseManager/Stocks/RequestForm";
+import ProfileSupplier from "./pages/Supplier/profile/ProfileSupplier";
 
 const App = () => {
   return (
@@ -160,6 +161,10 @@ const App = () => {
               <Route exact path="/supplier/Supplier_invoices_details">
                 <Supplier_invoices_details />
               </Route>
+              <Route exact path="/supplier/SupplierProfile">
+                <ProfileSupplier />
+              </Route>
+              
               {/* <Route path="/users">
                 <UserList />
               </Route> */}
