@@ -37,8 +37,7 @@ const Request_product = () => {
   const handleSubmit = (event) =>{
     event.preventDefault();
     console.log(formValues);
-    Axios.post("http://localhost:8080/api/save" , {formValues}).
-    then(()=>{console.log("Insert Successful. ")})
+  
 
   }
   
