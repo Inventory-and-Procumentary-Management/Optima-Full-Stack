@@ -12,6 +12,14 @@ import AddIcon from '@mui/icons-material/Add';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Link } from "react-router-dom";
 import { isInteger } from 'formik';
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from "../../redux/productApiCalls";
+import MenuItem from '@mui/material/MenuItem';
 
 
 
@@ -23,6 +31,8 @@ const defautlValues = {
   description:"",
   UOM:"",
 };
+
+
 const top100Films = [
   { label: 'The Shawshank Redemption', year: 1994 },
   { label: 'The Godfather', year: 1972 },
@@ -152,9 +162,13 @@ const top100Films = [
 
 
 const Request_product = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.products);
+  const userType = useSelector((state) => state.user.userType);
     const [formValues , setFormValues] = useState(defautlValues);
     const [priceError ,setPriceError] = useState(false);
     const [quantityError ,setquantityError] = useState(false);
+    const [deleteTrigger, setDeleteTrigger] = useState("");
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -164,6 +178,13 @@ const Request_product = () => {
       });
   
   }
+  useEffect(() => {
+    const getproductsItems = async () => {
+      await getProducts(dispatch);
+      console.log(products)
+    };
+    getproductsItems();
+  }, [dispatch, deleteTrigger]);
   
   
   const handleSubmit = (event) =>{
@@ -201,13 +222,18 @@ const Request_product = () => {
       <Autocomplete
       disablePortal
       id="combo-box-demo"
-      onChange={(event , newValue)=>{if(newValue !== null){alert(newValue.label);}}}
-      options={top100Films}
+     onChange={(event , newValue)=>{if(newValue !== null){alert(newValue.title);}}}
+      options={products}
+      getOptiontitle={(option) => option.title}
+      renderOption={(props , option)=>(<>{option.title} <br></br></>)
+
+      }
       sx={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label="Name"  />}
     />
    
   </div>  {/* div 01 end */ }
+  
   <div className='footer-section'>
     <p className='dont-have-a-product-name'>Dont Have a Product Name to add: <button className='click-me-btn'>
     <Link to="/supplier/Request_new_product">Click Here</Link>
@@ -271,16 +297,19 @@ const Request_product = () => {
   autoComplete="off"
   >
   <TextField
-  
+  error ={priceError ? true : false }
   id="outlined-basic" 
   name='price_per_one' 
   variant="outlined" 
+  helperText={priceError ? "Please Enter a Valid Number" : "" }
   // value={formValues.price_per_one}
   onChange = {(e)=>{
     handleInputChange(e);
-    if(!isInteger(e.target.value)){
-      setPriceError(true)
+    if(!isInteger(e.target.value) || e.target.value <=0){
+      setPriceError(true) 
     }else{setPriceError(false)}
+
+    
     }}
   />
   
@@ -298,14 +327,19 @@ const Request_product = () => {
   autoComplete="off"
   >
   <TextField
-  required
+  error ={quantityError ? true : false }
   id="outlined-basic"
    name='quantity' 
    variant="outlined" 
+   helperText={quantityError ? "Please Enter a Valid Number" : "" }
   //  value={formValues.quantity}
   onChange = {(e)=>{
     handleInputChange(e);
-    if(isInteger(e.target.value)){}
+    if(!isInteger(e.target.value) || e.target.value <=0){
+      setquantityError(true) 
+    }else{setquantityError(false)}
+
+    
     }}
   />
   

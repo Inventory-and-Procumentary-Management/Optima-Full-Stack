@@ -8,6 +8,14 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import './RequestProductStyle.css';
 import Axios from 'axios';
+import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from "../../redux/productApiCalls";
 
 const defautlValues = {
     name :"",
@@ -19,7 +27,11 @@ const defautlValues = {
   };
 
 const Request_existing_product = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.product.products);
+  const userType = useSelector((state) => state.user.userType);
     const [formValues , setFormValues] = useState(defautlValues);
+    const [deleteTrigger, setDeleteTrigger] = useState("");
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -29,6 +41,14 @@ const Request_existing_product = () => {
       });
   
   }
+
+  useEffect(() => {
+    const getproductsItems = async () => {
+      await getProducts(dispatch);
+      console.log(products)
+    };
+    getproductsItems();
+  }, [dispatch, deleteTrigger]);
   
   
   const handleSubmit = (event) =>{
@@ -113,7 +133,7 @@ const Request_existing_product = () => {
   
   </Box>
   </div> {/* div 03 end */ }
-  
+  {products.category}
   <div> {/* div 04 */ }
       <h4>Quantity</h4>
   <Box
