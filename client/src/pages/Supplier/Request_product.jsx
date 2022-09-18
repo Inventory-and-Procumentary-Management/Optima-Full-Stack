@@ -181,7 +181,9 @@ const Request_product = () => {
   useEffect(() => {
     const getproductsItems = async () => {
       await getProducts(dispatch);
-      console.log(products)
+    
+      //console.log(products)
+      console.log(userType);
     };
     getproductsItems();
   }, [dispatch, deleteTrigger]);

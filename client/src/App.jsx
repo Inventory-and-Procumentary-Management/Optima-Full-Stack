@@ -10,7 +10,7 @@ import config from "./config";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 import Sidebar from "./components/sidebar/Sidebar";
-import Topbar from "./components/topbar/TopbarSupplier";
+import Topbar from "./components/topbar/Topbar";
 import SecondTopbar from "./components/secondTopbar/SecondTopbar";
 import MaterialRequest from "./pages/purchasingStaff/materialRequest/MaterialRequest";
 import PurchaseOrder from "./pages/purchasingStaff/purchaseOrder/PurchaseOrder";
