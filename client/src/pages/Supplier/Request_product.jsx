@@ -160,6 +160,8 @@ const top100Films = [
   { label: 'Monty Python and the Holy Grail', year: 1975 },
 ];
 
+const selectValues = [{}];
+
 
 const Request_product = () => {
   const dispatch = useDispatch();
@@ -169,6 +171,28 @@ const Request_product = () => {
     const [priceError ,setPriceError] = useState(false);
     const [quantityError ,setquantityError] = useState(false);
     const [deleteTrigger, setDeleteTrigger] = useState("");
+    const [selectValue, setSelectValue] = useState("");
+
+    let selectItemProduct = products;
+
+    selectItemProduct = selectItemProduct.map(item => {
+      return {
+        category:item.category,
+        createDate:item.createDate,
+        description:item.description,
+        img:item.img,
+        inventor_item_id:item.inventor_item_id,
+        isActivate:item.isActivate,
+        isApprove:item.isApprove,
+        maxQuantity:item.maxQuantity,
+        minQuantity:item.minQuantity,
+        label: item.title,
+        totalQuantity:item.totalQuantity,
+        uom:item.uom,
+      };
+    });
+    console.log(selectItemProduct);
+
 
     const handleInputChange = (e) => {
       const { name, value } = e.target;
@@ -182,7 +206,7 @@ const Request_product = () => {
     const getproductsItems = async () => {
       await getProducts(dispatch);
     
-      //console.log(products)
+      console.log(products)
       console.log(userType);
     };
     getproductsItems();
@@ -223,17 +247,20 @@ const Request_product = () => {
       <h4>Name</h4>
       <Autocomplete
       disablePortal
+      value={selectValue}
       id="combo-box-demo"
-     onChange={(event , newValue)=>{if(newValue !== null){alert(newValue.title);}}}
-      options={products}
-      getOptiontitle={(option) => option.title}
-      renderOption={(props , option)=>(<>{option.title} <br></br></>)
-
-      }
+      options={selectItemProduct}
+      onChange={(event, newValue) => {
+        setSelectValue(newValue);
+        console.log(selectValue);
+        // if(newValue === "fdfdsadfd"){
+        //   alert(newValue);
+        // }
+        // alert(selectValue);
+      }}
       sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Name"  />}
+      renderInput={(params) => <TextField {...params} label="Name Of Product" />}
     />
-   
   </div>  {/* div 01 end */ }
   
   <div className='footer-section'>
