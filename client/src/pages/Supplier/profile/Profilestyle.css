@@ -1,0 +1,78 @@
+.main-div{
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin: 1rem;
+}
+
+
+.image-section-main{
+    background-color: rgb(236, 236, 236);
+    border-radius: 1rem;
+    margin: 1rem;
+    width: 30%;
+}
+.profile-section-main{
+    
+    width: 80%;
+}
+.main-div{
+    display: flex;
+    
+}
+#photo{
+    width: 15.5rem;
+    height: 15.5rem;
+    margin-left: 2rem;
+    margin-top: 2rem;
+}
+.name-style{
+    font-size: 2rem;
+    font-weight: bold;
+    padding: 1rem;
+    background-color:rgb(55, 140, 187) ;
+    color: white;
+    border-radius: 2rem;
+}
+.username-style{
+    padding: 1rem;
+    padding-top: 0rem;
+}
+.contact-information-style{
+    font-size: 1.6rem;
+    font-weight: bold;
+
+}
+.mobilephone-div{
+    display: flex;
+
+}
+.innerDetails{
+    padding: 1rem;
+}
+.contact-infromation-div{
+    background-color: rgb(241, 241, 241);
+    border-radius: 1rem;
+    padding: 1rem;
+    width: max-content;
+}
+.company-description{
+    font-size: 1.3rem;
+    font-weight:bold;
+    margin-left: 1rem;
+}
+.description-text{
+    margin: 1rem;
+    margin-top: 0rem;
+    padding: 1rem;
+}
+.product-details-div{
+    display: flex;
+}
+.product-categories-div{
+    margin: 1rem;
+    padding: 1.5rem;
+    padding-top: 1rem;
+    background-color: rgb(232, 233, 235);
+    border-radius: 2rem;
+}
