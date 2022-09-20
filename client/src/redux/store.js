@@ -13,6 +13,9 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import breadcrumbReducer from "./breadcrumbRedux";
+import inventoryItemReducer from "./inventoryItemRedux";
+import categoryReducer from "./categoryRedux";
+import inventoryReducer from "./inventoryRedux";
 
 const persistConfig = {
   key: "root",
@@ -24,6 +27,9 @@ const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
   breadcrumb: breadcrumbReducer,
+  inventoryItem: inventoryItemReducer,
+  category: categoryReducer,
+  inventoryItem: inventoryReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
