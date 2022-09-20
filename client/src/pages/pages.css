@@ -12,6 +12,14 @@
   padding: 20px;
   border-radius: 10px;
 }
+.userListInventory {
+  /* flex: 4;
+  margin: 20px;
+  z-index: 99; */
+  background-color: white;
+  padding: 20px;
+  border-radius: 0px 0px 10px 10px;
+}
 
 .userListUser {
   display: flex;
