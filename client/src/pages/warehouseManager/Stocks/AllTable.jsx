@@ -135,8 +135,8 @@ const columns = [
 
 const AllTable = () => {
   return (
-    <div className="common">
-      <div className="userList">
+    <div >
+      <div className="userListInventory">
         <div className="top-container-material-request">
           
           <div className="top-container-search-material-request">
