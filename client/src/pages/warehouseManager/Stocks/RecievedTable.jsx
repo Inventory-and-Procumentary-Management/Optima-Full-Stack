@@ -9,73 +9,99 @@ import { inventoryData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
+import {
+  deleteInventory,
+  getInventory,
+  updateInventory,
+} from "../../../redux/inventoryApiCalls";
 
-const columns = [
-  { field: "_id", headerName: "Request ID", width: 160 },
-  {
-    field: "name",
-    headerName: "Item Name",
-    width: 220,
-    renderCell: (params) => {
-      return (
-        <div className="userListUser">
-          {/* <img
-            className="userListImg"
-            src={params.row.img}
-            alt="category Icon"
-          /> */}
-          {params.row.name}
-        </div>
-      );
-    },
-  },
-  { field: "type", headerName: "Unit of Messurement", width: 180 },
-  { field: "recieve", headerName: "Recieve Date", width: 180 },
-  { field: "expire", headerName: "Expire Date", width: 180 },
-  { field: "block", headerName: "Placement", width: 180 },
- 
-//   {
-//     field: "action",
-//     headerName: "Action",
-//     width: 180,
-//     renderCell: (params) => {
-//       return (
-//         <>
-//           {!params.row.isCancel ? (
-//             <button
-//               className="userListEdit"
-//               // onClick={() => {
-//               //   setUpdateShow(true);
-//               //   setCartId(params.row._id);
-//               //   setIsCancelStatus(false);
-//               // }}
-//               style={{ backgroundColor: "red" }}
-//             >
-//               Cancel
-//             </button>
-//           ) : (
-//             <button
-//               className="userListEdit"
-//               style={{ backgroundColor: "red" }}
-//               // onClick={() => {
-//               //     setUpdateShow(true);
-//               //     setCartId(params.row._id);
-//               //     setIsCancelStatus(true);
-//               //   }}
-//             >
-//               Request Received
-//             </button>
-//           )}
-//         </>
-//       );
-//     },
-//   },
-];
 
-const RecievedTable = () => {
+
+export default function RecievedTable(){
+
+  const dispatch = useDispatch();
+  const userType = useSelector((state) => state.user.userType);
+  const inventories = useSelector((state) => state.inventory.inventories);
+
+  const [deleteTrigger, setDeleteTrigger] = useState("");
+
+  useEffect(() => {
+    const getNewInventory = async () => {
+      await getInventory(dispatch);
+      console.log(inventories)
+    };
+    getNewInventory();
+  }, [dispatch, deleteTrigger]);
+
+  const columns = [
+    { field: "inventory_id", headerName: "Request ID", width: 160 },
+    // {
+    //   field: "title",
+    //   headerName: "Item Name",
+    //   width: 220,
+    //   renderCell: (params) => {
+    //     return (
+    //       <div className="userListUser">
+    //         {/* <img
+    //           className="userListImg"
+    //           src={params.row.img}
+    //           alt="category Icon"
+    //         /> */}
+    //         {params.row.title}
+    //       </div>
+    //     );
+    //   },
+    // },
+    //{ field: "uom", headerName: "Unit of Messurement", width: 180 },
+    { field: "sectionQuantity", headerName: "Quantity", width: 180 },
+    { field: "expiredDate", headerName: "Expire Date", width: 180 },
+    { field: "receivedLocation", headerName: "Placement", width: 180 },
+   
+  //   {
+  //     field: "action",
+  //     headerName: "Action",
+  //     width: 180,
+  //     renderCell: (params) => {
+  //       return (
+  //         <>
+  //           {!params.row.isCancel ? (
+  //             <button
+  //               className="userListEdit"
+  //               // onClick={() => {
+  //               //   setUpdateShow(true);
+  //               //   setCartId(params.row._id);
+  //               //   setIsCancelStatus(false);
+  //               // }}
+  //               style={{ backgroundColor: "red" }}
+  //             >
+  //               Cancel
+  //             </button>
+  //           ) : (
+  //             <button
+  //               className="userListEdit"
+  //               style={{ backgroundColor: "red" }}
+  //               // onClick={() => {
+  //               //     setUpdateShow(true);
+  //               //     setCartId(params.row._id);
+  //               //     setIsCancelStatus(true);
+  //               //   }}
+  //             >
+  //               Request Received
+  //             </button>
+  //           )}
+  //         </>
+  //       );
+  //     },
+  //   },
+  ];
+  
+
+
+
+
   return (
-    <div className="common">
-      <div className="userList">
+    <div >
+      <div className="userListInventory">
         <div className="top-container-material-request">
           
           <div className="top-container-search-material-request">
@@ -84,10 +110,10 @@ const RecievedTable = () => {
         </div>
         <div className="bottom-container-material-request">
           <DataGrid
-            rows={inventoryData}
+            rows={inventories}
             disableSelectionOnClick
             columns={columns}
-            getRowId={(row) => row._id}
+            getRowId={(row) => row.inventory_id}
             pageSize={7}
             checkboxSelection
             autoHeight
@@ -153,4 +179,3 @@ const RecievedTable = () => {
   );
 };
 
-export default RecievedTable;
