@@ -50,7 +50,6 @@ export default function TableForm({
             setAmount(quantity * rate)
         }
         calAmount(amount)
-        console.log(rate)
     },[amount,rate,quantity,setAmount])
 
 //edit function

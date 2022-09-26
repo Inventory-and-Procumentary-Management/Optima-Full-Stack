@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useEffect } from "react";
 import TableForm from "../../Supplier/invoices/TableForm";
 
+
 export default function InvoiceForm() {
   const [stock, setStock] = useState(true);
   const [category, setCategory] = useState("");
@@ -54,39 +55,22 @@ export default function InvoiceForm() {
   const [itemName, setItemName] = useState("");
   const [uom, setUom] = useState("");
   const [list, setList] = useState([]);
+  const [clientName, setClientName] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [invoiceNum, setInvoiceNum] = useState("");
+  
+  // function uniqueID() {
+  //   return Math.floor(Math.random() + Date.now())
+  //   }
 
-//   useEffect(() => {
-//     const date = new Date();
-//     let currentDate =
-//       date.getFullYear() +
-//       "-" +
-//       ("0" + (date.getMonth() + 1)).slice(-2) +
-//       "-" +
-//       ("0" + date.getDate()).slice(-2);
-//     console.log(currentDate);
-//     setCurrent_Date(currentDate);
-//   }, []);
+  //generate unique invoice number
+//   useEffect(()=>{
+//     const uniqueID = ()=>{
+//         setInvoiceNum(Math.random())
+//     }
+//     uniqueID()
+// },[invoiceNum, setInvoiceNum])
 
-//   const handleChange = (e) => {
-//     setInputs((prev) => {
-//       return { ...prev, [e.target.name]: e.target.value };
-//     });
-//   };
-
-//   const handleClick = (e) => {
-//     // if (!e.target.value) {
-//     //   setShow(true);
-//     //   return;
-//     // }
-//     e.preventDefault();
-//     const fileName = new Date().getTime() + file.name;;
-//     // const uploadTask = uploadBytesResumable(storageRef, file);
-
-//     // Register three observers:
-//     // 1. 'state_changed' observer, called any time the state changes
-//     // 2. Error observer, called on failure
-//     // 3. Completion observer, called on successful completion
-//   }
 
   return (
     <div className="newProduct common">
@@ -144,9 +128,7 @@ export default function InvoiceForm() {
                     setTitleError(false);
                     setTitleMessageError("");
                     // handleChange();
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
+                    setClientName(e.target.value)
                   }}
                 />
               </Grid>
@@ -166,9 +148,7 @@ export default function InvoiceForm() {
                   onChange={(e) => {
                     setDescriptionError(false);
                     setDescriptionMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
+                    setClientAddress(e.target.value);
                   }}
                 />
               </Grid>
@@ -180,18 +160,13 @@ export default function InvoiceForm() {
                   margin="normal"
                   required
                   fullWidth
+                  
                   id="description"
                   label="Invoice Number"
                   name="invoiceNumber"
                   autoFocus
                   helperText={descriptionMessageError}
-                  onChange={(e) => {
-                    setDescriptionError(false);
-                    setDescriptionMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
-                  }}
+                  value={invoiceNum}
                 />
               </Grid>
               <Grid item md={sizeForm}>

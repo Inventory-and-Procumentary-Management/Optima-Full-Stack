@@ -31,9 +31,9 @@ export default function Invoice() {
 								</div>
 								<div className="col-lg-6 col-md-6 col-sm-6">
 									<address className="text-right">
-										Maxwell admin Inc, 45 NorthWest Street.<br />
-										Sunrise Blvd, San Francisco.<br />
-										00000 00000
+										161/A, <br />
+										Aggona,<br />
+										Sri Lanka
 									</address>
 								</div>
 							</div>
