@@ -4,6 +4,7 @@ import com.example.backend.model.InventoryItem;
 import com.example.backend.repository.InventoryItemRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,9 +22,10 @@ public class InventoryItemServiceImpl implements InventoryItemService{
         log.info("Saving inventory item {} to the database",inventoryItem.getInventor_item_id());
         return inventoryItemRepository.save(inventoryItem);
     }
-    public List<InventoryItem> getInventoryItems(){
+    public List<InventoryItem> getInventoryItems(String field){
         log.info("Fetching all inventory items");
-        return inventoryItemRepository.findAll();
+//        return inventoryItemRepository.findAll(Sort.by(Sort.Direction.ASC, field));
+        return inventoryItemRepository.findAll(Sort.by(Sort.Direction.DESC, field));
     }
     public InventoryItem getInventoryItem(Long id){
         log.info("Get {} inventory item from database",id);
@@ -60,7 +62,17 @@ public class InventoryItemServiceImpl implements InventoryItemService{
         if (Objects.nonNull(inventoryItem.getTotalQuantity()) && !inventoryItem.getTotalQuantity().equals(0)) {
             existingInventoryItem.setTotalQuantity(inventoryItem.getTotalQuantity());
         }
+        if (Objects.nonNull(inventoryItem.getIsActivate())) {
+            existingInventoryItem.setIsActivate(inventoryItem.getIsActivate());
+        }
+        if (Objects.nonNull(inventoryItem.getIsApprove())) {
+            existingInventoryItem.setIsApprove(inventoryItem.getIsApprove());
+        }
 
         return inventoryItemRepository.save(existingInventoryItem);
+    }
+
+    public Long countInventoryItems(){
+        return inventoryItemRepository.count();
     }
 }

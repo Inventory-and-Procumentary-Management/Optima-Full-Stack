@@ -10,7 +10,6 @@ import app from "../../../../firebase";
 import { addProduct } from "../../../../redux/productApiCalls";
 import { addUser, addRole } from "../../../../redux/userApiCalls";
 import { useDispatch } from "react-redux";
-import SweetAlert from "react-bootstrap-sweetalert";
 import { Link, useLocation } from "react-router-dom";
 // import "../user/user.css";
 
@@ -69,7 +68,6 @@ export default function NewUser() {
   const [idMessageError, setIdMessageError] = useState("");
   const [usernameMessageError, setUsernameMessageError] = useState("");
   const [usertypeMessageError, setUsertypeMessageError] = useState("");
-  const [passwordMessageError, setPasswordMessageError] = useState("");
   const [mobileNumberMessageError, setMobileNumberMessageError] = useState("");
 
   useEffect(() => {
@@ -449,20 +447,20 @@ export default function NewUser() {
           {/* </form> */}
         </Box>
       </Box>
-      <SweetAlert
+      {/* <SweetAlert
         show={allShow}
         success
         title="Successfully added!"
         // text="SweetAlert in React"
         onConfirm={() => setAllShow(false)}
-      ></SweetAlert>
-      <SweetAlert
+      ></SweetAlert> */}
+      {/* <SweetAlert
         show={show}
         danger
         title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
-      ></SweetAlert>
+      ></SweetAlert> */} 
     </div>
   );
 }

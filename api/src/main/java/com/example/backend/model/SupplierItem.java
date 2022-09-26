@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -22,7 +24,7 @@ public class SupplierItem {
 //    @Column(columnDefinition = "boolean default true")
     private Boolean isActivate = true;
 //    @Column(columnDefinition = "boolean default false")
-    private Boolean isApprove = false;
+    private Integer isApprove = 0;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date createDate;
@@ -31,4 +33,7 @@ public class SupplierItem {
     private void onCreate() {
         createDate = new Date();
     }
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    InventoryItem inventoryItem;
 }

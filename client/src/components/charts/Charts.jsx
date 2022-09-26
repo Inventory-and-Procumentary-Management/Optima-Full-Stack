@@ -12,7 +12,8 @@ import {
 export default function Charts({ title, data, dataKey1,dataKey2, grid }) {
   return (
     <div className="chart">
-      <h3 className="chartTitle">{title}</h3>
+      {/* <h3 className="chartTitle">{title}</h3> */}
+      <h3 className="h3Title">{title}</h3>
       <ResponsiveContainer width="100%" aspect={4 / 1}>
         <LineChart data={data}>
           <XAxis dataKey="name" stroke="#8884d8" padding={{ left: 30, right: 30 }} />

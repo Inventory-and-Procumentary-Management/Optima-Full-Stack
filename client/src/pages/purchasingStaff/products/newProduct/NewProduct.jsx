@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./NewProduct.css";
 import {
   getStorage,
@@ -8,16 +8,19 @@ import {
 } from "firebase/storage";
 import app from "../../../../firebase";
 import { addProduct } from "../../../../redux/productApiCalls";
-import { useDispatch } from "react-redux";
-import SweetAlert from "react-bootstrap-sweetalert";
-import { Link, useLocation } from "react-router-dom";
-// import "../user/user.css";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useLocation, Redirect } from "react-router-dom";
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Grid from "@mui/material/Grid";
 import MenuItem from "@mui/material/MenuItem";
-import { useEffect } from "react";
+import PropTypes from "prop-types";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import Swal from "sweetalert2";
 
 const stockData = [
   {
@@ -29,6 +32,39 @@ const stockData = [
     label: "False",
   },
 ];
+
+function CircularProgressWithLabel(props) {
+  return (
+    <Box sx={{ position: "relative", display: "inline-flex" }}>
+      <CircularProgress variant="determinate" {...props} />
+      <Box
+        sx={{
+          top: 0,
+          left: 0,
+          bottom: 0,
+          right: 0,
+          position: "absolute",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Typography variant="caption" component="div" color="text.secondary">
+          {`${Math.round(props.value)}%`}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
+
+CircularProgressWithLabel.propTypes = {
+  /**
+   * The value of the progress indicator for the determinate variant.
+   * Value between 0 and 100.
+   * @default 0
+   */
+  value: PropTypes.number.isRequired,
+};
 
 const categoryData = [
   {
@@ -85,23 +121,18 @@ const uomData = [
 ];
 
 export default function NewProduct() {
-  const [stock, setStock] = useState(true);
   const [category, setCategory] = useState("");
   const [UOM, setUOM] = useState("");
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [allShow, setAllShow] = useState(false);
-  const [show, setShow] = useState(false);
   const [sizeForm, setSizeForm] = useState(6);
-  const [current_date, setCurrent_Date] = useState("");
   const dispatch = useDispatch();
 
   const [titleError, setTitleError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [categoryError, setCategoryError] = useState(false);
   const [messureError, setMessureError] = useState(false);
-  const [priceError, setPriceError] = useState(false);
-  const [inStockError, setInStockError] = useState(false);
   const [quantityError, setQuantityError] = useState(false);
   const [minimumLevelError, setMinimumLevelError] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -110,24 +141,25 @@ export default function NewProduct() {
   const [descriptionMessageError, setDescriptionMessageError] = useState("");
   const [categoryMessageError, setCategoryMessageError] = useState("");
   const [messureMessageError, setMessureMessageError] = useState("");
-  const [priceMessageError, setPriceMessageError] = useState(false);
-  const [inStockMessageError, setInStockMessageError] = useState(false);
-  const [quantityMessageError, setQuantityMessageError] = useState(false);
-  const [minimumLevelMessageError, setMinimumLevelMessageError] =
-    useState(false);
+  const [quantityMessageError, setQuantityMessageError] = useState("");
+  const [minimumLevelMessageError, setMinimumLevelMessageError] = useState(false);
   const [imageMessageError, setImageMessageError] = useState(false);
 
+  const [progress, setProgress] = useState(0);
+  const [afterClicked, setAfterClicked] = useState(false);
+
+  const userType = useSelector((state) => state.user.userType);
+
   useEffect(() => {
-    const date = new Date();
-    let currentDate =
-      date.getFullYear() +
-      "-" +
-      ("0" + (date.getMonth() + 1)).slice(-2) +
-      "-" +
-      ("0" + date.getDate()).slice(-2);
-    console.log(currentDate);
-    setCurrent_Date(currentDate);
-  }, []);
+    const timer = setInterval(() => {
+      setProgress((prevProgress) =>
+        prevProgress >= 100 ? 0 : prevProgress + 10
+      );
+    }, 800);
+    return () => {
+      clearInterval(timer);
+    };
+  }, [afterClicked]);
 
   const handleChange = (e) => {
     setInputs((prev) => {
@@ -135,62 +167,142 @@ export default function NewProduct() {
     });
   };
 
-  const handleClick = (e) => {
-    // if (!e.target.value) {
-    //   setShow(true);
-    //   return;
-    // }
+  const handleClick = async (e) => {
     e.preventDefault();
-    const fileName = new Date().getTime() + file.name;
-    const storage = getStorage(app);
-    const storageRef = ref(storage, fileName);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+    const data = new FormData(e.currentTarget);
+    let formData = {
+      title: data.get("title"),
+      description: data.get("description"),
+      category: data.get("category"),
+      uom: data.get("messure"),
+      minQuantity: data.get("minQuantity"),
+      maxQuantity: data.get("maxQuantity"),
+      file: data.get("file"),
+    };
+    if (!formData.title) {
+      setTitleError(true);
+      setTitleMessageError("Title can't be empty!");
+    } else if (!formData.description) {
+      setDescriptionError(true);
+      setDescriptionMessageError("Description can't be empty!");
+    } else if (!formData.category) {
+      setCategoryError(true);
+      setCategoryMessageError("Category can't be empty!");
+    } else if (!formData.uom) {
+      setMessureError(true);
+      setMessureMessageError("UOM can't be empty!");
+    } else if (!formData.minQuantity) {
+      setMinimumLevelError(true);
+      setMinimumLevelMessageError("Minimum level can't be empty!");
+    } else if (!formData.maxQuantity) {
+      setQuantityError(true);
+      setQuantityMessageError("Maximum level can't be empty!");
+    } else if (!file) {
+      setImageError(true);
+      setImageMessageError("Image can't be empty!");
+    } else if(parseInt(formData.minQuantity) >= parseInt(formData.maxQuantity)){
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Maximum level should be greater than minimum level!'
+      })
+    }else {
+      const fileName = new Date().getTime() + file.name;
+      const storage = getStorage(app);
+      const storageRef = ref(storage, fileName);
+      const uploadTask = uploadBytesResumable(storageRef, file);
 
-    // Register three observers:
-    // 1. 'state_changed' observer, called any time the state changes
-    // 2. Error observer, called on failure
-    // 3. Completion observer, called on successful completion
-    uploadTask.on(
-      "state_changed",
-      (snapshot) => {
-        // Observe state change events such as progress, pause, and resume
-        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-        console.log("Upload is " + progress + "% done");
-        switch (snapshot.state) {
-          case "paused":
-            console.log("Upload is paused");
-            break;
-          case "running":
-            console.log("Upload is running");
-            break;
-          default:
+      // Register three observers:
+      // 1. 'state_changed' observer, called any time the state changes
+      // 2. Error observer, called on failure
+      // 3. Completion observer, called on successful completion
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          // Observe state change events such as progress, pause, and resume
+          // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+          setAfterClicked(true);
+          const prevProgress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+          console.log("Upload is " + prevProgress + "% done");
+          switch (snapshot.state) {
+            case "paused":
+              console.log("Upload is paused");
+              break;
+            case "running":
+              console.log("Upload is running");
+              break;
+            default:
+          }
+        },
+        (error) => {
+          // Handle unsuccessful uploads
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Image added unsuccess!'
+          })
+        },
+        () => {
+          // Handle successful uploads on complete
+          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            const product = {
+              ...inputs,
+              img: downloadURL,
+              // categories: [...cat, "all"],
+              category: category,
+              uom: UOM,
+              isApprove: userType === "ROLE_PURCHASING_STAFF" ? false : true,
+            };
+            const productStatus = addProduct(product, dispatch);
+            console.log(productStatus.PromiseResult);
+            if (productStatus) {
+              setAfterClicked(false);
+              setProgress(0);
+              setAllShow(true);
+              Swal.fire({
+                title: "Success!",
+                text: "Product added success!",
+                icon: "success",
+                confirmButtonText: 'Ok',
+                confirmButtonColor: '#378cbb',
+                // showConfirmButton: false,
+                // timer: 2000,
+              }).then((result) => {
+                setInputs({});
+                setCategory("");
+                setFile(null);
+                setUOM("");
+                // if (result.isConfirmed) {
+                //   Swal.fire('Saved!', '', 'success')
+                // }
+                // window.location.href = "http://localhost:3000/purchaseStaff/productList";
+              })
+              // return (
+              //   <Stack sx={{ width: "100%" }} spacing={2}>
+              //     <Alert severity="success">
+              //       Product added success!
+              //     </Alert>
+              //   </Stack>
+              // );
+            } else {
+              return (
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: 'Product added unsuccess!'
+                })
+                // <Stack sx={{ width: "100%" }} spacing={2}>
+                //   <Alert severity="warning">Product added unsuccess!</Alert>
+                // </Stack>
+              );
+            }
+          });
         }
-      },
-      (error) => {
-        // Handle unsuccessful uploads
-      },
-      () => {
-        // Handle successful uploads on complete
-        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          const product = {
-            ...inputs,
-            img: downloadURL,
-            // categories: [...cat, "all"],
-            category: category,
-            messure: UOM,
-            inStock: stock,
-            isActivate: true,
-            createDate: current_date,
-            isApprove: false,
-          };
-          addProduct(product, dispatch);
-          setAllShow(true);
-        });
-      }
-    );
+      );
+    }
   };
 
   return (
@@ -201,8 +313,8 @@ export default function NewProduct() {
         <div className="userTitleButtons">
           <Link to={"/purchaseStaff/productList"}>
             <button
-              className="productAddButton"
-              style={{ backgroundColor: "darkblue" }}
+              className="color-contained-button"
+              style={{ marginRight: 10, paddingLeft:17, paddingRight:17 }}
             >
               Back
             </button>
@@ -225,6 +337,7 @@ export default function NewProduct() {
         <Box
           component="form"
           noValidate
+          // autoComplete="off"
           onSubmit={handleClick}
           className="productForm"
           sx={{ m: 5 }}
@@ -236,7 +349,7 @@ export default function NewProduct() {
               <Grid item md={sizeForm}>
                 <TextField
                   error={titleError}
-                  // defaultValue={product.title}
+                  // defaultValue={inputs.title}
                   // variant="standard"
                   margin="normal"
                   required
@@ -244,7 +357,6 @@ export default function NewProduct() {
                   id="title"
                   label="Product Name"
                   name="title"
-                  autoComplete="title"
                   autoFocus
                   helperText={titleMessageError}
                   onChange={(e) => {
@@ -260,7 +372,7 @@ export default function NewProduct() {
               <Grid item md={sizeForm}>
                 <TextField
                   error={descriptionError}
-                  // defaultValue={product.description}
+                  // defaultValue={inputs.description}
                   // variant="standard"
                   margin="normal"
                   required
@@ -280,29 +392,6 @@ export default function NewProduct() {
                   }}
                 />
               </Grid>
-              {/* <Grid item md={sizeForm}>
-                <TextField
-                  error={categoryError}
-                  // defaultValue={product.category}
-                  // variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="category"
-                  label="Category"
-                  name="category"
-                  autoComplete="category"
-                  autoFocus
-                  helperText={categoryMessageError}
-                  onChange={(e) => {
-                    setCategoryError(false);
-                    setCategoryMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
-                  }}
-                />
-              </Grid> */}
               <Grid item md={sizeForm}>
                 <TextField
                   error={categoryError}
@@ -333,29 +422,6 @@ export default function NewProduct() {
                   ))}
                 </TextField>
               </Grid>
-              {/* <Grid item md={sizeForm}>
-                <TextField
-                  error={messureError}
-                  // defaultValue={product.messure}
-                  // variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="messure"
-                  label="Unit of Messurement"
-                  name="messure"
-                  autoComplete="messure"
-                  autoFocus
-                  helperText={messureMessageError}
-                  onChange={(e) => {
-                    setMessureError(false);
-                    setMessureMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
-                  }}
-                />
-              </Grid> */}
               <Grid item md={sizeForm}>
                 <TextField
                   select
@@ -388,65 +454,17 @@ export default function NewProduct() {
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
-                  error={priceError}
-                  // defaultValue={product.messure}
-                  // variant="standard"
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="price"
-                  label="Price (Rs)"
-                  name="price"
-                  type="number"
-                  autoComplete="price"
-                  autoFocus
-                  helperText={priceMessageError}
-                  onChange={(e) => {
-                    setPriceError(false);
-                    setPriceMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid item md={sizeForm}>
-                <TextField
-                  error={quantityError}
-                  // defaultValue={product.messure}
-                  // variant="standard"
-                  margin="normal"
-                  required
-                  type="number"
-                  fullWidth
-                  id="quantity"
-                  label="Quantity"
-                  name="quantity"
-                  autoComplete="quantity"
-                  autoFocus
-                  helperText={quantityMessageError}
-                  onChange={(e) => {
-                    setQuantityError(false);
-                    setQuantityMessageError("");
-                    setInputs((prev) => {
-                      return { ...prev, [e.target.name]: e.target.value };
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid item md={sizeForm}>
-                <TextField
                   error={minimumLevelError}
-                  // defaultValue={product.messure}
+                  // defaultValue={inputs.minQuantity}
                   // variant="standard"
                   type="number"
                   margin="normal"
                   required
                   fullWidth
-                  id="minimumLevel"
+                  id="minQuantity"
                   label="Minimum Level"
-                  name="minimumLevel"
-                  autoComplete="minimumLevel"
+                  name="minQuantity"
+                  autoComplete="minQuantity"
                   autoFocus
                   helperText={minimumLevelMessageError}
                   onChange={(e) => {
@@ -460,44 +478,33 @@ export default function NewProduct() {
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
-                  error={inStockError}
-                  // defaultValue={product.messure}
+                  error={quantityError}
+                  // defaultValue={inputs.maxQuantity}
                   // variant="standard"
-                  value={stock}
                   margin="normal"
                   required
-                  select
+                  type="number"
                   fullWidth
-                  id="in_stock"
-                  label="Stock"
-                  name="in_stock"
-                  autoComplete="in_stock"
+                  id="maxQuantity"
+                  label="Maximum Level"
+                  name="maxQuantity"
+                  autoComplete="maxQuantity"
                   autoFocus
-                  helperText={inStockMessageError}
-                  onChange={(event) => {
-                    setInStockError(false);
-                    setInStockMessageError("");
-                    setStock(event.target.value);
-                    // handleCat();
+                  helperText={quantityMessageError}
+                  onChange={(e) => {
+                    setQuantityError(false);
+                    setQuantityMessageError("");
+                    setInputs((prev) => {
+                      return { ...prev, [e.target.name]: e.target.value };
+                    });
                   }}
-                >
-                  {stockData.map((option) => (
-                    <MenuItem key={option.value} value={option.value}>
-                      {option.label}
-                    </MenuItem>
-                  ))}
-                </TextField>
+                />
               </Grid>
+
               <Grid item md={sizeForm}>
-                {/* <input
-                  type="file"
-                  id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
-                  required
-                /> */}
                 <TextField
                   error={imageError}
-                  // defaultValue={product.messure}
+                  // defaultValue={null}
                   // variant="standard"
                   type="file"
                   margin="normal"
@@ -516,7 +523,18 @@ export default function NewProduct() {
                   }}
                 />
               </Grid>
-              <Grid item md={sizeForm}></Grid>
+              <Grid
+                item
+                md={sizeForm}
+                container
+                sx={{ alignItems: "center", justifyContent: "left" }}
+              >
+                {afterClicked ? (
+                  <CircularProgressWithLabel value={progress} />
+                ) : (
+                  <></>
+                )}
+              </Grid>
               <Grid
                 item
                 md={12}
@@ -565,20 +583,20 @@ export default function NewProduct() {
           {/* </form> */}
         </Box>
       </Box>
-      <SweetAlert
+       {/* <SweetAlert
         show={allShow}
         success
         title="Successfully added!"
         // text="SweetAlert in React"
         onConfirm={() => setAllShow(false)}
-      ></SweetAlert>
-      <SweetAlert
+      ></SweetAlert> */}
+      {/* <SweetAlert
         show={show}
         danger
         title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
-      ></SweetAlert>
+      ></SweetAlert> */} 
     </div>
   );
 }

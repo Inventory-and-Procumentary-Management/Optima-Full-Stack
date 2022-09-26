@@ -19,7 +19,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import SweetAlert from "react-bootstrap-sweetalert";
+import Swal from "sweetalert2";
 
 import { login } from "../../redux/userApiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,8 +48,6 @@ export default function SignInSide() {
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [loginShow, setLoginShow] = useState(false);
-  const [loginCancelShow, setLoginCancelShow] = useState(false);
   const [loginErrorSet, setLoginErrorSet] = useState(false);
   const [errorMessageEmail, setErrorMessageEmail] = useState("");
   const [errorMessagePassword, setErrorMessagePassword] = useState("");
@@ -74,35 +72,50 @@ export default function SignInSide() {
       setErrorMessagePassword("Password can't be empty!");
     } else {
       console.log(userData);
-      await login(dispatch, userData);
+      const loginStatus = await login(dispatch, userData);
       setLoginErrorSet(userError);
       console.log(user);
       console.log(userError);
-      // if (userError) {
-      //   setLoginCancelShow(true);
-      //   // window.location.href = "http://localhost:3000/login";
-      // } else {
-      //   setLoginShow(true);
-      // }
+      if (loginStatus) {
+        Swal.fire({
+          title: "Login Success!",
+          icon: "success",
+          confirmButtonText: 'Ok',
+          // showConfirmButton: false,
+          // timer: 2000,
+        }).then((result) => {
+          window.location.href = "http://localhost:3000/";
+          // window.location.href = "http://localhost:3000/purchaseStaff/productList";
+        })
+        // setLoginCancelShow(true);
+        // window.location.href = "http://localhost:3000/login";
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Login Unsuccess!',
+          text: 'Please try again'
+        })
+        // setLoginShow(true);
+      }
     }
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <SweetAlert
+       {/* <SweetAlert
         show={loginShow}
         success
         title="Successfully Login!"
         // text="SweetAlert in React"
         onConfirm={() => setLoginShow(false)}
-      ></SweetAlert>
-      <SweetAlert
+      ></SweetAlert> */}
+      {/* <SweetAlert
         show={loginCancelShow}
         danger
         title="Login Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setLoginCancelShow(false)}
-      ></SweetAlert>
+      ></SweetAlert> */}
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
