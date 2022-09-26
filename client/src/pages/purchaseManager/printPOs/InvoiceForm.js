@@ -3,7 +3,7 @@ import "../products/newProduct/NewProduct.css";
 
 import { useDispatch } from "react-redux";
 import SweetAlert from "react-bootstrap-sweetalert";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate , useHistory} from "react-router-dom";
 // import "../user/user.css";
 
 import Box from "@mui/material/Box";
@@ -15,9 +15,10 @@ import TableForm from "../../Supplier/invoices/TableForm";
 
 
 export default function InvoiceForm() {
+  const history = useHistory()
   const [stock, setStock] = useState(true);
   const [category, setCategory] = useState("");
-  const [UOM, setUOM] = useState("");
+  const [invoiceDate, setInvoiceDate] = useState("");
   const [inputs, setInputs] = useState({});
   const [file, setFile] = useState(null);
   const [allShow, setAllShow] = useState(false);
@@ -71,6 +72,13 @@ export default function InvoiceForm() {
 //     uniqueID()
 // },[invoiceNum, setInvoiceNum])
 
+function handleClick(){
+  history.push("/purchaseManager/invoicePreview", {
+    list, clientAddress, clientName, invoiceNum, invoiceDate
+  })
+  // navigation.navigate("/purchaseManager/newMaterialRequest1")
+  // console.log(list, clientAddress, clientName, invoiceNum, invoiceDate);
+}
 
   return (
     <div className="newProduct common">
@@ -160,18 +168,20 @@ export default function InvoiceForm() {
                   margin="normal"
                   required
                   fullWidth
-                  
                   id="description"
                   label="Invoice Number"
                   name="invoiceNumber"
                   autoFocus
                   helperText={descriptionMessageError}
-                  value={invoiceNum}
+                  onChange={(e) => {
+                    setDescriptionError(false);
+                    setDescriptionMessageError("");
+                    setInvoiceNum(e.target.value);
+                  }}
                 />
               </Grid>
               <Grid item md={sizeForm}>
                 <TextField
-                  value={UOM}
                   error={messureError}
                   // defaultValue={product.messure}
                   // variant="standard"
@@ -186,7 +196,7 @@ export default function InvoiceForm() {
                   onChange={(event) => {
                     setMessureError(false);
                     setMessureMessageError("");
-                    setUOM(event.target.value);
+                    setInvoiceDate(event.target.value);
                     // handleCat();
                   }}
                 >
@@ -220,7 +230,7 @@ export default function InvoiceForm() {
               >
                 <button
                   
-                  // onClick={handleClick}
+                  onClick={handleClick}
                   // className="addProductButton"
                   className="color-contained-button"
                   style={{

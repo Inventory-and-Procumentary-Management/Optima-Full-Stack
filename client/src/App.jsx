@@ -186,6 +186,9 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
+              <InvoiceForm />
+              </Route>
+              <Route path="/purchaseManager/invoicePreview">
               <Invoice />
               </Route>
             </div>
