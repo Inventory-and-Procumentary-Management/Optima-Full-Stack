@@ -88,3 +88,7 @@
     font-size: 1.3rem;
     font-weight: bold;
   }
+/* .cateroty-and-uom{
+  display: grid;
+  grid-template-columns: auto auto;
+} */

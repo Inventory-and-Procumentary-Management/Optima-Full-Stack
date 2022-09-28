@@ -19,7 +19,7 @@ public class InventoryItemServiceImpl implements InventoryItemService{
     private final InventoryItemRepository inventoryItemRepository;
 
     public InventoryItem saveInventoryItems(InventoryItem inventoryItem){
-        log.info("Saving inventory item {} to the database",inventoryItem.getInventor_item_id());
+//        log.info("Saving inventory item {} to the database",inventoryItem.getInventor_item_id());
         return inventoryItemRepository.save(inventoryItem);
     }
     public List<InventoryItem> getInventoryItems(String field){
