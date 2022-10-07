@@ -1,0 +1,80 @@
+.titleBox {
+    flex: 4;
+    padding: 20px;
+    background-color: "black";
+  }
+  
+  .heading {
+    flex: 4;
+    margin: 20px;
+    z-index: 99;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .subheadingContainer {
+    display: flex;
+    align-items: center;
+    background-color: aqua; 
+  }
+  
+  .confirmButton {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+  
+  .editButton {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    /* margin: 0 10px 0; */
+    background-color: #3bb077;
+    color: white;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  
+  .editButtonColor {
+    background-color: #bdba2c;
+  }
+  
+  .deleteButton {
+    color: red;
+    cursor: pointer;
+  }
+  
+  
+  .deleteButton:hover {
+    background-color: #378cbb;
+    border: 2px solid #378cbb;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .editButton:hover {
+    background-color: white;
+    border: 2px solid #378cbb;
+    padding: 6px 10px;
+    border-radius: 5px;
+    color: #378cbb;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .adduserBox {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin: 0px 25px 25px 25px;
+  }
+  
+  
+  
+  
