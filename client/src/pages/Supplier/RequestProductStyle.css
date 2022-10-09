@@ -92,3 +92,11 @@
   display: grid;
   grid-template-columns: auto auto;
 } */
+.category-style{
+  border: 0.5px solid rgb(226, 226, 226);
+  padding: 0.625rem;
+  width: 10rem;
+  border-radius: 0.4rem;
+  background-color: rgb(226, 226, 226);
+  
+}

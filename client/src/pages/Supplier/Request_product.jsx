@@ -174,6 +174,7 @@ const Request_product = () => {
     const [selectValue, setSelectValue] = useState("No Product");
     const [selectObjectProduct , setSelectObjectProduct ] = useState({});
     const [inputValue, setInputValue] = useState('');
+    const [displayCategory , setdisplayCategory] = useState(false)
 
     let selectItemProduct = products;
 
@@ -193,7 +194,7 @@ const Request_product = () => {
         uom:item.uom,
       };
     });
-    console.log(selectItemProduct);
+    //console.log(selectItemProduct);
  
 
 
@@ -254,6 +255,7 @@ const Request_product = () => {
         onChange={(event, newValue) => {
           setSelectValue(newValue.label);
           setSelectObjectProduct(newValue);
+          console.log(newValue)
         }}
         inputValue={inputValue}
         onInputChange={(event, newInputValue) => {
@@ -264,7 +266,7 @@ const Request_product = () => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Products" />}
       />
-      <button>OK</button>
+      <button onClick={()=>{setdisplayCategory(true);; console.log(selectObjectProduct.category)}}>OK</button>
   </div>  {/* div 01 end */ }
   
   <div className='footer-section'>
@@ -274,9 +276,9 @@ const Request_product = () => {
     
   </div>
   
-  <div className='cateroty-and-uom'>
+  {displayCategory ?(<div className='cateroty-and-uom'>
   <div> {/* div 02 */ }
-      <h4>Category</h4>
+      {/* <h4>Category</h4> */}
   <Box
   component="form"
   
@@ -287,7 +289,7 @@ const Request_product = () => {
   
   autoComplete="off"
   >
-  <TextField 
+  {/* <TextField 
   id="outlined-basic" 
   disabled
   name='category' 
@@ -295,13 +297,16 @@ const Request_product = () => {
   defaultValue={selectObjectProduct.category}
   // value={formValues.category}
   onChange = {handleInputChange}
-  />
+  /> */}
+
+    <div className='category-style'>{`Category: ${selectObjectProduct.category !== null ? `'${selectObjectProduct.category}'` : 'null'}`}</div>
+      {/* <div>{`inputValue: '${inputValue}'`}</div> */}
   
   </Box>
   </div> {/* div 02  end*/ }
 
   <div> {/* div 05 */ }
-      <h4>Unit Of Measurement</h4>
+      {/* <h4>Unit Of Measurement</h4> */}
   <Box
   component="form"
   sx={{
@@ -310,20 +315,22 @@ const Request_product = () => {
   noValidate
   autoComplete="off"
   >
-  <TextField
+  {/* <TextField
   id="outlined-basic"
   disabled
    name='UOM' 
    variant="outlined" 
    value={formValues.UOM}
   onChange = {handleInputChange}
-  />
+  /> */}
+  <div className='category-style'>{`Unit Of Measurement: ${selectObjectProduct.uom !== null ? `'${selectObjectProduct.uom}'` : 'null'}`}</div>
   
   </Box>
   </div> {/* div 05 end */ }
 
   </div>
- 
+ ):(<></>)}
+  
   <br></br>
   <div> {/* div 03 */ }
       <h4>Price Per One</h4>
