@@ -203,17 +203,9 @@ const Request_product = () => {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params}  />}
       />
-      <button onClick={()=>{setdisplayCategory(true);; console.log(selectObjectProduct.category)}}>OK</button>
-  </div>  {/* div 01 end */ }
-  
-  <div className='footer-section'>
-    <p className='dont-have-a-product-name'>Dont Have a Product Name to add: <button className='click-me-btn'>
-    <Link to="/supplier/Request_new_product">Click Here</Link>
-      </button> </p>
-    
-  </div>
-  
-  {displayCategory ?(<div className='cateroty-and-uom'>
+      <button className='btn-ok' onClick={()=>{setdisplayCategory(true);; console.log(selectObjectProduct.category)}}>Get Details</button>
+
+      {displayCategory ?(<div className='cateroty-and-uom'>
   <div> {/* div 02 */ }
       {/* <h4>Category</h4> */}
   <Box
@@ -267,8 +259,19 @@ const Request_product = () => {
 
   </div>
  ):(<></>)}
+
+
+  </div>  {/* div 01 end */ }
   
-  <br></br>
+  <div className='footer-section'>
+    <p className='dont-have-a-product-name'>Dont Have a Product Name to add: <button className='click-me-btn'>
+    <Link to="/supplier/Request_new_product">Click Here</Link>
+      </button> </p>
+    
+  </div>
+  
+
+  <div>
   <div> {/* div 03 */ }
       <h4>Price Per One</h4>
       
@@ -300,7 +303,7 @@ const Request_product = () => {
   
   </Box>
   </div> {/* div 03 end */ }
-  
+
   <div> {/* div 04 */ }
       <h4>Quantity</h4>
   <Box
@@ -331,6 +334,8 @@ const Request_product = () => {
   </Box>
   </div> {/* div 04 end */ }
 
+  </div>
+  
   
   
   

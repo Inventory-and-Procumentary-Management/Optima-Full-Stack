@@ -100,3 +100,14 @@
   background-color: rgb(226, 226, 226);
   
 }
+.btn-ok{
+  padding: 0.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 1rem;
+  color: white;
+  background-color: green;
+  margin-top: 0.5rem;
+  margin-bottom: 0.7rem;
+
+}
