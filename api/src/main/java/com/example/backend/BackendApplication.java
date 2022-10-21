@@ -28,6 +28,7 @@ public class BackendApplication {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/login").allowedOrigins("http://localhost:3000");
+                registry.addMapping("/api/login").allowedOrigins("https://optima-inventory-backend.herokuapp.com/");
                 registry.addMapping("/api/user/**").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/inventoryItem/**").allowedOrigins("http://localhost:3000");
                 registry.addMapping("/api/dispatch/**").allowedOrigins("http://localhost:3000");
