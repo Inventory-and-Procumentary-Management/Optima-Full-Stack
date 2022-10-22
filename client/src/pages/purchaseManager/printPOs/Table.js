@@ -1,30 +1,39 @@
 import React from "react";
+import "./invoice.css";
 
-export default function ({ list }) {
+function Table ({ list }) {
   return (
-    <>
-      <table width="100%" className="mb-10">
-        <thead>
-          <tr className="bg-gray-100 p-1">
-            <td className="font-bold">Description</td>
-            <td className="font-bold">Quantity</td>
-            <td className="font-bold">Price</td>
-            <td className="font-bold">Amount</td>
-          </tr>
-        </thead>
-        {list.map(({ id, desc, quantity, price, amount }) => (
+    <div className="row gutters">
+    <div className="col-lg-12 col-md-12 col-sm-12">
+      <div className="table-responsive">
+        <table className="table custom-table m-0" style={{
+          width:'100%'
+        }}>
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Rate</th>
+              <th>Quantity</th>
+              <th>Sub Total</th>
+            </tr>
+          </thead>
+          {list.map(({ id, desc,itemCode, quantity, rate, amount }) => (
           <React.Fragment key={id}>
             <tbody>
               <tr>
-                <td>{desc}</td>
+                <td>{itemCode}</td>
                 <td>{quantity}</td>
-                <td>{price}</td>
+                <td>{rate}</td>
                 <td>{amount}</td>
               </tr>
             </tbody>
           </React.Fragment>
         ))}
-      </table>
-    </>
+        </table>
+      </div>
+    </div>
+  </div>
   );
 }
+
+export default Table;

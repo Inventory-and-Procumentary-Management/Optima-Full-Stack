@@ -37,17 +37,23 @@ import Supplier_Invoices from "./pages/Supplier/invoices/Supplier_Invoices";
 import Supplier_invoices_details from "./pages/Supplier/invoices/Supplier_invoices_details";
 import Product_details from "./pages/Supplier/Product/Product_details";
 import Order_details from "./pages/Supplier/Orders/Order_details";
-import SupplierHome from "./pages/Supplier/SupplierHome"
+import SupplierHome from "./pages/Supplier/SupplierHome";
 
 import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
+import RequestForm from "./pages/warehouseManager/Stocks/RequestForm";
+import ProfileSupplier from "./pages/Supplier/profile/ProfileSupplier";
+import Request_new_product from "./pages/Supplier/Request_new_product";
+import Invoice from "./pages/purchaseManager/printPOs/Invoice";
+import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
 
 const App = () => {
   return (
     <Router basename={config.basename}>
       <Switch>
+        {/* <Redirect exact from="/" to="/login" /> */}
         <Route exact path="/login">
           <Login />
         </Route>
@@ -128,33 +134,44 @@ const App = () => {
                 <Stocks />
               </Route>
               <Route exact path="/warehouseManager/Dispatch">
-                 <Dispatch />
+                <Dispatch />
               </Route>
               <Route exact path="/warehouseManager/requesdtedDispatch">
-                 <RequesdtedDispatch/>
+                <RequesdtedDispatch />
+              </Route>
+              <Route exact path="/warehouseManager/requestForm">
+                 <RequestForm/>
               </Route>
 
               <Route exact path="/supplier/Request_product">
-                 <Request_product/>
+                <Request_product />
+              </Route>
+
+              <Route exact path="/supplier/Request_new_product">
+                <Request_new_product />
               </Route>
               <Route exact path="/supplier/Supplier_Invoices">
-                 <Supplier_Invoices/>
+                <Supplier_Invoices />
               </Route>
               <Route exact path="/supplier/Product_details">
-                 <Product_details/>
+                <Product_details />
               </Route>
               <Route exact path="/supplier/Order_details">
-                 <Order_details/>
+                <Order_details />
               </Route>
               <Route exact path="/supplierHome">
-                 <SupplierHome/>
+                <SupplierHome />
               </Route>
               <Route exact path="/supplier">
-                 <SupplierHome/>
+                <SupplierHome />
               </Route>
               <Route exact path="/supplier/Supplier_invoices_details">
-                 <Supplier_invoices_details/>
+                <Supplier_invoices_details />
               </Route>
+              <Route exact path="/supplier/SupplierProfile">
+                <ProfileSupplier />
+              </Route>
+              
               {/* <Route path="/users">
                 <UserList />
               </Route> */}
@@ -184,7 +201,10 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
-                <PurchaseOrders />
+              <InvoiceForm />
+              </Route>
+              <Route path="/purchaseManager/invoicePreview">
+              <Invoice />
               </Route>
             </div>
           </div>
