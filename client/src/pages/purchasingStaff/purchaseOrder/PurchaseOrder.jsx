@@ -17,12 +17,30 @@ import { purchaseOrderData } from "../../../constants/DashboardData";
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
 import PrintInvoice from "../../purchaseManager/printPOs/PrintInvoice";
+import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
 
 const PurchaseOrder = () => {
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
   const [show, setShow] = useState(true);
   console.log(userType);
+
+  const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    breadcrumbs.map((item)=>{
+      if(item.link == "purchaseOrder"){
+        getRemoveBreadcrumb(dispatch,"purchaseOrder");
+      }
+    });
+    const setBreadcrumb = () => {
+      getBreadcrumb(dispatch, {
+        name: "Purchase Order",
+        link: "purchaseOrder",
+      });
+    };
+    setBreadcrumb();
+  }, []);
 
   useEffect(() => {
     if (userType === "ROLE_PURCHASING_MANAGER") {
