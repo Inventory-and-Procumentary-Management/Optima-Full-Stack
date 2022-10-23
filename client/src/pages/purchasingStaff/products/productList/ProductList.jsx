@@ -17,7 +17,6 @@ import {
   getProducts,
   updateProduct,
 } from "../../../../redux/productApiCalls";
-import SweetAlert from "react-bootstrap-sweetalert";
 import SearchComponent from "../../../../components/search/Search";
 
 export default function ProductList() {
@@ -374,39 +373,7 @@ export default function ProductList() {
             autoHeight
           />
         </div>
-        <SweetAlert
-          show={show}
-          warning
-          showCancel
-          confirmBtnText="Yes, Delete it!"
-          confirmBtnBsStyle="danger"
-          title="Are you sure?"
-          onConfirm={deleteConfirm}
-          onCancel={deleteCancel}
-          focusCancelBtn
-        >
-          You will not be able to recover this imaginary file!
-        </SweetAlert>
-        <SweetAlert
-          show={approveShow}
-          warning
-          showCancel
-          confirmBtnText="Yes, Update it!"
-          confirmBtnBsStyle="danger"
-          title="Are you sure?"
-          onConfirm={updateApproveConfirm}
-          onCancel={deleteCancel}
-          focusCancelBtn
-        >
-          You will not be able to recover this imaginary file!
-        </SweetAlert>
-        <SweetAlert
-          show={allShow}
-          success
-          title="Successfully delete!"
-          // text="SweetAlert in React"
-          onConfirm={() => setAllShow(false)}
-        ></SweetAlert>
+        
       </div>
     </div>
   );

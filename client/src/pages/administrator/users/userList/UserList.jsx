@@ -8,7 +8,6 @@ import {
   PersonAddDisabledOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import SweetAlert from "react-bootstrap-sweetalert";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -250,51 +249,7 @@ export default function UserList() {
             autoHeight
           />
         </div>
-        <SweetAlert
-          show={show}
-          warning
-          showCancel
-          confirmBtnText="Yes, Delete it!"
-          confirmBtnBsStyle="danger"
-          title="Are you sure?"
-          onConfirm={deleteConfirm}
-          onCancel={deleteCancel}
-          focusCancelBtn
-        >
-          You will not be able to recover this imaginary file!
-        </SweetAlert>
-
-        <SweetAlert
-          show={updateShow}
-          warning
-          showCancel
-          confirmBtnText="Yes, Update it!"
-          confirmBtnBsStyle="danger"
-          title="Are you sure?"
-          onConfirm={() => {
-            updateConfirm(keyData, valueData);
-          }}
-          onCancel={deleteCancel}
-          focusCancelBtn
-        >
-          You will not be able to recover this imaginary file!
-        </SweetAlert>
-
-        <SweetAlert
-          show={allShow}
-          success
-          title="Successfully delete!"
-          // text="SweetAlert in React"
-          onConfirm={() => setAllShow(false)}
-        ></SweetAlert>
-
-        <SweetAlert
-          show={updateAllShow}
-          success
-          title="Successfully update!"
-          // text="SweetAlert in React"
-          onConfirm={() => setUpdateAllShow(false)}
-        ></SweetAlert>
+       
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import { useEffect, useMemo, useState } from "react";
 // import { userRequest } from "../../requestMethods";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteProduct, getProducts, updateProduct } from "../../../../redux/productApiCalls";
-import SweetAlert from "react-bootstrap-sweetalert";
+
 
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -362,27 +362,7 @@ export default function ProductUpdate() {
           </Box>
         </Box>
       </div>
-      <SweetAlert
-        show={show}
-        warning
-        showCancel
-        confirmBtnText="Yes, Update it!"
-        confirmBtnBsStyle="danger"
-        title="Are you sure?"
-        onConfirm={updateProductDetails}
-        onCancel={updateProductDetailsCancel}
-        focusCancelBtn
-      >
-        You will not be able to recover this imaginary file!
-      </SweetAlert>
-
-      <SweetAlert
-        show={allShow}
-        success
-        title="Successfully updated!"
-        // text="SweetAlert in React"
-        onConfirm={() => setAllShow(false)}
-      ></SweetAlert>
+      
     </div>
   );
 }

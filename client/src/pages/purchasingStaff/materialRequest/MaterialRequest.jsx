@@ -9,7 +9,7 @@ import {
   VisibilityOutlined,
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
-import SweetAlert from "react-bootstrap-sweetalert";
+
 import { useDispatch, useSelector } from "react-redux";
 import { materialRequestData } from "../../../constants/DashboardData";
 

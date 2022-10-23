@@ -19,7 +19,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
-import SweetAlert from "react-bootstrap-sweetalert";
+
 
 import { login } from "../../redux/userApiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -89,20 +89,7 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={theme}>
-      <SweetAlert
-        show={loginShow}
-        success
-        title="Successfully Login!"
-        // text="SweetAlert in React"
-        onConfirm={() => setLoginShow(false)}
-      ></SweetAlert>
-      <SweetAlert
-        show={loginCancelShow}
-        danger
-        title="Login Unsuccess!"
-        // text="SweetAlert in React"
-        onConfirm={() => setLoginCancelShow(false)}
-      ></SweetAlert>
+     
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
