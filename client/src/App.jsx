@@ -107,6 +107,9 @@ const App = () => {
               <Route path="/purchaseStaff/supplierItems">
                 <SupplierItems />
               </Route>
+              <Route path="/purchaseStaff/materialRequest/invoice">
+                <Invoice />
+              </Route>
 
               <Route exact path="/admin">
                 <AdministratorHome />
