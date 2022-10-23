@@ -42,19 +42,15 @@ const columns = [
      <>
      <div>
 
-     <Link to="/supplier/Request_product" className="link">
+     <Link to="/supplier/Request_product">
                 {/* {history.push("/purchaseStaff/materialRequest")} */}
                 <li className="sidebarListItem">
                   Update
+                  <AddIcon sx={{ color: green[500] }} ></AddIcon>
                 </li>
               </Link>
    
-     {/* <button onClick = {()=>{
-     
-    //  setitemName(params.row.itemName);
-    // setdisplayRequestForm(true);
-   }
-     }>Update <AddIcon sx={{ color: green[500] }} ></AddIcon></button> */}
+     {/* <h3>Update <AddIcon sx={{ color: green[500] }} ></AddIcon></h3> */}
      
      </div>
      &nbsp;
