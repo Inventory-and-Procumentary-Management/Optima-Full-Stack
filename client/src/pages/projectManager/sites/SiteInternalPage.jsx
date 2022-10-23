@@ -34,6 +34,8 @@ const SiteInternalPage = (props) => {
 
                 <button className='add-inventory-div' onClick={()=>{alert("Suwasana")}}>Add Inventory Item Details</button>
 
+                
+
         </div>
         </div>
         
