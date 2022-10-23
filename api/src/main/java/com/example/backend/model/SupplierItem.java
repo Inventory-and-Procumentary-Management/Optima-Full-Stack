@@ -25,6 +25,7 @@ public class SupplierItem {
     private Boolean isActivate = true;
 //    @Column(columnDefinition = "boolean default false")
     private Integer isApprove = 0;
+   private Long inventoryItemId;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date createDate;

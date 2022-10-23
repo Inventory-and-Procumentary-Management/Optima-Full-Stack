@@ -37,6 +37,18 @@ public class SupplierItemController {
             return new ResponseEntity<SupplierItem>(HttpStatus.NOT_FOUND);
         }
     }
+
+    //get one supplieritem with inventory
+    @GetMapping("/{id}")
+    public ResponseEntity<SupplierItem>getSupplierItem(@PathVariable Long id){
+        try {
+            return new ResponseEntity<SupplierItem>(supplierItemService.getSupplierItem(id), HttpStatus.OK);
+
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<SupplierItem>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     //save supplier
     @PostMapping("/save")
     public ResponseEntity<SupplierItem> saveSupplierItem(@RequestBody SupplierItem supplierItem){

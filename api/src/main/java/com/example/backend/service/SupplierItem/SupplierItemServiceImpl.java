@@ -31,6 +31,12 @@ public class SupplierItemServiceImpl implements SupplierItemService{
         log.info("Get {} supplier items from database",id);
         return supplierItemRepository.findById(id).get();
     }
+
+    public SupplierItem getSupplierItemInventoryItem(Long id){
+        log.info("Get {} supplier items from database",id);
+        return supplierItemRepository.findById(id).get();
+    }
+
     public void deleteSupplierItem(Long id){
         log.info("Delete supplier items");
         supplierItemRepository.deleteById(id);

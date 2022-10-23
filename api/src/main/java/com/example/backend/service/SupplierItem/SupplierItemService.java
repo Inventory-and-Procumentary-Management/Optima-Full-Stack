@@ -8,6 +8,7 @@ public interface SupplierItemService {
     public SupplierItem saveSupplierItem(SupplierItem supplierItem);
     public List<SupplierItem> getSupplierItems();
     public SupplierItem getSupplierItem(Long id);
+    public SupplierItem getSupplierItemInventoryItem(Long id);
     public void deleteSupplierItem(Long id);
     public SupplierItem updateSupplierItem(Long id, SupplierItem supplierItem);
 }
