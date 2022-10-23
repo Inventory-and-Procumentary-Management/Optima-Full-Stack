@@ -31,7 +31,7 @@ export const getSupplierProducts = async (dispatch) => {
 export const deleteSupplierProduct = async (id, dispatch) => {
   dispatch(deleteSupplierProductStart());
   try {
-    const res = await userRequest.delete(`/inventoryItem/delete/${id}`);
+    const res = await userRequest.delete(`/supplierItem/delete/${id}`);
     dispatch(deleteSupplierProductSuccess(id));
   } catch (err) {
     dispatch(deleteSupplierProductFailure());
@@ -42,7 +42,7 @@ export const updateSupplierProduct = async (id, product, dispatch) => {
   dispatch(updateSupplierProductStart());
   try {
     // update
-    const res = await userRequest.put(`/inventoryItem/update/${id}`,product);
+    const res = await userRequest.put(`supplierItem/update/${id}`,product);
     dispatch(updateSupplierProductSuccess({ id, product }));
     return 1;
   } catch (err) {
