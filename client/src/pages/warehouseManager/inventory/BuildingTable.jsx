@@ -5,151 +5,174 @@ import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 // import SweetAlert from "react-bootstrap-sweetalert";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector,shallowEqual } from "react-redux";
 import { inventoryData } from "../../../constants/DashboardData";
 import SearchComponent from "../../../components/search/Search";
+import {
+  deleteInventoryItem,
+  getInventoryItems,
+  updateInventoryItem,
+} from "../../../redux/inventoryItemApiCalls";
 
-const columns = [
-  // { field: "_id", headerName: "ID", width: 150 },
-  {
-    field: "name",
-    headerName: "Item Name",
-    width: 180,
-    renderCell: (params) => {
-      return (
-        <div className="userListUser">
-          {/* <img
-            className="userListImg"
-            src={params.row.img}
-            alt="category Icon"
-          /> */}
-          {params.row.name}
-        </div>
-      );
+
+export default function BuildingTable({name}) {
+  const dispatch = useDispatch();
+  const userType = useSelector((state) => state.user.userType);
+  const inventoryItems = useSelector((state) => state.inventoryItem.inventoryItems.filter(x => x.category == name));
+
+  const [deleteTrigger, setDeleteTrigger] = useState("");
+
+  useEffect(() => {
+    const getNewInventoryItems = async () => {
+      await getInventoryItems(dispatch);
+      console.log(inventoryItems)
+    };
+    getNewInventoryItems();
+  }, [dispatch, deleteTrigger]);
+
+  const columns = [
+    // { field: "_id", headerName: "ID", width: 150 },
+    {
+      field: "title",
+      headerName: "Item Name",
+      width: 180,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            {/* <img
+              className="userListImg"
+              src={params.row.img}
+              alt="category Icon"
+            /> */}
+            {params.row.title}
+          </div>
+        );
+      },
     },
-  },
-  { field: "quantity", headerName: "Quantity", width: 160 },
-  { field: "type", headerName: "Unit of Messurement", width: 180 },
-  { field: "recieve", headerName: "Recieved Date", width: 180 },
-  { field: "expire", headerName: "Expire Date", width: 180 },
-  { field: "minimum", headerName: "Minimum Level", width: 180 },
-  
-  { field: "description", headerName: "Description", width: 200 },
-  // {
-  //   field: "staus",
-  //   headerName: "Order Status",
-  //   width: 220,
-  //   renderCell: (params) => {
-  //     return (
-  //       <>
-  //         {params.row.status === "Pending" ? (
-  //           <button
-  //             className="userListEdit"
-  //             style={{ backgroundColor: "#bdba2c" }}
-  //             // onClick={() => {
-  //             //   setCartId(params.row._id);
-  //             //   setStatus("Accepted");
-  //             //   setShow(true);
-  //             // }}
-  //           >
-  //             {params.row.status}
-  //           </button>
-  //         ) : params.row.status === "Accepted" ? (
-  //           <button
-  //             className="userListEdit"
-  //             style={{ backgroundColor: "#87DD44" }}
-  //             // onClick={() => {
-  //             //     setCartId(params.row._id);
-  //             //     setStatus("In Warehouse");
-  //             //     setShow(true);
-  //             //   }}
-  //           >
-  //             {params.row.status}
-  //           </button>
-  //         ) : params.row.status === "In Warehouse" ? (
-  //           <button
-  //             className="userListEdit"
-  //             style={{ backgroundColor: "#DD9A44" }}
-  //             // onClick={() => {
-  //             //     setStatus("Shipped");
-  //             //     setCartId(params.row._id);
-  //             //     setShow(true);
-  //             //   }}
-  //           >
-  //             {params.row.status}
-  //           </button>
-  //         ) : params.row.status === "Shipped" ? (
-  //           <button
-  //             className="userListEdit"
-  //             style={{ backgroundColor: "#44A1DD" }}
-  //             // onClick={() => {
-  //             //     setCartId(params.row._id);
-  //             //     setStatus("Completed");
-  //             //     setShow(true);
-  //             //   }}
-  //           >
-  //             {params.row.status}
-  //           </button>
-  //         ) : params.row.status === "Completed" ? (
-  //           <button
-  //             className="userListEdit"
-  //             style={{ backgroundColor: "#69DD44" }}
-  //           >
-  //             {params.row.status}
-  //           </button>
-  //         ) : (
-  //           <button className="userListEdit" style={{ backgroundColor: "red" }}>
-  //             {params.row.status}
-  //           </button>
-  //         )}
-  //       </>
-  //     );
-  //   },
-  // },
-  // {
-  //   field: "action",
-  //   headerName: "Action",
-  //   width: 250,
-  //   renderCell: (params) => {
-  //     return (
-  //       <>
-  //         {!params.row.isCancel ? (
-  //           <button
-  //             className="userListEdit"
-  //             // onClick={() => {
-  //             //   setUpdateShow(true);
-  //             //   setCartId(params.row._id);
-  //             //   setIsCancelStatus(false);
-  //             // }}
-  //             style={{ backgroundColor: "#FFB000" }}
-  //           >
-  //             Update
-  //           </button>
-  //         ) : (
-  //           <button
-  //             className="userListEdit"
-  //             style={{ backgroundColor: "red" }}
-  //             // onClick={() => {
-  //             //     setUpdateShow(true);
-  //             //     setCartId(params.row._id);
-  //             //     setIsCancelStatus(true);
-  //             //   }}
-  //           >
-  //             Request Received
-  //           </button>
-  //         )}
-  //       </>
-  //     );
-  //   },
-  // },
-];
+    { field: "totalQuantity", headerName: "Quantity", width: 160 },
+    { field: "uom", headerName: "UOM", width: 180 },
+    // { field: "recieve", headerName: "Recieved Date", width: 180 },
+    // { field: "expire", headerName: "Expire Date", width: 180 },
+    { field: "minQuantity", headerName: "Minimum Level", width: 180 },
 
-const BuildingTable = () => {
+    { field: "description", headerName: "Description", width: 200 },
+    // {
+    //   field: "staus",
+    //   headerName: "Order Status",
+    //   width: 220,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         {params.row.status === "Pending" ? (
+    //           <button
+    //             className="userListEdit"
+    //             style={{ backgroundColor: "#bdba2c" }}
+    //             // onClick={() => {
+    //             //   setCartId(params.row._id);
+    //             //   setStatus("Accepted");
+    //             //   setShow(true);
+    //             // }}
+    //           >
+    //             {params.row.status}
+    //           </button>
+    //         ) : params.row.status === "Accepted" ? (
+    //           <button
+    //             className="userListEdit"
+    //             style={{ backgroundColor: "#87DD44" }}
+    //             // onClick={() => {
+    //             //     setCartId(params.row._id);
+    //             //     setStatus("In Warehouse");
+    //             //     setShow(true);
+    //             //   }}
+    //           >
+    //             {params.row.status}
+    //           </button>
+    //         ) : params.row.status === "In Warehouse" ? (
+    //           <button
+    //             className="userListEdit"
+    //             style={{ backgroundColor: "#DD9A44" }}
+    //             // onClick={() => {
+    //             //     setStatus("Shipped");
+    //             //     setCartId(params.row._id);
+    //             //     setShow(true);
+    //             //   }}
+    //           >
+    //             {params.row.status}
+    //           </button>
+    //         ) : params.row.status === "Shipped" ? (
+    //           <button
+    //             className="userListEdit"
+    //             style={{ backgroundColor: "#44A1DD" }}
+    //             // onClick={() => {
+    //             //     setCartId(params.row._id);
+    //             //     setStatus("Completed");
+    //             //     setShow(true);
+    //             //   }}
+    //           >
+    //             {params.row.status}
+    //           </button>
+    //         ) : params.row.status === "Completed" ? (
+    //           <button
+    //             className="userListEdit"
+    //             style={{ backgroundColor: "#69DD44" }}
+    //           >
+    //             {params.row.status}
+    //           </button>
+    //         ) : (
+    //           <button className="userListEdit" style={{ backgroundColor: "red" }}>
+    //             {params.row.status}
+    //           </button>
+    //         )}
+    //       </>
+    //     );
+    //   },
+    // },
+    // {
+    //   field: "action",
+    //   headerName: "Action",
+    //   width: 250,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         {!params.row.isCancel ? (
+    //           <button
+    //             className="userListEdit"
+    //             // onClick={() => {
+    //             //   setUpdateShow(true);
+    //             //   setCartId(params.row._id);
+    //             //   setIsCancelStatus(false);
+    //             // }}
+    //             style={{ backgroundColor: "#FFB000" }}
+    //           >
+    //             Update
+    //           </button>
+    //         ) : (
+    //           <button
+    //             className="userListEdit"
+    //             style={{ backgroundColor: "red" }}
+    //             // onClick={() => {
+    //             //     setUpdateShow(true);
+    //             //     setCartId(params.row._id);
+    //             //     setIsCancelStatus(true);
+    //             //   }}
+    //           >
+    //             Request Received
+    //           </button>
+    //         )}
+    //       </>
+    //     );
+    //   },
+    // },
+  ];
+
   return (
-    <div className="common">
-      <div className="userList">
+    <div>
+      <div className="userListInventory">
         <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request" style={{visibility:"hidden"}}>
+          <div
+            className="top-contaier-button-material-request"
+            style={{ visibility: "hidden" }}
+          >
             <Link to={"/purchaseStaff/newMaterialRequest"}>
               <button className="color-contained-button">Add New Item</button>
             </Link>
@@ -159,10 +182,10 @@ const BuildingTable = () => {
           </div>
         </div>
         <DataGrid
-          rows={inventoryData}
+          rows={inventoryItems}
           disableSelectionOnClick
           columns={columns}
-          getRowId={(row) => row._id}
+          getRowId={(row) => row.inventor_item_id}
           pageSize={8}
           checkboxSelection
           autoHeight
@@ -225,6 +248,4 @@ const BuildingTable = () => {
       </div>
     </div>
   );
-};
-
-export default BuildingTable;
+}

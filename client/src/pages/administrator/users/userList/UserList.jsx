@@ -250,7 +250,7 @@ export default function UserList() {
             autoHeight
           />
         </div>
-        {/* <SweetAlert
+         {/* <SweetAlert
           show={show}
           warning
           showCancel
@@ -294,7 +294,7 @@ export default function UserList() {
           title="Successfully update!"
           // text="SweetAlert in React"
           onConfirm={() => setUpdateAllShow(false)}
-        ></SweetAlert> */}
+        ></SweetAlert> */} 
       </div>
     </div>
   );

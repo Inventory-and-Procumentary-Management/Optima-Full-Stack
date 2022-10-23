@@ -583,7 +583,7 @@ export default function NewProduct() {
           {/* </form> */}
         </Box>
       </Box>
-      {/* <SweetAlert
+       {/* <SweetAlert
         show={allShow}
         success
         title="Successfully added!"
@@ -596,7 +596,7 @@ export default function NewProduct() {
         title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
-      ></SweetAlert> */}
+      ></SweetAlert> */} 
     </div>
   );
 }

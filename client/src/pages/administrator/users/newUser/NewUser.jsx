@@ -460,7 +460,7 @@ export default function NewUser() {
         title="Added Unsuccess!"
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
-      ></SweetAlert> */}
+      ></SweetAlert> */} 
     </div>
   );
 }

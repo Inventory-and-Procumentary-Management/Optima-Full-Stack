@@ -18,6 +18,7 @@ public class MaterialRequest {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long material_request_id;
     private Long senderId;
+    private String senderType;
     private Long receiverId;
 
     @Temporal(TemporalType.TIMESTAMP)
