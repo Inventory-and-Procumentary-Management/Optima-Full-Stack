@@ -5,12 +5,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { countProduct } from "../../redux/productApiCalls";
 import "../pages.css";
 import "./PurchaseStaffHome.css";
+import { getBreadcrumb, getRemoveAllBreadcrumb, getRemoveBreadcrumb } from "../../redux/breadcrumbApiCalls";
 
 const PurchaseStaffHome = () => {
   const [userStats, setUserStats] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   const dispatch = useDispatch();
   const inventoryCount = useSelector((state) => state.product.count);
+  const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
+
+  useEffect(() => {
+    const setBreadcrumb = () => {
+      // breadcrumbs.map((item)=>{
+      //   if(item.link == "purchaseStaff"){
+      //     getRemoveBreadcrumb(dispatch,"purchaseStaff");
+      //   }
+      // });
+      getRemoveAllBreadcrumb(dispatch, 
+        {
+          name: "Purchase Staff",
+          link: "purchaseStaff",
+        },
+      );
+    };
+    setBreadcrumb();
+  }, []);
 
   const MONTHS = useMemo(
     () => [
@@ -30,22 +49,22 @@ const PurchaseStaffHome = () => {
     []
   );
 
-  useEffect(()=>{
+  useEffect(() => {
     const getCountInventoryData = async () => {
       await countProduct(dispatch);
-    }
-    
+    };
+
     getCountInventoryData();
-  },[]);
+  }, []);
 
   useEffect(() => {
     let data = [
-      { name: MONTHS[0], "Cement": 15, "Sand": 12 },
-      { name: MONTHS[1], "Cement": 20, "Sand": 25 },
-      { name: MONTHS[2], "Cement": 65, "Sand": 78 },
-      { name: MONTHS[3], "Cement": 45, "Sand": 30 },
-      { name: MONTHS[4], "Cement": 100, "Sand": 80 },
-      { name: MONTHS[5], "Cement": 74, "Sand": 90 },
+      { name: MONTHS[0], Cement: 15, Sand: 12 },
+      { name: MONTHS[1], Cement: 20, Sand: 25 },
+      { name: MONTHS[2], Cement: 65, Sand: 78 },
+      { name: MONTHS[3], Cement: 45, Sand: 30 },
+      { name: MONTHS[4], Cement: 100, Sand: 80 },
+      { name: MONTHS[5], Cement: 74, Sand: 90 },
     ];
     setUserStats(data);
     console.log(userStats);
