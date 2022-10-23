@@ -51,10 +51,11 @@ const PurchaseOrder = () => {
   }, []);
 
   const list = [
-    { id: 1, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
-    { id: 2, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
-    { id: 3, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+    { id: 1,itemCode:"PR-0001" ,productName:"Cement", desc: "Cement", quantity: 200, rate: 800, amount: 160000 },
+    { id: 2,itemCode:"PR-0002" ,productName:"Cement", desc: "Cement", quantity: 200, rate: 800, amount: 160000 },
+    { id: 3,itemCode:"PR-0003" ,productName:"Cement", desc: "Cement", quantity: 200, rate: 800, amount: 160000 },
   ];
+  // id, desc,itemCode, quantity, rate, amount
 
   const columns = [
     { field: "invoice_id", headerName: "Invoice ID", width: 150 },
@@ -345,7 +346,7 @@ const PurchaseOrder = () => {
           ourName={"OPTIMA"}
           ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
           clientName={"Yohan"}
-          clientAddress={"497/A/1"}
+          clientAddress={"497/A/1 Susilarama Road Malabe"}
           invoiceNum={"Inv-123456"}
           invoiceDate={"2022-05-14"}
           dueDate={"2022-08-29"}
@@ -356,6 +357,12 @@ const PurchaseOrder = () => {
           list={list}
           // setList={}
           // notes={}
+          subTotal={1000}
+          discount={25}
+          tax={56}
+          total={4565}
+          title={"Purchase Order"}
+          flag={false}
         />
       )}
     </div>
