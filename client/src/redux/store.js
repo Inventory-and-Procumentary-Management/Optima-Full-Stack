@@ -16,6 +16,8 @@ import breadcrumbReducer from "./breadcrumbRedux";
 import inventoryItemReducer from "./inventoryItemRedux";
 import categoryReducer from "./categoryRedux";
 import inventoryReducer from "./inventoryRedux";
+import materialRequestReducer from "./materialRequestRedux";
+import dispatchRedux from "./dispatchRedux";
 
 const persistConfig = {
   key: "root",
@@ -29,7 +31,9 @@ const rootReducer = combineReducers({
   breadcrumb: breadcrumbReducer,
   inventoryItem: inventoryItemReducer,
   category: categoryReducer,
-  inventoryItem: inventoryReducer,
+  inventory: inventoryReducer,
+  materialRequest: materialRequestReducer,
+  siteManagerItem: dispatchRedux,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
