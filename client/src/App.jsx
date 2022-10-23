@@ -44,6 +44,10 @@ import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDisp
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
 import RequestForm from "./pages/warehouseManager/Stocks/RequestForm";
+import ProfileSupplier from "./pages/Supplier/profile/ProfileSupplier";
+import Request_new_product from "./pages/Supplier/Request_new_product";
+import Invoice from "./pages/purchaseManager/printPOs/Invoice";
+import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
 
 const App = () => {
   return (
@@ -142,6 +146,10 @@ const App = () => {
               <Route exact path="/supplier/Request_product">
                 <Request_product />
               </Route>
+
+              <Route exact path="/supplier/Request_new_product">
+                <Request_new_product />
+              </Route>
               <Route exact path="/supplier/Supplier_Invoices">
                 <Supplier_Invoices />
               </Route>
@@ -160,6 +168,10 @@ const App = () => {
               <Route exact path="/supplier/Supplier_invoices_details">
                 <Supplier_invoices_details />
               </Route>
+              <Route exact path="/supplier/SupplierProfile">
+                <ProfileSupplier />
+              </Route>
+              
               {/* <Route path="/users">
                 <UserList />
               </Route> */}
@@ -189,7 +201,10 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
-                <PurchaseOrders />
+              <InvoiceForm />
+              </Route>
+              <Route path="/purchaseManager/invoicePreview">
+              <Invoice />
               </Route>
             </div>
           </div>

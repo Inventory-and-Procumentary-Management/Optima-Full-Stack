@@ -246,7 +246,7 @@ const RequesdtedDispatch = () => {
     <div className="common">
       <div className="userList">
         <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request">
+          <div className="top-contaier-button-material-request" style={{visibility:"hidden"}}>
             <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
             </Link>

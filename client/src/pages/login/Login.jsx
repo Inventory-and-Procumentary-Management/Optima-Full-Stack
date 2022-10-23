@@ -102,7 +102,7 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <SweetAlert
+       {/* <SweetAlert
         show={loginShow}
         success
         title="Successfully Login!"
