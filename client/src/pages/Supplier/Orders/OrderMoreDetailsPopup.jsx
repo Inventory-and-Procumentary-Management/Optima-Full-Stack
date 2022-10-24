@@ -8,15 +8,16 @@ import { purple } from '@mui/material/colors';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import "./OrderStyle.css" ;
 import { Link } from "react-router-dom";
+import "./OrderStyle.css";
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 400,
+  width: 550,
   bgcolor: 'background.paper',
-  border: '2px solid #000',
+  border: '1px solid #000',
   boxShadow: 24,
   p: 4,
 };
@@ -30,6 +31,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
+      
       <button onClick={handleOpen}  > Review <ExpandCircleDownIcon></ExpandCircleDownIcon> </button> 
       <Modal
         open={open}
@@ -37,12 +39,16 @@ export default function BasicModal(props) {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
+
         <Box sx={style}>
+        <Typography id="modal-modal-title" variant="h4" component="h2">
+            Order Details
+          </Typography>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Issue Date:
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           { props.IssueDate}
+          <h1> { props.IssueDate} </h1>
           </Typography>
           <br></br>
 
@@ -50,18 +56,9 @@ export default function BasicModal(props) {
             Due Date:
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           { props.DueDate}
+          <h1> { props.DueDate} </h1>
           </Typography>
           <br></br>
-
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Ordered Items:
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           { props.details}
-          </Typography>
-          <br></br>
-
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Description:
           </Typography>
