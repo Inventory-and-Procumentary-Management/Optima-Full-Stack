@@ -21,22 +21,50 @@ import SearchComponent from "../../../components/search/Search";
 
 import BasicModalDispatch from "./BasicModalDispatch";
 import { IconButton } from "@material-ui/core";
+import axios from "axios";
+import { getMaterialRequest } from "../../../redux/materialRequestApiCalls";
+import { setAddSiteManagerItem } from "../../../redux/dispatchApiCalls";
 
 const RequesdtedDispatch = () => {
+  const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
-  console.log(userType);
+  const materialRequest = useSelector((state) => state.materialRequest.materialRequests);
+  const [details,setDeatails] = useState([]);
+  // console.log(userType);
 
   useEffect(() => {
-    if (userType === "ROLE_PURCHASING_MANAGER") {
-      setUser("purchaseManager");
-    } else if (userType === "ROLE_PURCHASING_STAFF") {
-      setUser("purchaseStaff");
-    }
-  }, []);
+
+    const selectRole = async () => {
+      if (userType === "ROLE_PURCHASING_MANAGER") {
+        setUser("purchaseManager");
+      } else if (userType === "ROLE_PURCHASING_STAFF") {
+        setUser("purchaseStaff");
+      }
+    
+    // const getMaterialRequest = async () => {
+      await getMaterialRequest(dispatch);
+      
+      
+      setDeatails(materialRequest);
+      console.log("Requested data: ",materialRequest);
+    // };
+
+    // getMaterialRequest();
+  }
+    selectRole();
+    
+    
+    
+  }, [dispatch]);
+
+  const addData = (data)=> {
+    console.log(data);
+    setAddSiteManagerItem(dispatch,data);
+  }
 
   const columns = [
-    { field: "invoice_id", headerName: "Dispatch ID", width: 180 },
+    { field: "material_request_id", headerName: "Dispatch ID", width: 180 },
     // {
     //   field: "staffUsername",
     //   headerName: "Purchase Staff Name",
@@ -55,7 +83,7 @@ const RequesdtedDispatch = () => {
     //   },
     // },
     {
-      field: "supplier",
+      field: "senderType",
       headerName: "Site Manager",
       width: 270,
       renderCell: (params) => {
@@ -72,8 +100,8 @@ const RequesdtedDispatch = () => {
       },
     },
     { field: "issueDate", headerName: "Recieve Date", width: 180 },
-    // { field: "dueDate", headerName: "Due Date", width: 180 },
-    { field: "price", headerName: "Description", width: 200 },
+    { field: "dueDate", headerName: "Due Date", width: 180 },
+    // { field: "price", headerName: "Description", width: 200 },
     // { field: "currentQuantity", headerName: "Current Quantity", width: 200 },
     // { field: "requestQuantity", headerName: "Request Quantity", width: 200 },
     {
@@ -85,7 +113,7 @@ const RequesdtedDispatch = () => {
           <>
             <div className="productListItem">
               <div className="productListItemData">
-                {params.row.isApprove + " "}
+                {params.row.status + " "}
               </div>
 
               {userType === "ROLE_WAREHOUSE_MANAGER" ? (
@@ -196,7 +224,7 @@ const RequesdtedDispatch = () => {
           <>
             {!params.row.isCancel ? (
               <div>
-                <IconButton>
+                <IconButton onClick={()=>{addData(params.row);}}>
                   <BasicModalDispatch
                     name={
                       <VisibilityOutlined
@@ -208,10 +236,10 @@ const RequesdtedDispatch = () => {
                       />
                     }
                     topic={"Requested Stocks"}
-                    supName={params.row.supplier}
-                    reqId={params.row.invoice_id}
+                    supName={params.row.senderType}
+                    reqId={params.row.material_request_id}
                     date={params.row.issueDate}
-                    description={params.row.price}
+                    description={params.row.orderProducts}
                   />
                 </IconButton>
 
@@ -257,10 +285,10 @@ const RequesdtedDispatch = () => {
         </div>
         <div className="bottom-container-material-request">
           <DataGrid
-            rows={purchaseInvoiceData}
+            rows={materialRequest}
             disableSelectionOnClick
             columns={columns}
-            getRowId={(row) => row._id}
+            getRowId={(row) => row.material_request_id}
             pageSize={7}
             checkboxSelection
             autoHeight

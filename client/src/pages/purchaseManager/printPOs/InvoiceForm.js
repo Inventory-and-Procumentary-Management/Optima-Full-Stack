@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../products/newProduct/NewProduct.css";
 
 import { useDispatch } from "react-redux";
-// import SweetAlert from "react-bootstrap-sweetalert";
+// // import SweetAlert from "react-bootstrap-sweetalert";
 import { Link, useLocation, useNavigate , useHistory} from "react-router-dom";
 // import "../user/user.css";
 
