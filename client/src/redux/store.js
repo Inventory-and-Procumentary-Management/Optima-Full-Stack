@@ -38,6 +38,7 @@ const rootReducer = combineReducers({
   materialRequest: materialRequestReducer,
   siteManagerItem: dispatchRedux,
   purchaseOrder:purchaseOrderRedux
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
