@@ -15,6 +15,9 @@ import {
 } from "../../../redux/inventoryItemApiCalls";
 
 
+
+
+
 export default function BuildingTable({name}) {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);

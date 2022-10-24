@@ -44,7 +44,7 @@ export default function TopBarTabs() {
                 </Box>
               </Grid>
               <Grid item xs={1.7} sx={{ marginTop: 1 }}>
-                <Link className="link">
+                <Link className="link" sx={{ color: "#000" }}>
                   <BasicModal
                     name={"ADD CATEGORY"}
                     title={"ADD NEW CATEGORY"}
