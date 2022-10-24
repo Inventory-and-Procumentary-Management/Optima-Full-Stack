@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import productReducer from "./productRedux";
 import siteReducer from "./SiteRedux"
+import supplierProductReducer from "./SupplierProductRedux"
 import {
   persistStore,
   persistReducer,
@@ -36,6 +37,7 @@ const rootReducer = combineReducers({
   inventory: inventoryReducer,
   materialRequest: materialRequestReducer,
   siteManagerItem: dispatchRedux,
+  supplierproduct: supplierProductReducer,
 
 });
 
