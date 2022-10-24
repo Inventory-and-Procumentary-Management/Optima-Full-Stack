@@ -28,8 +28,8 @@ function PurchaseOrders({
   const [bankName, setBankName] = useState("");
   const [bankAccount, setBankAccount] = useState("");
   const [webSite, setWebSite] = useState("");
-  const [clientName, setClientName] = useState("");
-  const [clientAddress, setClientAddresse] = useState("");
+  const [siteManagerId, setSiteManagerId] = useState("");
+  const [siteManagerName, setSiteManagerName] = useState("");
   const [invoiceNum, setInvoiceNum] = useState("");
   const [invoiceDate, setInvoiceDate] = useState("");
   const [dueDate, setDueDate] = useState("");
@@ -40,9 +40,19 @@ function PurchaseOrders({
   const [amount, setAmount] = useState("");
   const [list, setList] = useState([]);
 
+  const twoCalls = e => {
+    this.functionOne(e)
+    this.functionTwo()
+  }
+
+
   const handlePrint = () => {
     window.print();
   };
+  function randomNumberInRange(min, max) {
+    
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   return (
     <>
@@ -54,8 +64,8 @@ function PurchaseOrders({
             <MainDetails name={name} address={address} />
 
             <ClientDetails
-              clientName={clientName}
-              clientAddress={clientAddress}
+              siteManagerId={siteManagerId}
+              siteManagerName={siteManagerName}
             />
 
             <Dates
@@ -200,12 +210,13 @@ function PurchaseOrders({
                   <label htmlFor="clientName">{smId}</label>
                   <input
                     type="text"
-                    name="clientName"
-                    id="clientName"
+                    name="sitemanagerId"
+                    id="sitemanagerId"
                     placeholder="Enter Site Manager's ID"
                     autoComplete="off"
                     value={smIdv}
-                    onChange={(e) => setClientName(e.target.value)}
+                    onChange={(e) => setSiteManagerId(e.target.value)}
+                    
                   />
                 </div>
 
@@ -213,12 +224,12 @@ function PurchaseOrders({
                   <label htmlFor="clientAddress">{smName}</label>
                   <input
                     type="text"
-                    name="clientAddress"
-                    id="clientAddress"
+                    name="sitemanagerName"
+                    id="sitemanagerName"
                     placeholder="Enter Site Manager's Name"
                     autoComplete="off"
                     value={smNamev}
-                    onChange={(e) => setClientAddresse(e.target.value)}
+                    onChange={(e) => setSiteManagerName(e.target.value)}
                   />
                 </div>
               </article>
@@ -272,10 +283,10 @@ function PurchaseOrders({
                   setDesc={setDesc}
                   quantity={quantity}
                   setQuantity={setQuantity}
-                  price={price}
-                  setPrice={setPrice}
-                  amount={amount}
-                  setAmount={setAmount}
+                  // price={price}
+                  // setPrice={setPrice}
+                  // amount={amount}
+                  // setAmount={setAmount}
                   list={list}
                   setList={setList}
                 />

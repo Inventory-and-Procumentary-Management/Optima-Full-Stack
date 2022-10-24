@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "../../pages.css";
 
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import {
   DeleteOutline,
   CancelOutlined,
@@ -26,44 +26,50 @@ import { IconButton } from "@material-ui/core";
 import axios from "axios";
 import { getMaterialRequest } from "../../../redux/materialRequestApiCalls";
 import { setAddSiteManagerItem } from "../../../redux/dispatchApiCalls";
+import PrintInvoice from "../../purchaseManager/printPOs/PrintInvoice";
 
 const RequesdtedDispatch = () => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
-  const materialRequest = useSelector((state) => state.materialRequest.materialRequests);
-  const [details,setDeatails] = useState([]);
+  const materialRequest = useSelector(
+    (state) => state.materialRequest.materialRequests
+  );
+  const [details, setDeatails] = useState([]);
+  
+  const [show, setShow] = useState(true);
+
+  const list = [
+    { id: 1, desc: "Cement", quantity: 200 },
+    { id: 2, desc: "Cement", quantity: 200 },
+    { id: 3, desc: "Cement", quantity: 200 },
+  ];
   // console.log(userType);
 
   useEffect(() => {
-
     const selectRole = async () => {
       if (userType === "ROLE_PURCHASING_MANAGER") {
         setUser("purchaseManager");
       } else if (userType === "ROLE_PURCHASING_STAFF") {
         setUser("purchaseStaff");
       }
-    
-    // const getMaterialRequest = async () => {
-      await getMaterialRequest(dispatch);
-      
-      
-      setDeatails(materialRequest);
-      console.log("Requested data: ",materialRequest);
-    // };
 
-    // getMaterialRequest();
-  }
+      // const getMaterialRequest = async () => {
+      await getMaterialRequest(dispatch);
+
+      setDeatails(materialRequest);
+      console.log("Requested data: ", materialRequest);
+      // };
+
+      // getMaterialRequest();
+    };
     selectRole();
-    
-    
-    
   }, [dispatch]);
 
-  const addData = (data)=> {
-    console.log(data);
-    setAddSiteManagerItem(dispatch,data);
-  }
+  const addData = (data) => {
+    console.log(materialRequest.senderId);
+    setAddSiteManagerItem(dispatch, data);
+  };
 
   const columns = [
     { field: "material_request_id", headerName: "Dispatch ID", width: 180 },
@@ -226,8 +232,27 @@ const RequesdtedDispatch = () => {
           <>
             {!params.row.isCancel ? (
               <div>
-                <IconButton onClick={()=>{addData(params.row);}}>
-                  <BasicModalDispatch
+                <IconButton
+                  // onClick={() => {
+                  //   addData(params.row);
+                  // }}
+                >
+                  <VisibilityOutlined
+                    style={{
+                      color: "#bdba2c",
+                      cursor: "pointer",
+                      marginRight: 20,
+                    }}
+
+                    onClick={() => {
+                      // setProductStatus(params.row.id, false);
+                      // setApproveShow(true);
+                      console.log(params.row);
+                      setShow(false);
+                    }}
+                  />
+                 
+                  {/* <BasicModalDispatch
                     name={
                       <VisibilityOutlined
                         style={{
@@ -242,7 +267,8 @@ const RequesdtedDispatch = () => {
                     reqId={params.row.material_request_id}
                     date={params.row.issueDate}
                     description={params.row.orderProducts}
-                  />
+                  /> */}
+                 
                 </IconButton>
 
                 <CancelOutlined
@@ -274,9 +300,13 @@ const RequesdtedDispatch = () => {
 
   return (
     <div className="common">
+      {show ? (
       <div className="userList">
-        <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request" style={{visibility:"hidden"}}>
+        {/* <div className="top-container-material-request">
+          <div
+            className="top-contaier-button-material-request"
+            style={{ visibility: "hidden" }}
+          >
             <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
             </Link>
@@ -284,7 +314,7 @@ const RequesdtedDispatch = () => {
           <div className="top-container-search-material-request">
             <SearchComponent />
           </div>
-        </div>
+        </div> */}
         <div className="bottom-container-material-request">
           <DataGrid
             rows={materialRequest}
@@ -294,6 +324,8 @@ const RequesdtedDispatch = () => {
             pageSize={7}
             checkboxSelection
             autoHeight
+            
+          components={{ Toolbar: GridToolbar }}
             // componentsProps={{
             //   columnMenu: {
             //     background: "red",
@@ -352,6 +384,25 @@ const RequesdtedDispatch = () => {
           onConfirm={() => setUpdateAllShow(false)}
         ></SweetAlert> */}
       </div>
+       ) : (
+        <PrintInvoice
+        ourName={"OPTIMA"}
+        ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
+        clientName={materialRequest.senderId}
+        clientAddress={"497/A/1"}
+        invoiceNum={"Inv-123456"}
+        invoiceDate={materialRequest.issueDate}
+        dueDate={materialRequest.dueDate}
+        // desc={"Sand"}
+        // quantity={152}
+        // price={50}
+        // amount={300000}
+        // list={list}
+         list={materialRequest.orderProducts}
+        // setList={}
+        // notes={}
+      />
+      )}
     </div>
   );
 };
