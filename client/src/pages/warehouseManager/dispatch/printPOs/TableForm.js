@@ -63,7 +63,7 @@ export default function TableForm({
     <>
       <form>
         {/*Table Items */}
-        <table width="100%" className="mb-10 border border-sky-500">
+        {/* <table width="100%" className="mb-10 border border-sky-500">
           <thead>
             <tr className="bg-gray-100 p-1">
               <td className="font-bold">Description</td>
@@ -80,7 +80,7 @@ export default function TableForm({
               </tbody>
             </React.Fragment>
           ))}
-        </table>
+        </table> */}
         <div className="flex flex-col">
           <label htmlFor="desc">{itemName}</label>
           <input

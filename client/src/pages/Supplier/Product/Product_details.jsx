@@ -6,7 +6,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Supplier_TableTabs from './Supplier_TableTabs';
-import Supplier_Table from './Supplier_Table';
+import Supplier_Table from './Supplier_TableBuilding';
 import { Link } from "react-router-dom";
 import './productStyle.css'
 

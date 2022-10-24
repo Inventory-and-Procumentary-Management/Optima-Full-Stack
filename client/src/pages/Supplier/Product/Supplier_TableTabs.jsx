@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Supplier_Table from './Supplier_Table';
+import Supplier_Table_Building from './Supplier_TableBuilding';
 import './productStyle.css';
 // import UpdateProductForm from './UpdateProductForm';
 
@@ -60,23 +60,31 @@ console.log( {displayvalue} , {itemName});
 <div className='tabStyle'>
 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
  <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-   <Tab sx={{ width: '20%' }} label="Core Products " {...a11yProps(0)} />
+   <Tab sx={{ width: '8%' }} label="BUILDING" {...a11yProps(0)} />
    
-   <Tab sx={{ width: '20%' }} label="Pipe and Eqipments" {...a11yProps(1)} />
-   <Tab sx={{ width: '20%' }} label="Paints" {...a11yProps(2)} />
+   <Tab sx={{ width: '8%' }} label="WIRING" {...a11yProps(1)} />
+   <Tab sx={{ width: '8%' }} label="PLUMBING" {...a11yProps(2)} />
+   <Tab sx={{ width: '8%' }} label="TILE" {...a11yProps(3)} />
+   <Tab sx={{ width: '8%' }} label="WOOD" {...a11yProps(4)} />
  </Tabs>
 </Box>
 </div>
 
 
 <TabPanel value={value} index={0}>
-<Supplier_Table></Supplier_Table>
+<Supplier_Table_Building name = {"BUILDING"}></Supplier_Table_Building>
 </TabPanel>
 <TabPanel value={value} index={1}>
-<Supplier_Table></Supplier_Table>
+<Supplier_Table_Building name = {"WIRING"}></Supplier_Table_Building>
 </TabPanel>
 <TabPanel value={value} index={2}>
-<Supplier_Table></Supplier_Table>
+<Supplier_Table_Building name = {"PLUMBING"}></Supplier_Table_Building>
+</TabPanel>
+<TabPanel value={value} index={3}>
+<Supplier_Table_Building name = {"TILE"}></Supplier_Table_Building>
+</TabPanel>
+<TabPanel value={value} index={4}>
+<Supplier_Table_Building name = {"WOOD"}></Supplier_Table_Building>
 </TabPanel>
 </Box>
 
