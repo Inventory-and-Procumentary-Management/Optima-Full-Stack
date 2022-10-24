@@ -16,6 +16,7 @@ import Tabs from "./navigation/Tabs";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import ItemTable from "./screens/ItemTable";
+import Notification from "./screens/Notification";
 
 const Stack = createStackNavigator();
 
@@ -38,6 +39,7 @@ export default function App() {
           <Stack.Screen name="Profile" component={Profile} />
           <Stack.Screen name="EditProfile" component={EditProfile} />
           <Stack.Screen name="ItemTable" component={ItemTable} />
+          <Stack.Screen name="Notifications" component={Notification} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -27,7 +27,7 @@ public class SupplierItemController {
     public ResponseEntity<List<SupplierItem>> getSupplierItems(){
         return ResponseEntity.ok().body(supplierItemService.getSupplierItems());
     }
-    //get one supplier
+    //get one supplieritem
     @GetMapping("/{id}")
     public ResponseEntity<SupplierItem>getSupplierItem(@PathVariable Long id){
         try {
