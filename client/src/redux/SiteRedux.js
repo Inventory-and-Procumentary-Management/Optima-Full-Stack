@@ -15,7 +15,7 @@ export const siteSlice = createSlice({
     },
     getSiteSuccess: (state, action) => {
       state.isFetching = false;
-      state.products = action.payload;
+      state.sites = action.payload;
     },
     getSiteFailure: (state) => {
       state.isFetching = false;

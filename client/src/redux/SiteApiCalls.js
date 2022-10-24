@@ -14,10 +14,11 @@ import {
   addSiteSuccess,
 } from "./SiteRedux";
 
-export const getSites = async (dispatch) => {
-  dispatch(getSiteStart());
+export const getSite = async (dispatch) => {
+    dispatch(getSiteStart());
   try {
-    const res = await userRequest.get("/site");
+    const res = await userRequest.get("/site/");
+    console.log(res.data);
     dispatch(getSiteSuccess(res.data));
   } catch (err) {
     dispatch(getSiteFailure());
@@ -45,7 +46,7 @@ export const updateSite = async (id, product, dispatch) => {
   }
 };
 export const addSite = async (product, dispatch) => {
-  dispatch(addProductStart());
+  dispatch(addSiteStart());
   try {
     const res = await userRequest.post(`/site/save`, product);
     dispatch(addSiteSuccess(res.data));

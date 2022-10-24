@@ -46,6 +46,7 @@ import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
 import ProjectManagerHome from "./pages/projectManager/ProjectManagerHome";
 import NewSite from "./pages/projectManager/sites/NewSite";
 import SiteInternalPage from "./pages/projectManager/sites/SiteInternalPage";
+import SiteDetails from "./pages/projectManager/sites/SiteDetails";
 
 const App = () => {
   return (
@@ -174,6 +175,9 @@ const App = () => {
               </Route>
               <Route exact path="/projectManager/siteInternalPage">
                  <SiteInternalPage/>
+              </Route>
+              <Route exact path="/projectManager/sitedetails">
+                 <SiteDetails/>
               </Route>
 
 
