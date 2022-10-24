@@ -3,7 +3,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import "../../pages.css";
 
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import {
   DeleteOutline,
   CancelOutlined,
@@ -38,9 +38,9 @@ const RequesdtedDispatch = () => {
   const [show, setShow] = useState(true);
 
   const list = [
-    { id: 1, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
-    { id: 2, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
-    { id: 3, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+    { id: 1, desc: "Cement", quantity: 200 },
+    { id: 2, desc: "Cement", quantity: 200 },
+    { id: 3, desc: "Cement", quantity: 200 },
   ];
   // console.log(userType);
 
@@ -65,7 +65,7 @@ const RequesdtedDispatch = () => {
   }, [dispatch]);
 
   const addData = (data) => {
-    console.log(data);
+    console.log(materialRequest.senderId);
     setAddSiteManagerItem(dispatch, data);
   };
 
@@ -231,9 +231,9 @@ const RequesdtedDispatch = () => {
             {!params.row.isCancel ? (
               <div>
                 <IconButton
-                  onClick={() => {
-                    addData(params.row);
-                  }}
+                  // onClick={() => {
+                  //   addData(params.row);
+                  // }}
                 >
                   <VisibilityOutlined
                     style={{
@@ -245,7 +245,7 @@ const RequesdtedDispatch = () => {
                     onClick={() => {
                       // setProductStatus(params.row.id, false);
                       // setApproveShow(true);
-                      console.log("Hee");
+                      console.log(params.row);
                       setShow(false);
                     }}
                   />
@@ -300,7 +300,7 @@ const RequesdtedDispatch = () => {
     <div className="common">
       {show ? (
       <div className="userList">
-        <div className="top-container-material-request">
+        {/* <div className="top-container-material-request">
           <div
             className="top-contaier-button-material-request"
             style={{ visibility: "hidden" }}
@@ -312,7 +312,7 @@ const RequesdtedDispatch = () => {
           <div className="top-container-search-material-request">
             <SearchComponent />
           </div>
-        </div>
+        </div> */}
         <div className="bottom-container-material-request">
           <DataGrid
             rows={materialRequest}
@@ -322,6 +322,8 @@ const RequesdtedDispatch = () => {
             pageSize={7}
             checkboxSelection
             autoHeight
+            
+          components={{ Toolbar: GridToolbar }}
             // componentsProps={{
             //   columnMenu: {
             //     background: "red",
@@ -384,16 +386,17 @@ const RequesdtedDispatch = () => {
         <PrintInvoice
         ourName={"OPTIMA"}
         ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
-        clientName={"Yohan"}
+        clientName={materialRequest.senderId}
         clientAddress={"497/A/1"}
         invoiceNum={"Inv-123456"}
-        invoiceDate={"2022-05-14"}
-        dueDate={"2022-05-14"}
+        invoiceDate={materialRequest.issueDate}
+        dueDate={materialRequest.dueDate}
         // desc={"Sand"}
         // quantity={152}
         // price={50}
         // amount={300000}
-        list={list}
+        // list={list}
+         list={materialRequest.orderProducts}
         // setList={}
         // notes={}
       />
