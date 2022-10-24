@@ -53,15 +53,23 @@ const columns = [
     renderCell: (params) => {
 
      return (
-       <>
+       <div>
        <OrderMoreDetailsPopup 
        details={params.row.Items} 
        IssueDate = {params.row.issueDate.slice(0, 10).replace("T", " ")}
        DueDate = {params.row.dueDate.slice(0, 10).replace("T", " ")}
-       Description = {params.row.Description}
+       Description = {params.row.orderProducts.map((order) =>(
+
+        <div className='popupdetailsOrder'>
+       <p>  <b>ProductName</b>  : {order.productName} </p> 
+       <p> <b> Description</b>  : {order.description} </p> 
+       <p> <b>Quantity</b>      : {order.quantity} </p> 
+       </div>
+
+     ))}
        ></OrderMoreDetailsPopup>
        {/* {params.row.Items} */}
-       </>
+       </div>
      );
        },},
    
