@@ -1,5 +1,5 @@
 import "./ProductList.css";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import {
   DeleteOutline,
   ThumbUpAltOutlined,
@@ -545,6 +545,7 @@ export default function ProductList() {
             pageSize={7}
             checkboxSelection
             autoHeight
+            components={{ Toolbar: GridToolbar }}
           />
         </div>
         {/* <SweetAlert
