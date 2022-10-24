@@ -1,0 +1,26 @@
+.create-New-Project-btn{
+    background-color: rgb(55, 140, 187);
+    padding: 0.625rem;
+    border-radius: 0.5rem;
+    color: white;
+    margin-left: 1.5rem;
+    font-size: large ;
+}
+.site-style{
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.site-labal-style{
+    background-color: white;
+ 
+    padding:1rem;
+    border: 0.1rem solid black;
+    margin: 0.3rem;
+    border-radius: 1rem;
+    width: max-content;
+    height: 20rem;
+}
+.site-main{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}

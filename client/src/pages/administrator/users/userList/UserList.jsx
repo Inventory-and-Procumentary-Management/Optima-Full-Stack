@@ -295,6 +295,7 @@ export default function UserList() {
           // text="SweetAlert in React"
           onConfirm={() => setUpdateAllShow(false)}
         ></SweetAlert> */} 
+
       </div>
     </div>
   );
