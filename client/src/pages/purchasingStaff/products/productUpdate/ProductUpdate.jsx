@@ -4,6 +4,7 @@ import Charts from "../../../../components/charts/Charts";
 import { Publish } from "@material-ui/icons";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   deleteProduct,
   getProducts,
@@ -11,6 +12,7 @@ import {
 } from "../../../../redux/productApiCalls";
 import MenuItem from "@mui/material/MenuItem";
 import Swal from "sweetalert2";
+
 
 import * as React from "react";
 import Box from "@mui/material/Box";
@@ -362,6 +364,7 @@ export default function ProductUpdate() {
           </Box>
         </Box>
       </div>
+
       {/* <SweetAlert
         show={show}
         warning
@@ -383,6 +386,7 @@ export default function ProductUpdate() {
         // text="SweetAlert in React"
         onConfirm={() => setAllShow(false)}
       ></SweetAlert> */}
+
     </div>
   );
 }

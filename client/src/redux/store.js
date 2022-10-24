@@ -29,12 +29,14 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
+  site:siteReducer,
   breadcrumb: breadcrumbReducer,
   inventoryItem: inventoryItemReducer,
   category: categoryReducer,
   inventory: inventoryReducer,
   materialRequest: materialRequestReducer,
   siteManagerItem: dispatchRedux,
+
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

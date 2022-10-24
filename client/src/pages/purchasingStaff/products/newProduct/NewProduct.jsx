@@ -8,8 +8,10 @@ import {
 } from "firebase/storage";
 import app from "../../../../firebase";
 import { addProduct } from "../../../../redux/productApiCalls";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, Redirect } from "react-router-dom";
+
 
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -583,6 +585,7 @@ export default function NewProduct() {
           {/* </form> */}
         </Box>
       </Box>
+
        {/* <SweetAlert
         show={allShow}
         success
@@ -597,6 +600,7 @@ export default function NewProduct() {
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
       ></SweetAlert> */} 
+
     </div>
   );
 }
