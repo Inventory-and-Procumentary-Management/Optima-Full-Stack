@@ -23,6 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 import Logout from "@mui/icons-material/Logout";
+import { Link } from "react-router-dom";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -68,6 +69,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 export default function Topbar() {
   const dispatch = useDispatch();
+  const userType = useSelector((state) => state.user.userType);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -187,7 +189,11 @@ export default function Topbar() {
           anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         >
           <MenuItem>
-            <Avatar /> Profile
+            <Avatar /> 
+            {userType == "ROLE_SUPPLIER" ?( <Link to="/supplier/SupplierProfile">           
+                Profile
+              </Link>) :(<></>)}
+           
           </MenuItem>
           <MenuItem>
             <Avatar /> My account

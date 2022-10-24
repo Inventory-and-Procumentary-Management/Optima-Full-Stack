@@ -17,7 +17,14 @@ import {
   getProducts,
   updateProduct,
 } from "../../../../redux/productApiCalls";
+
+import Swal from "sweetalert2";
+
 import SearchComponent from "../../../../components/search/Search";
+
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import { getBreadcrumb } from "../../../../redux/breadcrumbApiCalls";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -29,17 +36,27 @@ export default function ProductList() {
   const [productStatusNew, setProductStatusNew] = useState(false);
   const [productId, setProductId] = useState("");
   const [deleteTrigger, setDeleteTrigger] = useState("");
-  const [allShow, setAllShow] = useState(false);
   const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const setBreadcrumb = () => {
+      getBreadcrumb(dispatch, 
+        {
+          name: "Products",
+          link: "productList",
+        },
+      );
+    };
+    setBreadcrumb();
+  }, []);
 
   useEffect(() => {
     getProducts(dispatch);
   }, [dispatch, deleteTrigger]);
 
-  const deleteConfirm = async () => {
-    setShow(false);
-    deleteProduct(productId, dispatch);
-    setDeleteTrigger("Delete"+deleteTrigger);
+  const deleteConfirm = async (id) => {
+    await deleteProduct(id, dispatch);
+    setDeleteTrigger("Delete" + deleteTrigger);
   };
 
   const deleteCancel = () => {
@@ -47,58 +64,172 @@ export default function ProductList() {
     setApproveShow(false);
   };
 
-  const handleDelete = (id) => {
-    setProductId(id);
+  const handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#378cbb",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteConfirm(id);
+        Swal.fire("Deleted!", "Your file has been deleted.", "success");
+      }
+    });
     // setData(data.filter((item) => item.id !== id));
   };
 
   const priceChangeModel = (id) => {
     setProductId(id);
-    setDeleteTrigger("price"+deleteTrigger);
+    setDeleteTrigger("price" + deleteTrigger);
     console.log(id);
   };
   const changeStockType = (id) => {
     setProductId(id);
-    setDeleteTrigger("stock"+deleteTrigger);
+    setDeleteTrigger("stock" + deleteTrigger);
     console.log(id);
   };
   const changeQuantity = (id) => {
     setProductId(id);
-    setDeleteTrigger("change"+deleteTrigger);
+    setDeleteTrigger("change" + deleteTrigger);
     console.log(id);
   };
   const setMinimumLevel = (id) => {
-    setProductId(id);
-    setDeleteTrigger("minimum"+deleteTrigger);
-    console.log(id);
+    // setProductId(id);
+    Swal.fire({
+      title: "Enter new minimum level",
+      input: "number",
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      confirmButtonColor: '#378cbb',
+      showLoaderOnConfirm: true,
+      inputPlaceholder: 'Minimum Level',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to add something!'
+        }
+      },
+      preConfirm: (minQuantity) => {
+        return updateProduct(id, { minQuantity: minQuantity }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Updated!", "Minimum level has been updated.", "success");
+        setDeleteTrigger("minimum" + deleteTrigger);
+      } else {
+        Swal.fire(
+          "Updated fail!",
+          "Minimum level has not been updated.",
+          "error"
+        );
+      }
+    });
+  };
+  const setMaximumLevel = (id) => {
+    Swal.fire({
+      title: "Enter new maximum level",
+      input: "number",
+      showCancelButton: true,
+      confirmButtonText: "Update",
+      confirmButtonColor: '#378cbb',
+      showLoaderOnConfirm: true,
+      inputPlaceholder: 'Maximum Level',
+      inputValidator: (value) => {
+        if (!value) {
+          return 'You need to add something!'
+        }
+      },
+      preConfirm: (maxQuantity) => {
+        return updateProduct(id, { maxQuantity: maxQuantity }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Updated!", "Maximum level has been updated.", "success");
+        setDeleteTrigger("maximum" + deleteTrigger);
+      } else {
+        Swal.fire(
+          "Updated fail!",
+          "Maximum level has not been updated.",
+          "error"
+        );
+      }
+    });
+    
   };
   const setProductStatus = (id, status) => {
-    setProductId(id);
-    setProductStatusNew(status);
-    setDeleteTrigger("product"+deleteTrigger);
     // now activate -> status = false
     // now deactivate -> status = true
-    console.log(id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#378cbb',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!',
+      preConfirm: () => {
+        return updateProduct(id, { isActivate: status }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Updated!',
+          'Activation has been updated.',
+          'success'
+        )
+        setDeleteTrigger("product" + deleteTrigger);
+      }else {
+        Swal.fire(
+          "Updated fail!",
+          "Activation has not been updated.",
+          "error"
+        );
+      }
+    })
   };
-  const setProductApproveStatus = (id, status, product) => {
-    if (userType === "ROLE_PURCHASING_MANAGER") {
-      setApproveStatus(status);
-      setProductId(id);
-      console.log(product);
-      let { isApprove, ...others } = product;
-      isApprove = status;
-      setProduct({ isApprove, ...others });
-    }else {
-      console.log(id);
-    }
+  const setProductApproveStatus = (id, status) => {
     // now activate -> status = false
     // now deactivate -> status = true
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#378cbb',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, update it!',
+      preConfirm: () => {
+        return updateProduct(id, { isApprove: status }, dispatch);
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Updated!',
+          'Approve has been updated.',
+          'success'
+        )
+        setDeleteTrigger("productApprove" + deleteTrigger);
+      }else {
+        Swal.fire(
+          "Updated fail!",
+          "Approve has not been updated.",
+          "error"
+        );
+      }
+    })
   };
   const updateApproveConfirm = async () => {
     setApproveShow(false);
     console.log(product);
     await updateProduct(productId, product, dispatch);
-    setDeleteTrigger("approve"+deleteTrigger);
+    setDeleteTrigger("approve" + deleteTrigger);
   };
 
   const columns = [
@@ -117,62 +248,67 @@ export default function ProductList() {
       },
     },
     {
-      field: "inStock",
-      headerName: "Stock",
-      width: 120,
-      renderCell: (params) => {
-        return (
-          <>
-            <div className="productListItem">
-              <div className="productListItemData">
-                {params.row.inStock + " "}
-              </div>
-
-              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
-              {userType === "ROLE_WAREHOUSE_MANAGER" ? (
-                <button
-                  className="productListEdit"
-                  style={{ backgroundColor: "#bdba2c" }}
-                  onClick={() => changeStockType(params.row.id)}
-                >
-                  Set
-                </button>
-              ) : (
-                <></>
-              )}
-
-              {/* </Link> */}
-            </div>
-          </>
-        );
-      },
+      field: "description",
+      headerName: "Description",
+      width: 220,
     },
+    // {
+    //   field: "inStock",
+    //   headerName: "Stock",
+    //   width: 120,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <div className="productListItem">
+    //           <div className="productListItemData">
+    //             {params.row.inStock + " "}
+    //           </div>
+
+    //           {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
+    //           {userType === "ROLE_WAREHOUSE_MANAGER" ? (
+    //             <button
+    //               className="productListEdit"
+    //               style={{ backgroundColor: "#bdba2c" }}
+    //               onClick={() => changeStockType(params.row.id)}
+    //             >
+    //               Set
+    //             </button>
+    //           ) : (
+    //             <></>
+    //           )}
+
+    //           {/* </Link> */}
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
+    // {
+    //   field: "price",
+    //   headerName: "Price (Rs)",
+    //   width: 180,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <div className="productListItem">
+    //           <div className="productListItemData">{params.row.price} </div>
+    //           {userType === "ROLE_SUPPLIER" ? (
+    //             <button
+    //               className="productListEdit"
+    //               onClick={() => priceChangeModel(params.row.id)}
+    //             >
+    //               Change
+    //             </button>
+    //           ) : (
+    //             <></>
+    //           )}
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
     {
-      field: "price",
-      headerName: "Price (Rs)",
-      width: 180,
-      renderCell: (params) => {
-        return (
-          <>
-            <div className="productListItem">
-              <div className="productListItemData">{params.row.price} </div>
-              {userType === "ROLE_SUPPLIER" ? (
-                <button
-                  className="productListEdit"
-                  onClick={() => priceChangeModel(params.row.id)}
-                >
-                  Change
-                </button>
-              ) : (
-                <></>
-              )}
-            </div>
-          </>
-        );
-      },
-    },
-    {
-      field: "quantity",
+      field: "totalQuantity",
       headerName: "Quantity",
       width: 200,
       renderCell: (params) => {
@@ -180,14 +316,14 @@ export default function ProductList() {
           <>
             <div className="productListItem">
               <div className="productListItemData">
-                {params.row.quantity} {params.row.messure}{" "}
+                {params.row.totalQuantity} {params.row.uom}{" "}
               </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
               {userType === "ROLE_WAREHOUSE_MANAGER" ? (
                 <button
                   className="productListEdit"
-                  onClick={() => changeQuantity(params.row.id)}
+                  onClick={() => changeQuantity(params.row.inventor_item_id)}
                 >
                   Change
                 </button>
@@ -201,7 +337,7 @@ export default function ProductList() {
       },
     },
     {
-      field: "minimumLevel",
+      field: "minQuantity",
       headerName: "Minimum Level",
       width: 200,
       renderCell: (params) => {
@@ -209,7 +345,7 @@ export default function ProductList() {
           <>
             <div className="productListItem">
               <div className="productListItemData">
-                {params.row.minimumLevel + " "}
+                {params.row.minQuantity + " "}
               </div>
 
               {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
@@ -218,7 +354,38 @@ export default function ProductList() {
                   className="productListDelete"
                   style={{ color: "#bdba2c" }}
                   onClick={() => {
-                    setMinimumLevel(params.row.id);
+                    setMinimumLevel(params.row.inventor_item_id);
+                    // setApproveShow(true);
+                  }}
+                />
+              ) : (
+                <></>
+              )}
+              {/* </Link> */}
+            </div>
+          </>
+        );
+      },
+    },
+    {
+      field: "maxQuantity",
+      headerName: "Maximum Level",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <>
+            <div className="productListItem">
+              <div className="productListItemData">
+                {params.row.maxQuantity + " "}
+              </div>
+
+              {/* <Link to={"/purchaseStaff/productUpdate/" + params.row.id}> */}
+              {userType === "ROLE_PURCHASING_MANAGER" ? (
+                <EditTwoTone
+                  className="productListDelete"
+                  style={{ color: "#bdba2c" }}
+                  onClick={() => {
+                    setMaximumLevel(params.row.inventor_item_id);
                     // setApproveShow(true);
                   }}
                 />
@@ -249,7 +416,7 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "green" }}
                     onClick={() => {
-                      setProductStatus(params.row.id, false);
+                      setProductStatus(params.row.inventor_item_id, false);
                       // setApproveShow(true);
                     }}
                   />
@@ -258,7 +425,7 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "red" }}
                     onClick={() => {
-                      setProductStatus(params.row.id, false);
+                      setProductStatus(params.row.inventor_item_id, true);
                       // setApproveShow(true);
                     }}
                   />
@@ -289,8 +456,10 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "green" }}
                     onClick={() => {
-                      setProductApproveStatus(params.row.id, false, params.row);
-                      setApproveShow(true);
+                      setProductApproveStatus(
+                        params.row.inventor_item_id,
+                        false,
+                      );
                     }}
                   />
                 ) : (
@@ -298,8 +467,10 @@ export default function ProductList() {
                     className="productListDelete"
                     style={{ color: "red" }}
                     onClick={() => {
-                      setProductApproveStatus(params.row.id, true, params.row);
-                      setApproveShow(true);
+                      setProductApproveStatus(
+                        params.row.inventor_item_id,
+                        true,
+                      );
                     }}
                   />
                 )
@@ -321,7 +492,12 @@ export default function ProductList() {
             {userType === "ROLE_PURCHASING_MANAGER" ||
             userType === "ROLE_PURCHASING_STAFF" ? (
               <div>
-                <Link to={"/purchaseStaff/productUpdate/" + params.row.id}>
+                <Link
+                  to={
+                    "/purchaseStaff/productUpdate/" +
+                    params.row.inventor_item_id
+                  }
+                >
                   {/* <button className="productListEdit">Edit</button> */}
                   <EditOutlined
                     className="productListDelete"
@@ -336,7 +512,7 @@ export default function ProductList() {
               <DeleteOutline
                 className="productListDelete"
                 onClick={() => {
-                  handleDelete(params.row.id);
+                  handleDelete(params.row.inventor_item_id);
                   setShow(true);
                 }}
               />
@@ -367,13 +543,47 @@ export default function ProductList() {
             rows={products}
             disableSelectionOnClick
             columns={columns}
-            getRowId={(row) => row.id}
+            getRowId={(row) => row.inventor_item_id}
             pageSize={7}
             checkboxSelection
             autoHeight
           />
         </div>
-        
+
+        {/* <SweetAlert
+          show={show}
+          warning
+          showCancel
+          confirmBtnText="Yes, Delete it!"
+          confirmBtnBsStyle="danger"
+          title="Are you sure?"
+          onConfirm={deleteConfirm}
+          onCancel={deleteCancel}
+          focusCancelBtn
+        >
+          You will not be able to recover this imaginary file!
+        </SweetAlert> */}
+        {/* <SweetAlert
+          show={approveShow}
+          warning
+          showCancel
+          confirmBtnText="Yes, Update it!"
+          confirmBtnBsStyle="danger"
+          title="Are you sure?"
+          onConfirm={updateApproveConfirm}
+          onCancel={deleteCancel}
+          focusCancelBtn
+        >
+          You will not be able to recover this imaginary file!
+        </SweetAlert> */}
+        {/* <SweetAlert
+          show={allShow}
+          success
+          title="Successfully delete!"
+          // text="SweetAlert in React"
+          onConfirm={() => setAllShow(false)}
+        ></SweetAlert> */} 
+
       </div>
     </div>
   );

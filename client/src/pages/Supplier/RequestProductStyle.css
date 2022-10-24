@@ -73,3 +73,18 @@
     flex-direction: row;
   
   }
+  .footer-section{
+    padding: 2rem;
+    padding-top: 1rem;
+  }
+  .click-me-btn{
+    background-color: rgb(55, 140, 187);
+    color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+  
+  }
+  .dont-have-a-product-name{
+    font-size: 1.3rem;
+    font-weight: bold;
+  }

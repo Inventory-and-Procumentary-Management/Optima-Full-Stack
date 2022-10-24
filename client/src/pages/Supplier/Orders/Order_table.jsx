@@ -25,47 +25,52 @@ const columns = [
     { field: 'IssueDate', headerName: 'Issue Date', width: 160 },
     { field: 'Due_date', headerName: 'Due date', width: 160 },
     { field: 'Items', headerName: 'Items', width: 160 },
-    { field: 'More', headerName: 'Item Details', width: 170 ,
-     renderCell: (params) => {
-
-      return (
-        <>
-        <OrderMoreDetailsPopup details={params.row.Items}></OrderMoreDetailsPopup>
-        {/* {params.row.Items} */}
-        </>
-      );
-        },},
     {
       field: 'Description',
       headerName: 'Description',
       width: 300,
     },
+    { field: 'More', headerName: 'Review ', width: 170 ,
+    renderCell: (params) => {
+
+     return (
+       <>
+       <OrderMoreDetailsPopup 
+       details={params.row.Items} 
+       IssueDate = {params.row.IssueDate}
+       DueDate = {params.row.Due_date}
+       Description = {params.row.Description}
+       ></OrderMoreDetailsPopup>
+       {/* {params.row.Items} */}
+       </>
+     );
+       },},
    
     
 
-    { field: 'Action', headerName: '', width: 160 ,
-    renderCell: (params) => {
+    // { field: 'Action', headerName: '', width: 160 ,
+    // renderCell: (params) => {
 
-      return (
-        <>
-            <Link to="/supplier/Supplier_Invoices" className="link">
-                <li className="sidebarListItem">
-                <CheckIcon sx={{ color: green[500] }} > </CheckIcon>
-                </li>
-              </Link>
-        {/* <button onClick={ () =>{
-          return( <Link to="/supplier/Supplier_Invoices" className="link"></Link>)
+    //   return (
+    //     <>
+    //         <Link to="/supplier/Supplier_Invoices" className="link">
+    //             <li className="sidebarListItem">
+    //             <CheckIcon sx={{ color: green[500] }} > </CheckIcon>
+    //             </li>
+    //           </Link>
+    //     {/* <button onClick={ () =>{
+    //       return( <Link to="/supplier/Supplier_Invoices" className="link"></Link>)
                         
-        }
-        }> <CheckIcon></CheckIcon> </button> */}
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        &nbsp;
-        <BlockIcon sx={{ color: red[500] }}></BlockIcon>
-        </>
-      );
-        },},
+    //     }
+    //     }> <CheckIcon></CheckIcon> </button> */}
+    //     &nbsp;
+    //     &nbsp;
+    //     &nbsp;
+    //     &nbsp;
+    //     <BlockIcon sx={{ color: red[500] }}></BlockIcon>
+    //     </>
+    //   );
+    //     },},
   
   ];
   

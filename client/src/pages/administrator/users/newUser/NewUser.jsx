@@ -69,7 +69,6 @@ export default function NewUser() {
   const [idMessageError, setIdMessageError] = useState("");
   const [usernameMessageError, setUsernameMessageError] = useState("");
   const [usertypeMessageError, setUsertypeMessageError] = useState("");
-  const [passwordMessageError, setPasswordMessageError] = useState("");
   const [mobileNumberMessageError, setMobileNumberMessageError] = useState("");
 
   useEffect(() => {
@@ -449,6 +448,21 @@ export default function NewUser() {
           {/* </form> */}
         </Box>
       </Box>
+
+      {/* <SweetAlert
+        show={allShow}
+        success
+        title="Successfully added!"
+        // text="SweetAlert in React"
+        onConfirm={() => setAllShow(false)}
+      ></SweetAlert> */}
+      {/* <SweetAlert
+        show={show}
+        danger
+        title="Added Unsuccess!"
+        // text="SweetAlert in React"
+        onConfirm={() => setShow(false)}
+      ></SweetAlert> */} 
 
     </div>
   );

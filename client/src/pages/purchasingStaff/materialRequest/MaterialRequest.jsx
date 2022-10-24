@@ -10,11 +10,14 @@ import {
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
+// import SweetAlert from "react-bootstrap-sweetalert";
+
 import { useDispatch, useSelector } from "react-redux";
 import { materialRequestData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
+import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
 
 const columns = [
   { field: "invoice_id", headerName: "Request ID", width: 170 },
@@ -157,8 +160,25 @@ const columns = [
 
 const MaterialRequest = () => {
   const userType = useSelector((state) => state.user.userType);
+  const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
   const [user, setUser] = useState("");
   console.log(userType);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    breadcrumbs.map((item)=>{
+      if(item.link == "materialRequest"){
+        getRemoveBreadcrumb(dispatch,"materialRequest");
+      }
+    });
+    const setBreadcrumb = () => {
+      getBreadcrumb(dispatch, {
+        name: "Material Request",
+        link: "materialRequest",
+      });
+    };
+    setBreadcrumb();
+  }, []);
 
   useEffect(() => {
     if (userType === "ROLE_PURCHASING_MANAGER") {

@@ -6,6 +6,8 @@ import Modal from "@mui/material/Modal";
 import { Grid, MenuItem, TextField } from "@mui/material";
 import BasicSelect from "../inventory/BasicSelect";
 import "../../pages.css";
+import { useState } from "react";
+import { Input } from "@material-ui/core";
 
 const style = {
   position: "absolute",
@@ -19,10 +21,14 @@ const style = {
   p: 4,
 };
 
-export default function BasicModalStocks() {
+
+export default function BasicModalStocks({name,topic }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [reqId, setReqId] = useState("");
+  const [itemName, setItemName] = useState("");
 
   return (
     <div>
@@ -31,7 +37,7 @@ export default function BasicModalStocks() {
                     ADD NEW
                   </Button> */}
       <Button onClick={handleOpen} style={{ color: "black" }}>
-        Request Stocks
+        {name}
       </Button>
       <Modal
         open={open}
@@ -41,14 +47,21 @@ export default function BasicModalStocks() {
       >
         <Box sx={style}>
           <h2 align="center" style={{ marginBottom: "20px" }}>
-            Request Stocks
+            {topic}
           </h2>
           <Grid container spacing={3} padding="20px">
             <Grid item xs={12}>
-              <TextField label="Request ID" fullWidth required />
+              <Input label="Request ID" fullWidth required 
+              value={reqId}
+              onChange={(e)=> setReqId(e.target.value)}
+              readOnly
+              />
             </Grid>
             <Grid item xs={12}>
-              <TextField label="Item Name" fullWidth required />
+              <Input label="Item Name" fullWidth required 
+              value={itemName}
+              readOnly
+              onChange={(e)=> setItemName(e.target.value)}/>
             </Grid>
             <Grid item xs={12}>
               <BasicSelect label="Category">

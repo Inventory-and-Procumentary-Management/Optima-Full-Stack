@@ -21,7 +21,7 @@ const EditProfile = () => {
 
   const { control, handleSubmit, watch, reset } = useForm();
 
-  const URL = `http://192.168.1.4:5000/api/v1/user/${userID}`;
+  const URL = `http:// 192.168.1.4:8080/api/v1/user/${userID}`;
 
   const onConfirmButtonPressed = async (data) => {
     if (selected == null) {

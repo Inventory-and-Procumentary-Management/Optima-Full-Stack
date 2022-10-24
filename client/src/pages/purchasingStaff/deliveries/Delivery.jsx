@@ -5,11 +5,15 @@ import "../../pages.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
+// import SweetAlert from "react-bootstrap-sweetalert";
+
 import { useDispatch, useSelector } from "react-redux";
 import { dumyData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
+import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
 
 const columns = [
   { field: "_id", headerName: "Invoice ID", width: 150 },
@@ -144,6 +148,22 @@ const columns = [
 ];
 
 const Delivery = () => {
+  const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    breadcrumbs.map((item)=>{
+      if(item.link == "deliveries"){
+        getRemoveBreadcrumb(dispatch,"deliveries");
+      }
+    });
+    const setBreadcrumb = () => {
+      getBreadcrumb(dispatch, {
+        name: "Deliveries",
+        link: "deliveries",
+      });
+    };
+    setBreadcrumb();
+  }, []);
   return (
     <div className="common">
       <div className="userList">

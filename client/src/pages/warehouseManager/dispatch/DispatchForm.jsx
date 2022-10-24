@@ -8,7 +8,9 @@ import {
 } from "firebase/storage";
 import app from "../../../firebase";
 import { addProduct } from "../../../redux/productApiCalls";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+// import SweetAlert from "react-bootstrap-sweetalert";
 
 import { Link, useLocation } from "react-router-dom";
 // import "../user/user.css";
@@ -63,6 +65,8 @@ export default function DispatchForm() {
     useState(false);
   const [imageMessageError, setImageMessageError] = useState(false);
 
+  const siteManagerItem = useSelector((state) => state.siteManagerItem.siteManagerItems);
+
   useEffect(() => {
     const date = new Date();
     let currentDate =
@@ -72,6 +76,7 @@ export default function DispatchForm() {
       "-" +
       ("0" + date.getDate()).slice(-2);
     console.log(currentDate);
+    console.log(siteManagerItem);
     setCurrent_Date(currentDate);
   }, []);
 
@@ -118,6 +123,7 @@ export default function DispatchForm() {
         // Handle unsuccessful uploads
       },
       () => {
+        //test comment
         // Handle successful uploads on complete
         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -139,16 +145,13 @@ export default function DispatchForm() {
   return (
     <div className="newProduct common">
       {/* <h1 className="addProductTitle">New Product</h1> */}
-      <div className="userTitleContainer" style={{margin:"0px 225px"}}>
-        <h1 className="addProductTitle" style={{fontSize:30}}>Dispatch Form</h1>
+      <div className="userTitleContainer" style={{ margin: "0px 225px" }}>
+        <h1 className="addProductTitle" style={{ fontSize: 30 }}>
+          Dispatch Form
+        </h1>
         <div className="userTitleButtons">
-          <Link to={"/warehouseManager"}>
-            <button
-              className="productAddButton"
-              style={{ backgroundColor: "blue", color: "black" }}
-            >
-              Back
-            </button>
+          <Link to={"/warehouseManager/requesdtedDispatch"}>
+            <button className="color-contained-button">Back</button>
           </Link>
         </div>
       </div>
@@ -267,10 +270,36 @@ export default function DispatchForm() {
             </Grid>
           </Grid> */}
           {/* </form> */}
-          <PurchaseOrders/>
+          <PurchaseOrders
+            smId={"The Site Manager's ID"}
+            smName={"The Site Manager's Name"}
+            dispatchNumber={"Dispatch Number"}
+            dispatchDate={"Date"}
+            itemName={"Item Name"}
+            dispatchQuantity={"Quantity"}
+            
+            smIdv={siteManagerItem.senderId}
+            smNamev={siteManagerItem.senderType}
+            oProductsv={siteManagerItem.orderProducts}
+          />
         </Box>
       </Box>
-      
+
+      {/* <SweetAlert
+        show={allShow}
+        success
+        title="Successfully added!"
+        // text="SweetAlert in React"
+        onConfirm={() => setAllShow(false)}
+      ></SweetAlert> */}
+      {/* <SweetAlert
+        show={show}
+        danger
+        title="Added Unsuccess!"
+        // text="SweetAlert in React"
+        onConfirm={() => setShow(false)}
+      ></SweetAlert> */}
+
     </div>
   );
 }

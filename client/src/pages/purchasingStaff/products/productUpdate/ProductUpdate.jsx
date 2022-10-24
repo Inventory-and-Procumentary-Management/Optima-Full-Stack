@@ -1,20 +1,17 @@
-// import React from 'react'
-
-// const ProductUpdate = () => {
-//   return (
-//     <div>ProductUpdate</div>
-//   )
-// }
-
 import { Link, useLocation } from "react-router-dom";
 import "./ProductUpdate.css";
 import Charts from "../../../../components/charts/Charts";
-// import { productData } from "../../dummyData";
 import { Publish } from "@material-ui/icons";
 import { useEffect, useMemo, useState } from "react";
-// import { userRequest } from "../../requestMethods";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getProducts, updateProduct } from "../../../../redux/productApiCalls";
+
+import {
+  deleteProduct,
+  getProducts,
+  updateProduct,
+} from "../../../../redux/productApiCalls";
+import MenuItem from "@mui/material/MenuItem";
+import Swal from "sweetalert2";
 
 
 import * as React from "react";
@@ -31,21 +28,77 @@ export default function ProductUpdate() {
   const [allShow, setAllShow] = useState(false);
   const [formSaveData, setFormSaveData] = useState([]);
 
-  const [titleError,setTitleError] = useState(false);
-  const [descriptionError,setDescriptionError] = useState(false);
-  const [categoryError,setCategoryError] = useState(false);
-  const [messureError,setMessureError] = useState(false);
+  const [titleError, setTitleError] = useState(false);
+  const [descriptionError, setDescriptionError] = useState(false);
+  const [categoryError, setCategoryError] = useState(false);
+  const [messureError, setMessureError] = useState(false);
 
-  const [titleMessageError,setTitleMessageError] = useState("");
-  const [descriptionMessageError,setDescriptionMessageError] = useState("");
-  const [categoryMessageError,setCategoryMessageError] = useState("");
-  const [messureMessageError,setMessureMessageError] = useState("");
+  const [titleMessageError, setTitleMessageError] = useState("");
+  const [descriptionMessageError, setDescriptionMessageError] = useState("");
+  const [categoryMessageError, setCategoryMessageError] = useState("");
+  const [messureMessageError, setMessureMessageError] = useState("");
 
   const dispatch = useDispatch();
   const product = useSelector((state) =>
-    state.product.products.find((product) => product.id == productId)
+    state.product.products.find(
+      (product) => product.inventor_item_id == productId
+    )
   );
   console.log(product);
+
+  const categoryData = [
+    {
+      value: "BUILDING",
+      label: "Building",
+    },
+    {
+      value: "WIRING",
+      label: "Wiring",
+    },
+    {
+      value: "PLUMBING",
+      label: "Plumbing",
+    },
+    {
+      value: "PAINTING",
+      label: "Painting",
+    },
+    {
+      value: "TILE",
+      label: "Tile",
+    },
+    {
+      value: "WOOD",
+      label: "Wood",
+    },
+  ];
+
+  const uomData = [
+    {
+      value: "Cubes",
+      label: "Cubes",
+    },
+    {
+      value: "Packets",
+      label: "Packets",
+    },
+    {
+      value: "Leters",
+      label: "Leters",
+    },
+    {
+      value: "Kg",
+      label: "Kg",
+    },
+    {
+      value: "Nos",
+      label: "Nos",
+    },
+    {
+      value: "Other",
+      label: "Other",
+    },
+  ];
 
   const MONTHS = useMemo(
     () => [
@@ -98,92 +151,38 @@ export default function ProductUpdate() {
     e.preventDefault();
     const formData = new FormData(e.target);
     const formNewData = {
-      id:productId,
       title: formData.get("title"),
       description: formData.get("description"),
       category: formData.get("category"),
-      messure: formData.get("messure"),
-      // img: formData.get("img"),
-      img: product.img,
-      inStock: product.inStock,
-      isActivate: product.isActivate,
-      price: product.price,
-      createDate: product.createDate,
-      minimumLevel: product.minimumLevel,
-      quantity: product.quantity,
-      isApprove: false,
-      // isApprove: product.isApprove,
+      uom: formData.get("messure"),
+      // img: product.img,
     };
     setFormSaveData(formNewData);
     setShow(true);
     console.log(formNewData);
+    updateProductDetails(formNewData);
   };
 
-  const updateProductDetails = async () => {
+  const updateProductDetails = async (data) => {
     setShow(false);
-    if (!formSaveData.title) {
-      formSaveData.title = product.title;
-    }
-    if (!formSaveData.description) {
-      formSaveData.description = product.description;
-    }
-    // console.log(formSaveData.img.name);
-    // if (!formSaveData.img.name) {
-    //   formSaveData.img = product.img;
-    // }
-    // console.log(formSaveData.img.name);
-    if (!formSaveData.category) {
-      formSaveData.category = product.category;
-    }
-    if (!formSaveData.messure) {
-      formSaveData.messure = product.messure;
-    }
-    updateProduct(productId,JSON.stringify(formSaveData),dispatch);
-    // try {
-    //   let response = await fetch(URL, {
-    //     method: "PUT",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       // token: token,
-    //     },
-    //     body: JSON.stringify({
-    //       title: formSaveData.title,
-    //       desc: formSaveData.desc,
-    //       img: formSaveData.img,
-    //       price: formSaveData.price,
-    //       inStock: formSaveData.inStock,
-    //     }),
-    //   });
-    //   let json = await response.json();
-    //   // setData(json);
-    //   console.log(json);
-    //   setAllShow(true);
-    //   // setLoading(false);
-    // } catch (error) {
-    //   alert(error);
-    // }
-  };
-
-  const updateProductDetailsCancel = () => {
-    setShow(false);
-    console.log("Update cancel");
+    updateProduct(productId, JSON.stringify(data), dispatch);
   };
 
   return (
     <div className="common">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Product Detail Edit</h1>
+        <h1 className="addTitle">Product Detail Edit</h1>
         <div>
           <Link to="/purchaseStaff/productList">
             <button
-              className="productAddButton"
-              style={{ backgroundColor: "darkblue", marginRight: 10 }}
+              className="color-contained-button"
+              style={{ marginRight: 10, paddingLeft:17, paddingRight:17 }}
             >
               Back
             </button>
           </Link>
           <Link to="/purchaseStaff/newProduct">
-            <button className="productAddButton">Create</button>
+            <button className="color-contained-button">Create</button>
           </Link>
         </div>
       </div>
@@ -198,22 +197,28 @@ export default function ProductUpdate() {
           </div>
           <div className="productInfoBottom">
             <div className="productInfoItem">
-              <span className="productInfoKey">id:</span>
-              <span className="productInfoValue">{product.id}</span>
+              <span className="productInfoKey">Product ID:</span>
+              <span className="productInfoValue">
+                {product.inventor_item_id}
+              </span>
             </div>
             <div className="productInfoItem">
-              <span className="productInfoKey">sales:</span>
-              <span className="productInfoValue">5123</span>
+              <span className="productInfoKey">Total Quantity:</span>
+              <span className="productInfoValue">{product.totalQuantity}</span>
             </div>
             <div className="productInfoItem">
-              <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue">{product.inStock}</span>
+              <span className="productInfoKey">Maximum Quantity:</span>
+              <span className="productInfoValue">{product.maxQuantity}</span>
+            </div>
+            <div className="productInfoItem">
+              <span className="productInfoKey">Minimum Quantity:</span>
+              <span className="productInfoValue">{product.minQuantity}</span>
             </div>
           </div>
         </div>
       </div>
       <div className="productBottom">
-        <h2>Update Product</h2>
+        <h2 className="h3Title">Update Product</h2>
         <Box
           sx={{
             my: 1,
@@ -283,6 +288,7 @@ export default function ProductUpdate() {
                       defaultValue={product.category}
                       variant="standard"
                       margin="normal"
+                      select
                       // required
                       fullWidth
                       id="category"
@@ -295,14 +301,21 @@ export default function ProductUpdate() {
                         setCategoryError(false);
                         setCategoryMessageError("");
                       }}
-                    />
+                    >
+                      {categoryData.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                   <Grid item md={4}>
                     <TextField
                       error={messureError}
-                      defaultValue={product.messure}
+                      defaultValue={product.uom}
                       variant="standard"
                       margin="normal"
+                      select
                       // required
                       fullWidth
                       id="messure"
@@ -315,26 +328,15 @@ export default function ProductUpdate() {
                         setMessureError(false);
                         setMessureMessageError("");
                       }}
-                    />
+                    >
+                      {uomData.map((option) => (
+                        <MenuItem key={option.value} value={option.value}>
+                          {option.label}
+                        </MenuItem>
+                      ))}
+                    </TextField>
                   </Grid>
                 </Grid>
-
-                {/* <label>Product Name</label>
-                <input type="text" name="title" placeholder={product.title} />
-                <label>Product Description</label>
-                <input
-                  type="text"
-                  name="desc"
-                  placeholder={product.description}
-                />
-                <label>Price</label>
-                <input type="text" name="price" placeholder={product.price} />
-                <label>In Stock</label>
-                <select name="inStock" id="idStock">
-                  <option value="1">Yes</option>
-                  <option value="0">No</option>
-                </select>
-                </div> */}
               </Grid>
               <Grid item md={2}>
                 <div className="productFormRight">
@@ -354,7 +356,7 @@ export default function ProductUpdate() {
                       style={{ display: "none" }}
                     />
                   </div>
-                  <button className="productButton">Update</button>
+                  <button className="color-outlined-button" style={{marginTop:10}}>Update</button>
                 </div>
               </Grid>
             </Grid>
@@ -362,7 +364,29 @@ export default function ProductUpdate() {
           </Box>
         </Box>
       </div>
-      
+
+      {/* <SweetAlert
+        show={show}
+        warning
+        showCancel
+        confirmBtnText="Yes, Update it!"
+        confirmBtnBsStyle="danger"
+        title="Are you sure?"
+        onConfirm={updateProductDetails}
+        onCancel={updateProductDetailsCancel}
+        focusCancelBtn
+      >
+        You will not be able to recover this imaginary file!
+      </SweetAlert> */}
+
+      {/* <SweetAlert
+        show={allShow}
+        success
+        title="Successfully updated!"
+        // text="SweetAlert in React"
+        onConfirm={() => setAllShow(false)}
+      ></SweetAlert> */}
+
     </div>
   );
 }
