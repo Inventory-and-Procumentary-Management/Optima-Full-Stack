@@ -4,8 +4,10 @@ import "../../pages.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
 // import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector,shallowEqual } from "react-redux";
+
 import { inventoryData } from "../../../constants/DashboardData";
 import SearchComponent from "../../../components/search/Search";
 import {
