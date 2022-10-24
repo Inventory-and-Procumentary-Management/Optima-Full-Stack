@@ -2,7 +2,7 @@ import { useState } from "react";
 import "../products/newProduct/NewProduct.css";
 
 import { useDispatch } from "react-redux";
-// import SweetAlert from "react-bootstrap-sweetalert";
+// // import SweetAlert from "react-bootstrap-sweetalert";
 import { Link, useLocation, useNavigate , useHistory} from "react-router-dom";
 // import "../user/user.css";
 
@@ -248,6 +248,20 @@ function handleClick(){
           {/* </form> */}
         </Box>
       </Box>
+      {/* <SweetAlert
+        show={allShow}
+        success
+        title="Successfully added!"
+        // text="SweetAlert in React"
+        onConfirm={() => setAllShow(false)}
+      ></SweetAlert>
+      <SweetAlert
+        show={show}
+        danger
+        title="Added Unsuccess!"
+        // text="SweetAlert in React"
+        onConfirm={() => setShow(false)}
+      ></SweetAlert> */}
     </div>
   );
 }
