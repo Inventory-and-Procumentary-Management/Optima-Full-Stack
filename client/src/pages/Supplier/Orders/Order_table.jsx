@@ -75,11 +75,11 @@ const columns = [
   ];
   
   const rows = [
-    { id: 1, Organization: 'Snow', IssueDate: '2022-05-01', Items:'Cement / Sand', Due_date: '2022-05-06', Description: 'We want Ultra Cement'},
-    { id: 2, Organization: 'Lannister',IssueDate: '2022-05-01',Items:'Cement/Bricks', Due_date: '2022-09-15', Description: 'We want Sanstha Cement' },
-    { id: 3, Organization: 'Lannister',IssueDate: '2022-05-01',Items:'Sand', Due_date: '2022-09-16', Description: '-' },
-    { id: 4, Organization: 'Stark',IssueDate: '2022-05-01',Items:'1 ft Tile / 1 ft Tile', Due_date: '2022-09-17', Description: 'We want Lanka Tiles' },
-    { id: 5, Organization: 'Targaryen',IssueDate: '2022-05-01',Items:'1" Pipes/2" Pipes', Due_date: '2022-09-18', Description: 'We want S-lone Pipes' },
+    { id: 1, Organization: 'Snow', IssueDate: '2022-05-01', Items:[" Cement "," Sand "], Due_date: '2022-05-06', Description: 'We want Ultra Cement'},
+    { id: 2, Organization: 'Lannister',IssueDate: '2022-05-01',Items:["Cement ", " Bricks "], Due_date: '2022-09-15', Description: 'We want Sanstha Cement' },
+    { id: 3, Organization: 'Lannister',IssueDate: '2022-05-01',Items:[" Sand "], Due_date: '2022-09-16', Description: '-' },
+    { id: 4, Organization: 'Stark',IssueDate: '2022-05-01',Items:[" 1 ft Tile "," 1 ft Tile "], Due_date: '2022-09-17', Description: 'We want Lanka Tiles' },
+    { id: 5, Organization: 'Targaryen',IssueDate: '2022-05-01',Items:[" 1' Pipes ", " 2' Pipes "], Due_date: '2022-09-18', Description: 'We want S-lone Pipes' },
     { id: 6, Organization: 'Melisandre',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-19', Description: '-' },
     { id: 7, Organization: 'Clifford',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-20', Description: '-' },
     { id: 8, Organization: 'Frances',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-23', Description: '-' },
@@ -94,6 +94,7 @@ const Order_table = () => {
             pageSize={5}
             rowsPerPageOptions={[5]}
             checkboxSelection
+            disableSelectionOnClick
             
           />
           
