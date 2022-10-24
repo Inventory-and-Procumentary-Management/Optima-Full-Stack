@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import productReducer from "./productRedux";
+import siteReducer from "./SiteRedux"
 import {
   persistStore,
   persistReducer,

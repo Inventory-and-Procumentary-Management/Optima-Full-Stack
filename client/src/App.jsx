@@ -182,6 +182,22 @@ const App = () => {
                 <User />
               </Route> */}
 
+
+              <Route exact path="/projectManager">
+                 <ProjectManagerHome/>
+              </Route>
+              <Route exact path="/projectManager/newsite">
+                 <NewSite/>
+              </Route>
+              <Route exact path="/projectManager/siteInternalPage">
+                 <SiteInternalPage/>
+              </Route>
+              <Route exact path="/projectManager/sitedetails">
+                 <SiteDetails/>
+              </Route>
+
+
+
               <Route exact path="/purchaseManager">
                 <PurchaseManagerHome />
               </Route>
