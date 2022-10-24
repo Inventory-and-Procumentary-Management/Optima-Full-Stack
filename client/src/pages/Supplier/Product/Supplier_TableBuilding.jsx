@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { green } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
 import { useState} from 'react';
@@ -51,9 +51,9 @@ import {
 
 
 
-export default function BasicTable() {
+export default function BasicTable({name}) {
   const dispatch = useDispatch();
-  const Supplierproducts = useSelector((state) => state.supplierproduct.supplierproducts.filter((x)=>x.isApprove == 1));
+  const Supplierproducts = useSelector((state) => state.supplierproduct.supplierproducts.filter((x)=>x.isApprove == 1 && x.category == name));
   const userType = useSelector((state) => state.user.userType);
   const [deleteTrigger, setDeleteTrigger] = useState("");
   const [show, setShow] = useState(false);
@@ -331,6 +331,7 @@ export default function BasicTable() {
         pageSize={5}
         rowsPerPageOptions={[5]}
         checkboxSelection
+        components={{ Toolbar: GridToolbar }}
         // disableMultipleSelection={true}
       />
       </div>  
