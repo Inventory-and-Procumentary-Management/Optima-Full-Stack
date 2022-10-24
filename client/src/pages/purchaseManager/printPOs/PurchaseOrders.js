@@ -87,7 +87,7 @@ function PurchaseOrders() {
         ) : (
           <>
             <div className="flex flex-col justify-center">
-              <article className="md:grid grid-cols-2 gap-10">
+              {/* <article className="md:grid grid-cols-2 gap-10">
                 <div className="flex flex-col">
                   <input
                     type="text"
@@ -112,9 +112,9 @@ function PurchaseOrders() {
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>
-              </article>
+              </article> */}
 
-              <article className="md:grid grid-cols-2 gap-10">
+              {/* <article className="md:grid grid-cols-2 gap-10">
                 <div className="flex flex-col">
                   <label htmlFor="email">Company Email</label>
                   <input
@@ -129,18 +129,7 @@ function PurchaseOrders() {
                   />
                 </div>
 
-                {/* <div className="flex flex-col">
-        <label htmlFor="webSite">Enter the webSite</label>
-        <input 
-          type="text"
-          name="webSite"
-          id="webSite"
-          placeholder="Enter webSite"
-          autoComplete="off" 
-          value={webSite}
-          onChange={(e)=>setWebSite(e.target.value)}
-          />
-        </div> */}
+                          
 
                 <div className="flex flex-col">
                   <label htmlFor="phone">Company Phone Number</label>
@@ -154,7 +143,7 @@ function PurchaseOrders() {
                     onChange={(e) => setPhone(e.target.value)}
                   />
                 </div>
-              </article>
+              </article> */}
 
               {/* <article className="md:grid grid-cols-2 gap-10">
         <div className="flex flex-col">
@@ -184,7 +173,7 @@ function PurchaseOrders() {
         </div>
       </article> */}
 
-              <article className="md:grid grid-cols-2 gap-10 md:mt-8">
+              {/* <article className="md:grid grid-cols-2 gap-10 md:mt-8">
                 <div className="flex flex-col">
                   <label htmlFor="clientName">Enter the client's Name</label>
                   <input
@@ -253,7 +242,7 @@ function PurchaseOrders() {
                     onChange={(e) => setDueDate(e.target.value)}
                   />
                 </div>
-              </article>
+              </article> */}
 
               <article>
                 <TableForm

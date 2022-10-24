@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../pages.css";
 
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import {
   DeleteOutline,
   CancelOutlined,
@@ -316,6 +316,8 @@ const PurchaseOrder = () => {
                 pageSize={7}
                 checkboxSelection
                 autoHeight
+                components={{ Toolbar: GridToolbar }}
+
               />
             </div>
           </div>

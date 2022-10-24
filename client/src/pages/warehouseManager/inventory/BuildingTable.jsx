@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "../../pages.css";
 
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -34,6 +34,35 @@ export default function BuildingTable({name}) {
     };
     getNewInventoryItems();
   }, [dispatch, deleteTrigger]);
+
+
+
+
+  // const [rows, setRows] = useState(inventoryItems);
+  // const [searched, setSearched] = useState("");
+
+  // const requestSearch = (searchedVal) => {
+  //   const filteredRows = inventoryItems.filter((row) => {
+  //     return Object.keys(row).some((key) =>
+  //       row[key].toLowerCase().includes(searchedVal)
+  //     );
+  //   });
+  //   setRows(filteredRows);
+  // };
+
+  // const cancelSearch = () => {
+  //   setSearched("");
+  //   requestSearch(searched);
+  // };
+
+
+
+
+
+
+
+
+
 
   const columns = [
     // { field: "_id", headerName: "ID", width: 150 },
@@ -173,7 +202,7 @@ export default function BuildingTable({name}) {
   return (
     <div>
       <div className="userListInventory">
-        <div className="top-container-material-request">
+        {/* <div className="top-container-material-request">
           <div
             className="top-contaier-button-material-request"
             style={{ visibility: "hidden" }}
@@ -183,9 +212,12 @@ export default function BuildingTable({name}) {
             </Link>
           </div>
           <div className="top-container-search-material-request">
-            <SearchComponent />
+            <SearchComponent 
+            value={searched}
+            onChange={(searchVal) => requestSearch(searchVal)}
+            onCancelSearch={() => cancelSearch()}/>
           </div>
-        </div>
+        </div> */}
         <DataGrid
           rows={inventoryItems}
           disableSelectionOnClick
@@ -194,6 +226,7 @@ export default function BuildingTable({name}) {
           pageSize={8}
           checkboxSelection
           autoHeight
+          components={{ Toolbar: GridToolbar }}
           // componentsProps={{
           //   columnMenu: {
           //     background: "red",

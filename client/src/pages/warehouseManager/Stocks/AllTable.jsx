@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "../../pages.css";
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -139,12 +139,12 @@ const AllTable = () => {
   return (
     <div >
       <div className="userListInventory">
-        <div className="top-container-material-request">
+        {/* <div className="top-container-material-request">
           
           <div className="top-container-search-material-request">
             <SearchComponent />
           </div>
-        </div>
+        </div> */}
         <div className="bottom-container-material-request">
           <DataGrid
             rows={inventoryData}
@@ -154,6 +154,7 @@ const AllTable = () => {
             pageSize={7}
             checkboxSelection
             autoHeight
+            components={{ Toolbar: GridToolbar }}
             // componentsProps={{
             //   columnMenu: {
             //     background: "red",
