@@ -24,44 +24,50 @@ import { IconButton } from "@material-ui/core";
 import axios from "axios";
 import { getMaterialRequest } from "../../../redux/materialRequestApiCalls";
 import { setAddSiteManagerItem } from "../../../redux/dispatchApiCalls";
+import PrintInvoice from "../../purchaseManager/printPOs/PrintInvoice";
 
 const RequesdtedDispatch = () => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
-  const materialRequest = useSelector((state) => state.materialRequest.materialRequests);
-  const [details,setDeatails] = useState([]);
+  const materialRequest = useSelector(
+    (state) => state.materialRequest.materialRequests
+  );
+  const [details, setDeatails] = useState([]);
+  
+  const [show, setShow] = useState(true);
+
+  const list = [
+    { id: 1, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+    { id: 2, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+    { id: 3, desc: "Cement", quantity: 200, price: 800, amount: 160000 },
+  ];
   // console.log(userType);
 
   useEffect(() => {
-
     const selectRole = async () => {
       if (userType === "ROLE_PURCHASING_MANAGER") {
         setUser("purchaseManager");
       } else if (userType === "ROLE_PURCHASING_STAFF") {
         setUser("purchaseStaff");
       }
-    
-    // const getMaterialRequest = async () => {
-      await getMaterialRequest(dispatch);
-      
-      
-      setDeatails(materialRequest);
-      console.log("Requested data: ",materialRequest);
-    // };
 
-    // getMaterialRequest();
-  }
+      // const getMaterialRequest = async () => {
+      await getMaterialRequest(dispatch);
+
+      setDeatails(materialRequest);
+      console.log("Requested data: ", materialRequest);
+      // };
+
+      // getMaterialRequest();
+    };
     selectRole();
-    
-    
-    
   }, [dispatch]);
 
-  const addData = (data)=> {
+  const addData = (data) => {
     console.log(data);
-    setAddSiteManagerItem(dispatch,data);
-  }
+    setAddSiteManagerItem(dispatch, data);
+  };
 
   const columns = [
     { field: "material_request_id", headerName: "Dispatch ID", width: 180 },
@@ -224,8 +230,27 @@ const RequesdtedDispatch = () => {
           <>
             {!params.row.isCancel ? (
               <div>
-                <IconButton onClick={()=>{addData(params.row);}}>
-                  <BasicModalDispatch
+                <IconButton
+                  onClick={() => {
+                    addData(params.row);
+                  }}
+                >
+                  <VisibilityOutlined
+                    style={{
+                      color: "#bdba2c",
+                      cursor: "pointer",
+                      marginRight: 20,
+                    }}
+
+                    onClick={() => {
+                      // setProductStatus(params.row.id, false);
+                      // setApproveShow(true);
+                      console.log("Hee");
+                      setShow(false);
+                    }}
+                  />
+                 
+                  {/* <BasicModalDispatch
                     name={
                       <VisibilityOutlined
                         style={{
@@ -240,7 +265,8 @@ const RequesdtedDispatch = () => {
                     reqId={params.row.material_request_id}
                     date={params.row.issueDate}
                     description={params.row.orderProducts}
-                  />
+                  /> */}
+                 
                 </IconButton>
 
                 <CancelOutlined
@@ -272,9 +298,13 @@ const RequesdtedDispatch = () => {
 
   return (
     <div className="common">
+      {show ? (
       <div className="userList">
         <div className="top-container-material-request">
-          <div className="top-contaier-button-material-request" style={{visibility:"hidden"}}>
+          <div
+            className="top-contaier-button-material-request"
+            style={{ visibility: "hidden" }}
+          >
             <Link to={`/${user}/newMaterialRequest`}>
               <button className="color-contained-button">Create New</button>
             </Link>
@@ -350,6 +380,24 @@ const RequesdtedDispatch = () => {
           onConfirm={() => setUpdateAllShow(false)}
         ></SweetAlert> */}
       </div>
+       ) : (
+        <PrintInvoice
+        ourName={"OPTIMA"}
+        ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
+        clientName={"Yohan"}
+        clientAddress={"497/A/1"}
+        invoiceNum={"Inv-123456"}
+        invoiceDate={"2022-05-14"}
+        dueDate={"2022-05-14"}
+        // desc={"Sand"}
+        // quantity={152}
+        // price={50}
+        // amount={300000}
+        list={list}
+        // setList={}
+        // notes={}
+      />
+      )}
     </div>
   );
 };
