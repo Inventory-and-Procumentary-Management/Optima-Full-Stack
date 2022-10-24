@@ -8,14 +8,20 @@ import { purple } from '@mui/material/colors';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import "./OrderStyle.css" ;
 import { Link } from "react-router-dom";
-import "./OrderStyle.css";
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 const style = {
   position: 'absolute',
   top: '50%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
-  width: 550,
+  width: 800,
   bgcolor: 'background.paper',
   border: '1px solid #000',
   boxShadow: 24,
@@ -60,10 +66,45 @@ export default function BasicModal(props) {
           </Typography>
           <br></br>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Description:
+            Description
           </Typography>
+
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           { props.Description}
+
+          <TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell align="left">Product Name</TableCell>
+            <TableCell align="left">Quantity&nbsp;(g)</TableCell>
+            <TableCell align="left">Description&nbsp;(g)</TableCell>
+            
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {props.Description.map((row) => (
+            <TableRow
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell align="left">{row.productName}</TableCell>
+              <TableCell align="left">{row.quantity}</TableCell>
+              <TableCell align="left">{row.description}</TableCell>
+  
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+           {/* { props.Description.map((order) =>(
+            <div className='popupgridToBe'>
+        <div className='popupdetailsOrder'>
+       <p>  <b>ProductName</b>  : {order.productName} </p> 
+       <p> <b> Description</b>  : {order.description} </p> 
+       <p> <b>Quantity</b>      : {order.quantity} </p> 
+       </div>
+       </div> */}
+
+     
           </Typography>
           <br></br>
 
