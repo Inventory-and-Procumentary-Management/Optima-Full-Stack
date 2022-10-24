@@ -174,7 +174,7 @@ export default function PurchaseStaffSidebar() {
                   Deliveries
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+              <Link to="/purchaseStaff/reports" className="link">
                 <li className="sidebarListItem">
                   <Report className="sidebarIcon" />
                   Reports

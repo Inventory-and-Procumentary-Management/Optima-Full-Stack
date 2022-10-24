@@ -22,8 +22,10 @@ export const getInventoryItems = async (dispatch) => {
   try {
     const res = await userRequest.get("/inventoryItem/?field=createDate");
     dispatch(getInventoryItemSuccess(res.data));
+    return 1;
   } catch (err) {
     dispatch(getInventoryItemFailure());
+    return 0;
   }
 };
 
@@ -32,8 +34,10 @@ export const deleteInventoryItem = async (id, dispatch) => {
   try {
     const res = await userRequest.delete(`/inventoryItem/delete/${id}`);
     dispatch(deleteInventoryItemSuccess(id));
+    return 1;
   } catch (err) {
     dispatch(deleteInventoryItemFailure());
+    return 0;
   }
 };
 
