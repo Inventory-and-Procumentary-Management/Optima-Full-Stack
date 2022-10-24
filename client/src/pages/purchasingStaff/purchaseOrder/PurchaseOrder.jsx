@@ -19,20 +19,31 @@ import { purchaseOrderData } from "../../../constants/DashboardData";
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
 import PrintInvoice from "../../purchaseManager/printPOs/PrintInvoice";
-import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
+import {
+  getBreadcrumb,
+  getRemoveBreadcrumb,
+} from "../../../redux/breadcrumbApiCalls";
+import { getPurchaseOrders } from "../../../redux/purchaseOrderApiCalls";
 
 const PurchaseOrder = () => {
   const userType = useSelector((state) => state.user.userType);
+  const userId = useSelector((state) => state.user.id);
   const [user, setUser] = useState("");
   const [show, setShow] = useState(true);
   console.log(userType);
+  const [dataList, setDataList] = useState([]);
 
   const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
+  const purchaseOrderDetails = useSelector(
+    (state) => state.purchaseOrder.purchaseOrders
+  );
+  // .filter((x) => x.senderId == userId)
+
   const dispatch = useDispatch();
   useEffect(() => {
-    breadcrumbs.map((item)=>{
-      if(item.link == "purchaseOrder"){
-        getRemoveBreadcrumb(dispatch,"purchaseOrder");
+    breadcrumbs.map((item) => {
+      if (item.link == "purchaseOrder") {
+        getRemoveBreadcrumb(dispatch, "purchaseOrder");
       }
     });
     const setBreadcrumb = () => {
@@ -44,9 +55,17 @@ const PurchaseOrder = () => {
     setBreadcrumb();
   }, []);
 
-  // useEffect(()=>{
-
-  // },[]);
+  useEffect(() => {
+    const getPurchaseOrderDetail = async () => {
+      const statusPurchaseOrders = await getPurchaseOrders(dispatch);
+      if (statusPurchaseOrders) {
+        console.log(purchaseOrderDetails);
+      } else {
+        console.log("unsuccess");
+      }
+    };
+    getPurchaseOrderDetail();
+  }, []);
 
   useEffect(() => {
     if (userType === "ROLE_PURCHASING_MANAGER") {
@@ -56,32 +75,79 @@ const PurchaseOrder = () => {
     }
   }, []);
 
+  const [subTotal, setSubTotal] = useState(0);
+  const [discountPrice, setDiscountPrice] = useState(0);
+  const [tax, setTax] = useState([]);
+  const [total, setTotal] = useState(0);
+
   const list = [
-    { id: 1,itemCode:"PR-0001" ,productName:"Cement", desc: "Cement", quantity: 200, rate: 800, amount: 160000 },
-    { id: 2,itemCode:"PR-0002" ,productName:"Cement", desc: "Cement", quantity: 200, rate: 800, amount: 160000 },
-    { id: 3,itemCode:"PR-0003" ,productName:"Cement", desc: "Cement", quantity: 200, rate: 800, amount: 160000 },
+    {
+      id: 1,
+      itemCode: "PR-0001",
+      productName: "Cement",
+      desc: "Cement",
+      quantity: 200,
+      rate: 800,
+      amount: 160000,
+    },
+    {
+      id: 2,
+      itemCode: "PR-0002",
+      productName: "Cement",
+      desc: "Cement",
+      quantity: 200,
+      rate: 800,
+      amount: 160000,
+    },
+    {
+      id: 3,
+      itemCode: "PR-0003",
+      productName: "Cement",
+      desc: "Cement",
+      quantity: 200,
+      rate: 800,
+      amount: 160000,
+    },
   ];
-  const dataList = [];
+
   // id, desc,itemCode, quantity, rate, amount
 
-  const setDataArray = (data)=>{
-    data.map((item)=>{
-      dataList.push(
-        {id:item.id,
-        itemCode:"PR-0001",
-        productName:"Cement",
-        desc:"Cement",
-        quantity:200,
-        rate:522,
-        amount:156}
-      );
+  const setDataArray = (data) => {
+    setTax(data);
+    let dataListNew = [];
+    data.orderProducts.map((item) => {
+      console.log(item);
+      // purchaseOrderDetails.orderProducts.push({
+      setSubTotal(subTotal + item.amount);
+      setDiscountPrice(discountPrice + item.amount);
+
+      setTotal(total + item.amount);
+      dataListNew.push({
+        id: item.order_id,
+        itemCode: item.itemCode,
+        productName: item.productName,
+        desc: item.description,
+        quantity: item.quantity,
+        rate: item.itemPrice,
+        amount: item.amount,
+      });
     });
-  }
+    setDataList(dataListNew);
+  };
 
   const columns = [
-    { field: "invoice_id", headerName: "Invoice ID", width: 150 },
     {
-      field: "staffUsername",
+      field: "purchase_order_id",
+      headerName: "Invoice ID",
+      width: 150,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">PO-{params.row.purchase_order_id}</div>
+        );
+      },
+    },
+    {
+      field: "senderName",
       headerName: "Purchase Staff Name",
       width: 250,
       renderCell: (params) => {
@@ -92,35 +158,55 @@ const PurchaseOrder = () => {
               src="https://res.cloudinary.com/midefulness/image/upload/v1661021417/OPTIMA/Login%20Images/construction-plans-with-yellow-helmet-drawing-tools-bluep_azokvo.jpg"
               alt="category Icon"
             />
-            {params.row.staffUsername}
+            {params.row.senderName}
           </div>
         );
       },
     },
     {
-      field: "supplier",
+      field: "receiverName",
       headerName: "Supplier",
       width: 300,
       renderCell: (params) => {
         return (
           <div className="userListUser">
-            <img
+            {/* <img
               className="userListImg"
               src="https://res.cloudinary.com/midefulness/image/upload/v1657441685/samples/people/kitchen-bar.jpg"
               alt="category Icon"
-            />
-            {params.row.supplier}
+            /> */}
+            {params.row.receiverName}
           </div>
         );
       },
     },
-    { field: "issueDate", headerName: "Issue Date", width: 180 },
-    { field: "dueDate", headerName: "Due Date", width: 180 },
-    { field: "price", headerName: "Total Price (Rs)", width: 200 },
+    {
+      field: "issueDate",
+      headerName: "Issue Date",
+      width: 180,
+      renderCell: (params) => {
+        let date3 = params.row.issueDate.slice(0, 10).replace("T", " ");
+        return (
+          <div className="userListUser">{date3}</div>
+        );
+      },
+    },
+    {
+      field: "dueDate",
+      headerName: "Due Date",
+      width: 180,
+      renderCell: (params) => {
+        let date3 = params.row.dueDate.slice(0, 10).replace("T", " ");
+        return (
+          <div className="userListUser">{date3}</div>
+        );
+      },
+    },
+    // { field: "price", headerName: "Total Price (Rs)", width: 200 },
     // { field: "currentQuantity", headerName: "Current Quantity", width: 200 },
     // { field: "requestQuantity", headerName: "Request Quantity", width: 200 },
     {
-      field: "isApprove",
+      field: "status",
       headerName: "Approve",
       width: 180,
       renderCell: (params) => {
@@ -128,11 +214,11 @@ const PurchaseOrder = () => {
           <>
             <div className="productListItem">
               <div className="productListItemData">
-                {params.row.isApprove + " "}
+                {params.row.status + " "}
               </div>
 
               {userType === "ROLE_PURCHASING_MANAGER" ? (
-                params.row.isApprove ? (
+                params.row.status ? (
                   <ThumbUpAltOutlined
                     className="productListDelete"
                     style={{ color: "green" }}
@@ -166,29 +252,9 @@ const PurchaseOrder = () => {
       renderCell: (params) => {
         return (
           <>
-            {!params.row.isCancel ? (
+            {/* {!params.row.isCancel ? (
               <div>
-                <VisibilityOutlined
-                  style={{
-                    color: "#bdba2c",
-                    cursor: "pointer",
-                    marginRight: 20,
-                  }}
-                  onClick={() => {
-                    // setProductStatus(params.row.id, false);
-                    // setApproveShow(true);
-                    console.log("Hee");
-                    setShow(false);
-                    setDataArray(params.row.id);
-                  }}
-                />
-                <CancelOutlined
-                  style={{ color: "red", cursor: "pointer" }}
-                  onClick={() => {
-                    // setProductStatus(params.row.id, false);
-                    // setApproveShow(true);
-                  }}
-                />
+                
               </div>
             ) : (
               <button
@@ -197,7 +263,29 @@ const PurchaseOrder = () => {
               >
                 Request Received
               </button>
-            )}
+            )} */}
+            <VisibilityOutlined
+              style={{
+                color: "#bdba2c",
+                cursor: "pointer",
+                marginRight: 20,
+              }}
+              onClick={() => {
+                // setProductStatus(params.row.id, false);
+                // setApproveShow(true);
+                console.log("Hee");
+                setShow(false);
+                console.log(params.row);
+                setDataArray(params.row);
+              }}
+            />
+            <CancelOutlined
+              style={{ color: "red", cursor: "pointer" }}
+              onClick={() => {
+                // setProductStatus(params.row.id, false);
+                // setApproveShow(true);
+              }}
+            />
           </>
         );
       },
@@ -221,10 +309,10 @@ const PurchaseOrder = () => {
             </div>
             <div className="bottom-container-material-request">
               <DataGrid
-                rows={purchaseOrderData}
+                rows={purchaseOrderDetails}
                 disableSelectionOnClick
                 columns={columns}
-                getRowId={(row) => row._id}
+                getRowId={(row) => row.purchase_order_id}
                 pageSize={7}
                 checkboxSelection
                 autoHeight
@@ -233,25 +321,26 @@ const PurchaseOrder = () => {
           </div>
         </div>
       ) : (
+        // purchaseOrderDetails
         <PrintInvoice
           ourName={"OPTIMA"}
           ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
-          clientName={"Yohan"}
-          clientAddress={"497/A/1 Susilarama Road Malabe"}
-          invoiceNum={"Inv-123456"}
-          invoiceDate={"2022-05-14"}
-          dueDate={"2022-08-29"}
+          clientName={tax.senderName}
+          clientAddress={tax.receiverName}
+          invoiceNum={`PO-${tax.purchase_order_id}`}
+          invoiceDate={tax.issueDate}
+          dueDate={tax.dueDate}
           // desc={"Sand"}
           // quantity={152}
           // price={50}
           // amount={300000}
-          list={list}
+          list={dataList}
           // setList={}
           // notes={}
-          subTotal={1000}
+          subTotal={total}
           discount={25}
           tax={56}
-          total={4565}
+          total={total}
           title={"Purchase Order"}
           flag={false}
         />
