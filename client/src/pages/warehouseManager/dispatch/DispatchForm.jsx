@@ -8,8 +8,10 @@ import {
 } from "firebase/storage";
 import app from "../../../firebase";
 import { addProduct } from "../../../redux/productApiCalls";
+
 import { useDispatch, useSelector } from "react-redux";
 // import SweetAlert from "react-bootstrap-sweetalert";
+
 import { Link, useLocation } from "react-router-dom";
 // import "../user/user.css";
 
@@ -282,6 +284,7 @@ export default function DispatchForm() {
           />
         </Box>
       </Box>
+
       {/* <SweetAlert
         show={allShow}
         success
@@ -296,6 +299,7 @@ export default function DispatchForm() {
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
       ></SweetAlert> */}
+
     </div>
   );
 }
