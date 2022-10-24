@@ -17,7 +17,9 @@ import {
   getProducts,
   updateProduct,
 } from "../../../../redux/productApiCalls";
+
 import Swal from "sweetalert2";
+
 import SearchComponent from "../../../../components/search/Search";
 
 import Alert from "@mui/material/Alert";
@@ -548,6 +550,7 @@ export default function ProductList() {
             components={{ Toolbar: GridToolbar }}
           />
         </div>
+
         {/* <SweetAlert
           show={show}
           warning
@@ -581,6 +584,7 @@ export default function ProductList() {
           // text="SweetAlert in React"
           onConfirm={() => setAllShow(false)}
         ></SweetAlert> */} 
+
       </div>
     </div>
   );

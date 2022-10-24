@@ -43,6 +43,10 @@ import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
+import ProjectManagerHome from "./pages/projectManager/ProjectManagerHome";
+import NewSite from "./pages/projectManager/sites/NewSite";
+import SiteInternalPage from "./pages/projectManager/sites/SiteInternalPage";
+import SiteDetails from "./pages/projectManager/sites/SiteDetails";
 import RequestForm from "./pages/warehouseManager/Stocks/RequestForm";
 import ProfileSupplier from "./pages/Supplier/profile/ProfileSupplier";
 import Request_new_product from "./pages/Supplier/Request_new_product";
@@ -181,6 +185,22 @@ const App = () => {
               {/* <Route path="/user/:userId">
                 <User />
               </Route> */}
+
+
+              <Route exact path="/projectManager">
+                 <ProjectManagerHome/>
+              </Route>
+              <Route exact path="/projectManager/newsite">
+                 <NewSite/>
+              </Route>
+              <Route exact path="/projectManager/siteInternalPage">
+                 <SiteInternalPage/>
+              </Route>
+              <Route exact path="/projectManager/sitedetails">
+                 <SiteDetails/>
+              </Route>
+
+
 
               <Route exact path="/purchaseManager">
                 <PurchaseManagerHome />

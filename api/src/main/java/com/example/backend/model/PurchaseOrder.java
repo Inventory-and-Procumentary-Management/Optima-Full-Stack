@@ -20,6 +20,9 @@ public class PurchaseOrder {
     private Long senderId;
     private Long receiverId;
 
+    private String senderName;
+    private String receiverName;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date issueDate;
