@@ -20,6 +20,7 @@ import categoryReducer from "./categoryRedux";
 import inventoryReducer from "./inventoryRedux";
 import materialRequestReducer from "./materialRequestRedux";
 import dispatchRedux from "./dispatchRedux";
+import purchaseOrderRedux from "./purchaseOrderRedux";
 import supplierOrderReducer from "./SupplierOrdersRedux";
 
 const persistConfig = {
@@ -40,8 +41,8 @@ const rootReducer = combineReducers({
   siteManagerItem: dispatchRedux,
   supplierproduct: supplierProductReducer,
   supplierorder :supplierOrderReducer,
-
-});
+  purchaseOrder:purchaseOrderRedux
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

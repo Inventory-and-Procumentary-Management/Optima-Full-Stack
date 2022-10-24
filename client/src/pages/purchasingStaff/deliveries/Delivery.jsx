@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../../pages.css";
 // import "./MaterialRequest.css";
 
-import { DataGrid } from "@material-ui/data-grid";
+import { DataGrid, GridToolbar } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -186,6 +186,7 @@ const Delivery = () => {
             pageSize={7}
             checkboxSelection
             autoHeight
+            components={{ Toolbar: GridToolbar }}
             // componentsProps={{
             //   columnMenu: {
             //     background: "red",
