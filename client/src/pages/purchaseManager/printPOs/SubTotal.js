@@ -5,7 +5,7 @@ export default function SubTotal({ subTotal, discount, tax, total }) {
     <>
       <article className="my-5 flex items-end justify-end">
         <ul>
-          <li className="p-1">
+          {/* <li className="p-1">
             <span className="font-bold">Sub Total(Rs.) : </span>
             {subTotal}
           </li>
@@ -16,7 +16,7 @@ export default function SubTotal({ subTotal, discount, tax, total }) {
           <li className="p-1">
             <span className="font-bold">Tax(%) : </span>
             {tax}
-          </li>
+          </li> */}
           <hr className="p-1 bg-gray-100"/>
           <li className="p-1 bg-gray-100">
             <span className="font-bold">Total(Rs.) : </span>
