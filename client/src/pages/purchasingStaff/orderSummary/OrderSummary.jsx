@@ -4,9 +4,11 @@ import "../../pages.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
 // import SweetAlert from "react-bootstrap-sweetalert";
 import { useDispatch, useSelector } from "react-redux";
 import { dumyData } from "../../../constants/DashboardData";
+import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
 
 const columns = [
   { field: "_id", headerName: "Order ID", width: 150 },
@@ -142,6 +144,24 @@ const columns = [
 ];
 
 const OrderSummary = () => {
+  const dispatch = useDispatch();
+  const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
+  useEffect(() => {
+    const setBreadcrumb = () => {
+      breadcrumbs.map((item)=>{
+        if(item.link == "orders"){
+          getRemoveBreadcrumb(dispatch,"orders");
+        }
+      });
+      getBreadcrumb(dispatch, 
+        {
+          name: "Order Summary",
+          link: "orders",
+        },
+      );
+    };
+    setBreadcrumb();
+  }, []);
   return (
     <div className="common">
       <div className="userList">

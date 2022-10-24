@@ -10,6 +10,7 @@ import app from "../../../../firebase";
 import { addProduct } from "../../../../redux/productApiCalls";
 import { addUser, addRole } from "../../../../redux/userApiCalls";
 import { useDispatch } from "react-redux";
+
 import { Link, useLocation } from "react-router-dom";
 // import "../user/user.css";
 
@@ -447,6 +448,7 @@ export default function NewUser() {
           {/* </form> */}
         </Box>
       </Box>
+
       {/* <SweetAlert
         show={allShow}
         success
@@ -461,6 +463,7 @@ export default function NewUser() {
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
       ></SweetAlert> */} 
+
     </div>
   );
 }

@@ -39,6 +39,8 @@ export default function BasicModalDispatch({
   // const [reqId, setReqId] = useState("");
   // const [itemName, setItemName] = useState("");
 
+  // console.log(description[0]);
+
   return (
     <div>
       {/* <Button color="inherit" align="center">

@@ -3,7 +3,9 @@ import "../../pages.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
 // import SweetAlert from "react-bootstrap-sweetalert";
+
 import { useDispatch, useSelector } from "react-redux";
 import { inventoryData } from "../../../constants/DashboardData";
 
@@ -135,8 +137,8 @@ const columns = [
 
 const AllTable = () => {
   return (
-    <div className="common">
-      <div className="userList">
+    <div >
+      <div className="userListInventory">
         <div className="top-container-material-request">
           
           <div className="top-container-search-material-request">

@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import productReducer from "./productRedux";
+import siteReducer from "./SiteRedux"
 import {
   persistStore,
   persistReducer,
@@ -13,6 +14,11 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import breadcrumbReducer from "./breadcrumbRedux";
+import inventoryItemReducer from "./inventoryItemRedux";
+import categoryReducer from "./categoryRedux";
+import inventoryReducer from "./inventoryRedux";
+import materialRequestReducer from "./materialRequestRedux";
+import dispatchRedux from "./dispatchRedux";
 
 const persistConfig = {
   key: "root",
@@ -23,7 +29,14 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: userReducer,
   product: productReducer,
+  site:siteReducer,
   breadcrumb: breadcrumbReducer,
+  inventoryItem: inventoryItemReducer,
+  category: categoryReducer,
+  inventory: inventoryReducer,
+  materialRequest: materialRequestReducer,
+  siteManagerItem: dispatchRedux,
+
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

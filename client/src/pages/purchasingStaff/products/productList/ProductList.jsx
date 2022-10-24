@@ -17,11 +17,14 @@ import {
   getProducts,
   updateProduct,
 } from "../../../../redux/productApiCalls";
+
 import Swal from "sweetalert2";
+
 import SearchComponent from "../../../../components/search/Search";
 
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { getBreadcrumb } from "../../../../redux/breadcrumbApiCalls";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -34,6 +37,18 @@ export default function ProductList() {
   const [productId, setProductId] = useState("");
   const [deleteTrigger, setDeleteTrigger] = useState("");
   const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    const setBreadcrumb = () => {
+      getBreadcrumb(dispatch, 
+        {
+          name: "Products",
+          link: "productList",
+        },
+      );
+    };
+    setBreadcrumb();
+  }, []);
 
   useEffect(() => {
     getProducts(dispatch);
@@ -534,6 +549,7 @@ export default function ProductList() {
             autoHeight
           />
         </div>
+
         {/* <SweetAlert
           show={show}
           warning
@@ -567,6 +583,7 @@ export default function ProductList() {
           // text="SweetAlert in React"
           onConfirm={() => setAllShow(false)}
         ></SweetAlert> */} 
+
       </div>
     </div>
   );
