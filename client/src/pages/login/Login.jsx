@@ -19,7 +19,9 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+
 import Swal from "sweetalert2";
+
 
 import { login } from "../../redux/userApiCalls";
 import { useDispatch, useSelector } from "react-redux";
@@ -102,7 +104,8 @@ export default function SignInSide() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <SweetAlert
+
+       {/* <SweetAlert
         show={loginShow}
         success
         title="Successfully Login!"

@@ -8,8 +8,10 @@ import {
 } from "firebase/storage";
 import app from "../../../firebase";
 import { addProduct } from "../../../redux/productApiCalls";
-import { useDispatch } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
 // import SweetAlert from "react-bootstrap-sweetalert";
+
 import { Link, useLocation } from "react-router-dom";
 // import "../user/user.css";
 
@@ -63,6 +65,8 @@ export default function DispatchForm() {
     useState(false);
   const [imageMessageError, setImageMessageError] = useState(false);
 
+  const siteManagerItem = useSelector((state) => state.siteManagerItem.siteManagerItems);
+
   useEffect(() => {
     const date = new Date();
     let currentDate =
@@ -72,6 +76,7 @@ export default function DispatchForm() {
       "-" +
       ("0" + date.getDate()).slice(-2);
     console.log(currentDate);
+    console.log(siteManagerItem);
     setCurrent_Date(currentDate);
   }, []);
 
@@ -272,9 +277,14 @@ export default function DispatchForm() {
             dispatchDate={"Date"}
             itemName={"Item Name"}
             dispatchQuantity={"Quantity"}
+            
+            smIdv={siteManagerItem.senderId}
+            smNamev={siteManagerItem.senderType}
+            oProductsv={siteManagerItem.orderProducts}
           />
         </Box>
       </Box>
+
       {/* <SweetAlert
         show={allShow}
         success
@@ -289,6 +299,7 @@ export default function DispatchForm() {
         // text="SweetAlert in React"
         onConfirm={() => setShow(false)}
       ></SweetAlert> */}
+
     </div>
   );
 }

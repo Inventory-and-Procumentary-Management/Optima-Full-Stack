@@ -19,6 +19,10 @@ public class OrderProduct {
     private Double itemPrice = 0.0;
     private Integer quantity = 0;
 
+    private String itemCode;
+    private String productName;
+    private String description;
+
     @Column(nullable = false)
     private Long inventoryItemId;
 //    @Column(nullable = false)

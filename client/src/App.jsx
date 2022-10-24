@@ -43,9 +43,15 @@ import Dispatch from "./pages/warehouseManager/dispatch/Dispatch";
 import RequesdtedDispatch from "./pages/warehouseManager/dispatch/RequesdtedDispatch";
 import SupplierDetails from "./pages/purchasingStaff/supplierDetails/SupplierDetails";
 import SupplierItems from "./pages/purchasingStaff/supplierItems/SupplierItems";
+import ProjectManagerHome from "./pages/projectManager/ProjectManagerHome";
+import NewSite from "./pages/projectManager/sites/NewSite";
+import SiteInternalPage from "./pages/projectManager/sites/SiteInternalPage";
+import SiteDetails from "./pages/projectManager/sites/SiteDetails";
 import RequestForm from "./pages/warehouseManager/Stocks/RequestForm";
 import ProfileSupplier from "./pages/Supplier/profile/ProfileSupplier";
 import Request_new_product from "./pages/Supplier/Request_new_product";
+import Invoice from "./pages/purchaseManager/printPOs/Invoice";
+import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
 
 const App = () => {
   return (
@@ -104,6 +110,9 @@ const App = () => {
               </Route>
               <Route path="/purchaseStaff/supplierItems">
                 <SupplierItems />
+              </Route>
+              <Route path="/purchaseStaff/materialRequest/invoice">
+                <Invoice />
               </Route>
 
               <Route exact path="/admin">
@@ -177,6 +186,22 @@ const App = () => {
                 <User />
               </Route> */}
 
+
+              <Route exact path="/projectManager">
+                 <ProjectManagerHome/>
+              </Route>
+              <Route exact path="/projectManager/newsite">
+                 <NewSite/>
+              </Route>
+              <Route exact path="/projectManager/siteInternalPage">
+                 <SiteInternalPage/>
+              </Route>
+              <Route exact path="/projectManager/sitedetails">
+                 <SiteDetails/>
+              </Route>
+
+
+
               <Route exact path="/purchaseManager">
                 <PurchaseManagerHome />
               </Route>
@@ -199,7 +224,10 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
-                <PurchaseOrders />
+              <InvoiceForm />
+              </Route>
+              <Route path="/purchaseManager/invoicePreview">
+              <Invoice />
               </Route>
             </div>
           </div>

@@ -10,17 +10,36 @@ import {
   ThumbUpAltOutlined
 } from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
 // import SweetAlert from "react-bootstrap-sweetalert";
+
 import { useDispatch, useSelector } from "react-redux";
 import { purchaseInvoiceData } from "../../../constants/DashboardData";
 
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
+import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
 
 const PurchaseInvoice = () => {
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
   console.log(userType);
+  const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    breadcrumbs.map((item)=>{
+      if(item.link == "purchaseInvoice"){
+        getRemoveBreadcrumb(dispatch,"purchaseInvoice");
+      }
+    });
+    const setBreadcrumb = () => {
+      getBreadcrumb(dispatch, {
+        name: "Purchase Invoice",
+        link: "purchaseInvoice",
+      });
+    };
+    setBreadcrumb();
+  }, []);
 
   useEffect(() => {
     if (userType === "ROLE_PURCHASING_MANAGER") {

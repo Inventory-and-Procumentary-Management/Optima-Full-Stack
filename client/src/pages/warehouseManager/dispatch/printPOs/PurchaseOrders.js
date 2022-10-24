@@ -15,7 +15,10 @@ function PurchaseOrders({
   dispatchNumber,
   dispatchDate,
   itemName,
-  dispatchQuantity
+  dispatchQuantity,
+  smIdv,
+  smNamev,
+  oProductsv,
 }) {
   const [showInvoice, setShowInvoice] = useState(false);
   const [name, setName] = useState("");
@@ -201,7 +204,7 @@ function PurchaseOrders({
                     id="clientName"
                     placeholder="Enter Site Manager's ID"
                     autoComplete="off"
-                    value={clientName}
+                    value={smIdv}
                     onChange={(e) => setClientName(e.target.value)}
                   />
                 </div>
@@ -214,7 +217,7 @@ function PurchaseOrders({
                     id="clientAddress"
                     placeholder="Enter Site Manager's Name"
                     autoComplete="off"
-                    value={clientAddress}
+                    value={smNamev}
                     onChange={(e) => setClientAddresse(e.target.value)}
                   />
                 </div>
@@ -284,7 +287,7 @@ function PurchaseOrders({
                 cols="30"
                 rows="10"
                 placeholder="Additional notes to the Site Manager"
-                value={notes}
+                value={oProductsv}
                 onChange={(e) => setNotes(e.target.value)}
               ></textarea>
               <button

@@ -9,7 +9,7 @@ import {
   Dimensions,
   Platform,
 } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 const { height, width } = Dimensions.get("window");
 import { icons, SIZES, COLORS } from "../constans";
 import { Logout } from '../store/actions';
@@ -130,7 +130,7 @@ const Header = (props) => {
               paddingLeft: SIZES.padding * 2,
               justifyContent: "center",
             }}
-            onPress={pressNotification}
+            onPress={()=>navigation.navigate('Notifications')}
           >
             <Image
               source={icons.bell}
