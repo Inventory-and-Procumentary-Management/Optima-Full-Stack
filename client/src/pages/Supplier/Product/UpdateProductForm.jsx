@@ -9,6 +9,9 @@ import Button from '@mui/material/Button';
 import '../RequestProductStyle.css';
 
 const UpdateProductForm = ({itemName}) => {
+
+
+    console.log({itemName});
     const [formValues , setFormValues] = useState([]);
 
     const handleInputChange = (e) => {
@@ -52,7 +55,7 @@ const UpdateProductForm = ({itemName}) => {
     id="outlined-basic" 
     name='name' 
     variant="outlined" 
-    defaultvalue={itemName}
+    defaultvalue= {itemName}
     onChange = {handleInputChange}
     />
     

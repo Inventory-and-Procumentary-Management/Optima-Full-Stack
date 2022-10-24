@@ -8,9 +8,15 @@ import Typography from "@mui/material/Typography";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import { useEffect } from "react";
+import { useState } from "react";
+import { getRemoveBreadcrumb, getRemoveOneBreadcrumb } from "../../redux/breadcrumbApiCalls";
 
 export default function SecondTopbar() {
   const dispatch = useDispatch();
+  const breadcrumbData = useSelector((state) => state.breadcrumb.breadcrumbs);
+  const [breadcrumbs, setBreadcrumbs] = useState([]);
+
   const logOutPress = () => {
     dispatch(logout());
     window.location.href = "http://localhost:3000/login";
@@ -21,36 +27,61 @@ export default function SecondTopbar() {
     console.info("You clicked a breadcrumb.");
   }
 
-  const breadcrumbs = [
-    <Link
-      underline="hover"
-      key="1"
-      color="inherit"
-      href="/"
-      onClick={handleClick}
-    >
-      Dashboard
-    </Link>,
-    <Link
-      underline="hover"
-      key="2"
-      color="inherit"
-      href="/material-ui/getting-started/installation/"
-      onClick={handleClick}
-    >
-      Core
-    </Link>,
-    <Typography key="3" color="text.primary">
-      Breadcrumb
-    </Typography>,
-  ];
+  useEffect(() => {
+    const setBreadcrumb = () => {
+      // getRemoveOneBreadcrumb(dispatch);
+      let data = [];
+      let i = 0;
+      breadcrumbData.map( (item) => {
+        i = i+1;
+        data.push(
+          <Link
+            underline="hover"
+            key={i}
+            color="inherit"
+            href={`/${item.link}`}
+            onClick={handleClick}
+          >
+            {item.name}
+          </Link>
+        )}
+      );
+      // getRemoveOneBreadcrumb(dispatch);
+
+      setBreadcrumbs(data);
+    };
+    setBreadcrumb();
+  }, [breadcrumbData]);
+
+  // const breadcrumbs = [
+  //   <Link
+  //     underline="hover"
+  //     key="1"
+  //     color="inherit"
+  //     href="/"
+  //     onClick={handleClick}
+  //   >
+  //     Dashboard
+  //   </Link>,
+  //   <Link
+  //     underline="hover"
+  //     key="2"
+  //     color="inherit"
+  //     href="/material-ui/getting-started/installation/"
+  //     onClick={handleClick}
+  //   >
+  //     Core
+  //   </Link>,
+  //   <Typography key="3" color="text.primary">
+  //     Breadcrumb
+  //   </Typography>,
+  // ];
 
   return (
     <div className="second-topbar">
       <div className="second-topbarWrapper">
         <div className="second-topLeft">
           <Stack spacing={2}>
-            
             <Breadcrumbs
               separator={<NavigateNextIcon fontSize="small" />}
               aria-label="breadcrumb"

@@ -6,6 +6,8 @@ import Modal from '@mui/material/Modal';
 import { styled } from '@mui/material/styles';
 import { purple } from '@mui/material/colors';
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
+import "./OrderStyle.css" ;
+import { Link } from "react-router-dom";
 
 const style = {
   position: 'absolute',
@@ -28,7 +30,7 @@ export default function BasicModal(props) {
 
   return (
     <div>
-      <button onClick={handleOpen}  ><ExpandCircleDownIcon></ExpandCircleDownIcon></button> 
+      <button onClick={handleOpen}  > Review <ExpandCircleDownIcon></ExpandCircleDownIcon> </button> 
       <Modal
         open={open}
         onClose={handleClose}
@@ -37,11 +39,49 @@ export default function BasicModal(props) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Ordered Items
+            Issue Date:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+           { props.IssueDate}
+          </Typography>
+          <br></br>
+
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Due Date:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+           { props.DueDate}
+          </Typography>
+          <br></br>
+
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Ordered Items:
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
            { props.details}
           </Typography>
+          <br></br>
+
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Description:
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+           { props.Description}
+          </Typography>
+          <br></br>
+
+          {/* <button className='accept-btn'>Accept</button> */}
+          <Link to="/supplier/Supplier_Invoices" className="link">
+                <button className="accept-btn">
+                {/* <CheckIcon sx={{ color: green[500] }} > </CheckIcon> */}
+                Accept
+                </button>
+              </Link>
+          &nbsp;
+          &nbsp;
+          &nbsp;
+
+          <button className='reject-btn'>Reject</button>
         </Box>
       </Modal>
     </div>
