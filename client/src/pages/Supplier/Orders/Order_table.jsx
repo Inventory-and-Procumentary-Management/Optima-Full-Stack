@@ -27,8 +27,54 @@ import {
   updateSupplierOrders,
 } from "../../../redux/SupplierOrdersApiCalls";
 
+import TextField from '@mui/material/TextField';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Stack from '@mui/material/Stack';
+import ClientDetails from "../../purchaseManager/printPOs/ClientDetails";
+import Dates from "../../purchaseManager/printPOs/Dates";
+import Footer from "../../purchaseManager/printPOs/Footer";
+import Header from "../../purchaseManager/printPOs/Header";
+import MainDetails from "../../purchaseManager/printPOs/MainDetails";
+import Notes from "../../purchaseManager/printPOs/Notes";
+import TableInvoice from "../invoices/TableInvoice";
+import TableForm from "../invoices/TableForm";
+import '../invoices/printPO_supplier.css'
+import '../invoices/SupplierInvoicesStyle.css'
+import "./OrderStyle.css" ;
 
-const columns = [
+
+
+const Order_table = () => {
+
+  const dispatch = useDispatch();
+  const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders.filter((x)=>x.receiverId == 45));
+  const userType = useSelector((state) => state.user.userType);
+  const userID = useSelector((state) => state.user.userID);
+  const [deleteTrigger, setDeleteTrigger] = useState("");
+
+  const [showInvoice, setShowInvoice] = useState(false)
+  const [name, setName] = useState("Janatha Hardware Pvt Lmd")
+  const [address, setAddress] = useState("282/1/G , Ashokarama Road, Ihala Bomiriya, Kaduwela")
+  const [email, setEmail] = useState("Janatha Hardware@gmail.com")
+  const [phone, setPhone] = useState("0765768600")
+  const [clientName, setClientName] = useState("SMG Constructions Pvt Lmd")
+  const [clientAddress, setClientAddresse] = useState("85/K Himbutana , Angoda")
+  const [invoiceNum, setInvoiceNum] = useState("")
+  const [invoiceDate, setInvoiceDate] = useState("")
+  const [dueDate, setDueDate] = useState("")
+  const [notes, setNotes] = useState("")
+  const [desc, setDesc] = useState("")
+  const [quantity, setQuantity] = useState("")
+  const [price, setPrice] = useState("")
+  const [amount, setAmount] = useState("")
+  const [itemCode, setitemCode] = useState("")
+  const [list,setList] = useState([])
+  const [orderProduct, setorderProduct] = ([]);
+
+  const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'issueDate', headerName: 'Issue Date', width: 200, 
     renderCell: (params) => {
@@ -54,6 +100,7 @@ const columns = [
     renderCell: (params) => {
 
      return (
+
        <div >
        <OrderMoreDetailsPopup 
        details={params.row.Items} 
@@ -64,20 +111,35 @@ const columns = [
        {/* {params.row.Items} */}
        </div>
      );
-       },},
+       },
+      
+      },
+      { field: 'action', headerName: 'action', width: 200 ,renderCell: (params) => {
+
+        return (
+   
+          <div >
+          <button className="accept-btn" onClick={()=>{setShowInvoice(true);}}>
+                  Accept
+                  </button> 
+                  &nbsp;
+            &nbsp;
+            &nbsp;
+  
+            {/* <button className='reject-btn' onClick={()=>{RejectOrder();}}>Reject</button> */}
+          </div>
+        );
+          }},
    
   
   ];
-  
-const Order_table = () => {
 
-  const dispatch = useDispatch();
-  const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders.filter((x)=>x.receiverId == 45));
-  const userType = useSelector((state) => state.user.userType);
-  const userID = useSelector((state) => state.user.userID);
-  const [deleteTrigger, setDeleteTrigger] = useState("");
- 
-  console.log(userID);
+
+  
+  const handlePrint =()=>{
+    window.print()
+  }
+  
 
 
 
@@ -94,19 +156,62 @@ const Order_table = () => {
   }, [dispatch, deleteTrigger]);
 
     return (
+      <div>
+      {showInvoice ? (<div><Header handlePrint={handlePrint} />
+
+      <MainDetails name={name} address={address} />
+      
+      <ClientDetails
+        clientName={clientName}
+        clientAddress={clientAddress}
+      />
+      
+      <Dates
+        invoiceNum={invoiceNum}
+        invoiceDate={invoiceDate}
+        dueDate={dueDate}
+      />
+      
+      <TableInvoice
+        list={list}
+      />
+      
+      <Notes notes={notes} />
+      
+      <Footer
+        name={name}
+        email={email}
+        phone={phone}
+      
+      />
+      
+      <button
+        onClick={() => setShowInvoice(false)}
+        className="bg-blue-500 text-white 
+      font-bold py-2 px-8 rounded shadow border-2 border-blue-500
+      hover:bg-transparent hover:text-blue-500 transition-all duration-300"
+      >
+        Edit Information
+      </button></div>):
+        (<div>
+      
         <div style={{ height: 400, width: '100%' }}>
-          <DataGrid
-            rows={SupplierOrders}
-            columns={columns}
-            pageSize={5}
-            getRowId={(row)=>row.purchase_order_id}
-            rowsPerPageOptions={[5]}
-            checkboxSelection
-            disableSelectionOnClick
-            
-          />
-          
-        </div>
+      <DataGrid
+        rows={SupplierOrders}
+        columns={columns}
+        pageSize={5}
+        getRowId={(row)=>row.purchase_order_id}
+        rowsPerPageOptions={[5]}
+        checkboxSelection
+        disableSelectionOnClick
+        
+      />
+      
+    </div>
+    </div>)}
+    </div>
+      
+        
       );
 }
 
