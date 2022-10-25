@@ -24,6 +24,7 @@ import {
   getRemoveBreadcrumb,
 } from "../../../redux/breadcrumbApiCalls";
 import { getPurchaseOrders } from "../../../redux/purchaseOrderApiCalls";
+import { useHistory } from "react-router-dom";
 
 const PurchaseOrder = () => {
   const userType = useSelector((state) => state.user.userType);
@@ -40,6 +41,7 @@ const PurchaseOrder = () => {
   // .filter((x) => x.senderId == userId)
 
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     breadcrumbs.map((item) => {
       if (item.link == "purchaseOrder") {
@@ -68,6 +70,7 @@ const PurchaseOrder = () => {
   }, []);
 
   useEffect(() => {
+    history.push("/purchaseStaff/purchaseOrder");
     if (userType === "ROLE_PURCHASING_MANAGER") {
       setUser("purchaseManager");
     } else if (userType === "ROLE_PURCHASING_STAFF") {

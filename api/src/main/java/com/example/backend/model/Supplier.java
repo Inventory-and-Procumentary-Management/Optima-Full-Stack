@@ -27,6 +27,7 @@ public class Supplier {
     private String email;
     private String contactNo;
     private String img;
+    private String employeeId;
     @Column(columnDefinition = "boolean default true")
     private Boolean isActivate;
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

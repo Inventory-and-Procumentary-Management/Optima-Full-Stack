@@ -25,6 +25,7 @@ import SearchComponent from "../../../../components/search/Search";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import { getBreadcrumb } from "../../../../redux/breadcrumbApiCalls";
+import { useHistory } from "react-router-dom";
 
 export default function ProductList() {
   const dispatch = useDispatch();
@@ -37,6 +38,8 @@ export default function ProductList() {
   const [productId, setProductId] = useState("");
   const [deleteTrigger, setDeleteTrigger] = useState("");
   const [product, setProduct] = useState([]);
+
+  const history = useHistory();
 
   useEffect(() => {
     const setBreadcrumb = () => {
@@ -51,6 +54,7 @@ export default function ProductList() {
   }, []);
 
   useEffect(() => {
+    history.push("/purchaseStaff/productList");
     getProducts(dispatch);
   }, [dispatch, deleteTrigger]);
 

@@ -23,6 +23,7 @@ import Typography from "@mui/material/Typography";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 const stockData = [
   {
@@ -130,6 +131,7 @@ export default function NewProduct() {
   const [allShow, setAllShow] = useState(false);
   const [sizeForm, setSizeForm] = useState(6);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const [titleError, setTitleError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
@@ -162,6 +164,10 @@ export default function NewProduct() {
       clearInterval(timer);
     };
   }, [afterClicked]);
+
+  useEffect(()=>{
+    history.push("/purchaseStaff/newProduct");
+  },[]);
 
   const handleChange = (e) => {
     setInputs((prev) => {

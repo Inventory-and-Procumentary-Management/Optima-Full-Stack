@@ -3,7 +3,7 @@ import "../products/newProduct/NewProduct.css";
 
 import { useDispatch } from "react-redux";
 // import SweetAlert from "react-bootstrap-sweetalert";
-import { Link, useLocation, useNavigate , useHistory} from "react-router-dom";
+import { Link, useLocation, useNavigate, useHistory } from "react-router-dom";
 // import "../user/user.css";
 
 import Box from "@mui/material/Box";
@@ -13,9 +13,8 @@ import MenuItem from "@mui/material/MenuItem";
 import { useEffect } from "react";
 import TableForm from "../../Supplier/invoices/TableForm";
 
-
 export default function InvoiceForm() {
-  const history = useHistory()
+  const history = useHistory();
   const [stock, setStock] = useState(true);
   const [category, setCategory] = useState("");
   const [invoiceDate, setInvoiceDate] = useState("");
@@ -59,26 +58,26 @@ export default function InvoiceForm() {
   const [clientName, setClientName] = useState("");
   const [clientAddress, setClientAddress] = useState("");
   const [invoiceNum, setInvoiceNum] = useState("");
-  
+
   // function uniqueID() {
   //   return Math.floor(Math.random() + Date.now())
   //   }
 
   //generate unique invoice number
-//   useEffect(()=>{
-//     const uniqueID = ()=>{
-//         setInvoiceNum(Math.random())
-//     }
-//     uniqueID()
-// },[invoiceNum, setInvoiceNum])
+  //   useEffect(()=>{
+  //     const uniqueID = ()=>{
+  //         setInvoiceNum(Math.random())
+  //     }
+  //     uniqueID()
+  // },[invoiceNum, setInvoiceNum])
 
-function handleClick(){
-  history.push("/purchaseManager/invoicePreview", {
-    list, clientAddress, clientName, invoiceNum, invoiceDate
-  })
-  // navigation.navigate("/purchaseManager/newMaterialRequest1")
-  // console.log(list, clientAddress, clientName, invoiceNum, invoiceDate);
-}
+  // function handleClick(){
+  //   history.push("/purchaseManager/invoicePreview", {
+  //     list, clientAddress, clientName, invoiceNum, invoiceDate
+  //   })
+  //   // navigation.navigate("/purchaseManager/newMaterialRequest1")
+  //   // console.log(list, clientAddress, clientName, invoiceNum, invoiceDate);
+  // }
 
   return (
     <div className="newProduct common">
@@ -109,12 +108,7 @@ function handleClick(){
       >
         {/* <form className="productForm" onSubmit={updateProduct}> */}
 
-        <Box
-          noValidate
-         
-          className="productForm"
-          sx={{ m: 5 }}
-        >
+        <Box noValidate className="productForm" sx={{ m: 5 }}>
           {/* <div className="productFormLeft"> */}
           <Grid container spacing={4}>
             {/* <Grid item md={10}> */}
@@ -136,7 +130,7 @@ function handleClick(){
                     setTitleError(false);
                     setTitleMessageError("");
                     // handleChange();
-                    setClientName(e.target.value)
+                    setClientName(e.target.value);
                   }}
                 />
               </Grid>
@@ -199,50 +193,28 @@ function handleClick(){
                     setInvoiceDate(event.target.value);
                     // handleCat();
                   }}
-                >
-                </TextField>
+                ></TextField>
               </Grid>
-                  <article>
-                    <TableForm
-                     desc={desc}
-                     setDesc={setDesc}
-                     itemCode= {itemCode}
-                     setItemCode = {setItemCode}
-                     itemName = {itemName}
-                     setItemName = {setItemName}
-                     uom = {uom}
-                     setUom = {setUom}
-                     quantity={quantity}
-                     setQuantity={setQuantity}
-                     rate={rate}
-                     setRate = {setRate}
-                     amount={amount}
-                     setAmount={setAmount}
-                     list={list}
-                     setList={setList}
-                     />
-                  </article>
-              <Grid
-                item
-                md={12}
-                container
-                sx={{ alignItems: "center", justifyContent: "center" }}
-              >
-                <button
-                  
-                  onClick={handleClick}
-                  // className="addProductButton"
-                  className="color-contained-button"
-                  style={{
-                    paddingLeft: 70,
-                    paddingRight: 70,
-                    paddingBottom: 15,
-                    paddingTop: 15,
-                  }}
-                >
-                  Preview Purchase Order
-                </button>
-              </Grid>
+              <article>
+                <TableForm
+                  desc={desc}
+                  setDesc={setDesc}
+                  itemCode={itemCode}
+                  setItemCode={setItemCode}
+                  itemName={itemName}
+                  setItemName={setItemName}
+                  uom={uom}
+                  setUom={setUom}
+                  quantity={quantity}
+                  setQuantity={setQuantity}
+                  rate={rate}
+                  setRate={setRate}
+                  amount={amount}
+                  setAmount={setAmount}
+                  list={list}
+                  setList={setList}
+                />
+              </article>
             </Grid>
           </Grid>
           {/* </form> */}
@@ -251,4 +223,3 @@ function handleClick(){
     </div>
   );
 }
-

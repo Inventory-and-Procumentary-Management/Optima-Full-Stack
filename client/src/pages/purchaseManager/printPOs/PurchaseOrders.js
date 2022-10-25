@@ -9,6 +9,8 @@ import Notes from "./Notes";
 import Table from "./Table";
 import TableForm from "./TableForm";
 import { Button } from "@mui/material";
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 function PurchaseOrders() {
   const [showInvoice, setShowInvoice] = useState(false);
@@ -30,6 +32,12 @@ function PurchaseOrders() {
   const [price, setPrice] = useState("");
   const [amount, setAmount] = useState("");
   const [list, setList] = useState([]);
+
+  const history = useHistory();
+
+  useEffect(()=>{
+    history.push("/purchaseStaff/newMaterialRequest");
+  },[]);
 
   const handlePrint = () => {
     window.print();
