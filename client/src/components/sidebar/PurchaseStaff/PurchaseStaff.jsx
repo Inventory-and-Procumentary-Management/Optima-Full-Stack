@@ -99,13 +99,12 @@ export default function PurchaseStaffSidebar() {
                   Payments
                 </li>
               </Link> */}
-              <Link to="/purchaseStaff/orders" className="link">
-                {/* {history.push("/purchaseStaff/orders")} */}
+              {/* <Link to="/purchaseStaff/orders" className="link">
                 <li className="sidebarListItem">
                   <BarChart className="sidebarIcon" />
                   Order Summary
                 </li>
-              </Link>
+              </Link> */}
             </ul>
           </div>
           <div className="sidebarMenu">
