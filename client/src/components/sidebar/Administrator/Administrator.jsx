@@ -123,16 +123,16 @@ export default function AdministratorSitebar() {
                 {/* {history.push("/purchaseStaff/materialRequest")} */}
                 <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
-                  Purchase
+                  Warehouse Requests
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseOrder" className="link">
+             {/*  <Link to="/purchaseStaff/purchaseOrder" className="link"> */}
                 {/* {history.push("/purchaseStaff/purchaseOrder")} */}
-                <li className="sidebarListItem">
+                {/* <li className="sidebarListItem">
                   <Storefront className="sidebarIcon" />
                   Supplier Return
                 </li>
-              </Link>
+              </Link> */}
               <Link to="/purchaseStaff/purchaseInvoice" className="link">
                 {/* {history.push("/purchaseStaff/purchaseInvoice")} */}
                 <li className="sidebarListItem">
@@ -140,16 +140,16 @@ export default function AdministratorSitebar() {
                   Invoice
                 </li>
               </Link>
-              <Link to="/purchaseStaff/purchaseInvoice" className="link">
+              {/* <Link to="/purchaseStaff/purchaseInvoice" className="link"> */}
                 {/* {history.push("/purchaseStaff/purchaseInvoice")} */}
-                <li className="sidebarListItem">
+                {/* <li className="sidebarListItem">
                   <TrendingUp className="sidebarIcon" />
                   Sales
                 </li>
-              </Link>
+              </Link> */}
             </ul>
           </div>
-          <div className="sidebarMenu">
+          {/* <div className="sidebarMenu">
             <h3 className="sidebarTitle">People</h3>
             <ul className="sidebarList">
               <li className="sidebarListItem">
@@ -159,13 +159,13 @@ export default function AdministratorSitebar() {
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 Suppliers
-              </li>
+              </li> */}
               {/* <li className="sidebarListItem">
                 <ChatBubbleOutline className="sidebarIcon" />
                 Messages
               </li> */}
-            </ul>
-          </div>
+            {/* </ul>
+          </div> */}
           {/* <div className="sidebarMenu">
             <h3 className="sidebarTitle">Products</h3>
             <ul className="sidebarList">
@@ -186,18 +186,20 @@ export default function AdministratorSitebar() {
           <div className="sidebarMenu">
             <h3 className="sidebarTitle">Project</h3>
             <ul className="sidebarList">
+            <Link to="/projectManager/siteDetails" className="link">
               <li className="sidebarListItem">
                 <WorkOutline className="sidebarIcon" />
-                Project
+                Projects
               </li>
-              <li className="sidebarListItem">
+              </Link>
+              {/* <li className="sidebarListItem">
                 <Timeline className="sidebarIcon" />
                 Deliveries
               </li>
               <li className="sidebarListItem">
                 <Report className="sidebarIcon" />
                 Reports
-              </li>
+              </li> */}
             </ul>
           </div>
         </div>

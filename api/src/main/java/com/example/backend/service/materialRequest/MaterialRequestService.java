@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MaterialRequestService {
     public MaterialRequest saveMaterialRequest(MaterialRequest materialRequest);
-    public List<MaterialRequest> getMaterialRequests();
+    public List<MaterialRequest> getMaterialRequests(String field);
     public MaterialRequest getMaterialRequest(Long id);
     public void deleteMaterialRequest(Long id);
     public MaterialRequest updateMaterialRequest(Long id,MaterialRequest materialRequest);

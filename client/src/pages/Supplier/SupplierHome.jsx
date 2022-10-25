@@ -4,11 +4,28 @@ import FeaturedInfo_supplier from "../../components/featuredInfo/FeaturedInfo_su
 import { useDispatch, useSelector } from "react-redux";
 import "../pages.css";
 import "./SupplierHomeStyle.css";
+import { getRemoveAllBreadcrumb } from "../../redux/breadcrumbApiCalls";
 
 const PurchaseStaffHome = () => {
   const [userStats, setUserStats] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   //   const user = useSelector((state) => state.user.currentUser);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const setBreadcrumb = () => {
+      // breadcrumbs.map((item)=>{
+      //   if(item.link == "purchaseStaff"){
+      //     getRemoveBreadcrumb(dispatch,"purchaseStaff");
+      //   }
+      // });
+      getRemoveAllBreadcrumb(dispatch, {
+        name: "Supplier",
+        link: "supplier",
+      });
+    };
+    setBreadcrumb();
+  }, []);
 
   const MONTHS = useMemo(
     () => [
@@ -30,12 +47,12 @@ const PurchaseStaffHome = () => {
 
   useEffect(() => {
     let data = [
-      { name: MONTHS[0], "Cement": 15, "Sand": 12 },
-      { name: MONTHS[1], "Cement": 20, "Sand": 25 },
-      { name: MONTHS[2], "Cement": 65, "Sand": 78 },
-      { name: MONTHS[3], "Cement": 45, "Sand": 30 },
-      { name: MONTHS[4], "Cement": 100, "Sand": 80 },
-      { name: MONTHS[5], "Cement": 74, "Sand": 90 },
+      { name: MONTHS[0], Cement: 15, Sand: 12 },
+      { name: MONTHS[1], Cement: 20, Sand: 25 },
+      { name: MONTHS[2], Cement: 65, Sand: 78 },
+      { name: MONTHS[3], Cement: 45, Sand: 30 },
+      { name: MONTHS[4], Cement: 100, Sand: 80 },
+      { name: MONTHS[5], Cement: 74, Sand: 90 },
     ];
     setUserStats(data);
     console.log(userStats);
@@ -60,7 +77,7 @@ const PurchaseStaffHome = () => {
         index: 3,
         title: "Due Orders",
         number: 5,
-        text:"To do Orders "
+        text: "To do Orders ",
       },
     ];
     setFeaturedData(featureData);

@@ -21,8 +21,8 @@ public class MaterialRequestController {
 
     //getAll
     @GetMapping("/")
-    public ResponseEntity<List<MaterialRequest>> getMaterialRequest(){
-        return ResponseEntity.ok().body(materialRequestService.getMaterialRequests());
+    public ResponseEntity<List<MaterialRequest>> getMaterialRequest(@RequestParam String field){
+        return ResponseEntity.ok().body(materialRequestService.getMaterialRequests(field));
     }
     //get one material request
     @GetMapping("/{id}")

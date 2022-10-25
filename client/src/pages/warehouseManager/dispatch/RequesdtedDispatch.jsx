@@ -130,51 +130,77 @@ const RequesdtedDispatch = () => {
         );
       },
     },
-    { field: "issueDate", headerName: "Recieve Date", width: 180 },
+    {
+      field: "issueDate",
+      headerName: "Recieve Date",
+      width: 220,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            
+            {params.row.issueDate.slice(0, 10).replace("T", " ")}
+          </div>
+        );
+      },
+    },
+    {
+      field: "dueDate",
+      headerName: "Due Date",
+      width: 220,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            
+            {params.row.issueDate.slice(0, 10).replace("T", " ")}
+          </div>
+        );
+      },
+    },
+    //{ field: "issueDate", headerName: "Recieve Date", width: 180 },
     { field: "dueDate", headerName: "Due Date", width: 180 },
     // { field: "price", headerName: "Description", width: 200 },
     // { field: "currentQuantity", headerName: "Current Quantity", width: 200 },
     // { field: "requestQuantity", headerName: "Request Quantity", width: 200 },
-    {
-      field: "isApprove",
-      headerName: "Approve",
-      width: 180,
-      renderCell: (params) => {
-        return (
-          <>
-            <div className="productListItem">
-              <div className="productListItemData">
-                {params.row.status + " "}
-              </div>
+    // {
+    //   field: "isApprove",
+    //   headerName: "Approve",
+    //   width: 180,
+    //   renderCell: (params) => {
+    //     return (
+    //       <>
+    //         <div className="productListItem">
+    //           <div className="productListItemData">
+    //             {params.row.status + " "}
+    //           </div>
 
-              {userType === "ROLE_WAREHOUSE_MANAGER" ? (
-                params.row.isApprove ? (
-                  <ThumbUpAltOutlined
-                    className="productListDelete"
-                    style={{ color: "green" }}
-                    onClick={() => {
-                      // setProductApproveStatus(params.row.id, false, params.row);
-                      // setApproveShow(true);
-                    }}
-                  />
-                ) : (
-                  <ThumbDownAltOutlined
-                    className="productListDelete"
-                    style={{ color: "red" }}
-                    onClick={() => {
-                      // setProductApproveStatus(params.row.id, true, params.row);
-                      // setApproveShow(true);
-                    }}
-                  />
-                )
-              ) : (
-                <></>
-              )}
-            </div>
-          </>
-        );
-      },
-    },
+    //           {userType === "ROLE_WAREHOUSE_MANAGER" ? (
+    //             params.row.isApprove ? (
+    //               <ThumbUpAltOutlined
+    //                 className="productListDelete"
+    //                 style={{ color: "green" }}
+    //                 onClick={() => {
+    //                   // setProductApproveStatus(params.row.id, false, params.row);
+    //                   // setApproveShow(true);
+    //                 }}
+    //               />
+    //             ) : (
+    //               <ThumbDownAltOutlined
+    //                 className="productListDelete"
+    //                 style={{ color: "red" }}
+    //                 onClick={() => {
+    //                   // setProductApproveStatus(params.row.id, true, params.row);
+    //                   // setApproveShow(true);
+    //                 }}
+    //               />
+    //             )
+    //           ) : (
+    //             <></>
+    //           )}
+    //         </div>
+    //       </>
+    //     );
+    //   },
+    // },
     // {
     //   field: "staus",
     //   headerName: "Status",
