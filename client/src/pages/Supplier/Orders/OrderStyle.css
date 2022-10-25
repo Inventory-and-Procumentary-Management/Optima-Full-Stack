@@ -8,12 +8,14 @@
     border-radius: 1rem;
 }
 .accept-btn{
+    color: white;
     border-radius: 0.5rem;
     padding: 0.3rem;
     border: 0.2rem solid rgb(123, 206, 7);
     background-color: rgb(123, 206, 7);
 }
 .reject-btn{
+    color:white;
     border-radius: 0.5rem;
     padding: 0.3rem;
     border: 0.2rem solid rgba(253, 60, 60, 0.897);
@@ -43,4 +45,11 @@
 }
 .popupOrder{
     height: 30rem;
+}
+.popupgridToBe{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+.order-popup-main{
+    height: 500px;
 }

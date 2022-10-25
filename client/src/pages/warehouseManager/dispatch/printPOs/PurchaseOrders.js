@@ -40,17 +40,15 @@ function PurchaseOrders({
   const [amount, setAmount] = useState("");
   const [list, setList] = useState([]);
 
-  const twoCalls = e => {
-    this.functionOne(e)
-    this.functionTwo()
-  }
-
+  const twoCalls = (e) => {
+    this.functionOne(e);
+    this.functionTwo();
+  };
 
   const handlePrint = () => {
     window.print();
   };
   function randomNumberInRange(min, max) {
-    
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -214,9 +212,8 @@ function PurchaseOrders({
                     id="sitemanagerId"
                     placeholder="Enter Site Manager's ID"
                     autoComplete="off"
-                    value={smIdv}
+                    value={siteManagerId}
                     onChange={(e) => setSiteManagerId(e.target.value)}
-                    
                   />
                 </div>
 
@@ -228,7 +225,7 @@ function PurchaseOrders({
                     id="sitemanagerName"
                     placeholder="Enter Site Manager's Name"
                     autoComplete="off"
-                    value={smNamev}
+                    value={siteManagerName}
                     onChange={(e) => setSiteManagerName(e.target.value)}
                   />
                 </div>
@@ -298,7 +295,7 @@ function PurchaseOrders({
                 cols="30"
                 rows="10"
                 placeholder="Additional notes to the Site Manager"
-                value={oProductsv}
+                value={notes}
                 onChange={(e) => setNotes(e.target.value)}
               ></textarea>
               <button

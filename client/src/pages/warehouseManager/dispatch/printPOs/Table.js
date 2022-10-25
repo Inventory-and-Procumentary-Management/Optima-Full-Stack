@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default function ({list}) {
+  console.log(list)
   return (
     <>
     <table width="100%" className='mb-10'>
