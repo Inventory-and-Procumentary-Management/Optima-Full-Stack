@@ -58,8 +58,37 @@ export default function RecievedTable(){
     // },
     //{ field: "uom", headerName: "Unit of Messurement", width: 180 },
     { field: "sectionQuantity", headerName: "Quantity", width: 180 },
-    { field: "receivedDate", headerName: "Request Date", width: 180 },
-    { field: "expiredDate", headerName: "Expire Date", width: 180 },
+    //{ field: "receivedDate", headerName: "Request Date", width: 180 },
+    
+    {
+      field: "receivedDate",
+      headerName: "Request Date",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            
+            {params.row.receivedDate.slice(0, 10).replace("T", " ")}
+          </div>
+        );
+      },
+    },
+    {
+      field: "expiredDate",
+      headerName: "Expire Date",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="userListUser">
+            
+            {params.row.expiredDate.slice(0, 10).replace("T", " ")}
+          </div>
+        );
+      },
+    },
+
+
+    //{ field: "expiredDate", headerName: "Expire Date", width: 180 },
     { field: "receivedLocation", headerName: "Placement", width: 180 },
    
   //   {
