@@ -52,7 +52,7 @@ import ProfileSupplier from "./pages/Supplier/profile/ProfileSupplier";
 import Request_new_product from "./pages/Supplier/Request_new_product";
 import Invoice from "./pages/purchaseManager/printPOs/Invoice";
 import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
-
+import Reports from "./pages/purchasingStaff/reports/Reports";
 import Requested_Product_details from "./pages/Supplier/Product/RequestedProduct";
 
 const App = () => {
