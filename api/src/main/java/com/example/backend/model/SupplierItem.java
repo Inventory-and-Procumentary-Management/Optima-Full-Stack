@@ -39,6 +39,8 @@ public class SupplierItem {
         createDate = new Date();
     }
 
+    private Long inventor_item_id;
+
 //    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    InventoryItem inventoryItem;
 }

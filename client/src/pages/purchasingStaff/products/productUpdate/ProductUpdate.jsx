@@ -4,6 +4,7 @@ import Charts from "../../../../components/charts/Charts";
 import { Publish } from "@material-ui/icons";
 import { useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import {
   deleteProduct,
@@ -39,6 +40,12 @@ export default function ProductUpdate() {
   const [messureMessageError, setMessureMessageError] = useState("");
 
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  // useEffect(()=>{
+  //   history.push("/purchaseStaff/productUpdate/:productId");
+  // },[]);
+
   const product = useSelector((state) =>
     state.product.products.find(
       (product) => product.inventor_item_id == productId

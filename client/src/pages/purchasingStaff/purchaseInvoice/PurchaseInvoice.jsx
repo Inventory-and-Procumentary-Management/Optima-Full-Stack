@@ -19,6 +19,7 @@ import { purchaseInvoiceData } from "../../../constants/DashboardData";
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
 import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
+import { useHistory } from "react-router-dom";
 
 const PurchaseInvoice = () => {
   const userType = useSelector((state) => state.user.userType);
@@ -26,6 +27,7 @@ const PurchaseInvoice = () => {
   console.log(userType);
   const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     breadcrumbs.map((item)=>{
       if(item.link == "purchaseInvoice"){
@@ -42,6 +44,7 @@ const PurchaseInvoice = () => {
   }, []);
 
   useEffect(() => {
+    history.push("/purchaseStaff/purchaseInvoice");
     if (userType === "ROLE_PURCHASING_MANAGER") {
       setUser("purchaseManager");
     } else if (userType === "ROLE_PURCHASING_STAFF") {

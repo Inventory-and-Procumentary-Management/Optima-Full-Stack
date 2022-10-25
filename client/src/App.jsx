@@ -53,6 +53,8 @@ import Request_new_product from "./pages/Supplier/Request_new_product";
 import Invoice from "./pages/purchaseManager/printPOs/Invoice";
 import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
 import Reports from "./pages/purchasingStaff/reports/Reports";
+import Requested_Product_details from "./pages/Supplier/Product/RequestedProduct";
+import InvoiceData from "./pages/purchasingStaff/Invoice/Invoice";
 
 const App = () => {
   return (
@@ -118,6 +120,12 @@ const App = () => {
               <Route path="/purchaseStaff/reports">
                 <Reports />
               </Route>
+              <Route path="/purchaseStaff/invoicePreview">
+                <Invoice />
+              </Route>
+              <Route path="/purchaseStaff/invoicePreview/invoiceData">
+                <InvoiceData />
+              </Route>
 
               <Route exact path="/admin">
                 <AdministratorHome />
@@ -151,7 +159,7 @@ const App = () => {
                 <RequesdtedDispatch />
               </Route>
               <Route exact path="/warehouseManager/requestForm">
-                 <RequestForm/>
+                <RequestForm />
               </Route>
 
               <Route exact path="/supplier/Request_product">
@@ -182,6 +190,9 @@ const App = () => {
               <Route exact path="/supplier/SupplierProfile">
                 <ProfileSupplier />
               </Route>
+              <Route exact path="/supplier/Requested_Product_details">
+                <Requested_Product_details />
+              </Route>
               
               {/* <Route path="/users">
                 <UserList />
@@ -190,21 +201,18 @@ const App = () => {
                 <User />
               </Route> */}
 
-
               <Route exact path="/projectManager">
-                 <ProjectManagerHome/>
+                <ProjectManagerHome />
               </Route>
               <Route exact path="/projectManager/newsite">
-                 <NewSite/>
+                <NewSite />
               </Route>
               <Route exact path="/projectManager/siteInternalPage">
-                 <SiteInternalPage/>
+                <SiteInternalPage />
               </Route>
               <Route exact path="/projectManager/sitedetails">
-                 <SiteDetails/>
+                <SiteDetails />
               </Route>
-
-
 
               <Route exact path="/purchaseManager">
                 <PurchaseManagerHome />
@@ -228,10 +236,10 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
-              <InvoiceForm />
+                <InvoiceForm />
               </Route>
               <Route path="/purchaseManager/invoicePreview">
-              <Invoice />
+                <Invoice />
               </Route>
             </div>
           </div>
