@@ -38,9 +38,10 @@ export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [totalPrice, settotalPrice] = useState([]);
+  var subtotal = 0;
 
-
-
+  console.log(props.AllDetails)
 
   const handlePrint =()=>{
     window.print()
@@ -67,6 +68,14 @@ export default function BasicModal(props) {
 
   const dummyFunction = ()=>{
     console.log("In dummy Function");
+  }
+  const findUnitPrice = (inventoryID)=>{
+    props.AllDetails.map((product)=>{ 
+      if(product.inventoryItemID == inventoryID ){
+        console.log(product.price);
+          return product.price;
+      }
+    })
   }
 
   return (
@@ -113,6 +122,8 @@ export default function BasicModal(props) {
               <TableCell align="left">Product Name</TableCell>
               <TableCell align="left">Quantity&nbsp;</TableCell>
               <TableCell align="left">Description&nbsp;</TableCell>
+              <TableCell align="left">Unit Price&nbsp;</TableCell>
+              <TableCell align="left">Unit Each Total&nbsp;</TableCell>
               
             </TableRow>
           </TableHead>
@@ -124,7 +135,23 @@ export default function BasicModal(props) {
                 <TableCell align="left">{row.productName}</TableCell>
                 <TableCell align="left">{row.quantity}</TableCell>
                 <TableCell align="left">{row.description}</TableCell>
-    
+                <TableCell align="left">{props.AllDetails.map((product)=>{ 
+      if(product.inventoryItemID == row.inventoryItemId ){
+        console.log(product.price);
+          return product.price;
+      }
+    })}</TableCell>
+    <TableCell align="left">{props.AllDetails.map((product)=>{ 
+      if(product.inventoryItemID == row.inventoryItemId ){
+        //console.log(product.price);
+        // settotalPrice([...totalPrice,product.price * row.quantity]);
+        subtotal = subtotal + product.price * row.quantity;
+          return product.price * row.quantity;
+          
+      }
+    })}</TableCell>
+
+                
               </TableRow>
             ))}
           </TableBody>
@@ -133,16 +160,21 @@ export default function BasicModal(props) {
             
             </Typography>
             <br></br>
-  
+
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Sub Total : {subtotal}
+            </Typography>
+            <br></br>
+
             {/* <button className='accept-btn'>Accept</button> */}
             {/* <Link to="/supplier/Supplier_Invoices" className="link">
                   <button className="accept-btn">
                   Accept
                   </button>
                 </Link> */}
-                {/* <button className="accept-btn">
+                <button className="accept-btn">
                   Accept
-                  </button> */}
+                  </button>
             &nbsp;
             &nbsp;
             &nbsp;
