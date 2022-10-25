@@ -69,7 +69,7 @@ export default function BuildingTable({name}) {
     {
       field: "title",
       headerName: "Item Name",
-      width: 180,
+      width: 250,
       renderCell: (params) => {
         return (
           <div className="userListUser">
@@ -89,7 +89,7 @@ export default function BuildingTable({name}) {
     // { field: "expire", headerName: "Expire Date", width: 180 },
     { field: "minQuantity", headerName: "Minimum Level", width: 180 },
 
-    { field: "description", headerName: "Description", width: 200 },
+    { field: "description", headerName: "Description", width: 250 },
     // {
     //   field: "staus",
     //   headerName: "Order Status",

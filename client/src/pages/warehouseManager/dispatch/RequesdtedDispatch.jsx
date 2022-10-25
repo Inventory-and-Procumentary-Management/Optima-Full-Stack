@@ -32,18 +32,22 @@ const RequesdtedDispatch = () => {
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);
   const [user, setUser] = useState("");
-  const materialRequest = useSelector(
-    (state) => state.materialRequest.materialRequests
+  const materialRequest = useSelector((state) =>
+    state.materialRequest.materialRequests.filter(
+      (x) => x.senderType == "Site Manager"
+    )
   );
   const [details, setDeatails] = useState([]);
-  
-  const [show, setShow] = useState(true);
 
-  const list = [
-    { id: 1, desc: "Cement", quantity: 200 },
-    { id: 2, desc: "Cement", quantity: 200 },
-    { id: 3, desc: "Cement", quantity: 200 },
-  ];
+  const [show, setShow] = useState(true);
+  const [dataList, setDataList] = useState([]);
+  const [list, setList] = useState([]);
+
+  // const list = [
+  //   { id: 1, desc: "Cement", quantity: 200 },
+  //   { id: 2, desc: "Cement", quantity: 200 },
+  //   { id: 3, desc: "Cement", quantity: 200 },
+  // ];
   // console.log(userType);
 
   useEffect(() => {
@@ -69,6 +73,25 @@ const RequesdtedDispatch = () => {
   const addData = (data) => {
     console.log(materialRequest.senderId);
     setAddSiteManagerItem(dispatch, data);
+  };
+
+  const setDataArray = (data) => {
+    setList(data);
+    let dataListNew = [];
+    data.orderProducts.map((item) => {
+      console.log(item);
+      dataListNew.push({
+        id: item.order_id,
+        itemCode: item.inventoryItemId,
+        productName: item.productName,
+        desc: item.description,
+        quantity: item.quantity,
+        rate: item.itemPrice,
+        amount: item.amount,
+      });
+    });
+    console.log(dataList);
+    setDataList(dataListNew);
   };
 
   const columns = [
@@ -102,7 +125,7 @@ const RequesdtedDispatch = () => {
               src="https://res.cloudinary.com/midefulness/image/upload/v1657441685/samples/people/kitchen-bar.jpg"
               alt="category Icon"
             />
-            {params.row.supplier}
+            {params.row.senderName}
           </div>
         );
       },
@@ -232,27 +255,22 @@ const RequesdtedDispatch = () => {
           <>
             {!params.row.isCancel ? (
               <div>
-                <IconButton
-                  // onClick={() => {
-                  //   addData(params.row);
-                  // }}
-                >
-                  <VisibilityOutlined
-                    style={{
-                      color: "#bdba2c",
-                      cursor: "pointer",
-                      marginRight: 20,
-                    }}
+                <VisibilityOutlined
+                  style={{
+                    color: "#bdba2c",
+                    cursor: "pointer",
+                    marginRight: 20,
+                  }}
+                  onClick={() => {
+                    // setProductStatus(params.row.id, false);
+                    // setApproveShow(true);
+                    console.log(params.row);
+                    setShow(false);
+                    setDataArray(params.row);
+                  }}
+                />
 
-                    onClick={() => {
-                      // setProductStatus(params.row.id, false);
-                      // setApproveShow(true);
-                      console.log(params.row);
-                      setShow(false);
-                    }}
-                  />
-                 
-                  {/* <BasicModalDispatch
+                {/* <BasicModalDispatch
                     name={
                       <VisibilityOutlined
                         style={{
@@ -268,8 +286,6 @@ const RequesdtedDispatch = () => {
                     date={params.row.issueDate}
                     description={params.row.orderProducts}
                   /> */}
-                 
-                </IconButton>
 
                 <CancelOutlined
                   style={{ color: "red", cursor: "pointer" }}
@@ -301,8 +317,8 @@ const RequesdtedDispatch = () => {
   return (
     <div className="common">
       {show ? (
-      <div className="userList">
-        {/* <div className="top-container-material-request">
+        <div className="userList">
+          {/* <div className="top-container-material-request">
           <div
             className="top-contaier-button-material-request"
             style={{ visibility: "hidden" }}
@@ -315,26 +331,25 @@ const RequesdtedDispatch = () => {
             <SearchComponent />
           </div>
         </div> */}
-        <div className="bottom-container-material-request">
-          <DataGrid
-            rows={materialRequest}
-            disableSelectionOnClick
-            columns={columns}
-            getRowId={(row) => row.material_request_id}
-            pageSize={7}
-            checkboxSelection
-            autoHeight
-            
-          components={{ Toolbar: GridToolbar }}
-            // componentsProps={{
-            //   columnMenu: {
-            //     background: "red",
-            //     // counter: rows.length
-            //   },
-            // }}
-          />
-        </div>
-        {/* <SweetAlert
+          <div className="bottom-container-material-request">
+            <DataGrid
+              rows={materialRequest}
+              disableSelectionOnClick
+              columns={columns}
+              getRowId={(row) => row.material_request_id}
+              pageSize={7}
+              checkboxSelection
+              autoHeight
+              components={{ Toolbar: GridToolbar }}
+              // componentsProps={{
+              //   columnMenu: {
+              //     background: "red",
+              //     // counter: rows.length
+              //   },
+              // }}
+            />
+          </div>
+          {/* <SweetAlert
           show={show}
           warning
           showCancel
@@ -368,7 +383,7 @@ const RequesdtedDispatch = () => {
           You will not be able to recover this imaginary file!
         </SweetAlert> */}
 
-        {/* <SweetAlert
+          {/* <SweetAlert
         show={allShow}
         success
         title="Successfully delete!"
@@ -376,32 +391,34 @@ const RequesdtedDispatch = () => {
         onConfirm={() => setAllShow(false)}
       ></SweetAlert> */}
 
-        {/* <SweetAlert
+          {/* <SweetAlert
           show={updateAllShow}
           success
           title="Request Send!"
           // text="SweetAlert in React"
           onConfirm={() => setUpdateAllShow(false)}
         ></SweetAlert> */}
-      </div>
-       ) : (
+        </div>
+      ) : (
         <PrintInvoice
-        ourName={"OPTIMA"}
-        ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
-        clientName={materialRequest.senderId}
-        clientAddress={"497/A/1"}
-        invoiceNum={"Inv-123456"}
-        invoiceDate={materialRequest.issueDate}
-        dueDate={materialRequest.dueDate}
-        // desc={"Sand"}
-        // quantity={152}
-        // price={50}
-        // amount={300000}
-        // list={list}
-         list={materialRequest.orderProducts}
-        // setList={}
-        // notes={}
-      />
+          ourName={"OPTIMA"}
+          ourAddress={"161/A, Aggona, Malabe, Sri Lanka"}
+          clientName={list.senderName}
+          clientAddress={"497/A/1"}
+          invoiceNum={list.material_request_id}
+          invoiceDate={list.issueDate}
+          dueDate={list.dueDate}
+          // desc={"Sand"}
+          // quantity={152}
+          // price={50}
+          // amount={300000}
+          // list={list}
+          list={dataList}
+          // setList={}
+          // notes={}
+          title={"Material Dispatch"}
+          flag={true}
+        />
       )}
     </div>
   );
