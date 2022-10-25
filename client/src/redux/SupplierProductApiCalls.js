@@ -53,7 +53,8 @@ export const updateSupplierProduct = async (id, product, dispatch) => {
 export const addSupplierProduct = async (product, dispatch) => {
   dispatch(addSupplierProductStart());
   try {
-    const res = await userRequest.post(`/inventoryItem/save`, product);
+  
+      const res = await userRequest.post(`/supplierItem/save`, product);
     dispatch(addSupplierProductSuccess(res.data));
     return 1;
   } catch (err) {
@@ -64,7 +65,7 @@ export const addSupplierProduct = async (product, dispatch) => {
 export const countSupplierProduct = async (dispatch) => {
   dispatch(countSupplierProductStart());
   try {
-    const res = await userRequest.get(`/inventoryItem/count`);
+    const res = await userRequest.get(`/supplierItem/count`);
     console.log(res);
     dispatch(countSupplierProductSuccess(res.data));
     return 1;

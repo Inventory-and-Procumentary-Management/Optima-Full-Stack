@@ -19,17 +19,25 @@ import {
   getProducts,
   updateProduct,
 } from "../../redux/productApiCalls";
+import {
+  deleteSupplierProduct,
+  getSupplierProducts,
+  updateSupplierProduct,
+  addSupplierProduct,
+} from "../../redux/SupplierProductApiCalls";
 import MenuItem from '@mui/material/MenuItem';
+import Swal from "sweetalert2";
 
 
 
 const defautlValues = {
-  name :"",
+  itemName :"Suwasana",
   category: "",
-  price_per_one: 0,
+  price: 0,
   quantity: 0,
   description:"",
-  UOM:"",
+  uom:"",
+  inventoryItemID:0,
 };
 
 
@@ -86,14 +94,14 @@ const Request_product = () => {
     console.log("In the selectNameinputchange function");
     console.log(obb);
    const json_obb= {
-     "name":"name",
+     "name":"itemName",
       "value" : obb.label,
 
     }
 
       setFormValues(formValues=>({
         ...formValues,
-        name:obb.label,
+        itemName:obb.label,
       }));
 
       // setName(existingValues => ({
@@ -104,18 +112,40 @@ const Request_product = () => {
       // }))
     }
 
+    const selectInventoryItemID =(obb)=>{
+      console.log("In the selectInventory Item ID function");
+      console.log(obb);
+     const json_obb= {
+       "name":"inventoryItemID",
+        "value" : obb.inventor_item_id,
+  
+      }
+  
+        setFormValues(formValues=>({
+          ...formValues,
+          inventoryItemID:obb.inventor_item_id,
+        }));
+  
+        // setName(existingValues => ({
+        //   // Retain the existing values
+        //   ...existingValues,
+        //   // update the firstName
+        //   firstName: e.target.value,
+        // }))
+      }
+
       const selectUOMInputchange =(obb)=>{
         console.log("In the selectUOMinputchange function");
         console.log(obb);
        const json_obb = {
           "name":"uom",
-          "value" : obb.UOM,
+          "value" : obb.uom,
     
         }
        
         setFormValues(formValues=>({
           ...formValues,
-          UOM:obb.uom,
+          uom:obb.uom,
         }));
         }
 
@@ -152,8 +182,18 @@ const Request_product = () => {
   
   const handleSubmit = (event) =>{
     event.preventDefault();
-    if(isInteger(formValues.price_per_one) && isInteger(formValues.quantity) ){
+    if(isInteger(formValues.price) && isInteger(formValues.quantity) ){
       console.log(formValues);
+      if(addSupplierProduct(formValues,dispatch)){
+        console.log("Success");
+        Swal.fire(
+          'Requested Success!',
+          'You add a Request Product!',
+          'success'
+        )
+      }else{
+        console.log("Failed");
+      };
     }
     
 
@@ -190,6 +230,7 @@ const Request_product = () => {
           selectNameInputchange(newValue);
          selectUOMInputchange(newValue);
          selectCategoryInputchange(newValue);
+         selectInventoryItemID(newValue);
 
           //handleInputChange;
           //console.log(newValue)
@@ -287,7 +328,7 @@ const Request_product = () => {
   <TextField
   error ={priceError ? true : false }
   id="outlined-basic" 
-  name='price_per_one' 
+  name='price' 
   variant="outlined" 
   helperText={priceError ? "Please Enter a Valid Number" : "" }
   // value={formValues.price_per_one}
@@ -369,7 +410,7 @@ const Request_product = () => {
   </div>  {/* div 0-1 end */ }
   <div className='button-container'>
   <div className='request-button'>
-  <button variant="contained" type='submit' >Request</button>
+  <button variant="contained" type='submit'>Request</button>
   </div>
 
   <div className='cancel-button'>
