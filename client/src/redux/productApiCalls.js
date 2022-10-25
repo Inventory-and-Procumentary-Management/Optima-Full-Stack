@@ -22,8 +22,10 @@ export const getProducts = async (dispatch) => {
   try {
     const res = await userRequest.get("/inventoryItem/?field=createDate");
     dispatch(getProductSuccess(res.data));
+    return 1;
   } catch (err) {
     dispatch(getProductFailure());
+    return 0;
   }
 };
 
