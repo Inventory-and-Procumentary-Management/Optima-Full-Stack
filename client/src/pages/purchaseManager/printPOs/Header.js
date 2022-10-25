@@ -1,9 +1,13 @@
 import React from "react";
 import Swal from "sweetalert2";
 
+import { useHistory } from "react-router-dom";
+
 export default function Header({ handlePrint, title, flag }) {
+  const history = useHistory();
 
   const handleSend = async () => {
+    
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -16,11 +20,12 @@ export default function Header({ handlePrint, title, flag }) {
       if (result.isConfirmed) {
         // deleteConfirm(id);
         Swal.fire("Sent!", "Stocks have been sent.", "success");
+        
+        history.push("/warehouseManager/inventory");
       }
     });
     // setData(data.filter((item) => item.id !== id));
   };
-
 
   return (
     <>
