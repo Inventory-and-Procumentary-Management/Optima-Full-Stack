@@ -10,7 +10,8 @@ const Order_details = () => {
         <h2 className='orders-topic-style'>Orders</h2>
       </div >
       <div className='sub-div-order'>
-      <Order_tableTabs></Order_tableTabs>
+      {/* <Order_tableTabs></Order_tableTabs> */}
+      <Order_table></Order_table> 
       </div>
     
    </div>

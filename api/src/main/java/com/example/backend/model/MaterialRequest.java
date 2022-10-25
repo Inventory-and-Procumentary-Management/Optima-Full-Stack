@@ -21,6 +21,9 @@ public class MaterialRequest {
     private String senderType;
     private Long receiverId;
 
+    private String senderName;
+    private String receiverName;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false)
     private Date issueDate;

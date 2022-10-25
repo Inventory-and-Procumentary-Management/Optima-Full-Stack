@@ -2,6 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userRedux";
 import productReducer from "./productRedux";
 import siteReducer from "./SiteRedux"
+import supplierProductReducer from "./SupplierProductRedux"
 import {
   persistStore,
   persistReducer,
@@ -20,6 +21,7 @@ import inventoryReducer from "./inventoryRedux";
 import materialRequestReducer from "./materialRequestRedux";
 import dispatchRedux from "./dispatchRedux";
 import purchaseOrderRedux from "./purchaseOrderRedux";
+import supplierOrderReducer from "./SupplierOrdersRedux";
 
 const persistConfig = {
   key: "root",
@@ -37,7 +39,10 @@ const rootReducer = combineReducers({
   inventory: inventoryReducer,
   materialRequest: materialRequestReducer,
   siteManagerItem: dispatchRedux,
+  supplierproduct: supplierProductReducer,
+  supplierorder :supplierOrderReducer,
   purchaseOrder:purchaseOrderRedux
+})
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

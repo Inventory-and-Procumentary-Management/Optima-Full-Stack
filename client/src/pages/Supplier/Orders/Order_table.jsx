@@ -19,81 +19,104 @@ import CheckIcon from '@mui/icons-material/Check';
 import { Link } from "react-router-dom";
 import { green } from '@mui/material/colors';
 import { red } from '@mui/material/colors';
+import { useEffect , useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteSupplierOrders,
+  getSupplierOrders,
+  updateSupplierOrders,
+} from "../../../redux/SupplierOrdersApiCalls";
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
-    { field: 'IssueDate', headerName: 'Issue Date', width: 160 },
-    { field: 'Due_date', headerName: 'Due date', width: 160 },
-    { field: 'Items', headerName: 'Items', width: 160 },
-    {
-      field: 'Description',
-      headerName: 'Description',
-      width: 300,
-    },
-    { field: 'More', headerName: 'Review ', width: 170 ,
+    { field: 'issueDate', headerName: 'Issue Date', width: 200, 
+    renderCell: (params) => {
+      return (
+        <>
+         {params.row.issueDate.slice(0, 10).replace("T", " ")}
+        {/* {params.row.Items} */}
+        </>
+      );
+        } },
+    { field: 'dueDate', headerName: 'Due date', width: 200, 
+    renderCell: (params) => {
+      return (
+        <>
+         {params.row.dueDate.slice(0, 10).replace("T", " ")}
+        {/* {params.row.Items} */}
+        </>
+      );
+        }  },
+        { field: 'id', headerName: 'ID', width: 70 },
+  
+    { field: 'More', headerName: 'Review ', width: 300 ,
     renderCell: (params) => {
 
      return (
-       <>
+       <div>
        <OrderMoreDetailsPopup 
        details={params.row.Items} 
-       IssueDate = {params.row.IssueDate}
-       DueDate = {params.row.Due_date}
-       Description = {params.row.Description}
+       IssueDate = {params.row.issueDate.slice(0, 10).replace("T", " ")}
+       DueDate = {params.row.dueDate.slice(0, 10).replace("T", " ")}
+       Description = {params.row.orderProducts.map((order) =>(
+
+        <div className='popupdetailsOrder'>
+       <p>  <b>ProductName</b>  : {order.productName} </p> 
+       <p> <b> Description</b>  : {order.description} </p> 
+       <p> <b>Quantity</b>      : {order.quantity} </p> 
+       </div>
+
+     ))}
        ></OrderMoreDetailsPopup>
        {/* {params.row.Items} */}
-       </>
+       </div>
      );
        },},
    
-    
-
-    // { field: 'Action', headerName: '', width: 160 ,
-    // renderCell: (params) => {
-
-    //   return (
-    //     <>
-    //         <Link to="/supplier/Supplier_Invoices" className="link">
-    //             <li className="sidebarListItem">
-    //             <CheckIcon sx={{ color: green[500] }} > </CheckIcon>
-    //             </li>
-    //           </Link>
-    //     {/* <button onClick={ () =>{
-    //       return( <Link to="/supplier/Supplier_Invoices" className="link"></Link>)
-                        
-    //     }
-    //     }> <CheckIcon></CheckIcon> </button> */}
-    //     &nbsp;
-    //     &nbsp;
-    //     &nbsp;
-    //     &nbsp;
-    //     <BlockIcon sx={{ color: red[500] }}></BlockIcon>
-    //     </>
-    //   );
-    //     },},
   
   ];
   
   const rows = [
-    { id: 1, Organization: 'Snow', IssueDate: '2022-05-01', Items:'Cement / Sand', Due_date: '2022-05-06', Description: 'We want Ultra Cement'},
-    { id: 2, Organization: 'Lannister',IssueDate: '2022-05-01',Items:'Cement/Bricks', Due_date: '2022-09-15', Description: 'We want Sanstha Cement' },
-    { id: 3, Organization: 'Lannister',IssueDate: '2022-05-01',Items:'Sand', Due_date: '2022-09-16', Description: '-' },
-    { id: 4, Organization: 'Stark',IssueDate: '2022-05-01',Items:'1 ft Tile / 1 ft Tile', Due_date: '2022-09-17', Description: 'We want Lanka Tiles' },
-    { id: 5, Organization: 'Targaryen',IssueDate: '2022-05-01',Items:'1" Pipes/2" Pipes', Due_date: '2022-09-18', Description: 'We want S-lone Pipes' },
+    { id: 1, Organization: 'Snow', IssueDate: '2022-05-01', Items:[" Cement "," Sand "], Due_date: '2022-05-06', Description: 'We want Ultra Cement'},
+    { id: 2, Organization: 'Lannister',IssueDate: '2022-05-01',Items:["Cement ", " Bricks "], Due_date: '2022-09-15', Description: 'We want Sanstha Cement' },
+    { id: 3, Organization: 'Lannister',IssueDate: '2022-05-01',Items:[" Sand "], Due_date: '2022-09-16', Description: '-' },
+    { id: 4, Organization: 'Stark',IssueDate: '2022-05-01',Items:[" 1 ft Tile "," 1 ft Tile "], Due_date: '2022-09-17', Description: 'We want Lanka Tiles' },
+    { id: 5, Organization: 'Targaryen',IssueDate: '2022-05-01',Items:[" 1' Pipes ", " 2' Pipes "], Due_date: '2022-09-18', Description: 'We want S-lone Pipes' },
     { id: 6, Organization: 'Melisandre',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-19', Description: '-' },
     { id: 7, Organization: 'Clifford',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-20', Description: '-' },
     { id: 8, Organization: 'Frances',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-23', Description: '-' },
     { id: 9, Organization: 'Roxie',IssueDate: '2022-05-01',Items:'Cement', Due_date: '2022-09-29', Description: '-' },
   ];
 const Order_table = () => {
+
+  const dispatch = useDispatch();
+  const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders);
+  const userType = useSelector((state) => state.user.userType);
+  const [deleteTrigger, setDeleteTrigger] = useState("");
+ 
+
+  useEffect(() => {
+    const getSupplierOrdersItems = async () => {
+      await getSupplierOrders(dispatch);
+    
+      console.log(SupplierOrders);
+      // console.log(typeof(Supplierproducts))
+
+      //console.log(userType);
+    };
+    getSupplierOrdersItems();
+  }, [dispatch, deleteTrigger]);
+
     return (
         <div style={{ height: 400, width: '100%' }}>
           <DataGrid
-            rows={rows}
+            rows={SupplierOrders}
             columns={columns}
             pageSize={5}
+            getRowId={(row)=>row.purchase_order_id}
             rowsPerPageOptions={[5]}
             checkboxSelection
+            disableSelectionOnClick
             
           />
           
