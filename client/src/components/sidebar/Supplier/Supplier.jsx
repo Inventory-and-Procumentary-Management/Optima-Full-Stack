@@ -122,6 +122,14 @@ export default function PurchaseStaffSidebar() {
                   Product
                 </li>
               </Link>
+
+              <Link to="/supplier/Requested_Product_details" className="link">
+                {/* {history.push("/purchaseStaff/purchaseOrder")} */}
+                <li className="sidebarListItem">
+                  <Storefront className="sidebarIcon" />
+                  Requested Products
+                </li>
+              </Link>
               
             </ul>
           </div>

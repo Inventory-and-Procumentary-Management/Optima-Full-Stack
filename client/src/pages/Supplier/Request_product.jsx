@@ -27,6 +27,7 @@ import {
 } from "../../redux/SupplierProductApiCalls";
 import MenuItem from '@mui/material/MenuItem';
 import Swal from "sweetalert2";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -34,7 +35,7 @@ const defautlValues = {
   itemName :"Suwasana",
   category: "",
   price: 0,
-  quantity: 0,
+  availableQuantity: 0,
   description:"",
   uom:"",
   inventoryItemID:0,
@@ -57,7 +58,8 @@ const Request_product = () => {
     const [selectValue, setSelectValue] = useState("No Product");
     const [selectObjectProduct , setSelectObjectProduct ] = useState({});
     const [inputValue, setInputValue] = useState('');
-    const [displayCategory , setdisplayCategory] = useState(false)
+    const [displayCategory , setdisplayCategory] = useState(false);
+    const history = useHistory();
 
     let selectItemProduct = products;
 
@@ -181,8 +183,10 @@ const Request_product = () => {
   
   
   const handleSubmit = (event) =>{
+    console.log("In handle Submit");
     event.preventDefault();
-    if(isInteger(formValues.price) && isInteger(formValues.quantity) ){
+    console.log(formValues);
+    if(isInteger(formValues.price) && isInteger(formValues.availableQuantity) ){
       console.log(formValues);
       if(addSupplierProduct(formValues,dispatch)){
         console.log("Success");
@@ -190,7 +194,9 @@ const Request_product = () => {
           'Requested Success!',
           'You add a Request Product!',
           'success'
-        )
+        ).then(()=> {
+          history.push("/supplier/Requested_Product_details")
+        })
       }else{
         console.log("Failed");
       };
@@ -358,7 +364,7 @@ const Request_product = () => {
   <TextField
   error ={quantityError ? true : false }
   id="outlined-basic"
-   name='quantity' 
+   name='availableQuantity' 
    variant="outlined" 
    helperText={quantityError ? "Please Enter a Valid Number" : "" }
   //  value={formValues.quantity}
