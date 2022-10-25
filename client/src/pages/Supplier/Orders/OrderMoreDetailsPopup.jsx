@@ -19,6 +19,13 @@ import Swal from "sweetalert2";
 
 
 import { useEffect , useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  deleteSupplierOrders,
+  getSupplierOrders,
+  updateSupplierOrders,
+} from "../../../redux/SupplierOrdersApiCalls";
+import { useHistory } from "react-router-dom";
 
 const style = {
   position: 'absolute',
@@ -40,6 +47,11 @@ export default function BasicModal(props) {
   const handleClose = () => setOpen(false);
   const [totalPrice, settotalPrice] = useState([]);
   var subtotal = 0;
+  const dispatch = useDispatch();
+  const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders.filter((x)=>x.supplierId == 84 && x.status == false));
+  const userType = useSelector((state) => state.user.userType);
+  const [deleteTrigger, setDeleteTrigger] = useState("");
+  const history = useHistory();
 
   console.log(props.AllDetails)
 
@@ -47,8 +59,28 @@ export default function BasicModal(props) {
     window.print()
   }
 
+  useEffect(() => {
+    const getSupplierOrdersItems = async () => {
+      await getSupplierOrders(dispatch);
+    
+      console.log(SupplierOrders);
+      // console.log(typeof(Supplierproducts))
+
+      //console.log(userType);
+    };
+    getSupplierOrdersItems();
+  }, [dispatch, deleteTrigger]);
+
+  const acceptOrderUpdate=(id)=>{
+    props.onChange(id);
+    handleClose();
+    updateSupplierOrders(id,{status: true},dispatch);
+
+  }
+
   const RejectOrder = async ()=>{
     handleClose();
+    props.onChange(-1)
     console.log("In reject order Function");
     const { value: text } = await Swal.fire({
       input: 'textarea',
@@ -172,7 +204,7 @@ export default function BasicModal(props) {
                   Accept
                   </button>
                 </Link> */}
-                <button className="accept-btn">
+                <button className="accept-btn" onClick={()=>{acceptOrderUpdate(props.PurchaseOrderID);history.push("/supplier/Order_details");}  }>
                   Accept
                   </button>
             &nbsp;
