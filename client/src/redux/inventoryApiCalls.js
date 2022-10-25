@@ -20,7 +20,7 @@ import {
 export const getInventory = async (dispatch) => {
   dispatch(getInventoryStart());
   try {
-    const res = await userRequest.get("/inventory");
+    const res = await userRequest.get("/inventory/");
     dispatch(getInventorySuccess(res.data));
   } catch (err) {
     dispatch(getInventoryFailure());
