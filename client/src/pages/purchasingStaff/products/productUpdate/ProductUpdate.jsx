@@ -42,9 +42,9 @@ export default function ProductUpdate() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  useEffect(()=>{
-    history.push("/purchaseStaff/productUpdate/:productId");
-  },[]);
+  // useEffect(()=>{
+  //   history.push("/purchaseStaff/productUpdate/:productId");
+  // },[]);
 
   const product = useSelector((state) =>
     state.product.products.find(

@@ -3,12 +3,29 @@ import Charts from "../../components/charts/Charts";
 import FeaturedInfo from "../../components/featuredInfo/FeaturedInfo";
 import { useDispatch, useSelector } from "react-redux";
 import "../pages.css";
+import { getRemoveAllBreadcrumb } from "../../redux/breadcrumbApiCalls";
 
 const AdministratorHome = () => {
   const [userStats, setUserStats] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   //   const user = useSelector((state) => state.user.currentUser);
-
+  const dispatch = useDispatch();
+  useEffect(() => {
+      const setBreadcrumb = () => {
+        // breadcrumbs.map((item)=>{
+        //   if(item.link == "purchaseStaff"){
+        //     getRemoveBreadcrumb(dispatch,"purchaseStaff");
+        //   }
+        // });
+        getRemoveAllBreadcrumb(dispatch, 
+          {
+            name: "Admin",
+            link: "admin",
+          },
+        );
+      };
+      setBreadcrumb();
+    }, []);
   const MONTHS = useMemo(
     () => [
       "Jan",

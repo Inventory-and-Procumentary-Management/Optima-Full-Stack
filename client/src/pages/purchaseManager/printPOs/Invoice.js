@@ -10,7 +10,7 @@ export default function Invoice(props) {
   const history = useHistory();
   const location = useLocation();
   const {
-    list: myList,
+    listNew,
     companyName,
     companyAddress,
     clientAddress,
@@ -23,9 +23,9 @@ export default function Invoice(props) {
   const [quantity, setQuantity] = useState("");
   const [rate, setRate] = useState("");
   const [amount, setAmount] = useState("");
-  const [list, setList] = useState([]);
+//   const [listNew, setlistNew] = useState([]);
 
-  console.log(myList, clientAddress, clientName, invoiceNumber, invoiceDate,companyName,companyAddress);
+  console.log(listNew, clientAddress, clientName, invoiceNumber, invoiceDate,companyName,companyAddress);
 
   useEffect(() => {
     history.push("/purchaseStaff/materialRequest/invoice");
@@ -98,7 +98,7 @@ export default function Invoice(props) {
                       quantity={quantity}
                       rate={rate}
                       amount={amount}
-                      list={myList}
+                      list={listNew}
                       // setList={setList}
                     />
                   </div>

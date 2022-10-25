@@ -53,6 +53,7 @@ import Request_new_product from "./pages/Supplier/Request_new_product";
 import Invoice from "./pages/purchaseManager/printPOs/Invoice";
 import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
 import Reports from "./pages/purchasingStaff/reports/Reports";
+import InvoiceData from "./pages/purchasingStaff/Invoice/Invoice";
 
 const App = () => {
   return (
@@ -120,6 +121,9 @@ const App = () => {
               </Route>
               <Route path="/purchaseStaff/invoicePreview">
                 <Invoice />
+              </Route>
+              <Route path="/purchaseStaff/invoicePreview/invoiceData">
+                <InvoiceData />
               </Route>
 
               <Route exact path="/admin">
