@@ -55,7 +55,7 @@ import {
 const Order_table = () => {
 
   const dispatch = useDispatch();
-  const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders.filter((x)=>x.receiverId == 45));
+  const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders.filter((x)=>x.supplierId == 84 && x.status == false));
   const Supplierproducts = useSelector((state) => state.supplierproduct.supplierproducts.filter((x)=>x.isApprove == 1));
   const userType = useSelector((state) => state.user.userType);
   const userID = useSelector((state) => state.user.userID);
@@ -79,6 +79,11 @@ const Order_table = () => {
   const [itemCode, setitemCode] = useState("")
   const [list,setList] = useState([])
   const [orderProduct, setorderProduct] = ([]);
+
+  const [x, setX] = useState(0);
+const setXHandler = (y) => {
+  setX(y)
+}
 
   const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
@@ -114,8 +119,8 @@ const Order_table = () => {
        DueDate = {params.row.dueDate.slice(0, 10).replace("T", " ")}
        Description = {params.row.orderProducts}
        AllDetails = {Supplierproducts}
-       
-       
+       PurchaseOrderID = {params.row.purchase_order_id}
+       onChange={setXHandler}
        ></OrderMoreDetailsPopup>
        {/* {params.row.Items} */}
        </div>
@@ -146,7 +151,7 @@ const Order_table = () => {
       //console.log(userType);
     };
     getSupplierOrdersItems();
-  }, [dispatch, deleteTrigger]);
+  }, [dispatch, deleteTrigger, x]);
 
   useEffect(() => {
     const getSupplierproductsItems = async () => {
@@ -159,6 +164,12 @@ const Order_table = () => {
     };
     getSupplierproductsItems();
   }, [dispatch, deleteTrigger]);
+
+  // const acceptOrderUpdate=(id)=>{
+
+  //   updateSupplierOrders(id,{status: true});
+
+  // }
 
     return (
       <div>
