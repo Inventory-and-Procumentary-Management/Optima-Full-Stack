@@ -53,6 +53,7 @@ import Request_new_product from "./pages/Supplier/Request_new_product";
 import Invoice from "./pages/purchaseManager/printPOs/Invoice";
 import InvoiceForm from "./pages/purchaseManager/printPOs/InvoiceForm";
 import Reports from "./pages/purchasingStaff/reports/Reports";
+import Requested_Product_details from "./pages/Supplier/Product/RequestedProduct";
 import InvoiceData from "./pages/purchasingStaff/Invoice/Invoice";
 
 const App = () => {
@@ -189,7 +190,10 @@ const App = () => {
               <Route exact path="/supplier/SupplierProfile">
                 <ProfileSupplier />
               </Route>
-
+              <Route exact path="/supplier/Requested_Product_details">
+                <Requested_Product_details />
+              </Route>
+              
               {/* <Route path="/users">
                 <UserList />
               </Route> */}

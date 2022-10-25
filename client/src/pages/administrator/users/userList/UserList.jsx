@@ -101,6 +101,7 @@ export default function UserList() {
               }
               alt="User Icon"
             />
+         
             {params.row.username}
           </div>
         );

@@ -20,7 +20,7 @@ import {
 export const getMaterialRequest = async (dispatch) => {
   dispatch(getMaterialRequestStart());
   try {
-    const res = await userRequest.get("/materialRequest/");
+    const res = await userRequest.get("/materialRequest/?field=createDate");
     dispatch(getMaterialRequestSuccess(res.data));
   } catch (err) {
     dispatch(getMaterialRequestFailure());

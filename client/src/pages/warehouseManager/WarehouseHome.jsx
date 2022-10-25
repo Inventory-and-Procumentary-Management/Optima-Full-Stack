@@ -64,26 +64,23 @@ const WarehouseHome = () => {
       {
         index: 1,
         title: "No of Pending Stocks",
-        number: 20,
-        percentage: -1.4,
+        number: 13,
         isDowngrade: false,
-        text: "",
+        text: "In this month",
       },
       {
         index: 2,
         title: "No of Dispatched Stocks",
-        number: 40,
-        percentage: +1.4,
+        number: 11,
         isDowngrade: true,
-        text: "Compared to last month",
+        text: "In this month",
       },
       {
         index: 3,
         title: "No of Recieved Stocks",
-        number: 20,
-        percentage: -1.4,
+        number: 5,
         isDowngrade: false,
-        text: "Compared to last month",
+        text: "In this month",
       },
     ];
     setFeaturedData(featureData);

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import "./invoice.css";
+import React from "react";
+import "../../purchaseManager/printPOs/invoice.css";
 import {
   DeleteOutline,
   ThumbUpAltOutlined,
@@ -14,23 +14,9 @@ import { useSelector } from "react-redux";
 
 function Table({ list }) {
   const userType = useSelector((state) => state.user.userType);
-  const [flagStatus, setFlagStatus] = useState(true);
-  const [newQuantity, setNewQuantity] = useState(list.quantity);
-  const [newQuantityValue, setNewQuantityValue] = useState({});
+  console.log({list});
 
-  useEffect(()=>{
-    const dataSetArray = ()=>{
-      let data = {};
-      list.map((x)=>{
-        data[x.id] = x.quantity;
-      });
-      setNewQuantityValue(data);
-    }
-    dataSetArray();
-    console.log(list);
-  },[]);
-
-  const editQuantity = async (id) => {
+  const editQuantity = async () => {
     Swal.fire({
       title: "Enter new Quantity",
       input: "number",
@@ -44,23 +30,7 @@ function Table({ list }) {
           return "You need to add something!";
         }
       },
-      preConfirm: (quantityValue) => {
-        setNewQuantity(quantityValue);
-        // (oldArray)=>[...oldArray,{id:id,quantity:quantityValue}]
-        console.log(newQuantityValue);
-        var obj = {};
-        obj = newQuantityValue;
-        obj[id] = quantityValue;
-        console.log(obj);
-        console.log(newQuantityValue);
-        setNewQuantityValue(obj);
-        // myArray.push(obj);
-        // setNewQuantityValue((oldArray) => [
-        //   ...oldArray,
-        //   obj,
-        // ]);
-
-        setFlagStatus(false);
+      preConfirm: (maxQuantity) => {
         // return updateProduct(id, { maxQuantity: maxQuantity }, dispatch);
         return true;
       },
@@ -132,37 +102,24 @@ function Table({ list }) {
                       {!(
                         userType == "ROLE_WAREHOUSE_MANAGER" ||
                         userType == "ROLE_SITE_MANAGER"
-                      ) && <td>{rate} </td>}
-                      {!(
-                        userType == "ROLE_PURCHASING_STAFF" ||
-                        userType == "ROLE_PURCHASING_MANAGER"
-                      ) && flagStatus ? (
+                      ) && (
                         <td>
-                          {quantity}
-                          <EditOutlined
-                            className="productListDelete"
-                            style={{ color: "green", marginRight: 10 }}
-                            onClick={() => {
-                              setFlagStatus(false);
-                              editQuantity(id);
-                            }}
-                          />
-                        </td>
-                      ) : (
-                        <td>
-                          
-                          <EditOutlined
-                            className="productListDelete"
-                            style={{ color: "green", marginRight: 10 }}
-                            onClick={() => {
-                        
-                              editQuantity(id);
-                            }}
-                          />
-                          {newQuantityValue[id]}
+                          {rate}{" "}
+                          {!(
+                            userType == "ROLE_PURCHASING_STAFF" ||
+                            userType == "ROLE_PURCHASING_MANAGER"
+                          ) && (
+                            <EditOutlined
+                              className="productListDelete"
+                              style={{ color: "green", marginRight: 10 }}
+                              onClick={() => {
+                                editQuantity(id);
+                              }}
+                            />
+                          )}
                         </td>
                       )}
-
+                      <td>{quantity}</td>
                       {!(
                         userType == "ROLE_WAREHOUSE_MANAGER" ||
                         userType == "ROLE_SITE_MANAGER"
