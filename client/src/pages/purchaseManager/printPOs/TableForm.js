@@ -7,6 +7,10 @@ import { v4 as uuidv4 } from "uuid";
 import { getProducts } from "../../../redux/productApiCalls";
 import Autocomplete from "@mui/material/Autocomplete";
 import { getSupplierProducts } from "../../../redux/SupplierProductApiCalls";
+import { getPurchaseOrders } from "../../../redux/purchaseOrderApiCalls";
+import { getUsers } from "../../../redux/userApiCalls";
+import { getSuppliers } from "../../../redux/supplierApiCalls";
+import { useHistory } from "react-router-dom";
 
 export default function TableForm({
   desc,
@@ -29,25 +33,64 @@ export default function TableForm({
   const [isEditing, setIsEditing] = useState(false);
   const [inputs, setInputs] = useState({});
   const [dataArray, setDataArray] = useState([]);
+  const [dataUserArray, setDataUserArray] = useState([]);
   const [correctDataArray, setCorrectDataArray] = useState([]);
   const [listNew, setListNew] = useState([]);
 
   const [sizeForm, setSizeForm] = useState(6);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const products = useSelector((state) => state.product.products);
   const supplierproducts = useSelector(
     (state) => state.supplierproduct.supplierproducts
   );
   const userType = useSelector((state) => state.user.userType);
+  const otherUsers = useSelector((state) => state.user.otherUsers);
+  const supplier = useSelector((state) => state.supplier.suppliers);
+  const purchaseOrders = useSelector(
+    (state) => state.purchaseOrder.purchaseOrders
+  );
 
   const [quantityNew, setQuantityNew] = useState(0);
   const [amountNew, setAmountNew] = useState(0);
   const [rateNew, setRateNew] = useState(0);
   const [uomNew, setUomNew] = useState("");
 
+  const [companyName, setCompanyName] = useState("Optima");
+  const [companyAddress, setCompanyAddress] = useState(
+    "161/A, Aggona, Malabe, Sri Lanka"
+  );
+  const [clientName, setClientName] = useState("");
+  const [clientAddress, setClientAddress] = useState("");
+  const [invoiceNumber, setInvoiceNumber] = useState("");
+  const [invoiceDate, setInvoiceDate] = useState("");
+  const [changeSupplierValue, setChangeSupplierValue] = useState([]);
+
+  useEffect(() => {
+    const getDataSupplierInvoice = async () => {
+      const date = new Date();
+      const currentDate =
+        date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDay();
+      setInvoiceDate(currentDate);
+
+      const purchaseOrderData = await getPurchaseOrders(dispatch);
+      if (purchaseOrderData) {
+        let value = 0;
+        purchaseOrders.map((item) => {
+          if (item.purchase_order_id > value) {
+            value = item.purchase_order_id;
+          }
+        });
+        setInvoiceNumber(value + 1);
+      }
+    };
+    getDataSupplierInvoice();
+  }, []);
+
   useEffect(() => {
     const getProductsItems = async () => {
+      const usersState = await getUsers(dispatch);
       const supplierStatus = await getSupplierProducts(dispatch);
       if (supplierStatus) {
         const inventoryProductsStatus = await getProducts(dispatch);
@@ -72,11 +115,40 @@ export default function TableForm({
     getProductsItems();
   }, [dispatch]);
 
+  useEffect(() => {
+    const checkSupplierDetails = async () => {
+      const supplierStatus = await getSuppliers(dispatch);
+      if (supplierStatus) {
+        let data = [];
+        supplier.map((item) => {
+          otherUsers.map((x) => {
+            if (item.employeeId == x.employeeId) {
+              data.push({ ...item, ["users"]: x });
+            }
+          });
+        });
+        setDataUserArray(data);
+        console.log(supplier);
+        console.log(otherUsers);
+        console.log(dataUserArray);
+      }
+    };
+    checkSupplierDetails();
+  }, []);
+
   const options = products.map((option) => {
     const firstLetter = option.title[0].toUpperCase();
     return {
       firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
       ...option,
+    };
+  });
+
+  const options1 = dataUserArray.map((option1) => {
+    const firstLetter = option1.businessName[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? "0-9" : firstLetter,
+      ...option1,
     };
   });
 
@@ -132,24 +204,44 @@ export default function TableForm({
     setList(list.filter((row) => row.id !== id));
   };
 
+  var tableDataArray = [];
+
   const clickAddTableItem = () => {
     console.log("Click una");
     // setListNew((prev) => {
     //   return { ...prev };
     // });
     let arrayData1 = [];
-    arrayData1.push(listNew);
-    arrayData1.push({
+    // arrayData1.push(listNew);
+    if (listNew.length != 0) {
+      arrayData1.push(listNew);
+    }
+    tableDataArray.push({
       id: correctDataArray.inventor_item_id,
       itemCode: correctDataArray.inventor_item_id,
       itemName: correctDataArray.inventoryItemData.title,
-      quantity:quantityNew,
+      quantity: quantityNew,
       uom: uomNew,
       rate: rateNew,
       amount: amountNew,
     });
-    setListNew(arrayData1);
-    setUomNew('');
+    // setListNew((prev) => {
+    //   return { ...prev,tableDataArray };
+    // });
+    // setListNew(tableDataArray);
+    setListNew((oldArray) => [
+      ...oldArray,
+      {
+        id: correctDataArray.inventor_item_id,
+        itemCode: correctDataArray.inventor_item_id,
+        itemName: correctDataArray.inventoryItemData.title,
+        quantity: quantityNew,
+        uom: uomNew,
+        rate: rateNew,
+        amount: amountNew,
+      },
+    ]);
+    setUomNew("");
     setQuantityNew(0);
     setRateNew(0);
     setAmountNew(0);
@@ -166,6 +258,32 @@ export default function TableForm({
       }
     });
   };
+  const newChangeSupplierValue = (data) => {
+    dataUserArray.map((item) => {
+      if (item.employeeId == data.employeeId) {
+        // setCorrectDataArray(item);
+        setClientAddress(item.address);
+        // setUomNew(item.inventoryItemData.uom);
+        // setQuantity(item.inventoryItemData.totalQuantity);
+        // setRateNew(item.price);
+        // setAmountNew(quantity*rate);
+      }
+    });
+  };
+
+  function handleClick() {
+    history.push("purchaseManager/invoicePreview", {
+      list,
+      companyName,
+      companyAddress,
+      clientAddress,
+      clientName,
+      invoiceNumber,
+      invoiceDate,
+    });
+    // navigation.navigate("/purchaseManager/newMaterialRequest1")
+    // console.log(list, clientAddress, clientName, invoiceNum, invoiceDate);
+  }
 
   return (
     <>
@@ -190,7 +308,7 @@ export default function TableForm({
                   {/* <Grid item md={10}> */}
                   <div className="flex flex-col items-center justify-center mb-5 xl:flex-row xl:justify-center">
                     <h1 className="font-bold uppercase tracking-wide text-3xl mb-3">
-                      {/* {itemHeader.item6} */} Purchase Invoice
+                      {/* {itemHeader.item6} */} Purchase Order
                     </h1>
                   </div>
                   <Grid container spacing={3}>
@@ -198,36 +316,38 @@ export default function TableForm({
                       <TextField
                         // defaultValue={product.title}
                         // variant="standard"
+                        inputProps={{ readOnly: true }}
+                        value={companyName}
                         margin="normal"
-                        value="OPTIMA"
+                        // value="OPTIMA"
                         required
                         fullWidth
                         id="companyName"
                         label="Company Name"
                         name="companyName"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
                     </Grid>
                     <Grid item md={sizeForm}>
                       <TextField
+                        inputProps={{ readOnly: true }}
                         // defaultValue={product.title}
                         // variant="standard"
                         margin="normal"
-                        value="161/A, Aggona, Malabe, Sri Lanka"
+                        value={companyAddress}
+                        // value="161/A, Aggona, Malabe, Sri Lanka"
                         required
                         fullWidth
                         id="companyAddress"
                         //label="Company Address"
                         name="companyAddress"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
                     </Grid>
-                    <Grid item md={sizeForm}>
+                    {/* <Grid item md={sizeForm}>
                       <TextField
-                        // defaultValue={product.title}
-                        // variant="standard"
                         margin="normal"
                         value="optima@gmail.com"
                         required
@@ -235,14 +355,12 @@ export default function TableForm({
                         id="companyAddress"
                         label="Company Email"
                         name="companyAddress"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
                     </Grid>
                     <Grid item md={sizeForm}>
                       <TextField
-                        // defaultValue={product.title}
-                        // variant="standard"
                         margin="normal"
                         value="0116598453"
                         required
@@ -250,35 +368,59 @@ export default function TableForm({
                         id="companyNumber"
                         //label="Company Number"
                         name="companyNumber"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
-                    </Grid>
-                    <Grid item md={sizeForm}>
-                      <TextField
+                    </Grid> */}
+                    <Grid item md={sizeForm} mt={2}>
+                      {/* <TextField
                         // defaultValue={product.title}
                         // variant="standard"
+                        value={clientName}
                         margin="normal"
                         required
                         fullWidth
                         id="clientName"
                         label="Client Name"
                         name="clientName"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
+                      /> */}
+                      <Autocomplete
+                        id="grouped-demo"
+                        onChange={(event, newValue) => {
+                          newChangeSupplierValue(newValue);
+                          console.log(newValue);
+                          console.log(event);
+                        }}
+                        options={options1.sort(
+                          (a, b) => -b.firstLetter.localeCompare(a.firstLetter)
+                        )}
+                        groupBy={(option1) => option1.firstLetter}
+                        // getOptionLabel={(option) => option.title}
+                        getOptionLabel={(option1) => option1.businessName}
+                        // sx={{ width: 500 }}
+                        renderInput={(params) => (
+                          <TextField
+                            {...params}
+                            label="Client Name"
+                            // variant="standard"
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid item md={sizeForm}>
                       <TextField
                         // defaultValue={product.title}
                         // variant="standard"
+                        value={clientAddress}
                         margin="normal"
                         required
                         fullWidth
                         id="clientAddress"
                         label="Client Address"
                         name="clientAddress"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
                     </Grid>
@@ -286,13 +428,14 @@ export default function TableForm({
                       <TextField
                         // defaultValue={product.title}
                         // variant="standard"
+                        value={invoiceNumber}
                         margin="normal"
                         required
                         fullWidth
                         id="invoiceNum"
                         label="Invoice Num"
                         name="invoiceNum"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
                     </Grid>
@@ -300,13 +443,14 @@ export default function TableForm({
                       <TextField
                         // defaultValue={product.title}
                         // variant="standard"
+                        value={invoiceDate}
                         margin="normal"
                         required
                         fullWidth
                         id="invoiceDate"
                         label="Invoice Date"
                         name="invoiceDate"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {}}
                       />
                     </Grid>
@@ -363,7 +507,7 @@ export default function TableForm({
                         id="title"
                         label="UOM"
                         name="title"
-                        autoFocus
+                        // autoFocus
                         inputProps={{ readOnly: true }}
                         // onChange={(e) => setUom(e.target.value)}
                         onChange={(e) => {
@@ -383,7 +527,7 @@ export default function TableForm({
                         id="Quantity"
                         label="Quantity"
                         name="Quantity"
-                        autoFocus
+                        // autoFocus
                         // onChange={(e) => setQuantity(e.target.value)}
                         onChange={(e) => {
                           setQuantityNew(e.target.value);
@@ -409,7 +553,7 @@ export default function TableForm({
                         id="description"
                         label="Rate"
                         name="invoiceNumber"
-                        autoFocus
+                        // autoFocus
                         inputProps={{ readOnly: true }}
                         // onChange={(e) => setRate(e.target.value)}
                         onChange={(e) => {
@@ -430,7 +574,7 @@ export default function TableForm({
                         id="description"
                         label="Amount"
                         name="invoiceNumber"
-                        autoFocus
+                        // autoFocus
                         onChange={(e) => {
                           setInputs((prev) => {
                             return { ...prev, [e.target.name]: e.target.value };
@@ -513,6 +657,29 @@ export default function TableForm({
           )}
         </table>
       </Box>
+
+
+
+      <Grid
+        item
+        md={12}
+        container
+        sx={{ alignItems: "center", justifyContent: "center" }}
+      >
+        <button
+          onClick={handleClick}
+          // className="addProductButton"
+          className="color-contained-button"
+          style={{
+            paddingLeft: 70,
+            paddingRight: 70,
+            paddingBottom: 15,
+            paddingTop: 15,
+          }}
+        >
+          Preview Purchase Order
+        </button>
+      </Grid>
     </>
   );
 }

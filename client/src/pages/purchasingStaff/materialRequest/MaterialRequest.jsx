@@ -18,6 +18,7 @@ import { materialRequestData } from "../../../constants/DashboardData";
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
 import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
+import { useHistory } from "react-router-dom";
 
 const columns = [
   { field: "invoice_id", headerName: "Request ID", width: 170 },
@@ -162,16 +163,17 @@ const MaterialRequest = () => {
   const userType = useSelector((state) => state.user.userType);
   const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
   const [user, setUser] = useState("");
+  const history = useHistory();
   console.log(userType);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    breadcrumbs.map((item)=>{
-      if(item.link == "materialRequest"){
-        getRemoveBreadcrumb(dispatch,"materialRequest");
-      }
-    });
     const setBreadcrumb = () => {
+      breadcrumbs.map((item)=>{
+        if(item.link == "materialRequest"){
+          getRemoveBreadcrumb(dispatch,"materialRequest");
+        }
+      });
       getBreadcrumb(dispatch, {
         name: "Material Request",
         link: "materialRequest",
@@ -181,6 +183,7 @@ const MaterialRequest = () => {
   }, []);
 
   useEffect(() => {
+    history.push("/purchaseStaff/materialRequest");
     if (userType === "ROLE_PURCHASING_MANAGER") {
       setUser("purchaseManager");
     } else if (userType === "ROLE_PURCHASING_STAFF") {

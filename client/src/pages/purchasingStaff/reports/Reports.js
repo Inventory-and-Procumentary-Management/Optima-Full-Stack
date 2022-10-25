@@ -13,6 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { getInventoryItems } from "../../../redux/inventoryItemApiCalls";
+import { useHistory } from "react-router-dom";
 
 const titleItem = [
   {
@@ -30,8 +31,10 @@ const Reports = (props) => {
   const inventoryItemsDataCollection = useSelector((state) => state.inventoryItem.inventoryItems);
   const [age, setAge] = React.useState("");
   const [list, setList] = React.useState([]);
+  const history = useHistory();
   const [itemHeader, setItemHeader] = React.useState(titleItem[0]);
   const dispatch = useDispatch();
+  
   useEffect(() => {
     breadcrumbs.map((item) => {
       if (item.link == "purchaseOrder") {
@@ -49,6 +52,7 @@ const Reports = (props) => {
 
   useEffect(() => {
     const getInventoryData = async () => {
+      history.push("/purchaseStaff/reports");
       const inventoryDataStatus = getInventoryItems(dispatch);
       let itemDataNew = [];
       inventoryItemsDataCollection.map((item) => {

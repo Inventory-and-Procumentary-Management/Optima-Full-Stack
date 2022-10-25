@@ -118,6 +118,9 @@ const App = () => {
               <Route path="/purchaseStaff/reports">
                 <Reports />
               </Route>
+              <Route path="/purchaseStaff/invoicePreview">
+                <Invoice />
+              </Route>
 
               <Route exact path="/admin">
                 <AdministratorHome />
@@ -151,7 +154,7 @@ const App = () => {
                 <RequesdtedDispatch />
               </Route>
               <Route exact path="/warehouseManager/requestForm">
-                 <RequestForm/>
+                <RequestForm />
               </Route>
 
               <Route exact path="/supplier/Request_product">
@@ -182,7 +185,7 @@ const App = () => {
               <Route exact path="/supplier/SupplierProfile">
                 <ProfileSupplier />
               </Route>
-              
+
               {/* <Route path="/users">
                 <UserList />
               </Route> */}
@@ -190,21 +193,18 @@ const App = () => {
                 <User />
               </Route> */}
 
-
               <Route exact path="/projectManager">
-                 <ProjectManagerHome/>
+                <ProjectManagerHome />
               </Route>
               <Route exact path="/projectManager/newsite">
-                 <NewSite/>
+                <NewSite />
               </Route>
               <Route exact path="/projectManager/siteInternalPage">
-                 <SiteInternalPage/>
+                <SiteInternalPage />
               </Route>
               <Route exact path="/projectManager/sitedetails">
-                 <SiteDetails/>
+                <SiteDetails />
               </Route>
-
-
 
               <Route exact path="/purchaseManager">
                 <PurchaseManagerHome />
@@ -228,10 +228,10 @@ const App = () => {
                 <MaterialRequest />
               </Route>
               <Route path="/purchaseManager/newMaterialRequest">
-              <InvoiceForm />
+                <InvoiceForm />
               </Route>
               <Route path="/purchaseManager/invoicePreview">
-              <Invoice />
+                <Invoice />
               </Route>
             </div>
           </div>
