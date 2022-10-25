@@ -29,8 +29,8 @@ export const supplierProductSlice = createSlice({
     },
     deleteSupplierProductSuccess: (state, action) => {
       state.isFetching = false;
-      state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload),
+      state.supplierproducts.splice(
+        state.supplierproducts.findIndex((item) => item._id === action.payload),
         1
       );
     },
@@ -45,9 +45,9 @@ export const supplierProductSlice = createSlice({
     },
     updateSupplierProductSuccess: (state, action) => {
       state.isFetching = false;
-      state.products[
-        state.products.findIndex((item) => item._id === action.payload.id)
-      ] = action.payload.product;
+      state.supplierproducts[
+        state.supplierproducts.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.supplierproducts;
     },
     updateSupplierProductFailure: (state) => {
       state.isFetching = false;
@@ -60,7 +60,7 @@ export const supplierProductSlice = createSlice({
     },
     addSupplierProductSuccess: (state, action) => {
       state.isFetching = false;
-      state.products.push(action.payload);
+      state.supplierproducts.push(action.payload);
     },
     addSupplierProductFailure: (state) => {
       state.isFetching = false;
