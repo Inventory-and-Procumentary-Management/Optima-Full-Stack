@@ -24,15 +24,17 @@ export default function RecievedTable(){
   const dispatch = useDispatch();
   const userType = useSelector((state) => state.user.userType);
   const inventories = useSelector((state) => state.inventory.inventories);
+  
 
   const [deleteTrigger, setDeleteTrigger] = useState("");
 
   useEffect(() => {
     const getNewInventory = async () => {
       await getInventory(dispatch);
-      console.log(inventories)
+      
     };
     getNewInventory();
+    console.log(inventories)
   }, [dispatch, deleteTrigger]);
 
   const columns = [
@@ -56,6 +58,7 @@ export default function RecievedTable(){
     // },
     //{ field: "uom", headerName: "Unit of Messurement", width: 180 },
     { field: "sectionQuantity", headerName: "Quantity", width: 180 },
+    { field: "receivedDate", headerName: "Request Date", width: 180 },
     { field: "expiredDate", headerName: "Expire Date", width: 180 },
     { field: "receivedLocation", headerName: "Placement", width: 180 },
    
