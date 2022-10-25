@@ -4,6 +4,7 @@ import com.example.backend.model.MaterialRequest;
 import com.example.backend.repository.MaterialRequestRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,9 +22,9 @@ public class MaterialRequestServiceImpl implements MaterialRequestService{
         log.info("Saving material request {} to the database",materialRequest.getMaterial_request_id());
         return materialRequestRepository.save(materialRequest);
     }
-    public List<MaterialRequest> getMaterialRequests(){
+    public List<MaterialRequest> getMaterialRequests(String field){
         log.info("Fetching all material requests");
-        return materialRequestRepository.findAll();
+        return materialRequestRepository.findAll(Sort.by(Sort.Direction.DESC, field));
     }
     public MaterialRequest getMaterialRequest(Long id){
         log.info("Get {} material request from database",id);
