@@ -15,6 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Swal from "sweetalert2";
 
 const style = {
   position: 'absolute',
@@ -34,6 +35,29 @@ export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const RejectOrder = async ()=>{
+    handleClose();
+    console.log("In reject order Function");
+    const { value: text } = await Swal.fire({
+      input: 'textarea',
+      inputLabel: 'Message',
+      inputPlaceholder: 'Type your message here...',
+      inputAttributes: {
+        'aria-label': 'Type your message here'
+      },
+      showCancelButton: true
+    })
+    
+    if (text) {
+      Swal.fire(text)
+    }
+
+  }
+
+  const dummyFunction = ()=>{
+    console.log("In dummy Function");
+  }
 
   return (
     <div>
@@ -119,7 +143,7 @@ export default function BasicModal(props) {
           &nbsp;
           &nbsp;
 
-          <button className='reject-btn'>Reject</button>
+          <button className='reject-btn' onClick={()=>{RejectOrder();}}>Reject</button>
         </Box>
       </Modal>
     </div>

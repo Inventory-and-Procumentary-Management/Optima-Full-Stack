@@ -27,6 +27,7 @@ import {
   updateSupplierOrders,
 } from "../../../redux/SupplierOrdersApiCalls";
 
+
 const columns = [
     { field: 'id', headerName: 'ID', width: 70 },
     { field: 'issueDate', headerName: 'Issue Date', width: 200, 
@@ -77,6 +78,8 @@ const Order_table = () => {
   const [deleteTrigger, setDeleteTrigger] = useState("");
  
   console.log(userID);
+
+
 
   useEffect(() => {
     const getSupplierOrdersItems = async () => {
