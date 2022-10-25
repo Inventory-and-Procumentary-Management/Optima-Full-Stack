@@ -14,6 +14,7 @@ import { dumyData } from "../../../constants/DashboardData";
 // import Button from "@mui/material/Button";
 import SearchComponent from "../../../components/search/Search";
 import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
+import { useHistory } from "react-router-dom";
 
 const columns = [
   { field: "_id", headerName: "Invoice ID", width: 150 },
@@ -150,6 +151,7 @@ const columns = [
 const Delivery = () => {
   const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
   const dispatch = useDispatch();
+  const history = useHistory();
   useEffect(() => {
     breadcrumbs.map((item)=>{
       if(item.link == "deliveries"){
@@ -164,6 +166,11 @@ const Delivery = () => {
     };
     setBreadcrumb();
   }, []);
+
+  useEffect(()=>{
+    history.push("/purchaseStaff/deliveries");
+  },[]);
+
   return (
     <div className="common">
       <div className="userList">

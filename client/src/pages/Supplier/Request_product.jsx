@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import './RequestProductStyle.css';
-import Axios from 'axios';
-import AddIcon from '@mui/icons-material/Add';
-import Autocomplete from '@mui/material/Autocomplete';
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
+import "./RequestProductStyle.css";
+import Axios from "axios";
+import AddIcon from "@mui/icons-material/Add";
+import Autocomplete from "@mui/material/Autocomplete";
 import { Link } from "react-router-dom";
-import { isInteger } from 'formik';
+import { isInteger } from "formik";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -41,11 +41,7 @@ const defautlValues = {
   inventoryItemID:0,
 };
 
-
-
-
 const selectValues = [{}];
-
 
 const Request_product = () => {
   const dispatch = useDispatch();
@@ -61,38 +57,35 @@ const Request_product = () => {
     const [displayCategory , setdisplayCategory] = useState(false);
     const history = useHistory();
 
-    let selectItemProduct = products;
+  let selectItemProduct = products;
 
-    selectItemProduct = selectItemProduct.map(item => {
-      return {
-        category:item.category,
-        createDate:item.createDate,
-        description:item.description,
-        img:item.img,
-        inventor_item_id:item.inventor_item_id,
-        isActivate:item.isActivate,
-        isApprove:item.isApprove,
-        maxQuantity:item.maxQuantity,
-        minQuantity:item.minQuantity,
-        label: item.title,
-        totalQuantity:item.totalQuantity,
-        uom:item.uom,
-      };
+  selectItemProduct = selectItemProduct.map((item) => {
+    return {
+      category: item.category,
+      createDate: item.createDate,
+      description: item.description,
+      img: item.img,
+      inventor_item_id: item.inventor_item_id,
+      isActivate: item.isActivate,
+      isApprove: item.isApprove,
+      maxQuantity: item.maxQuantity,
+      minQuantity: item.minQuantity,
+      label: item.title,
+      totalQuantity: item.totalQuantity,
+      uom: item.uom,
+    };
+  });
+  //console.log(selectItemProduct);
+
+  const handleInputChange = (e) => {
+    console.log(e.target);
+    const { name, value } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: value,
     });
-    //console.log(selectItemProduct);
- 
-
-
-    const handleInputChange = (e) => {
-      console.log(e.target);
-      const { name, value } = e.target;
-      setFormValues({
-        ...formValues,
-        [name]: value,
-      });
-  
-  }
-  const selectNameInputchange =(obb)=>{
+  };
+  const selectNameInputchange = (obb) => {
     console.log("In the selectNameinputchange function");
     console.log(obb);
    const json_obb= {
@@ -151,30 +144,28 @@ const Request_product = () => {
         }));
         }
 
-        const selectCategoryInputchange =(obb)=>{
-          console.log("In the selectCategoryinputchange function");
-          console.log(obb);
-         const json_obb = {
-            "name":"category",
-            "value" : obb.category,
-      
-          }
-          setFormValues(formValues=>({
-            ...formValues,
-            category:obb.category,
-          }));
-          }
-    // const { name, value } = e.target;
-    //   setFormValues({
-    //     ...formValues,
-    //     [name]: value,
-    //   });
-  
+  const selectCategoryInputchange = (obb) => {
+    console.log("In the selectCategoryinputchange function");
+    console.log(obb);
+    const json_obb = {
+      name: "category",
+      value: obb.category,
+    };
+    setFormValues((formValues) => ({
+      ...formValues,
+      category: obb.category,
+    }));
+  };
+  // const { name, value } = e.target;
+  //   setFormValues({
+  //     ...formValues,
+  //     [name]: value,
+  //   });
 
   useEffect(() => {
     const getproductsItems = async () => {
       await getProducts(dispatch);
-    
+
       //console.log(products)
       //console.log(userType);
     };
@@ -201,12 +192,8 @@ const Request_product = () => {
         console.log("Failed");
       };
     }
-    
-
-  
-
-  }
-  const handleName = (e)=>{
+  };
+  const handleName = (e) => {
     console.log(e.target.value);
     // if(e.target.value == "The Godfather"){
     //   alert("The Godfather!!");
@@ -238,34 +225,42 @@ const Request_product = () => {
          selectCategoryInputchange(newValue);
          selectInventoryItemID(newValue);
 
-          //handleInputChange;
-          //console.log(newValue)
-        }}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        id="controllable-states-demo"
-        options={selectItemProduct}
-        sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params}  />}
-      />
-      <button className='btn-ok' onClick={()=>{setdisplayCategory(true);; console.log(selectObjectProduct.category)}}>Get Details</button>
-
-      {displayCategory ?(<div className='cateroty-and-uom'>
-  <div> {/* div 02 */ }
-      {/* <h4>Category</h4> */}
-  <Box
-  component="form"
-  
-  sx={{
-  '& > :not(style)': { m: 1, width: '25ch' },
-  }}
-  noValidate
-  
-  autoComplete="off"
-  >
-  {/* <TextField 
+                    //handleInputChange;
+                    //console.log(newValue)
+                  }}
+                  inputValue={inputValue}
+                  onInputChange={(event, newInputValue) => {
+                    setInputValue(newInputValue);
+                  }}
+                  id="controllable-states-demo"
+                  options={selectItemProduct}
+                  sx={{ width: 300 }}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+                <button
+                  className="btn-ok"
+                  onClick={() => {
+                    setdisplayCategory(true);
+                    console.log(selectObjectProduct.category);
+                  }}
+                >
+                  Get Details
+                </button>
+                {displayCategory ? (
+                  <div className="cateroty-and-uom">
+                    <div>
+                      {" "}
+                      {/* div 02 */}
+                      {/* <h4>Category</h4> */}
+                      <Box
+                        component="form"
+                        sx={{
+                          "& > :not(style)": { m: 1, width: "25ch" },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                      >
+                        {/* <TextField 
   id="outlined-basic" 
   disabled
   name='category' 
@@ -275,23 +270,28 @@ const Request_product = () => {
   onChange = {handleInputChange}
   /> */}
 
-    <div className='category-style'>{`Category: ${selectObjectProduct.category !== null ? `'${selectObjectProduct.category}'` : 'null'}`}</div>
-      {/* <div>{`inputValue: '${inputValue}'`}</div> */}
-  
-  </Box>
-  </div> {/* div 02  end*/ }
-
-  <div> {/* div 05 */ }
-      {/* <h4>Unit Of Measurement</h4> */}
-  <Box
-  component="form"
-  sx={{
-  '& > :not(style)': { m: 1, width: '25ch' },
-  }}
-  noValidate
-  autoComplete="off"
-  >
-  {/* <TextField
+                        <div className="category-style">{`Category: ${
+                          selectObjectProduct.category !== null
+                            ? `'${selectObjectProduct.category}'`
+                            : "null"
+                        }`}</div>
+                        {/* <div>{`inputValue: '${inputValue}'`}</div> */}
+                      </Box>
+                    </div>{" "}
+                    {/* div 02  end*/}
+                    <div>
+                      {" "}
+                      {/* div 05 */}
+                      {/* <h4>Unit Of Measurement</h4> */}
+                      <Box
+                        component="form"
+                        sx={{
+                          "& > :not(style)": { m: 1, width: "25ch" },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                      >
+                        {/* <TextField
   id="outlined-basic"
   disabled
    name='UOM' 
@@ -419,23 +419,16 @@ const Request_product = () => {
   <button variant="contained" type='submit'>Request</button>
   </div>
 
-  <div className='cancel-button'>
-  <button variant="contained" >Cancel</button>
-  </div>
-  </div>
-
-  </div> {/* Form ends in here */}
+              <div className="cancel-button">
+                <button variant="contained">Cancel</button>
+              </div>
+            </div>
+          </div>{" "}
+          {/* Form ends in here */}
         </form>
-  
-          
-  
-         
-        </div>
-  
-  
       </div>
-      
-    )
-}
+    </div>
+  );
+};
 
-export default Request_product
+export default Request_product;

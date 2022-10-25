@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { dumyData } from "../../../constants/DashboardData";
 import { getBreadcrumb, getRemoveBreadcrumb } from "../../../redux/breadcrumbApiCalls";
+import { useHistory } from "react-router-dom";
 
 const columns = [
   { field: "_id", headerName: "Order ID", width: 150 },
@@ -145,6 +146,7 @@ const columns = [
 
 const OrderSummary = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const breadcrumbs = useSelector((state) => state.breadcrumb.breadcrumbs);
   useEffect(() => {
     const setBreadcrumb = () => {
@@ -162,6 +164,11 @@ const OrderSummary = () => {
     };
     setBreadcrumb();
   }, []);
+
+  useEffect(()=>{
+    history.push("/purchaseStaff/orders");
+  },[]);
+
   return (
     <div className="common">
       <div className="userList">

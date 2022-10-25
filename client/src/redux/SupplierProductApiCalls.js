@@ -23,8 +23,10 @@ export const getSupplierProducts = async (dispatch) => {
     const res = await userRequest.get("supplierItem/");
    // console.log(res.data);
     dispatch(getSupplierProductSuccess(res.data));
+    return 1;
   } catch (err) {
     dispatch(getSupplierProductFailure());
+    return 0;
   }
 };
 
