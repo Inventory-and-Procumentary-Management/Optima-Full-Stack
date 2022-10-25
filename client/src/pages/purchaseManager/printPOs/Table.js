@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./invoice.css";
 import {
   DeleteOutline,
@@ -14,8 +14,23 @@ import { useSelector } from "react-redux";
 
 function Table({ list }) {
   const userType = useSelector((state) => state.user.userType);
+  const [flagStatus, setFlagStatus] = useState(true);
+  const [newQuantity, setNewQuantity] = useState(list.quantity);
+  const [newQuantityValue, setNewQuantityValue] = useState({});
 
-  const editQuantity = async () => {
+  useEffect(()=>{
+    const dataSetArray = ()=>{
+      let data = {};
+      list.map((x)=>{
+        data[x.id] = x.quantity;
+      });
+      setNewQuantityValue(data);
+    }
+    dataSetArray();
+    console.log(list);
+  },[]);
+
+  const editQuantity = async (id) => {
     Swal.fire({
       title: "Enter new Quantity",
       input: "number",
@@ -29,7 +44,23 @@ function Table({ list }) {
           return "You need to add something!";
         }
       },
-      preConfirm: (maxQuantity) => {
+      preConfirm: (quantityValue) => {
+        setNewQuantity(quantityValue);
+        // (oldArray)=>[...oldArray,{id:id,quantity:quantityValue}]
+        console.log(newQuantityValue);
+        var obj = {};
+        obj = newQuantityValue;
+        obj[id] = quantityValue;
+        console.log(obj);
+        console.log(newQuantityValue);
+        setNewQuantityValue(obj);
+        // myArray.push(obj);
+        // setNewQuantityValue((oldArray) => [
+        //   ...oldArray,
+        //   obj,
+        // ]);
+
+        setFlagStatus(false);
         // return updateProduct(id, { maxQuantity: maxQuantity }, dispatch);
         return true;
       },
@@ -101,24 +132,37 @@ function Table({ list }) {
                       {!(
                         userType == "ROLE_WAREHOUSE_MANAGER" ||
                         userType == "ROLE_SITE_MANAGER"
-                      ) && (
+                      ) && <td>{rate} </td>}
+                      {!(
+                        userType == "ROLE_PURCHASING_STAFF" ||
+                        userType == "ROLE_PURCHASING_MANAGER"
+                      ) && flagStatus ? (
                         <td>
-                          {rate}{" "}
-                          {!(
-                            userType == "ROLE_PURCHASING_STAFF" ||
-                            userType == "ROLE_PURCHASING_MANAGER"
-                          ) && (
-                            <EditOutlined
-                              className="productListDelete"
-                              style={{ color: "green", marginRight: 10 }}
-                              onClick={() => {
-                                editQuantity(id);
-                              }}
-                            />
-                          )}
+                          {quantity}
+                          <EditOutlined
+                            className="productListDelete"
+                            style={{ color: "green", marginRight: 10 }}
+                            onClick={() => {
+                              setFlagStatus(false);
+                              editQuantity(id);
+                            }}
+                          />
+                        </td>
+                      ) : (
+                        <td>
+                          
+                          <EditOutlined
+                            className="productListDelete"
+                            style={{ color: "green", marginRight: 10 }}
+                            onClick={() => {
+                        
+                              editQuantity(id);
+                            }}
+                          />
+                          {newQuantityValue[id]}
                         </td>
                       )}
-                      <td>{quantity}</td>
+
                       {!(
                         userType == "ROLE_WAREHOUSE_MANAGER" ||
                         userType == "ROLE_SITE_MANAGER"

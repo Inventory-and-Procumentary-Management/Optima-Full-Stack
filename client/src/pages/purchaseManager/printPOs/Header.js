@@ -1,6 +1,27 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 export default function Header({ handlePrint, title, flag }) {
+
+  const handleSend = async () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#378cbb",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // deleteConfirm(id);
+        Swal.fire("Sent!", "Stocks have been sent.", "success");
+      }
+    });
+    // setData(data.filter((item) => item.id !== id));
+  };
+
+
   return (
     <>
       <header className="flex flex-col items-center justify-center mb-5 xl:flex-row xl:justify-between">
@@ -31,15 +52,20 @@ export default function Header({ handlePrint, title, flag }) {
               </button>
             </li>
 
-            {flag && <li className="mx-2">
-              <button
-                className="bg-green-500 text-white 
+            {flag && (
+              <li className="mx-2">
+                <button
+                  className="bg-green-500 text-white 
         font-bold py-2 px-8 rounded shadow border-2 border-green-500
         hover:bg-transparent hover:text-green-500 transition-all duration-300"
-              >
-                Send
-              </button>
-            </li>}
+                  onClick={() => {
+                    handleSend();
+                  }}
+                >
+                  Send
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </header>
