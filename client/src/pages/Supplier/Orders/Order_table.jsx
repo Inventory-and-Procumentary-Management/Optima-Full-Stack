@@ -44,6 +44,11 @@ import TableForm from "../invoices/TableForm";
 import '../invoices/printPO_supplier.css'
 import '../invoices/SupplierInvoicesStyle.css'
 import "./OrderStyle.css" ;
+import {
+  deleteSupplierProduct,
+  getSupplierProducts,
+  updateSupplierProduct,
+} from "../../../redux/SupplierProductApiCalls";
 
 
 
@@ -51,6 +56,7 @@ const Order_table = () => {
 
   const dispatch = useDispatch();
   const SupplierOrders = useSelector((state) => state.supplierorder.supplierorders.filter((x)=>x.receiverId == 45));
+  const Supplierproducts = useSelector((state) => state.supplierproduct.supplierproducts.filter((x)=>x.isApprove == 1));
   const userType = useSelector((state) => state.user.userType);
   const userID = useSelector((state) => state.user.userID);
   const [deleteTrigger, setDeleteTrigger] = useState("");
@@ -107,6 +113,9 @@ const Order_table = () => {
        IssueDate = {params.row.issueDate.slice(0, 10).replace("T", " ")}
        DueDate = {params.row.dueDate.slice(0, 10).replace("T", " ")}
        Description = {params.row.orderProducts}
+       AllDetails = {Supplierproducts}
+       
+       
        ></OrderMoreDetailsPopup>
        {/* {params.row.Items} */}
        </div>
@@ -114,24 +123,8 @@ const Order_table = () => {
        },
       
       },
-      { field: 'action', headerName: 'action', width: 200 ,renderCell: (params) => {
+      
 
-        return (
-   
-          <div >
-          <button className="accept-btn" onClick={()=>{setShowInvoice(true);}}>
-                  Accept
-                  </button> 
-                  &nbsp;
-            &nbsp;
-            &nbsp;
-  
-            {/* <button className='reject-btn' onClick={()=>{RejectOrder();}}>Reject</button> */}
-          </div>
-        );
-          }},
-   
-  
   ];
 
 
@@ -153,6 +146,18 @@ const Order_table = () => {
       //console.log(userType);
     };
     getSupplierOrdersItems();
+  }, [dispatch, deleteTrigger]);
+
+  useEffect(() => {
+    const getSupplierproductsItems = async () => {
+      await getSupplierProducts(dispatch);
+    
+      // console.log(Supplierproducts)
+      // console.log(typeof(Supplierproducts))
+
+      //console.log(userType);
+    };
+    getSupplierproductsItems();
   }, [dispatch, deleteTrigger]);
 
     return (
