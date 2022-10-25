@@ -13,6 +13,7 @@ console.log(TOKEN);
 export const publicRequest = axios.create({
   baseURL: BASE_URL,
   "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "origin-list"
 });
 
 export const userRequest = axios.create({
@@ -20,5 +21,6 @@ export const userRequest = axios.create({
   headers: {
     "Content-Type": "application/json",
     Authorization: `Bearer ${TOKEN}`,
+    "Access-Control-Allow-Origin": "origin-list"
   },
 });
