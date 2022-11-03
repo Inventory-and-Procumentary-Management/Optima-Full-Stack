@@ -58,12 +58,12 @@ import InvoiceData from "./pages/purchasingStaff/Invoice/Invoice";
 
 const App = () => {
   return (
-    <Router basename={config.basename}>
+    <Router>
       <Switch>
         {/* <Redirect exact from="/" to="/login" /> */}
-        <Route exact path="/">
+        {/* <Route exact path="/">
           <Login />
-        </Route>
+        </Route> */}
         <Route exact path="/login">
           <Login />
         </Route>

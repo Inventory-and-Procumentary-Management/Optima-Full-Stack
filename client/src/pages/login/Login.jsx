@@ -60,12 +60,12 @@ export default function SignInSide() {
   let userError = useSelector((state) => state.user.error);
   const history = useHistory();
 
-  React.useEffect(()=>{
-    const redirectPage = ()=>{
-      history.push("/login");
-    }
-    redirectPage();
-  },[]);
+  // React.useEffect(()=>{
+  //   const redirectPage = ()=>{
+  //     history.push("/login");
+  //   }
+  //   redirectPage();
+  // },[]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
