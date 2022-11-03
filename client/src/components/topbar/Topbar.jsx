@@ -80,7 +80,7 @@ export default function Topbar() {
   };
   const logOutPress = () => {
     dispatch(logout());
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = "http://localhost:3000/";
   };
 
   return (

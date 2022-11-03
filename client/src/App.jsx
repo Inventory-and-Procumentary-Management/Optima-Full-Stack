@@ -61,12 +61,12 @@ const App = () => {
     <Router>
       <Switch>
         {/* <Redirect exact from="/" to="/login" /> */}
-        {/* <Route exact path="/">
-          <Login />
-        </Route> */}
-        <Route exact path="/login">
+        <Route exact path="/">
           <Login />
         </Route>
+        {/* <Route exact path="/login">
+          <Login />
+        </Route> */}
         {/* <Route path="/ForgetPassword">
           <ForgetPassword />
         </Route> */}
@@ -77,7 +77,7 @@ const App = () => {
             <Sidebar />
             <div className="sub-container">
               <SecondTopbar />
-              <Route exact path="/">
+              <Route exact path="/home">
                 <Home />
               </Route>
               <Route exact path="/purchaseStaff">
