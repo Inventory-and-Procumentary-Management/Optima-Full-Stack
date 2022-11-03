@@ -61,6 +61,9 @@ const App = () => {
     <Router basename={config.basename}>
       <Switch>
         {/* <Redirect exact from="/" to="/login" /> */}
+        <Route exact path="/">
+          <Login />
+        </Route>
         <Route exact path="/login">
           <Login />
         </Route>

@@ -18,17 +18,17 @@ function Table({ list }) {
   const [newQuantity, setNewQuantity] = useState(list.quantity);
   const [newQuantityValue, setNewQuantityValue] = useState({});
 
-  useEffect(()=>{
-    const dataSetArray = ()=>{
+  useEffect(() => {
+    const dataSetArray = () => {
       let data = {};
-      list.map((x)=>{
+      list.map((x) => {
         data[x.id] = x.quantity;
       });
       setNewQuantityValue(data);
-    }
+    };
     dataSetArray();
     console.log(list);
-  },[]);
+  }, []);
 
   const editQuantity = async (id) => {
     Swal.fire({
@@ -133,32 +133,38 @@ function Table({ list }) {
                         userType == "ROLE_WAREHOUSE_MANAGER" ||
                         userType == "ROLE_SITE_MANAGER"
                       ) && <td>{rate} </td>}
-                      {!(
-                        userType == "ROLE_PURCHASING_STAFF" ||
-                        userType == "ROLE_PURCHASING_MANAGER"
-                      ) && flagStatus ? (
+
+                      {flagStatus ? (
                         <td>
                           {quantity}
-                          <EditOutlined
-                            className="productListDelete"
-                            style={{ color: "green", marginRight: 10 }}
-                            onClick={() => {
-                              setFlagStatus(false);
-                              editQuantity(id);
-                            }}
-                          />
+                          {!(
+                            userType == "ROLE_PURCHASING_STAFF" ||
+                            userType == "ROLE_PURCHASING_MANAGER"
+                          ) && (
+                            <EditOutlined
+                              className="productListDelete"
+                              style={{ color: "green", marginRight: 10 }}
+                              onClick={() => {
+                                setFlagStatus(false);
+                                editQuantity(id);
+                              }}
+                            />
+                          )}
                         </td>
                       ) : (
                         <td>
-                          
-                          <EditOutlined
-                            className="productListDelete"
-                            style={{ color: "green", marginRight: 10 }}
-                            onClick={() => {
-                        
-                              editQuantity(id);
-                            }}
-                          />
+                          {!(
+                            userType == "ROLE_PURCHASING_STAFF" ||
+                            userType == "ROLE_PURCHASING_MANAGER"
+                          ) && (
+                            <EditOutlined
+                              className="productListDelete"
+                              style={{ color: "green", marginRight: 10 }}
+                              onClick={() => {
+                                editQuantity(id);
+                              }}
+                            />
+                          )}
                           {newQuantityValue[id]}
                         </td>
                       )}

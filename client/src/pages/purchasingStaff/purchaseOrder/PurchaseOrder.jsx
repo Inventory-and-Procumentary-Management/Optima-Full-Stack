@@ -118,13 +118,14 @@ const PurchaseOrder = () => {
   const setDataArray = (data) => {
     setTax(data);
     let dataListNew = [];
+    var dataValue = 0;
     data.orderProducts.map((item) => {
       console.log(item);
       // purchaseOrderDetails.orderProducts.push({
       setSubTotal(subTotal + item.amount);
       setDiscountPrice(discountPrice + item.amount);
-
-      setTotal(total + item.amount);
+      dataValue = dataValue + item.quantity*item.itemPrice;
+      
       dataListNew.push({
         id: item.order_id,
         itemCode: item.itemCode,
@@ -135,6 +136,7 @@ const PurchaseOrder = () => {
         amount: item.amount,
       });
     });
+    setTotal(dataValue);
     setDataList(dataListNew);
   };
 

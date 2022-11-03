@@ -126,7 +126,7 @@ export default function BasicModal(props) {
           <Typography id="modal-modal-title" variant="h4" component="h2">
               Order Details
             </Typography>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
+            {/* <Typography id="modal-modal-title" variant="h6" component="h2">
               Issue Date:
             </Typography>
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
@@ -140,7 +140,7 @@ export default function BasicModal(props) {
             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             <h1> { props.DueDate} </h1>
             </Typography>
-            <br></br>
+            <br></br> */}
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Description
             </Typography>
