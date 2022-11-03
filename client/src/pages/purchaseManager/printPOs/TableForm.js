@@ -101,7 +101,7 @@ export default function TableForm({
           let data = [];
           supplierproducts.map((item) => {
             products.map((x) => {
-              if (item.inventor_item_id == x.inventor_item_id) {
+              if (item.inventor_item_id == x.inventory_item_id) {
                 data.push({ ...item, ["inventoryItemData"]: x });
               }
             });

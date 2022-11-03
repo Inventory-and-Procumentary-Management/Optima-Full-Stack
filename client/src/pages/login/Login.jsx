@@ -19,6 +19,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 import IconButton from "@mui/material/IconButton";
+import { useHistory } from "react-router-dom";
 
 import Swal from "sweetalert2";
 
@@ -57,6 +58,14 @@ export default function SignInSide() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.currentUser);
   let userError = useSelector((state) => state.user.error);
+  const history = useHistory();
+
+  React.useEffect(()=>{
+    const redirectPage = ()=>{
+      history.push("/login");
+    }
+    redirectPage();
+  },[]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -38,8 +38,9 @@ const defautlValues = {
   availableQuantity: 0,
   description:"",
   uom:"",
-  inventoryItemID:0,
+  inventor_item_id:0,
 };
+
 
 const selectValues = [{}];
 
@@ -111,7 +112,7 @@ const Request_product = () => {
       console.log("In the selectInventory Item ID function");
       console.log(obb);
      const json_obb= {
-       "name":"inventoryItemID",
+       "name":"inventorItemID",
         "value" : obb.inventor_item_id,
   
       }
@@ -166,20 +167,20 @@ const Request_product = () => {
     const getproductsItems = async () => {
       await getProducts(dispatch);
 
-      //console.log(products)
+      console.log(products)
       //console.log(userType);
     };
     getproductsItems();
   }, [dispatch, deleteTrigger]);
   
   
-  const handleSubmit = (event) =>{
+  const handleSubmit = async (event) =>{
     console.log("In handle Submit");
     event.preventDefault();
     console.log(formValues);
     if(isInteger(formValues.price) && isInteger(formValues.availableQuantity) ){
       console.log(formValues);
-      if(addSupplierProduct(formValues,dispatch)){
+      if(await addSupplierProduct(formValues,dispatch)){
         console.log("Success");
         Swal.fire(
           'Requested Success!',
