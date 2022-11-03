@@ -95,7 +95,7 @@ export default function SignInSide() {
           // showConfirmButton: false,
           // timer: 2000,
         }).then((result) => {
-          window.location.href = "http://localhost:3000/";
+          window.location.href = "http://localhost:3000/home";
           // window.location.href = "http://localhost:3000/purchaseStaff/productList";
         })
         // setLoginCancelShow(true);
